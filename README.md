@@ -1,0 +1,2 @@
+# foodly
+Foodly Shopify Theme
