@@ -1,0 +1,37 @@
+{% if settings.font_body_family contains 'Google' %}
+  {% assign font_base_parts = settings.font_body_family | split: '_' %}
+  {% capture baseGoogleUrl %}{{ font_base_parts[1] }}:{{ font_base_parts[2] }}{% endcapture %}
+  {{ '//fonts.googleapis.com/css?family=' | append: baseGoogleUrl | stylesheet_tag }}
+{% endif %}
+
+{% if settings.font_header_page_family contains 'Google' %}
+  {% unless settings.font_header_page_family contains font_base_parts[1] %}
+    {% assign font_header_page_parts = settings.font_header_page_family | split: '_' %}
+    {% capture headerGoogleUrl %}{{ font_header_page_parts[1] }}:{{ font_header_page_parts[2] }}{% endcapture %}
+    {{ '//fonts.googleapis.com/css?family=' | append: headerGoogleUrl | stylesheet_tag }}
+  {% endunless %}
+{% endif %}
+
+{% if settings.font_header_family contains 'Google' %}
+  {% unless settings.font_header_family contains font_base_parts[1] or settings.font_header_family contains font_header_page_parts[1] %}
+    {% assign font_header_parts = settings.font_header_family | split: '_' %}
+    {% capture subheaderGoogleUrl %}{{ font_header_parts[1] }}:{{ font_header_parts[2] }}{% endcapture %}
+    {{ '//fonts.googleapis.com/css?family=' | append: subheaderGoogleUrl | stylesheet_tag }}
+  {% endunless %}
+{% endif %}
+
+{% if settings.font_additional_family contains 'Google' %}
+  {% unless settings.font_additional_family contains font_base_parts[1] or settings.font_additional_family contains font_header_page_parts[1] or settings.font_additional_family contains font_header_parts[1] %}
+    {% assign font_additional_parts = settings.font_additional_family | split: '_' %}
+    {% capture smallHeaderGoogleUrl %}{{ font_additional_parts[1] }}:{{ font_additional_parts[2] }}{% endcapture %}
+    {{ '//fonts.googleapis.com/css?family=' | append: smallHeaderGoogleUrl | stylesheet_tag }}
+  {% endunless %}
+{% endif %}
+
+{% if settings.font_accent_family contains 'Google' %}
+  {% unless settings.font_accent_family contains font_base_parts[1] %}
+    {% assign font_accent_parts = settings.font_accent_family | split: '_' %}
+    {% capture headerGoogleUrl %}{{ font_accent_parts[1] }}:{{ font_accent_parts[2] }}{% endcapture %}
+    {{ '//fonts.googleapis.com/css?family=' | append: headerGoogleUrl | stylesheet_tag }}
+  {% endunless %}
+{% endif %}

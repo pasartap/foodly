@@ -1,0 +1,42 @@
+{% comment %}
+Create links to the next and previous articles, if available.
+{% endcomment %}
+
+<section class="section">
+  
+  {% if blog.next_article or blog.previous_article %}
+    <div class="pagination pagination--simple">
+      {% if blog.previous_article %}
+        <span class="pagination__item  left">          
+          <a class="pagination__link" href="{{ blog.previous_article }}">
+            <span class="icon icon--arrow-left"></span>
+            <span class="pagination__link-text">{{ 'blogs.article.older_post' | t | upcase }}</span>
+          </a>         
+        </span>
+      {% else %}
+        <span class="pagination__item disable left">          
+          <a class="pagination__link" href="javascript:void(0)">
+            <span class="icon icon--arrow-left"></span>
+            <span class="pagination__link-text">{{ 'blogs.article.older_post' | t | upcase }}</span>
+          </a>         
+        </span>
+      {% endif %}
+  
+      {% if blog.next_article %}
+        <span class="pagination__item  right">
+          <a class="pagination__link" href="{{ blog.next_article}}">
+            <span class="pagination__link-text">{{ 'blogs.article.newer_post' | t | upcase }}</span>
+            <span class="icon icon--arrow-right"></span>
+          </a>
+        </span>
+      {% else %}
+        <span class="pagination__item disable right">
+          <a class="pagination__link" href="javascript:void(0)">
+            <span class="pagination__link-text">{{ 'blogs.article.newer_post' | t | upcase }}</span>
+            <span class="icon icon--arrow-right"></span>
+          </a>
+        </span>
+      {% endif %}
+    </div>
+  {% endif %}
+</section>

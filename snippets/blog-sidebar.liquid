@@ -1,0 +1,161 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=353861661473733";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<section class="section section--page">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        <div class="page-description">
+          <h1 class="heading--page">{{ 'blogs.general.heading' | t | upcase }}</h1>
+          <h2 class="subheading--page-small">
+            <em>{{ 'blogs.general.subheading' | t }}</em>
+          </h2>
+        </div>
+        {% if settings.blog_sorting_enable == true %}
+          <div id="sorting_toolbar" class="sorting_toolbar">
+            
+          </div>
+        {% endif %}
+        <div class="blog-container">
+          <div class="articles-container">
+            {% paginate blog.articles by 5 %} 
+              {% for article in blog.articles %}
+                {% comment %}
+                Check if article is article with recipe
+                {% endcomment %}
+                {% assign article_recipe = false %}
+                {% if blog_recipes != blank %}
+                  {% for article_blog in settings.blogs[blog_recipes].articles %}
+                    {% if article_blog.id == article.id %}
+                      {% assign article_recipe = true %}
+                      {% break %}
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                  {% for article_blog in blogs["recipes"].articles %}
+                    {% if article_blog.id == article.id %}
+                      {% assign article_recipe = true %}
+                      {% break %}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+                <article class="article article--blog">
+              
+                  <div class="img-holder">
+                    <a href="{{ article.url }}" title="{{ article.title }}">
+                      <img class="article__img" src="{{ article | img_url: 'large' }}" alt="{{ article.title }}">
+                    </a>
+                  </div>              
+                     
+                  <h3 class="heading--add article__title">
+                    <a href="{{ article.url }}" title="{{ article.title }}">{{ article.title }}</a>
+                  </h3>
+                  
+                  <p class="article__date">
+                    <time class="date">{{ article.created_at | date: "%B %-d, %Y" }}</time>
+                  </p>
+                  
+                  <div class="rte article__content">
+                    {% if article_recipe == true %}
+                      {% assign  content_html =  article.content %}
+                      {% comment %}
+                      Strip unnecessary html
+                      {% endcomment %}
+                      {% include 'strip_html_tags' with content_html %}
+            
+                      {% if content contains '[ingredients]' %}
+                        {% assign first_part = content | split: '[ingredients]' | first %}
+                        
+                        {% if first_part contains 'Ingredients' %}
+                          {{ first_part | split: 'Ingredients' | first }}
+                          {{ first_part | split: 'Ingredients' | last }}
+                        {% elsif first_part contains 'ingredients' %}
+                          {{ first_part | split: 'ingredients' | first }}
+                          {{ first_part | split: 'ingredients' | last }}
+                        {% else %}
+                          {{ first_part }}
+                        {% endif %} 
+                      {% endif %}
+            
+                    {% else %}
+                      {% if article.excerpt.size > 0 %}
+                        {{ article.excerpt }}
+                      {% else %}
+                        <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+                      {% endif %}
+                    {% endif %}
+                    
+                  </div>
+                  
+                  <p class="article__author">{{ 'blogs.general.by_author' | t }} {{ article.author }}</p>
+                </article>
+                      
+                <hr class="hr--clear-inverse">  
+              {% endfor %}
+                    
+              {% if paginate.pages > 1 %}
+                <div class="pagination">
+                  {% include 'pagination' %}
+                </div>  
+              {% endif %}
+              
+              {% endpaginate %}
+            </div>
+          </div> <!-- End blog-container -->
+          
+          <aside class="sidebar">
+            {% if settings.sidebar_recent_articles_enable %}
+              <div class="sidebar__block">
+                <h4 class="sidebar__title">{{ 'blogs.sidebar.recent_articles_title' | t }}</h4>
+                <ul class="recent-article-list">
+                {% for article in blogs[blog.handle].articles limit:3 %}
+                  <li class="article-item">
+                    <a class="article-title" href="{{ article.url }}">{{ article.title }}</a>
+                    <p class="article__date">
+                        <time class="date">{{ article.created_at | date: "%B %-d, %Y" }}</time>
+                    </p>
+                  </li>
+                {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+
+            {% if settings.sidebar_tags_enable %}
+              <div class="sidebar__block">
+                {% if blog.all_tags.size > 0 %}
+                  <h4 class="sidebar__title">{{ 'blogs.sidebar.tags_title' | t }}</h4>
+                  <ul class="tags-list">
+                    {% for tag in blog.all_tags %}
+                      {% if current_tags contains tag %}
+                      <li class"tag active">{{ tag }}</li>
+                      {% else %}
+                      <li class="tag">{{ tag | link_to_tag: tag }}</li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if settings.sidebar_facebook_enable %}
+              <h4 class="sidebar__title">{{ 'blogs.sidebar.facebook_title' | t }}</h4>
+              <div class="sidebar__block">
+                <div class="fb-page" data-href="https://www.facebook.com/envato/" data-tabs="timeline" data-small-header="true" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="true">
+                  <blockquote cite="https://www.facebook.com/envato/" class="fb-xfbml-parse-ignore">
+                    <a href="https://www.facebook.com/envato/">Envato</a>
+                  </blockquote>
+                </div>
+              </div>
+            {% endif %}
+          </aside>
+        
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>

@@ -1,0 +1,552 @@
+{% assign number_of_comments = article.comments_count %}
+
+{% comment %}
+If a comment was just submitted and it has no blank fields, we have an extra comment to count.
+{% endcomment %}
+{% if comment and comment.created_at %}
+  {% assign number_of_comments = article.comments_count | plus: 1 %}
+{% endif %}
+
+{% comment %}
+Check if article is article with recipe
+{% endcomment %}
+{% assign content_html =  article.content %}
+{% assign article_recipe = false %}
+
+{% comment %}
+Strip unnecessary html
+{% endcomment %}
+{% include 'strip_html_tags' with content_html %}
+
+{% if content contains '[ingredients]' or content contains '[directions]'  %}
+  {% assign article_recipe = true %}
+{% endif %}
+
+{% comment %}
+Layout for article with recipe
+{% endcomment %}
+{% assign related_product = '' %}
+{% if article_recipe == true %}
+  {% for product in collections['all-products'].products %}
+    {% assign product_title = product.title | downcase %}
+    {% for tag in article.tags %}
+      {% if product_title contains tag %}
+        {% assign related_product = product.title %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+  <section class="section">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item one-whole">
+          <article class="article article--recipe">
+            {% if article.image %}
+              <div class="img-holder img-holder--cover">
+                <img src="{{ article | img_url: 'large' }}" alt="">
+              </div>  
+            {% endif %}     
+          
+           <div>
+              {% if article.title contains "[price:" %}
+                {% assign article_title = article.title | split: "[price:" | first %}
+              {% else %}
+                {% assign article_title = article.title  %}
+              {% endif %}
+              <h1 class="article__title">{{ article_title }}</h1>
+             <p class="article__date">
+               <time class="date">{{ article.created_at | date: "%B %-d, %Y" }}</time>
+             </p>
+             
+             <div class="article__desc">
+               <span>{{ 'blogs.article.by_author' | t }} {{ article.author}}</span>
+               <span>{{ 'blogs.article.for_product' | t }} {{related_product}}</span>
+             </div>
+           </div>
+              
+            <div class="rte article__content">
+
+              {% if content contains '[ingredients]' %}
+                {% assign first_part = content | split: '[ingredients]' | first %}
+                {% assign second_part  = content | split: '[ingredients]' | last %}
+    
+                {% assign ingredients_part  = second_part | split: '[/ingredients]' | first %}
+                {% assign middle_part  = second_part | split: '[/ingredients]' | last %}
+    
+                {% assign middle_part  = middle_part | split: '[directions]' | first %}
+                {% assign directions_first_part  = second_part | split: '[directions]' | last %}
+    
+                {% assign directions_part  = directions_first_part | split: '[/directions]' | first %}
+                {% assign other_description = directions_first_part | split: '[/directions]' | last %}
+
+                {% assign first_part = content | split: '[ingredients]' | first %}
+                      
+                {% if first_part contains 'Ingredients' %}
+                  {% assign f_p_b_ingredients = first_part | split: 'Ingredients' | first %}
+                  {% assign f_p_a_ingredients = first_part | split: 'Ingredients' | last %}
+                {% elsif first_part contains 'ingredients' %}
+                  {% assign f_p_b_ingredients = first_part | split: 'ingredients' | first %}
+                  {% assign f_p_a_ingredients = first_part | split: 'ingredients' | last %}
+                {% else %}
+                  {% assign f_p_b_ingredients = first_part %}
+                {% endif %} 
+
+                {% if f_p_b_ingredients.size > 5 %}
+                  {{ f_p_b_ingredients }}
+                  {{ f_p_a_ingredients }}
+                {% elsif article.excerpt.size > 0 %}
+                  {{ article.excerpt }}
+                {% endif %}
+    
+                <div class="recipe__ingredients clearfix">
+                  <h2>{{ settings.product_recipe_blog_ingredients }}</h2>
+                  {{ ingredients_part }}
+                </div>
+
+                <div class="right recipe__directions-wrapper">
+                  <h2>{{ settings.product_recipe_blog_directions }}</h2> 
+                  <div class="recipe__directions">
+                    {{ directions_part }}
+                  </div>
+                </div>
+
+                {% if other_description contains '[recipe-products]' %}
+                  {% assign other_description = other_description | split: '[recipe-products]' | first %}
+                {% endif %}
+
+                {% if other_description contains '[recipe-accessories]' %}
+                  {% assign other_description = other_description | split: '[recipe-accessories]' | first %}
+                {% endif %}
+    
+                {% if content contains '[license-url]' and settings.article_image_license_enable %}
+    
+                  {% assign license_mark_last = other_description | split: '[license-url]' | last %}
+                  {% assign text_before_license_mark = other_description | split: '[license-url]' | first %}
+                  {% assign license_mark = license_mark_last | split: '[/license-url]' | first %}
+                  {% assign text_after_license_mark = license_mark_last | split: '[/license-url]' | last %}
+    
+                {% else %}
+                  {{other_description}}
+                {% endif %}
+    
+                <div class="clearfix">
+                  {{ text_before_license_mark }}              
+                  {{ license_mark }}
+                  {{ text_after_license_mark }}
+                </div>
+                
+              {% else %}
+                {{ content }}
+              {% endif %}
+            </div>
+          </article>
+        </div> <!-- End grid__item -->
+      </div> <!-- End grid -->
+    </div> <!-- End wrapper -->
+    
+    
+    <div class="social-share-container social-sharing">
+      {% include 'social-sharing' %}
+    </div>
+    
+    {% comment %}
+    Create links to the next and previous articles, if available.
+    {% endcomment %}
+    {% if blog.next_article or blog.previous_article %}
+      <div class="pagination pagination--simple">
+        {% if blog.previous_article %}
+          <span class="pagination__item  left">          
+            <a class="pagination__link" href="{{ blog.previous_article }}">
+              <span class="icon icon--arrow-left"></span>
+              <span class="pagination__link-text">{{ 'blogs.article.older_post' | t | upcase }}</span>
+            </a>         
+          </span>
+        {% else %}
+          <span class="pagination__item disable left">          
+            <a class="pagination__link" href="javascript:void(0)">
+              <span class="icon icon--arrow-left"></span>
+              <span class="pagination__link-text">{{ 'blogs.article.older_post' | t | upcase }}</span>
+            </a>         
+          </span>
+        {% endif %}
+    
+        {% if blog.next_article %}
+          <span class="pagination__item  right">
+            <a class="pagination__link" href="{{ blog.next_article}}">
+              <span class="pagination__link-text">{{ 'blogs.article.newer_post' | t | upcase }}</span>
+              <span class="icon icon--arrow-right"></span>
+            </a>
+          </span>
+        {% else %}
+          <span class="pagination__item disable right">
+            <a class="pagination__link" href="javascript:void(0)">
+              <span class="pagination__link-text">{{ 'blogs.article.newer_post' | t | upcase }}</span>
+              <span class="icon icon--arrow-right"></span>
+            </a>
+          </span>
+        {% endif %}
+      </div>
+    {% endif %}
+    
+    <hr class="hr--clear-inverse hr--short clear">
+    
+    {% comment %}
+    Comments.
+    Comments are enabled in Admin -> Online Store -> Blog Posts -> Manage blogs - > [blog] -> Comments -> [choose type of moderation]
+    {% endcomment %}  
+    {% if blog.comments_enabled? %}
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item one-whole">
+            <div class="comments">
+                
+              {% paginate article.comments by 30 %}
+                           
+                {% if number_of_comments > 0 %}
+    
+                  <h3 class="heading--add">{{ 'blogs.comments.heading' | t }}</h3>
+                  {% if comment and comment.created_at %}
+                    <div class="comments__info-message">
+                      {% if blog.moderated? %}
+                        {{ 'blogs.comments.success_moderated_html' | t }}
+                      {% else %}
+                        {{ 'blogs.comments.success_html' | t }}
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                  <ul class="comments__list">
+                    {% comment %}
+                      If a comment was just submitted with no blank field, show it.
+                    {% endcomment %}
+                    {% if comment and comment.created_at %}
+                      <li id="{{ comment.id }}" class="comment comments__list-item">
+                        <div class="comment">
+    
+                          <div class="comment__avatar">
+                            <img src="{{ 'img_comments_default_avatar.png' | asset_url }}" alt="">
+                          </div>
+    
+                          <div class="comment__body">
+                            <div class="comment_info">
+                              <span>{{ 'blogs.comments.posted_on' | t }} <strong><time>{{ comment.created_at | date: "%b %-d, %Y" }}</time></strong> {{ 'blogs.comments.posted_by' | t }} <strong>{{ comment.author }}</strong></span>
+                            </div>
+                            
+                            <div class="rte comment__content">
+                              {{ comment.content }}
+                            </div>
+                          </div> <!-- End comment__body -->
+     
+                        </div> <!-- End comment -->
+                      </li>
+                    {% endif %}
+                
+                    {% comment %}
+                      Showing the rest of the comments.
+                    {% endcomment %}
+                    {% for comment in article.comments %}
+                      <li id="{{ comment.id }}" class="comment comments__list-item">
+                        <div class="comment">
+                          <div class="comment__avatar">
+                            <img src="{{ 'img_comments_default_avatar.png' | asset_url }}" alt="">
+                          </div>
+    
+                          <div class="comment__body">
+                            <div class="comment_info">
+                              <span>{{ 'blogs.comments.posted_on' | t }} <strong><time>{{ comment.created_at | date: "%b %-d, %Y" }}</time></strong> {{ 'blogs.comments.posted_by' | t }} <strong>{{ comment.author }}</strong></span>
+                            </div>
+                            
+                            <div class="rte comment__content">
+                              {{ comment.content }}
+                            </div>
+                          </div> <!-- End comment__body -->
+     
+                        </div> <!-- End comment -->
+                      </li>
+    
+                    {% endfor %}
+                  </ul>
+                
+                  {% if paginate.pages > 1 %}
+                    <div class="pagination">
+                      {% include 'pagination' %}
+                    </div>
+                  {% endif %}
+                {% endif %}
+                
+                
+                
+                {% form 'new_comment', article, class: "form form--default form--comments form-validation" %}
+    
+                  <h3 class="heading--add">{{ 'blogs.comments.title' | t }}</h4>
+                
+                  {{ form.errors | default_errors }}
+    
+                  <div class="form__row">
+                    <textarea class="form__field--textarea-neutral form__field--full" name="comment[body]" id="CommentBody" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
+                    <label class="form__field--placeholder" for="CommentBody">{{ 'blogs.comments.message' | t }}</label>
+                  </div>
+                  
+                  <div class="form__row form__row-blocks">
+                    <div class="form__row-block">
+                      <input class="form__field" type="text" name="comment[author]" id="CommentAuthor" value="{{ form.author }}" autocapitalize="words" placeholder="{{ 'blogs.comments.name' | t }}">
+                      <label class="form__field--placeholder" for="CommentAuthor">{{ 'blogs.comments.name' | t }}</label>
+                    </div> <!-- End form__row-block --> 
+                  
+                    <div class="form__row-block">
+                      <input class="form__field" type="email" name="comment[email]" id="CommentEmail" value="{{ form.email }}" autocorrect="off" autocapitalize="off" placeholder="{{ 'blogs.comments.email' | t }}">
+                      <label class="form__field--placeholder" for="CommentEmail">{{ 'blogs.comments.email' | t }}</label>
+                    </div> <!-- End form__row-block --> 
+                  </div> <!-- End form__row -->
+                
+                  <button class="btn btn--default btn--full" type="submit">{{ 'blogs.comments.post' | t }}</button>
+                
+                {% endform %}
+                
+              {% endpaginate %}
+            </div> <!-- End comments -->
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+    
+    {% endif %}
+  </section>
+{% else %}
+  <div class="parallax parallax--additional">
+    <section class="section">
+      <div class="parallax__back">
+        <article class="article">
+          <div class="img-holder img-holder--cover js-img-holder-cover">
+            <img src="{{ article | img_url: 'master' }}" alt="">
+          </div>
+        </article>
+      </div> <!-- End parallax__back -->
+      
+      <div class="parallax__base">
+        <article class="article">
+          <div class="wrapper">
+            <div class="grid">
+              <div class="grid__item one-whole">
+                {% if article.title contains "[price:" %}
+                  {% assign article_title = article.title | split: "[price:" | first %}
+                {% else %}
+                  {% assign article_title = article.title  %}
+                {% endif %}
+                <h1 class="article__title">{{ article_title }}</h1>
+                <p class="article__date">
+                  <time class="date">{{ article.created_at | date: "%B %-d, %Y" }}</time>
+                </p>
+                  
+                <div class="rte article__content">
+
+                  {% if content contains '[image-one]' %}
+                    {% assign first_part = content | split: '[image-one]' | first %}
+                    {% assign second_part  = content | split: '[image-one]' | last %}
+
+                    {% assign last_part  = content | split: '[/image-two]' | last %}
+        
+                    {% assign part_with_image  = second_part | split: '[/image-one]' | first %}
+                    {% assign first_image  = part_with_image | split: '[text-image]' | first %}
+                    {% assign first_text  = part_with_image | split: '[text-image]' | last %}
+                    {% assign first_text  = first_text | split: '[/text-image]' | first %}
+
+                    {% assign part_with_image  = second_part | split: '[image-two]' | last %}
+                    {% assign second_image  = part_with_image | split: '[text-image]' | first %}
+                    {% assign second_text  = part_with_image | split: '[text-image]' | last %}
+                    {% assign second_text  = second_text | split: '[/text-image]' | first %}
+        
+        
+                    {{ first_part }}
+
+                    <div class="two-block">
+                      <div class="first-block">
+                        {{ first_image }}                        
+                        <div class="block-text">{{ first_text }}</div>
+                      </div>
+
+                      <div class="second-block">
+                        {{ second_image }}                        
+                        <div class="block-text">{{ second_text }}</div>
+                      </div>
+                    </div>
+        
+                    {{ last_part }}
+                    
+                  {% else %}
+                    {{ content }}
+                  {% endif %}
+                </div>
+              </div> <!-- End grid__item -->
+            </div> <!-- End grid -->
+          </div> <!-- End wrapper -->
+        </article>
+        
+        <div class="social-share-container social-sharing">
+          {% include 'social-sharing' %}
+        </div>
+        
+        {% comment %}
+        Create links to the next and previous articles, if available.
+        {% endcomment %}
+        {% if blog.next_article or blog.previous_article %}
+          <div class="pagination pagination--simple">
+            {% if blog.previous_article %}
+              <span class="pagination__item  left">          
+                <a class="pagination__link" href="{{ blog.previous_article }}">
+                  <span class="icon icon--arrow-left"></span>
+                  <span class="pagination__link-text">{{ 'blogs.article.older_post' | t | upcase }}</span>
+                </a>         
+              </span>
+            {% else %}
+              <span class="pagination__item disable left">          
+                <a class="pagination__link" href="javascript:void(0)">
+                  <span class="icon icon--arrow-left"></span>
+                  <span class="pagination__link-text">{{ 'blogs.article.older_post' | t | upcase }}</span>
+                </a>         
+              </span>
+            {% endif %}
+        
+            {% if blog.next_article %}
+              <span class="pagination__item  right">
+                <a class="pagination__link" href="{{ blog.next_article}}">
+                  <span class="pagination__link-text">{{ 'blogs.article.newer_post' | t | upcase }}</span>
+                  <span class="icon icon--arrow-right"></span>
+                </a>
+              </span>
+            {% else %}
+              <span class="pagination__item disable right">
+                <a class="pagination__link" href="javascript:void(0)">
+                  <span class="pagination__link-text">{{ 'blogs.article.newer_post' | t | upcase }}</span>
+                  <span class="icon icon--arrow-right"></span>
+                </a>
+              </span>
+            {% endif %}
+          </div>
+        {% endif %}
+        
+        <hr class="hr--clear-inverse hr--short clear">
+        
+        {% comment %}
+        Comments.
+        Comments are enabled in Admin -> Online Store -> Blog Posts -> Manage blogs - > [blog] -> Comments -> [choose type of moderation]
+        {% endcomment %}  
+        {% if blog.comments_enabled? %}
+          <div class="wrapper">
+            <div class="grid">
+              <div class="grid__item one-whole">
+                <div class="comments">
+                    
+                  {% paginate article.comments by 30 %}
+                               
+                    {% if number_of_comments > 0 %}
+        
+                      <h3 class="heading--add">{{ 'blogs.comments.heading' | t }}</h3>
+                      {% if comment and comment.created_at %}
+                        <div class="comments__info-message">
+                          {% if blog.moderated? %}
+                            {{ 'blogs.comments.success_moderated_html' | t }}
+                          {% else %}
+                            {{ 'blogs.comments.success_html' | t }}
+                          {% endif %}
+                        </div>
+                      {% endif %}
+                      <ul class="comments__list">
+                        {% comment %}
+                          If a comment was just submitted with no blank field, show it.
+                        {% endcomment %}
+                        {% if comment and comment.created_at %}
+                          <li id="{{ comment.id }}" class="comment comments__list-item">
+                            <div class="comment">
+        
+                              <div class="comment__avatar">
+                                <img src="{{ 'img_comments_default_avatar.png' | asset_url }}" alt="">
+                              </div>
+        
+                              <div class="comment__body">
+                                <div class="comment_info">
+                                  <span>{{ 'blogs.comments.posted_on' | t }} <strong><time>{{ comment.created_at | date: "%b %-d, %Y" }}</time></strong> {{ 'blogs.comments.posted_by' | t }} <strong>{{ comment.author }}</strong></span>
+                                </div>
+                                
+                                <div class="rte comment__content">
+                                  {{ comment.content }}
+                                </div>
+                              </div> <!-- End comment__body -->
+         
+                            </div> <!-- End comment -->
+                          </li>
+                        {% endif %}
+                    
+                        {% comment %}
+                          Showing the rest of the comments.
+                        {% endcomment %}
+                        {% for comment in article.comments %}
+                          <li id="{{ comment.id }}" class="comment comments__list-item">
+                            <div class="comment">
+                              <div class="comment__avatar">
+                                <img src="{{ 'img_comments_default_avatar.png' | asset_url }}" alt="">
+                              </div>
+        
+                              <div class="comment__body">
+                                <div class="comment_info">
+                                  <span>{{ 'blogs.comments.posted_on' | t }} <strong><time>{{ comment.created_at | date: "%b %-d, %Y" }}</time></strong> {{ 'blogs.comments.posted_by' | t }} <strong>{{ comment.author }}</strong></span>
+                                </div>
+                                
+                                <div class="rte comment__content">
+                                  {{ comment.content }}
+                                </div>
+                              </div> <!-- End comment__body -->
+         
+                            </div> <!-- End comment -->
+                          </li>
+        
+                        {% endfor %}
+                      </ul>
+                    
+                      {% if paginate.pages > 1 %}
+                        <div class="pagination">
+                          {% include 'pagination' %}
+                        </div>
+                      {% endif %}
+                    {% endif %}
+                    
+                    
+                    
+                    {% form 'new_comment', article, class: "form form--default form--comments form-validation" %}
+        
+                      <h3 class="heading--add" id="comments">{{ 'blogs.comments.title' | t }}</h4>
+                    
+                      {{ form.errors | default_errors }}
+        
+                      <div class="form__row">
+                        <textarea class="form__field--textarea-neutral form__field--full" name="comment[body]" id="CommentBody" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
+                        <label class="form__field--placeholder" for="CommentBody">{{ 'blogs.comments.message' | t }}</label>
+                      </div>
+                      
+                      <div class="form__row form__row-blocks">
+                        <div class="form__row-block">
+                          <input class="form__field" type="text" name="comment[author]" id="CommentAuthor" value="{{ form.author }}" autocapitalize="words" placeholder="{{ 'blogs.comments.name' | t }}">
+                          <label class="form__field--placeholder" for="CommentAuthor">{{ 'blogs.comments.name' | t }}</label>
+                        </div> <!-- End form__row-block --> 
+                      
+                        <div class="form__row-block">
+                          <input class="form__field" type="email" name="comment[email]" id="CommentEmail" value="{{ form.email }}" autocorrect="off" autocapitalize="off" placeholder="{{ 'blogs.comments.email' | t }}">
+                          <label class="form__field--placeholder" for="CommentEmail">{{ 'blogs.comments.email' | t }}</label>
+                        </div> <!-- End form__row-block --> 
+                      </div> <!-- End form__row -->
+                    
+                      <button class="btn btn--default btn--full" type="submit">{{ 'blogs.comments.post' | t }}</button>
+                    
+                    {% endform %}
+                    
+                  {% endpaginate %}
+                </div> <!-- End comments -->
+              </div> <!-- End grid__item -->
+            </div> <!-- End grid -->
+          </div> <!-- End wrapper -->
+        
+        {% endif %}
+      </div> <!-- End parallax__base -->
+    </section>
+  </div> <!-- End parallax -->
+
+{% endif %}

@@ -1,0 +1,485 @@
+{% assign current_page_title = page_title | handle %}
+<header class="header header--simple {{ header_type }}" {% if template == 'index' %}style="z-index: 3;"{% endif %} >
+
+      <!-- Mobile logo -->
+      {% if settings.logo_use_image and settings.mobile_logo_enable %}
+        <a class="site-logo site-logo--mobile" href="/">
+          <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}">
+        </a>
+      {% endif %}
+      <!-- End Mobile logo -->
+        <!-- *** Menu *** -->
+        <div class="drawer drawer--menu close">
+                  <!-- Open menu button -->
+                  <button class="drawer__btn-open" type="button">
+                    <span class="icon icon--hamburger">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </span>
+                    <span class="fallback-text">{{ 'layout.menu.open_menu' | t }}</span>
+                  </button>
+                  <!-- End open menu button -->
+                  <!-- Store description -->
+                  {% unless settings.mobile_logo_enable %}
+                    {% if settings.header_store_description_left != blank or settings.header_store_description_right != blank %}
+                      <span class="store-desc store-desc--mobile">{% if settings.header_store_description_left != blank %}{{ settings.header_store_description_left }}<br>{% endif %}{% if settings.header_store_description_right != blank %}{{ settings.header_store_description_right }}{% endif %}</span>
+                    {% endif %}
+                  {% endunless %}
+                  <!-- End store description -->
+                
+                  <div class="drawer__wrapper">
+                    <div class="drawer__header">
+                      
+                      <!-- Shop logo -->
+                      {% if settings.logo_use_image %}
+                        <a class="site-logo" href="/">
+                          <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}">
+                        </a>
+                      {% else %}
+                        <a href="/">{{ shop.name }}</a>
+                      {% endif %}
+                      <!-- End shop logo -->
+                      
+                      
+                      <button class="drawer__btn-close" type="button">
+                        <span class="icon icon--close"></span>
+                        <span class="fallback-text">{{ 'layout.menu.close_menu' | t }}</span>
+                      </button>
+                    </div> <!-- end drawer__header -->
+                
+                    <ul class="nav-list">
+                      {% comment %}
+                      Menu with submenu level 2 and level 3
+                      {% endcomment %}
+                      {% for link in linklists.main-menu.links %}
+                      {% comment %}
+                      Assign the variable for marking active link
+                      - https://ecommerce.shopify.com/c/ecommerce-design/t/current-page-menu-highlighting-help-26714
+                      {% endcomment %}
+                        {% assign active = false %}
+                          {% if template == 'index' and link.url == '/' %}
+                            {% assign active = true %}
+                          {% elsif collection.url == link.url %}
+                            {% assign active = true %}
+                          {% elsif blog.url == link.url %}
+                            {% assign active = true %}
+                          {% elsif page.url == link.url %}
+                            {% assign active = true %}
+                          {% elsif page_title == link.title %}
+                            {% assign active = true %}
+                          {% elsif template == 'list-collections' and link.url == '/collections' %}
+                            {% assign active = true %}
+                          {% elsif page_title == 'Products' and link.url == '/collections/all' %}
+                            {% assign active = true %}
+                          {% elsif template == 'article' and link.url == article.url %}
+                            {% assign active = true %}
+                        {% endif %}
+
+                        {% assign child_list_handle = link.title | handle %}
+
+                        {% assign third_level = false %}
+
+                        {% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
+                          {% assign third_level = false %}
+                        {% endif %}
+
+                        {% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
+                          {% for child_link in linklists[child_list_handle].links %}
+                            {% assign grand_child_list_handle = child_link.title | handle %}
+                            {% if linklists[grand_child_list_handle] and linklists[grand_child_list_handle].links.size > 0 %}
+                              {% assign third_level = true %}
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
+
+                        {% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
+                          <li class="nav-list__item {% if active %}active{% endif %} has-dropdown {% if third_level == true %} has-dropdown--tertiary{% endif %} {% if child_list_handle == 'products' and settings.main_menu_collection_enable and settings.main_menu_collections != blank %} nav-list__item--mega {% endif %}">
+                            <a class="nav-list__link" href="{{ link.url }}">{{ link.title }}</a>
+                            <span class="icon--plus-small js-collapse"></span>
+                            <!-- Secondary menu level -->
+                            <ul class="nav-list__dropdown {% unless third_level == true %}nav-list__dropdown--secondary{% endunless %}">
+                              {% if child_list_handle == 'products' and settings.main_menu_collection_enable and settings.main_menu_collections != blank %}
+                                  {% assign collections_list = settings.main_menu_collections | split: ',' %}
+                                  {% for list_item in collections_list %}
+                                    {% assign collection_menu = collections[list_item] %}
+                                    {% if collection_menu.products.size != 0 %}
+                                      <li class="nav-list__item nav-list__item--add">
+                                        <a class="nav-list__link" href="{{ collection_menu.url }}">
+                                          <div class="img-holder img-holder--block nav-list__image">
+                                            <img src="{{ collection_menu.image.src | img_url: 'small' }}" alt="">
+                                          </div>
+                                          <h3 class="nav-list__title">{{ collection_menu.title }}</h3>
+                                          <p class="nav-list__desc">{{ collection_menu.description | truncatewords: 25 }}</p>
+                                        </a>
+                                      </li>
+                                    {% endif %}
+                                  {% endfor %}
+                                  {{}}
+                              {% else %}
+                                {% for child_link in linklists[child_list_handle].links %}
+                                  {% assign grand_child_list_handle = child_link.title | handle %}
+                                  {% if linklists[grand_child_list_handle] and linklists[grand_child_list_handle].links.size > 0 %}
+                                    <li class="nav-list__item has-dropdown">
+                                      <a class="nav-list__link" href="{{ child_link.url }}">{{ child_link.title }}</a>
+                                      <span class="icon--plus-small js-collapse"></span>
+                                      <!-- Third menu level -->
+                                      <ul class="nav-list__dropdown">
+                                        {% for grand_child_link in linklists[grand_child_list_handle].links %}
+                                          <li class="nav-list__item">
+                                            <a class="nav-list__link" href="{{ grand_child_link.url }}">{{ grand_child_link.title }}</a>
+                                          </li>
+                                        {% endfor %}
+                                      </ul>
+                                      <!-- end third menu level -->
+                                    </li>
+                                  {% else %}
+                                    <li class="nav-list__item">
+                                      <a class="nav-list__link" href="{{ child_link.url }}">{{ child_link.title }}</a>
+                                    </li>
+                                  {% endif %}
+                                {% endfor %}
+                              {% endif %}
+                            </ul>
+                            <!-- end secondary menu level -->
+                          </li>
+                        {% else %}
+                          <li class="nav-list__item {% if active %}active{% endif %}">
+                            <a class="nav-list__link" href="{{ link.url }}">{{ link.title }}</a>
+                          </li>
+                        {% endif %}
+                      {% endfor %}
+                
+                      <!-- Menu search  -->
+                      <li class="nav-list__item nav-list__item--search has-dropdown">
+                        <a class="nav-list__link" href="/search">{{ 'layout.search.heading' | t }}</a>
+                        <span class="icon--plus-small js-collapse"></span>
+                        <!-- Secondary menu level -->
+                        <ul class="nav-list__dropdown">
+                          <li class="nav-list__item">
+                            <div class="form-wrapper">
+                              <form action="/search" method="GET" class="form form--inverse" role="search">
+                                {% if settings.search_type == 'products' %}
+                                  <input type="hidden" name="type" value="product" />
+                                {% endif %}
+                                <div class="form__row">
+                                  <input type="text" name="q" class="form__field" placeholder="{{ 'layout.search.placeholder' | t }}" autocomplete="off">
+                                </div>
+                                <div class="form__row form__row--submit">
+                                  <input type="submit" class="btn btn--submit" value="{{ 'layout.search.button' | t }}">
+                                </div>
+                              </form>
+                            </div>
+                          </li>
+                        </ul>
+                        <!-- end secondary menu level -->
+                      </li>
+                      <!-- End menu search -->
+
+                      {% if settings.show_multiple_currencies == true %}
+                        <li class="nav-list__item nav-list__item--currency">
+                          <a class="nav-list__link" href="javascript:void(0);">{{ 'layout.menu.currency' | t }}</a>
+                          {% comment %}
+                          Dropdown for currency
+                          {% endcomment %}
+                          {% include 'currency-picker' %}
+                        </li>
+                      {% endif %}
+                
+                      <li class="nav-list__item nav-list__item--divider"></li>
+
+                      {% if shop.customer_accounts_enabled %}
+                
+                        {% if customer %}
+                          <li class="nav-list__item has-dropdown {% if template contains 'customers' %}active {% endif %}">
+                            <a class="nav-list__link" href="/account">{{ 'layout.menu.view_account' | t }}</a>
+                            <span class="icon--plus-small js-collapse"></span>
+                            <!-- Secondary menu level -->
+                            <ul class="nav-list__dropdown nav-list__dropdown--secondary">
+                              <li class="nav-list__item">
+                                <a class="nav-list__link" href="/account">{{ 'layout.menu.orders' | t }}</a>
+                              </li>
+                              <li class="nav-list__item">
+                                <a class="nav-list__link" href="/account/addresses" title="{{ 'layout.menu.addresses' | t }}">{{ 'layout.menu.addresses' | t }}</a>
+                              </li>
+                              {% if settings.wishlist_enable %}
+                                <li class="nav-list__item">
+                                  <a class="nav-list__link" href="/pages/wishlist" title="{{ 'layout.menu.wishlist' | t }}">{{ 'layout.menu.wishlist' | t }}</a>
+                                </li>
+                              {% endif %}
+                              <li class="nav-list__item nav-list__item--logout-desktop">
+                                <a class="nav-list__link" href="/account/logout"  title="{{ 'customer.login.logout' | t }}">{{ 'customer.login.logout' | t }}</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="nav-list__item nav-list__item--logout">
+                            <a class="nav-list__link" href="/account/logout" title="{{ 'customer.login.logout' | t }}">{{ 'customer.login.logout' | t }}</a>
+                            
+                          </li>
+                        {% else %}
+                          <li class="nav-list__item nav-list__item--creat-account has-dropdown">
+                            <a class="nav-list__link" href="#">{{ 'layout.menu.create_account' | t }}</a>
+                            <span class="icon--plus-small js-collapse"></span>
+                            <!-- Secondary menu level -->
+                            <ul class="nav-list__dropdown">
+                              <li class="nav-list__item">
+                                <div class="form-wrapper">
+                                  {% form 'create_customer', class: 'form form--inverse form-validation' %} 
+
+                                    <div class="form__row">
+                                      <label class="label-hide" for="first_name">{{ 'customer.general.first_name' | t }}</label>
+                                      <input class="form__field" id="first_name" type="text" value="" name="customer[first_name]" size="30" placeholder="{{ 'customer.general.first_name' | t }}">
+                                    </div>
+                                  
+                                    <div class="form__row">
+                                      <label class="label-hide" for="last_name">{{ 'customer.general.last_name' | t }}</label>
+                                      <input class="form__field" id="last_name" type="text" value="" name="customer[last_name]" size="30" placeholder="{{ 'customer.general.last_name' | t }}">
+                                    </div>
+                                  
+                                    <div class="form__row">
+                                      <label class="label-hide" for="email">{{ 'customer.general.email' | t }}</label>
+                                      <input class="form__field" id="email" type="email" value="" name="customer[email]" size="30" placeholder="{{ 'customer.general.email' | t }}">
+                                    </div>
+                                  
+                                    <div class="form__row">
+                                      <label class="label-hide" for="password" class="login">{{ 'customer.general.password' | t }}</label>
+                                      <input class="form__field" id="password" type="password" value="" name="customer[password]" size="30" placeholder="{{ 'customer.general.password' | t }}">
+                                    </div>
+                                  
+                                    <div class="form__row form__row--submit">
+                                      <button class="btn btn--submit" type="submit">{{ 'customer.registration.create_account_button' | t }}</button>
+                                    </div>
+                                  
+                                  {% endform %}
+                                </div>
+                              </li>              
+                            </ul>
+                            <!-- end secondary menu level -->
+                          </li>
+                  
+                          <li class="nav-list__item nav-list__item--login {% if template contains 'customers' %}active {% endif %}has-dropdown">
+                            <a class="nav-list__link" href="/account/login">{{ 'customer.login.heading' | t }}</a>
+                            <span class="icon--plus-small js-collapse"></span>
+                            <!-- Secondary menu level -->
+                            <ul class="nav-list__dropdown">
+                              <li class="nav-list__item">
+                                <div class="login-form">
+                                  <div class="form-wrapper form-wrapper--login">
+                                    {% form 'customer_login', class: 'form form--inverse form-validation' %}
+                                      {{ form.errors | default_errors }}
+                                    
+                                      <div class="form__row">
+                                        <label class="label-hide" for="login_email">{{ 'customer.general.email' | t }}</label>
+                                        <input class="form__field" id="login_email" type="email" value="" name="customer[email]" size="30" placeholder="{{ 'customer.general.email' | t }}">
+                                      </div>
+                                    
+                                      <div class="form__row">
+                                        <label class="label-hide" for="login_password">{{ 'customer.general.password' | t }}</label>
+                                        <input class="form__field" id="login_password" type="password" value="" name="customer[password]" size="16"  placeholder="{{ 'customer.general.password' | t }}">
+                                      </div>
+                                    
+                                      <div class="form__row text-center">
+                                        <a class="text-link text-link--form js-forget-password" href="#" alt="{{ 'customer.login.forgot_password' | t }}">{{ 'customer.login.forgot_password' | t }}</a>
+                                      </div>
+                                    
+                                      <div class="form__row form__row--submit">
+                                        <input type="submit" class="btn btn--submit" value="{{ 'customer.login.login_button' | t }}">
+                                      </div>
+                                    
+                                    {% endform %}
+                                  </div>
+                                  
+                                  <div class="form-wrapper form-wrapper--recover-password display-none">
+                                    {% form 'recover_customer_password', class: 'form form--inverse' %}
+                                      {{ form.errors | default_errors }}
+                                  
+                                      <p class="form__info">{{ 'customer.recover_password.title' | t }}</p>
+                                    
+                                      {% if form.posted_successfully? %}
+                                        {% assign reset_success = true %}
+                                      {% endif %}
+                                  
+                                      <div class="form__row">
+                                        <label class="label-hide" for="email">{{ 'customer.recover_password.email' | t }}</label>
+                                        <input class="form__field" id="recover-email" type="email" value="" size="30" name="email" placeholder="{{ 'customer.recover_password.email' | t }}">
+                                      </div>
+                                  
+                                      <div class="form__row form__row--submit">
+                                        <input type="submit" class="btn btn--submit" value="{{ 'customer.recover_password.button' | t }}">
+                                      </div>
+
+                                      <div class="form__row form__row--text text-center">
+                                        <button class="text-link text-link--form js-forget-password-cancel" type="button" id="HideRecoverPasswordLink">{{ 'customer.recover_password.cancel' | t }}</button>
+                                      </div>
+                                  
+                                    {% endform %}
+                                  </div>
+                                </div>
+                              </li>
+                  
+                            </ul>
+                            <!-- end secondary menu level -->            
+                          </li>
+                        {% endif %}   
+                      {% endif %}     
+                    </ul>
+                  </div> <!-- end drawer__wrapper -->
+        </div> <!-- end drawer -->
+        <!-- *** End menu *** --> 
+        <!-- *** Shopping cart *** --> 
+        <div id="cart" class="drawer drawer--cart close">
+                  <!-- Open cart button -->
+                  <button class="drawer__btn-open" type="button"> 
+                    <span class="cart-total__amount drawer--cart-total">
+                      <span class="money">{{ cart.total_price | money }}</span>
+                    </span>
+                    <span class="icon icon--cart">
+                      <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="16" height="20" viewBox="0 0 16 20">
+                        <path d="M14.000,20.000 L2.000,20.000 C0.895,20.000 -0.000,19.105 -0.000,18.000 L-0.000,7.000 C-0.000,5.896 0.895,5.000 2.000,5.000 L4.000,5.000 L4.000,4.000 C4.000,1.791 5.791,0.000 8.000,0.000 C10.209,0.000 12.000,1.791 12.000,4.000 L12.000,5.000 L14.000,5.000 C15.105,5.000 16.000,5.896 16.000,7.000 L16.000,18.000 C16.000,19.105 15.105,20.000 14.000,20.000 ZM10.000,4.000 C10.000,2.895 9.105,2.000 8.000,2.000 C6.895,2.000 6.000,2.895 6.000,4.000 L6.000,5.000 L10.000,5.000 L10.000,4.000 ZM14.000,8.000 C14.000,7.448 13.552,7.000 13.000,7.000 L3.000,7.000 C2.448,7.000 2.000,7.448 2.000,8.000 L2.000,17.000 C2.000,17.552 2.448,18.000 3.000,18.000 L13.000,18.000 C13.552,18.000 14.000,17.552 14.000,17.000 L14.000,8.000 ZM12.000,17.000 C11.448,17.000 11.000,16.552 11.000,16.000 L11.000,13.000 C11.000,12.448 11.448,12.000 12.000,12.000 C12.552,12.000 13.000,12.448 13.000,13.000 L13.000,16.000 C13.000,16.552 12.552,17.000 12.000,17.000 Z" class="cls-1"/>
+                      </svg>
+                    </span>
+
+                    <span id="cartCount" class="drawer--cart-count"></span>
+                    <span class="fallback-text">{{ 'layout.cart.open_cart' | t }}</span>
+                  </button>
+                  <!-- End open cart button -->
+                
+                  <div class="drawer__wrapper">
+                    <div class="cart-wrapper">
+                      <div class="drawer__header">
+                        <h3 class="heading--add-small">{{ 'cart.general.heading' | t | upcase }}</h3>
+                        <!-- End shop logo -->
+                        <button class="drawer__btn-close btn" type="button">
+                          <span>{{ 'layout.cart.close_cart' | t }}</span>
+                        </button>
+                      </div> <!-- end drawer__header -->
+                            
+                      <hr class="hr--clear">
+                            
+                      <div class="cart">
+                        <form action="/cart" method="POST" id="cart-form">
+                            
+                            <div class="cart-header">
+                              <div class="cart-header__item">
+                                {{ 'cart.general.price' | t }}
+                              </div>
+                            
+                              <div class="cart-header__item">
+                                {{ 'cart.general.quantity' | t }}
+                              </div>
+                            </div>
+                            
+                            <ul class="cart-list">
+                              {% for item in cart.items %}
+                                <li class="cart-list__item">
+                                  <div class="cart-list__item--img clearfix">
+                                    <div class="img-holder img-holder--circle img-holder--circle-sm">
+                                      <a href="{{ item.product.url }}">
+                                      
+                                        <img src="{% if product.featured_image.size > 0 %}{{ item.product.featured_image.src | product_img_url: 'small' }}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}" alt="{{ item.title | escape }}">
+                                      </a>
+                                    </div>
+                                  </div>
+                            
+                                  <div class="cart-list__item--title">
+                                    <a href="{{ item.product.url | within: collection.all }}">{{ item.title | truncate: 20 }}</a>
+                                  </div>
+                            
+                                  <div class="cart-list__item--quantity">
+                                    <div class="quantity-field">
+                                      <span class="icon icon--arrow-up js-up-quantity"></span>
+                                      <input id="updates_{{ item.id }}" type="number" name="updates[]" min="1" value="{{ item.quantity }}" size="5">
+                                      <span class="icon icon--arrow-down js-down-quantity"></span>
+                                    </div>
+                                  </div>
+                            
+                                  <div class="cart-list__item--price">
+                                    <span class="money">{{ item.price | money }}</span>
+                                  </div>
+                            
+                                  <div class="cart-list__item--remove">
+                                    <a href="/cart/change?line={{ forloop.index }}&quantity=0">
+                                      <span class="icon icon--delete"></span>
+                                    </a>
+                                  </div>
+                            
+                                </li>
+                              {% endfor %}
+                              
+                            </ul>
+                        
+                            <div class="cart__block cart__package">
+                              {% comment %}
+                              Snippet for adding additional packing to cart.
+                              For more information, visit:
+                              - https://docs.shopify.com/manual/configuration/store-customization/page-specific/cart-page/ask-customer-for-more-information
+                              {% endcomment %}
+                              {% include 'adding-wooden-box' %}
+                            </div>
+                        
+                            <div class="cart__block cart__total clearfix">
+                              <h3 class="heading--add-small">{{ 'cart.general.total' | t | upcase }}</h3>
+
+                              <span class="cart-total__amount">
+                                <span class="money">{{ cart.total_price | money }}</span>
+                              </span>
+
+                              <a id="update-cart" class="update-cart" href="javascript:void(0);">
+                                <span>{{ 'cart.general.update_cart' | t }}</span>
+                                <span class="icon icon--refresh">
+                                  <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="21" height="19" viewBox="0 0 21 19">
+                                    <path d="M21.008,13.709 C21.076,14.311 20.717,14.884 20.205,14.988 C19.694,15.091 19.223,14.687 19.155,14.084 L19.000,13.670 C17.453,16.818 14.244,19.000 10.500,19.000 C6.491,19.000 3.069,16.513 1.674,13.000 L3.869,13.000 C5.127,15.378 7.623,17.000 10.500,17.000 C13.275,17.000 15.685,15.483 16.981,13.242 L16.340,13.524 C15.877,13.808 15.314,13.611 15.083,13.085 C14.852,12.559 15.041,11.903 15.504,11.619 L18.423,10.334 C18.559,10.181 18.721,10.058 18.918,10.018 C19.223,9.956 19.501,10.089 19.701,10.322 C19.722,10.342 19.737,10.372 19.757,10.395 C19.790,10.442 19.829,10.482 19.855,10.536 C19.882,10.579 19.918,10.610 19.940,10.659 C20.001,10.799 20.029,10.948 20.034,11.097 L21.008,13.709 ZM18.750,13.000 L18.579,12.539 L17.531,13.000 L18.750,13.000 ZM10.500,2.000 C8.067,2.000 5.911,3.162 4.543,4.959 C5.011,4.791 5.528,4.967 5.754,5.419 C6.003,5.918 5.800,6.540 5.301,6.809 L3.260,7.924 C3.103,8.127 2.882,8.280 2.620,8.327 C2.291,8.385 1.991,8.259 1.776,8.038 C1.752,8.019 1.737,7.991 1.715,7.969 C1.679,7.925 1.638,7.887 1.610,7.835 C1.581,7.795 1.541,7.765 1.518,7.719 C1.452,7.587 1.422,7.447 1.416,7.307 L0.367,4.880 C0.293,4.309 0.680,3.766 1.232,3.668 C1.784,3.570 2.291,3.953 2.364,4.524 L2.399,4.603 C4.061,1.854 7.052,-0.000 10.500,-0.000 C14.880,-0.000 18.558,2.968 19.656,7.000 L17.564,7.000 C16.533,4.089 13.764,2.000 10.500,2.000 Z"/>
+                                  </svg>
+                                </span>
+                              </a>
+                              
+                              <p class="cart-total__info clearfix">{{ 'cart.general.total_information' | t }}</p>
+                              
+                            </div>
+                        
+                            <div class="cart__block cart__note form form--default">
+                              <div class="form__row">
+                                <label class="heading--add-small" for="{{ 'cart.general.note' | t | handle }}">{{ 'cart.general.note_heading' | t | upcase }}</label>
+                              </div>
+                              <div class="form__row">
+                                <textarea class="form__field form__field--textarea" id="{{ 'cart.general.note_heading' | t | handle }}" name="attributes[{{ 'cart.general.note_heading' | t }}]" rows="10" placeholder="{{ 'cart.general.note_placeholder' | t }}"></textarea>
+                                <label  class="form__field--placeholder" for="{{ 'cart.general.note_heading' | t | handle }}">{{ 'cart.general.note_placeholder' | t }}</label>
+                              </div>
+                            </div>
+                        
+                            <div class="text-center cart__checkout-btn">
+                              <button class="btn btn--default btn--full" type="submit" name="checkout">{{ 'cart.general.checkout_button' | t | upcase }}</button>
+                            </div>
+                            
+                            {% comment %}
+                            Snippet for adding shipping calculator.
+                            For more information, visit:
+                            - https://docs.shopify.com/manual/configuration/store-customization/page-specific/cart-page/add-shipping-rates-calculator
+                            {% endcomment %}
+                            {% include 'shipping-calculator' %}
+
+                            <div>
+                              <span>{{rates.length}}</span>
+                            </div>
+                          </form>
+                      
+                          <div class="cart-empty display-none">
+                            <div class="cart-empty__wrapper">
+                              <h5 class="heading--add-small">{{ 'cart.empty.heading' | t | upcase }}</h5>
+                              <p class="cart-empty__info">{{ 'cart.empty.additional_information_html' | t }}</p>
+                              <a class="btn btn--underlines" href="/collections/all" title="{{ 'cart.empty.button' | t }}">
+                                {{ 'cart.empty.button' | t }}
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="61" height="12" viewBox="0 0 61 12">
+                                  <path d="M60.217,1.433 C45.717,2.825 31.217,4.217 16.717,5.609 C13.227,5.944 8.806,6.200 6.390,5.310 C7.803,4.196 11.676,3.654 15.204,3.216 C28.324,1.587 42.033,-0.069 56.184,0.335 C58.234,0.394 60.964,0.830 60.217,1.433 ZM50.155,5.670 C52.205,5.728 54.936,6.165 54.188,6.767 C39.688,8.160 25.188,9.552 10.688,10.943 C7.198,11.278 2.778,11.535 0.362,10.645 C1.774,9.531 5.647,8.988 9.175,8.551 C22.295,6.922 36.005,5.265 50.155,5.670 Z" class="cls-1"/>
+                                </svg> 
+                              </a>
+                            </div>
+                          </div>
+                      
+                      </div> <!-- end cart -->
+                    </div> <!-- end cart -->
+                  </div> <!-- end drawer__wrapper -->
+        </div> <!-- end drawer -->
+        <!-- *** End shopping cart *** -->
+
+</header>

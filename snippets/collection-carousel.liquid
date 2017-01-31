@@ -1,0 +1,37 @@
+<div class="page-description">
+  <h1 class="heading--page">{{ collection.title }}</h1>
+  <h2 class="subheading--page-small"><em>{{ collection.products_count }} {{ 'collections.product_list.products_in_collection' | t }}</em></h2>
+</div>
+
+{% comment %}
+Snippet for toolbar with types of view and sorting options
+
+{% include 'collection-toolbar' %}
+{% endcomment %}
+<section class="clearfix">
+  {% comment %}
+  Collection product carousel
+  {% endcomment %}
+  <!-- Swiper -->
+  <div class="swiper-container carousel carousel--homepage">   
+    <div class="swiper-wrapper">
+      {% for product in collection.products %}
+      <div class="swiper-slide" data-img-bg="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'grande'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}">
+        {% include 'product-item-grid' %}
+      </div>
+      {% endfor %}
+    </div>
+    <div class="carousel__navigation">
+      <!-- Add Arrows -->
+      <div class="homepage-swiper-btn-next carousel-button-next">
+        <span class="icon icon--arrow-right"></span>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-active-slide"></div>
+
+      <div class="homepage-swiper-btn-prev carousel-button-prev">
+        <span class="icon icon--arrow-left"></span>
+      </div>
+    </div>
+  </div>
+</section>

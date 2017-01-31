@@ -1,0 +1,74 @@
+<div class="contact-page-wrapper">
+  {% comment %}
+  Block with short contact information: hours, email and phone
+  {% endcomment %}
+  <div class="contact-short">
+    <div class="wrapper">
+      {% comment %}
+      Calculate the number of short contact form columns
+      {% endcomment %}
+      {% assign num_cs_columns = 0 %}
+          
+      {% if settings.contact_short_hours_enable %}
+        {% assign num_cs_columns = num_cs_columns | plus: 1 %}
+      {% endif %}
+          
+      {% if settings.contact_short_email_enable %}
+        {% assign num_cs_columns = num_cs_columns | plus: 1 %}
+      {% endif %}
+          
+      {% if settings.contact_short_phone_enable %}
+        {% assign num_cs_columns = num_cs_columns | plus: 1 %}
+      {% endif %}
+          
+          
+      {% comment %}
+      Choose css grid for columns number
+      {% endcomment %}
+      {% case num_cs_columns %}
+        {% when 0 %}
+        {% when 1 %}
+          {% assign cs_column_width = 'text-center' %}
+        {% when 2 %}
+          {% assign cs_column_width = 'large--one-half medium--one-half one-whole' %}
+        {% when 3 %}
+          {% assign cs_column_width = 'large--one-third medium--one-whole one-whole' %}
+      {% endcase %}
+  
+      <div class="grid">
+        {% if settings.contact_short_hours_enable %}
+          <div class="grid__item {{ cs_column_width }}">
+            <div class="contact-short__block">
+              <span class="heading--add-small contact-short__title">{{ 'contact.short.hours' | t }}</span>
+              {% if settings.contact_short_hours != blank %}
+                <p class="contact-short__contact">{{ settings.contact_short_hours }}</p>
+              {% endif %}
+            </div> <!-- End contact-short__block -->
+          </div> <!-- End grid__item -->
+        {% endif %}
+        
+        {% if settings.contact_short_email_enable %}
+          <div class="grid__item {{ cs_column_width }}">
+            <div class="contact-short__block">
+              <span class="heading--add-small contact-short__title">{{ 'contact.short.email' | t }}</span>
+              {% if settings.contact_short_email != blank %}
+                <p class="contact-short__contact"><a href="mailto:{{ settings.contact_short_email }}">{{ settings.contact_short_email }}</a></p>
+              {% endif %}
+            </div> <!-- End contact-short__block -->
+          </div> <!-- End grid__item -->
+        {% endif %}
+        
+        {% if settings.contact_short_phone_enable %}
+          <div class="grid__item {{ cs_column_width }}">
+            <div class="contact-short__block">
+              <span class="heading--add-small contact-short__title">{{ 'contact.short.phone' | t }}</span>
+              {% if settings.contact_short_phone != blank %}
+                <p class="contact-short__contact">{{ settings.contact_short_phone }}</p>
+              {% endif %}
+            </div> <!-- End contact-short__block -->
+          </div> <!-- End grid__item -->
+        {% endif %}
+      </div> <!-- End grid -->
+    </div> <!-- End wrapper -->
+  </div> <!-- End contact-short -->
+</div>

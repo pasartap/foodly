@@ -1,0 +1,22 @@
+{% unless settings.img_about_us_hero.jpg or settings.about_us_hero_text == blank %}
+  <section class="hero-about-us">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item">
+          <div class="hero-msg-container-wrapper">
+            <div class="hero-msg-container">
+              {{ settings.about_us_hero_text }}
+              
+              <div class="btn--underlines-container">
+                 <a class="btn" href="{{ settings.about_us_hero_link }}" title="{{ 'additional_blocks.hero_about_us.button' | t }}">{{ 'additional_blocks.hero_about_us.button' | t }}</a>
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="206" height="11" viewBox="0 0 206 11">
+                    <path fill="#fff" d="M205.565,1.151 C155.769,2.543 105.972,3.935 56.175,5.327 C44.189,5.662 29.008,5.919 20.711,5.029 C25.561,3.915 38.863,3.372 50.978,2.934 C96.035,1.306 143.117,-0.351 191.713,0.054 C198.755,0.112 208.132,0.549 205.565,1.151 ZM171.008,5.388 C178.051,5.447 187.428,5.884 184.861,6.486 C135.064,7.878 85.268,9.270 35.471,10.662 C23.485,10.997 8.304,11.254 0.007,10.364 C4.857,9.250 18.158,8.707 30.274,8.269 C75.331,6.641 122.413,4.984 171.008,5.388 Z" class="cls-1"/>
+                  </svg>
+               </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </section>
+{% endunless %}

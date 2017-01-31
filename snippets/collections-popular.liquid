@@ -1,0 +1,41 @@
+{% if settings.popular_collections != blank %}
+  <section>
+    {% comment %}
+    Calculation columns for spesial offer
+    {% endcomment %}
+    {% assign popular_collections = settings.popular_collections | split: ',' %}
+    {% assign popular_collections_length = popular_collections.size %}
+
+    {% case popular_collections_length %}
+      {% when 0 %}
+      {% when 1 %}
+        {% assign popular_collections_colunm_width = 'one' %}
+      {% when 2 %}
+        {% assign popular_collections_colunm_width = 'two' %}
+      {% when 3 %}
+        {% assign popular_collections_colunm_width = 'three' %}
+    {% endcase %}
+
+    <div class="collection-popular-container {{popular_collections_colunm_width}} ">
+      {% for collection in popular_collections %}
+        {% assign collection = collection | downcase %}
+      
+    {% if collections[collection].image %}
+          {% assign collection_image = collections[collection].image | img_url: 'medium' %}
+        {% else %}
+          {% for product in collections[collection].products  limit: 1 %}
+              {% assign collection_image = product.featured_image | product_img_url: '1024x1024' %}
+            {% endfor %}
+        {% endif %}
+
+        {% for product in collections[collection].products  limit: 1 %}
+          {% assign collection_image = product.featured_image | product_img_url: '1024x1024' %}
+        {% endfor %}
+      
+        <div class="collection-popular" style="background: url('{{collection_image}}') no-repeat; background-size: cover; background-position: center center;">
+          <h4 class="heading--page">{{ collections[collection].handle}}</h4>
+        </div>
+      {% endfor %}
+    </div> <!-- End collection-popular-container -->
+  </section>
+{% endif %}

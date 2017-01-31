@@ -1,0 +1,81 @@
+{% comment %}
+Snippet for toolbar with types of view and sorting options (collection page)
+{% endcomment %}
+<div class="collection__toolbar {% if coll-list == true %}collection__toolbar--list{% endif %}">
+
+  <div class="collection__toolbar-views">
+    <a class="grid-view" href="{{collection.url}}?view=grid">
+      <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="20" height="15" viewBox="0 0 20 15">
+        <path d="M19.000,15.000 L17.000,15.000 C16.448,15.000 16.000,14.552 16.000,14.000 L16.000,13.000 C16.000,12.448 16.448,12.000 17.000,12.000 L19.000,12.000 C19.552,12.000 20.000,12.448 20.000,13.000 L20.000,14.000 C20.000,14.552 19.552,15.000 19.000,15.000 ZM19.000,9.000 L17.000,9.000 C16.448,9.000 16.000,8.552 16.000,8.000 L16.000,7.000 C16.000,6.448 16.448,6.000 17.000,6.000 L19.000,6.000 C19.552,6.000 20.000,6.448 20.000,7.000 L20.000,8.000 C20.000,8.552 19.552,9.000 19.000,9.000 ZM19.000,3.000 L17.000,3.000 C16.448,3.000 16.000,2.552 16.000,2.000 L16.000,1.000 C16.000,0.448 16.448,0.000 17.000,0.000 L19.000,0.000 C19.552,0.000 20.000,0.448 20.000,1.000 L20.000,2.000 C20.000,2.552 19.552,3.000 19.000,3.000 ZM11.000,15.000 L9.000,15.000 C8.448,15.000 8.000,14.552 8.000,14.000 L8.000,13.000 C8.000,12.448 8.448,12.000 9.000,12.000 L11.000,12.000 C11.552,12.000 12.000,12.448 12.000,13.000 L12.000,14.000 C12.000,14.552 11.552,15.000 11.000,15.000 ZM11.000,9.000 L9.000,9.000 C8.448,9.000 8.000,8.552 8.000,8.000 L8.000,7.000 C8.000,6.448 8.448,6.000 9.000,6.000 L11.000,6.000 C11.552,6.000 12.000,6.448 12.000,7.000 L12.000,8.000 C12.000,8.552 11.552,9.000 11.000,9.000 ZM11.000,3.000 L9.000,3.000 C8.448,3.000 8.000,2.552 8.000,2.000 L8.000,1.000 C8.000,0.448 8.448,0.000 9.000,0.000 L11.000,0.000 C11.552,0.000 12.000,0.448 12.000,1.000 L12.000,2.000 C12.000,2.552 11.552,3.000 11.000,3.000 ZM3.000,15.000 L1.000,15.000 C0.448,15.000 0.000,14.552 0.000,14.000 L0.000,13.000 C0.000,12.448 0.448,12.000 1.000,12.000 L3.000,12.000 C3.552,12.000 4.000,12.448 4.000,13.000 L4.000,14.000 C4.000,14.552 3.552,15.000 3.000,15.000 ZM3.000,9.000 L1.000,9.000 C0.448,9.000 0.000,8.552 0.000,8.000 L0.000,7.000 C0.000,6.448 0.448,6.000 1.000,6.000 L3.000,6.000 C3.552,6.000 4.000,6.448 4.000,7.000 L4.000,8.000 C4.000,8.552 3.552,9.000 3.000,9.000 ZM3.000,3.000 L1.000,3.000 C0.448,3.000 0.000,2.552 0.000,2.000 L0.000,1.000 C0.000,0.448 0.448,0.000 1.000,0.000 L3.000,0.000 C3.552,0.000 4.000,0.448 4.000,1.000 L4.000,2.000 C4.000,2.552 3.552,3.000 3.000,3.000 Z" class="cls-1"/>
+      </svg>
+      <span class="fallback-text">Grid view</span>
+    </a>
+      
+    <a class="list-view" href="{{ collection.url }}?view=list">
+      <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="20" height="15" viewBox="0 0 20 15">
+        <path d="M19.000,15.000 L9.000,15.000 C8.448,15.000 8.000,14.552 8.000,14.000 L8.000,13.000 C8.000,12.448 8.448,12.000 9.000,12.000 L19.000,12.000 C19.552,12.000 20.000,12.448 20.000,13.000 L20.000,14.000 C20.000,14.552 19.552,15.000 19.000,15.000 ZM19.000,9.000 L9.000,9.000 C8.448,9.000 8.000,8.552 8.000,8.000 L8.000,7.000 C8.000,6.448 8.448,6.000 9.000,6.000 L19.000,6.000 C19.552,6.000 20.000,6.448 20.000,7.000 L20.000,8.000 C20.000,8.552 19.552,9.000 19.000,9.000 ZM19.000,3.000 L9.000,3.000 C8.448,3.000 8.000,2.552 8.000,2.000 L8.000,1.000 C8.000,0.448 8.448,0.000 9.000,0.000 L19.000,0.000 C19.552,0.000 20.000,0.448 20.000,1.000 L20.000,2.000 C20.000,2.552 19.552,3.000 19.000,3.000 ZM3.000,15.000 L1.000,15.000 C0.448,15.000 -0.000,14.552 -0.000,14.000 L-0.000,13.000 C-0.000,12.448 0.448,12.000 1.000,12.000 L3.000,12.000 C3.552,12.000 4.000,12.448 4.000,13.000 L4.000,14.000 C4.000,14.552 3.552,15.000 3.000,15.000 ZM3.000,9.000 L1.000,9.000 C0.448,9.000 -0.000,8.552 -0.000,8.000 L-0.000,7.000 C-0.000,6.448 0.448,6.000 1.000,6.000 L3.000,6.000 C3.552,6.000 4.000,6.448 4.000,7.000 L4.000,8.000 C4.000,8.552 3.552,9.000 3.000,9.000 ZM3.000,3.000 L1.000,3.000 C0.448,3.000 -0.000,2.552 -0.000,2.000 L-0.000,1.000 C-0.000,0.448 0.448,0.000 1.000,0.000 L3.000,0.000 C3.552,0.000 4.000,0.448 4.000,1.000 L4.000,2.000 C4.000,2.552 3.552,3.000 3.000,3.000 Z" class="cls-1"/>
+        </svg>
+        <span class="fallback-text">List view</span>
+    </a>
+  </div> <!-- end collection__toolbar-views -->
+  
+  <div class="collection__filters">
+    {% comment %}
+    Sort products by type.
+    For enable/disable go: Admin -> Online Store -> Themes -> Customize theme -> Collection page
+    {% endcomment %}
+    {% if settings.collection_for_sorting_enable and settings.collection_for_sorting != blank %}
+      {% assign current_tags = settings.collection_for_sorting %}
+      {% assign collection_array = settings.collection_for_sorting | split: ', ' %}
+      {% assign collection_array_size = collection_array.size | minus: 1 %}
+    
+      <select id="" class="sort-filter sort-filter--collection js-dropdown" name="" >
+        <option value="">{{ collection_array[0] }}</option>
+    
+        {% for i in (1..collection_array_size) %}
+          <option value="{{ collection_array[i] | handle }}">{{ collection_array[i] | capitalize }}</option>
+        {% endfor %}
+    
+      </select>
+    {% endif %}
+    
+    {% comment %}
+    Sort products by state.
+    For enable/disable go: Admin -> Online Store -> Themes -> Customize theme -> Collection page
+    {% endcomment %}
+    {% if settings.collection_sort_tags_enable and settings.collection_sort_tags != blank %}
+      {% assign current_tags = settings.collection_sort_tags %}
+      {% assign tags_array = settings.collection_sort_tags | split: ', ' %}
+      {% assign tags_array_size = tags_array.size | minus: 1 %}
+    
+      <select id="" class="sort-filter sort-filter--tags js-dropdown" name="">
+        <option value="">{{ tags_array[0] }}</option>
+        <option value="">{{ tags_array[1] }}</option>
+    
+        {% for i in (2..tags_array_size) %}
+          <option value="{{ tags_array[i] | handle }}">{{ tags_array[i] | capitalize }}</option>
+        {% endfor %}
+    
+      </select>
+    {% endif %}
+    
+    {% comment %}
+    Default sort.
+    For enable/disable go: Admin -> Online Store -> Themes -> Customize theme -> Collection page
+    {% endcomment %}
+    {% if settings.collection_sort_default_enable %}
+      <select id="sort_by" class="sort-filter sort-filter--order js-dropdown" name="sort-by">
+        <option value="manual">By order</option>
+        <option value="">None</option>
+        <option value="best-selling">Best selling</option>
+        <option value="title-ascending">Alphabetically: A-Z</option>
+        <option value="title-descending">Alphabetically: Z-A</option>
+        <option value="price-ascending">Price: low to high</option>
+        <option value="price-descending">Price: high to low</option>
+        <option value="created-descending">Date: new to old</option>    
+        <option value="created-ascending">Date: old to new</option>    
+      </select>
+    {% endif %}
+  </div> <!-- end collection__filters -->
+</div> <!-- end collection__toolbar -->
+

@@ -1,0 +1,37 @@
+<!-- DO NOT REMOVE THE FOLLOWING COMMENT -->
+<!-- (c) Copyright 2014 Caroline Hill. All Rights Reserved. Contact Mlle Caroline Schnapp at mllegeorgesand@gmail.com -->
+<!-- DO NOT REMOVE THE ABOVE COMMENT -->
+
+{% if linklists.special-packing.links.size > 0 and linklists.special-packing.links.first.type == 'product_link' %}
+
+  <div class="special-packing" id="is-a-gift" class="clearfix">
+    <h3 class="heading--add-small">{{ 'cart.general.additional_information_heading' | t | upcase }}</h3>
+    <div class="special-packing__block">
+      <input type="hidden" name="attributes[choose_package]" value="" />
+
+      <div class="special-packing__item">
+        <input type="radio" id="pack-default" name="attributes[choose_package]" {% unless cart.attributes.special_pack %} checked{% endunless %}>
+        <label for="pack-default">{{ 'cart.general.additional_information_one' | t }} <span class="special-packing__price money">$0</span></label>
+      </div>
+
+      <div class="special-packing__item">
+        <input type="radio" id="giftWrap" name="attributes[choose_package]" {% if cart.attributes.special_pack %} checked{% endif %}> 
+        <label for="giftWrap">{{linklists.special-packing.links.first.object.title | downcase }} <span class="special-packing__price money">{{ linklists.special-packing.links.first.object.price | money }}</span></label>
+      </div>
+    </div>
+  </div>
+
+{% assign id = linklists.special-packing.links.first.object.variants.first.id %}
+
+{% assign gift_wraps_in_cart = 0 %}
+{% for item in cart.items %}
+  {% if item.id == id %}
+    {% assign gift_wraps_in_cart = item.quantity %}
+  {% endif %}
+{% endfor %}
+
+<style>
+  #updates_{{ id }} { display: none; }
+</style>
+
+{% endif %}

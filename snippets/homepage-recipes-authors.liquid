@@ -1,0 +1,58 @@
+<section class="section section--homepage-recipe-authors">
+  <div class="wrapper clearfix">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        {% comment %}
+        Snippet for recipes from blog
+        For settings go to Admin -> Theme -> Customize Theme -> Homepage
+        {% endcomment %}
+        
+        {% if settings.homepage_recipes_authors_heading != blank %}
+          <h3 class="section-heading heading--page">{{ settings.homepage_recipes_authors_heading | upcase }}</h3>
+        {% endif %}
+
+        {% if settings.homepage_recipes_authors_subheading != blank %}
+          <p class="section__info text-center">{{ settings.homepage_recipes_authors_subheading }}</p>
+        {% endif %}
+
+        {% for article in blogs[settings.homepage_recipes_authors_blog].articles limit:3 %}
+            <article class="article">
+              <div class="article-img-container">
+                {% if article.image %}
+                  <div class="img-holder">
+                    <a href="{{ article.url }}" title="{{ article.title }}">
+                      <img src="{{ article | img_url: 'grande' }}" alt="{{ article.title }}">
+                    </a>
+                  </div>
+                {% else %}
+                  <div class="img-holder img-holder--no-img">
+                    <a href="{{ article.url }}" title="{{ article.title }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="70" height="70" viewBox="0 0 70 70">
+                        <path fill="#d0cacc" d="M45.509,65.525 C42.406,65.420 39.843,62.793 36.837,63.095 C31.542,63.625 27.631,68.553 22.051,68.364 C9.691,67.946 0.033,56.975 0.480,43.860 C0.927,30.745 11.309,20.452 23.670,20.870 C25.566,20.934 27.413,22.410 29.130,21.804 C36.393,19.240 40.045,11.433 47.344,11.680 C59.705,12.099 69.314,24.491 68.807,39.360 C68.301,54.229 57.870,65.944 45.509,65.525 ZM54.026,22.284 C50.005,18.016 43.573,24.444 47.585,28.702 C50.457,31.751 51.855,34.905 51.899,38.908 C51.962,44.746 59.529,45.946 59.465,40.094 C59.393,33.400 58.768,27.316 54.026,22.284 ZM35.677,11.286 C31.580,13.872 30.048,17.756 30.048,17.756 C26.669,0.990 40.706,-0.805 42.696,3.198 C44.687,7.201 39.775,8.700 35.677,11.286 Z"/>
+                      </svg>
+                    </a>
+                  </div>
+                {% endif %}
+                <p class="article__date">
+                  <time class="date">{{ article.created_at | date: '%B %-d, %Y' }}</time>
+                </p>
+              </div>
+              
+              {% assign author_photo_name = article.author | handleize | append: '.jpg'%}
+              
+              <div class="article__author-photo">
+                {{ author_photo_name | asset_url | img_tag }}
+              </div>
+              
+              <div class="article__info">
+                <h5 class="heading--add article__title">
+                  <a href="{{ article.url }}" title="{{ article.title }}">{{ article.title | truncatewords: 3 }}</a>
+                </h5>
+                <p class="article__author">by {{ article.author }}</p>
+              </div>
+            </article>
+          {% endfor %}
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>

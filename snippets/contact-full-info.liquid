@@ -1,0 +1,63 @@
+<div class="contact-page-wrapper">
+  {% if settings.contact_block1_enable or settings.contact_block2_enable %}
+  
+    <div class="wrapper">
+        <div class="grid">
+          {% comment %}
+          Calculate the number of contact information columns
+          {% endcomment %}
+          {% assign num_contact_columns = 0 %}
+              
+          {% if settings.contact_block1_enable %}
+            {% assign num_contact_columns = num_contact_columns | plus: 1 %}
+          {% endif %}
+              
+          {% if settings.contact_short_email_enable %}
+            {% assign num_contact_columns = num_contact_columns | plus: 1 %}
+          {% endif %}
+              
+          {% comment %}
+          Choose css grid for columns number
+          {% endcomment %}
+          {% case num_contact_columns %}
+            {% when 0 %}
+            {% when 1 %}
+              {% assign contact_column_width = 'text-center' %}
+            {% when 2 %}
+              {% assign contact_column_width = 'large--one-half medium--one-half one-whole' %}
+          {% endcase %}
+            
+          {% comment %}
+          First block with detailed information
+          {% endcomment %}
+          {% if settings.contact_block1_enable %}
+            <div class="contact-full grid__item {{ contact_column_width }}">
+              <h3 class="heading--add-small">{{ 'contact.detailed.farm_facilities' | t | upcase }}</h3>
+            
+              {% if settings.contact_block1 != blank %}
+                <address class="address">
+                  {{ settings.contact_block1 }}
+                </address>
+              {% endif %}
+            </div> <!-- End contact-full -->
+          {% endif %}
+          
+          {% comment %}
+          Second block with detailed information
+          {% endcomment %}  
+          {% if settings.contact_block2_enable %}
+          <div class="contact-full grid__item {{ contact_column_width }}">
+            <h3 class="heading--add-small">{{ 'contact.detailed.grocery_store' | t | upcase }}</h3>
+            
+              {% if settings.contact_block2 != blank %}
+                <address class="address">
+                  {{ settings.contact_block2 }}
+                </address>
+              {% endif %}
+            </div> <!-- End contact-full -->
+          {% endif %}
+            
+        </div> <!-- End grid -->
+    </div> <!-- End wrapper -->
+  {% endif %}
+</div>

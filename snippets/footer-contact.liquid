@@ -1,0 +1,92 @@
+<!-- *** Footer *** -->
+<footer class="footer {% unless settings.footer_social_enable %}social-disable{% endunless %} {% unless settings.footer_show_methods_of_payment %}payment-disable{% endunless %}">
+
+  <div class="wrapper">
+    <div class="grid">
+
+      {% comment %}
+      Contact information.
+      For setting go to Admin -> Theme -> Customize Theme -> Footer
+      {% endcomment %}          
+      <div class="grid__item large--one-quarter medium--one-half one-whole footer__item footer__item--contact {% if settings.footer_show_methods_of_payment %}footer__item--contact-half{% endif %}">
+        {% if settings.footer_address_text != blank %}
+          <h4 class="heading--add-small">{{ settings.footer_second_menu_heading | upcase }}</h4>
+          <div>{{ settings.footer_address_text }}</div>
+        {% endif %}
+      </div>
+          
+      {% comment %}
+      Footer menu.
+      For setting go to Admin -> Theme -> Customize Theme -> Footer
+      {% endcomment %}
+      <div class="grid__item large--one-quarter medium--one-half one-whole footer__item footer__item--menu">
+        <h4 class="heading--add-small">{{ settings.footer_menu_heading | upcase }}</h4>
+        <ul class="footer-list">
+          {% for link in linklists[settings.footer_quicklinks_linklist].links %}
+            <li class="footer-list__item">
+              <a class="footer-list__link" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% comment %}
+      Footer additional menu.
+      For setting go to Admin -> Theme -> Customize Theme -> Footer
+      {% endcomment %}
+      <div class="grid__item large--one-quarter medium--one-half one-whole footer__item footer__item--menu">
+        <h4 class="heading--add-small">{{ settings.footer_second_menu_heading | upcase }}</h4>
+        <ul class="footer-list">
+          {% for link in linklists[settings.footer_second_menu].links %}
+            <li class="footer-list__item">
+              <a class="footer-list__link" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+          
+      {% comment %}
+      Social media icons.
+      For setting go to Admin -> Theme -> Customize Theme -> Footer
+      {% endcomment %}
+      <div class="grid__item large--one-quarter medium--one-half one-whole  footer__item footer__item--payments">
+        <p class="copyright-mobile">
+          &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. {{ 'layout.copyright.right_reserved' | t }} 
+          {% if settings.copyright_link != blank %}
+            <a class="text-link--default" href="{{ settings.copyright_link }}" target="_blank" title="{{ settings.copyright_link_text }}">{{ settings.copyright_link_text }}</a>
+          {% endif %}
+        </p>
+
+        {% unless shop.enabled_payment_types == empty %}
+          {% assign enabled_payment_types = 'visa,master,american_express,paypal,diners_club,discover,jcb,google' %}
+          <h4 class="heading--add-small">{{ settings.footer_payments_heading | upcase }}</h4>
+          <ul class="list-payments">
+            {% for type in shop.enabled_payment_types %}
+              {% if enabled_payment_types contains type %}
+                <li class="list-payments__item">
+                  <span>
+                    <span class="icon-payment icon--{{type}}" aria-hidden="true"></span>
+                    <span class="fallback-text">{{ type | replace: '_', ' ' }}</span>
+                  </span>
+                </li>
+              {% else %}
+                <li class="list-payments__item list-payments__item--img">
+                  <img src="{{ type | payment_type_img_url }}" />
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endunless %}
+      </div><!-- end grid item -->
+    </div><!-- end grid -->
+  </div><!-- end wrapper-->
+
+  <p class="copyright">
+  &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. {{ 'layout.copyright.right_reserved' | t }} 
+    {% if settings.copyright_link != blank %}
+      <a class="text-link--default" href="{{ settings.copyright_link }}" target="_blank" title="{{ settings.copyright_link_text }}">{{ settings.copyright_link_text }}</a>
+    {% endif %}
+  </p>
+
+</footer>
+<!-- *** End footer *** -->

@@ -1,0 +1,48 @@
+<section class="hero-products hero-products__bg">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item">
+        <div class="hero-products-wrapper">
+          {% if settings.hero_products_product_1 %}
+            {% assign product_1 = all_products[settings.hero_products_product_1] %}
+            <div class="hero-products__product product-1">
+              <a href="{{ product_1.url  }}" title="{{ product_1.title }}">
+                <span class="price money">{{ product_1.price | money }}</span>
+                <h4 class="product__name">{{ product_1.title }}</h4>
+                <span class="arrow arrow--next">
+                  <span class="icon icon--arrow-right"></span>
+                </span>
+              </a>
+              <div class="arrow-curve">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="27" height="57" viewBox="0 0 27 57">
+                  <path fill="#fff" d="M26.476,55.748 C26.040,56.293 25.388,56.603 24.691,56.601 L11.293,56.572 C10.481,56.573 9.620,56.078 9.241,55.282 C8.861,54.489 8.975,53.576 9.543,52.894 L13.785,47.835 C-0.693,36.105 -3.661,15.060 7.353,0.063 L10.293,2.179 C0.404,15.641 3.083,34.541 16.100,45.074 L19.907,40.533 C20.358,39.994 21.022,39.705 21.709,39.725 C21.858,39.729 22.008,39.748 22.158,39.782 C23.001,39.972 23.652,40.607 23.860,41.444 L26.893,53.826 C27.061,54.503 26.909,55.203 26.476,55.748 ZM20.971,44.893 L14.185,52.988 L22.959,53.008 L20.971,44.893 Z" class="cls-1"/>
+                </svg>
+              </div>
+            </div>
+          {% endif %}
+          <div class="hero-msg-container">
+            <h2 class="hero-products__title">{{ settings.hero_products_title }}</h2>
+            <p class="hero-products__subtitle">{{ settings.hero_products_subtitle }}</p>
+          </div>
+          {% if settings.hero_products_product_2 %}
+            {% assign product_2 = all_products[settings.hero_products_product_2] %}
+            <div class="hero-products__product product-2">
+              <a href="{{ product_2.url  }}" title="{{ product_2.title }}">
+                <span class="price money">{{ product_2.price | money }}</span>
+                <h4 class="product__name">{{ product_2.title }}</h4>
+                <span class="arrow arrow--next">
+                  <span class="icon icon--arrow-right"></span>
+                </span>
+              </a>
+              <div class="arrow-curve">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="27" height="57" viewBox="0 0 27 57">
+                  <path fill="#fff" d="M26.476,55.748 C26.040,56.293 25.388,56.603 24.691,56.601 L11.293,56.572 C10.481,56.573 9.620,56.078 9.241,55.282 C8.861,54.489 8.975,53.576 9.543,52.894 L13.785,47.835 C-0.693,36.105 -3.661,15.060 7.353,0.063 L10.293,2.179 C0.404,15.641 3.083,34.541 16.100,45.074 L19.907,40.533 C20.358,39.994 21.022,39.705 21.709,39.725 C21.858,39.729 22.008,39.748 22.158,39.782 C23.001,39.972 23.652,40.607 23.860,41.444 L26.893,53.826 C27.061,54.503 26.909,55.203 26.476,55.748 ZM20.971,44.893 L14.185,52.988 L22.959,53.008 L20.971,44.893 Z" class="cls-1"/>
+                </svg>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div> 
+    </div>
+  </div>
+</section>

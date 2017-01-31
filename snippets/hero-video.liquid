@@ -1,0 +1,22 @@
+{% assign header_type = "header--clear" %}
+{% include 'header' with header_type %}
+
+<section class="hero-video">
+  <div class="hero-msg-container">
+    <h1 class="heading--page">From the Earth</h1>
+  </div>
+  <video autoplay muted loop>
+    {% if settings.bg_video_mp4 != blank %}
+      <source src="{{ settings.bg_video_mp4 }}" type="video/mp4">
+    {% endif %}
+    {% if settings.bg_video_ogg != blank %}
+      <source src="{{ settings.bg_video_ogg }}" type="application/ogg">
+    {% endif %}
+    {% if settings.bg_video_webm != blank %}
+      <source src="{{ settings.bg_video_webm }}" type="application/webm">
+    {% endif %}
+
+    <img src="{{ slide_img | asset_url }}">
+
+  </video>
+</section>

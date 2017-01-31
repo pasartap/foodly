@@ -1,0 +1,22 @@
+<div class="parallax parallax--additional">
+  <div class="parallax__back">
+    {% comment %}
+    Contact page heading
+    {% endcomment %}
+    <div class="hero-img {% if settings.contact_banner_enable %}hero-img--contact{% endif %}">
+      <div class="hero-img__content">
+        {% if settings.contact_heading != blank %}
+          <h1 class="heading--page">
+            {% if settings.contact_heading_em != blank %}
+              <em class="heading--accent">{{ settings.contact_heading_em }}</em>
+            {% endif %}
+            {{ settings.contact_heading }}
+          </h1>
+        {% endif %}
+      </div> <!-- End hero-img__content -->
+    </div> <!-- End hero-img -->
+  </div>
+  
+  <div class="parallax__base">
+  </div>
+</div>

@@ -1,0 +1,174 @@
+<!-- *** Footer *** -->
+<footer class="footer footer--boxed {% unless settings.footer_social_enable %}social-disable{% endunless %} {% unless settings.footer_show_methods_of_payment %}payment-disable{% endunless %}">
+
+  <div class="wrapper">
+        
+    {% comment %}
+    Calculate the number of footer columns shown
+    {% endcomment %}
+    {% assign num_footer_columns = 0 %}
+        
+    {% if settings.footer_blog_enable %}
+      {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+    {% endif %}
+        
+    {% if settings.footer_menu_enable %}
+      {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+    {% endif %}
+        
+    {% if settings.footer_second_menu_enable %}
+      {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+    {% endif %}
+        
+    {% if settings.footer_social_enable %}
+      {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+    {% endif %}
+
+    {% if settings.footer_show_methods_of_payment %}
+      {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+    {% endif %}
+    
+    {% if settings.footer_address_enable %}
+      {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+    {% endif %}
+        
+    {% comment %}
+    Choose css grid for columns number
+    {% endcomment %}
+    {% case num_footer_columns %}
+      {% when 0 %}
+      {% when 1 %}
+        {% assign footer_column_width = 'text-center' %}
+      {% when 2 %}
+        {% assign footer_column_width = 'large--one-half medium--one-half one-whole' %}
+      {% when 3 %}
+        {% assign footer_column_width = 'large--one-third medium--one-third one-whole' %}
+      {% when 4 %}
+        {% assign footer_column_width = 'large--one-quarter medium--one-half one-whole' %}
+    {% endcase %}
+        
+    <div class="grid">
+      <div class="footer-container">
+      {% comment %}
+        Contact information.
+        For setting go to Admin -> Theme -> Customize Theme -> Footer
+        {% endcomment %}          
+        {% if settings.footer_address_enable %}
+          <div class="grid__item {{ footer_column_width }} footer__item footer__item--contact {% if settings.footer_show_methods_of_payment %}footer__item--contact-half{% endif %}">
+            {% if settings.footer_address_text != blank %}
+              <h4 class="heading--add-small">{{ settings.footer_second_menu_heading | upcase }}</h4>
+              <div>{{ settings.footer_address_text }}</div>
+            {% endif %}
+          </div>
+        {% endif %}
+        
+        {% comment %}
+        Latest from blog.
+        For setting go to Admin -> Theme -> Customize Theme -> Footer
+        {% endcomment %}
+        {% if settings.footer_blog_enable %}
+          <div class="grid__item {{ footer_column_width }} footer__item footer__item--blog ">
+            <h4 class="heading--add-small">{{ settings.footer_blog_heading | upcase }}</h4>
+            <div class="footer__item--blog-item">
+              {% assign article = blogs[settings.footer_blog].articles.first %}
+              {% if article.image %}
+                {% assign image_alt = article.title | escape %}
+              
+                <a class="article-link" href="{{ article.url }}" title="{{ article.title }}">
+                  <img class="article-image" src="{{ article | img_url: 'compact'  }}" alt="{{ article.title }}">
+                </a>
+              
+              {% endif %}
+              <div class="article-desc">
+                <h5 class="article-title">{{ article.title | link_to: article.url | truncatewords: 6 }}</h5>  
+              </div>
+            </div>
+          </div>
+        {% endif %}
+            
+        {% comment %}
+        Footer menu.
+        For setting go to Admin -> Theme -> Customize Theme -> Footer
+        {% endcomment %}
+        {% if settings.footer_menu_enable %}
+          <div class="grid__item {{ footer_column_width }} footer__item footer__item--menu">
+            <h4 class="heading--add-small">{{ settings.footer_menu_heading | upcase }}</h4>
+            <ul class="footer-list">
+              {% for link in linklists[settings.footer_quicklinks_linklist].links %}
+                <li class="footer-list__item">
+                  <a class="footer-list__link" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+            
+        {% comment %}
+        Footer additional menu.
+        For setting go to Admin -> Theme -> Customize Theme -> Footer
+        {% endcomment %}
+        {% if settings.footer_second_menu_enable %}
+          <div class="grid__item {{ footer_column_width }} footer__item footer__item--menu">
+            <h4 class="heading--add-small">{{ settings.footer_second_menu_heading | upcase }}</h4>
+            <ul class="footer-list">
+              {% for link in linklists[settings.footer_second_menu].links %}
+                <li class="footer-list__item">
+                  <a class="footer-list__link" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+            
+        {% comment %}
+        Social media icons.
+        For setting go to Admin -> Theme -> Customize Theme -> Footer
+        {% endcomment %}
+        {% if settings.footer_social_enable %}
+          <div class="grid__item {{ footer_column_width }} footer__item footer__item--social">
+            <h4 class="heading--add-small">{{ settings.footer_social_heading | upcase }}</h4>
+            {% include 'social-links' %}
+          </div>
+        {% endif %}
+            
+        {% comment %}
+        Social media icons.
+        For setting go to Admin -> Theme -> Customize Theme -> Footer
+        {% endcomment %}
+        <div class="grid__item {{ footer_column_width }}  footer__item footer__item--payments">
+          <p class="copyright-mobile">
+            &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. {{ 'layout.copyright.right_reserved' | t }} 
+            {% if settings.copyright_link != blank %}
+              <a class="text-link--default" href="{{ settings.copyright_link }}" target="_blank" title="{{ settings.copyright_link_text }}">{{ settings.copyright_link_text }}</a>
+            {% endif %}
+          </p>
+          
+          {% if settings.footer_show_methods_of_payment %}
+            {% unless shop.enabled_payment_types == empty %}
+              {% assign enabled_payment_types = 'visa,master,american_express,paypal,diners_club,discover,jcb,google' %}
+              <h4 class="heading--add-small">{{ settings.footer_payments_heading | upcase }}</h4>
+              <ul class="list-payments">
+                {% for type in shop.enabled_payment_types %}
+                  {% if enabled_payment_types contains type %}
+                    <li class="list-payments__item">
+                      <span>
+                        <span class="icon-payment icon--{{type}}" aria-hidden="true"></span>
+                        <span class="fallback-text">{{ type | replace: '_', ' ' }}</span>
+                      </span>
+                    </li>
+                  {% else %}
+                    <li class="list-payments__item list-payments__item--img">
+                      <img src="{{ type | payment_type_img_url }}" />
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endunless %}
+          {% endif %}
+        </div><!-- end grid item -->
+      </div>
+    </div><!-- end grid -->
+  </div><!-- end wrapper-->
+
+</footer>
+<!-- *** End footer *** -->

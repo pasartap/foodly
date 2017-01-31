@@ -1,0 +1,14 @@
+<div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        <div class="embedded-video-container text-center">
+        <h2 class="heading--page">{{ settings.embedded_video_heading }}</h2>
+        {% if settings.embedded_video != blank %}
+          <div class="video-container">
+            {{ settings.embedded_video }}
+          </div>
+        {% endif %}
+        </div>
+    </div>
+  </div>
+</div>

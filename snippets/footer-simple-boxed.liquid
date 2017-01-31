@@ -1,0 +1,43 @@
+<!-- *** Footer *** -->
+<footer class="footer footer--boxed payment-disable">
+  <div class="wrapper">
+    <div class="grid">
+          
+      <div class="footer-container">
+        {% comment %}
+        Social media icons.
+        For setting go to Admin -> Theme -> Customize Theme -> Footer
+        {% endcomment %}
+        {% if settings.footer_social_enable %}
+          <div class="grid__item text-center footer__item footer__item--social">
+            <h4 class="heading--add-small">{{ settings.footer_social_heading | upcase }}</h4>
+            {% include 'social-links' %}
+          </div>
+        {% endif %}
+            
+        {% comment %}
+        Social media icons.
+        For setting go to Admin -> Theme -> Customize Theme -> Footer
+        {% endcomment %}
+        <div class="grid__item text-center  footer__item footer__item--payments">
+          <p class="copyright-mobile">
+            &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. {{ 'layout.copyright.right_reserved' | t }} 
+            {% if settings.copyright_link != blank %}
+              <a class="text-link--default" href="{{ settings.copyright_link }}" target="_blank" title="{{ settings.copyright_link_text }}">{{ settings.copyright_link_text }}</a>
+            {% endif %}
+          </p>
+        </div><!-- end grid item -->
+      </div>
+    </div><!-- end grid -->
+  </div><!-- end wrapper-->
+
+  <p class="copyright">
+  &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. {{ 'layout.copyright.right_reserved' | t }} 
+    {% if settings.copyright_link != blank %}
+      <a class="text-link--default" href="{{ settings.copyright_link }}" target="_blank" title="{{ settings.copyright_link_text }}">{{ settings.copyright_link_text }}</a>
+    {% endif %}
+  </p>
+
+</footer>
+<!-- *** End footer *** -->
+

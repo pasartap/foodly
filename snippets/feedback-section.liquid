@@ -1,0 +1,60 @@
+<section class="section section--feedback">
+  <div class="wrapper clearfix">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        {% comment %}
+        Snippet for recipes from blog
+        For settings go to Admin -> Theme -> Customize Theme -> Homepage
+        {% endcomment %}
+        
+        {% if settings.feedback_section_heading != blank %}
+          <h3 class="section-heading heading--page">{{ settings.feedback_section_heading | upcase }}</h3>
+        {% endif %}
+
+        <div class="feedback-container">
+          {% capture rundom_feedback %}{{ 'now' | date: '%S' | times:  blogs[settings.blog_with_feedbacks].articles_count | divided_by: 60 }}{% endcapture %}
+          {% for article in blogs[settings.blog_with_feedbacks].articles offset:rundom_feedback limit: 1 %}
+          
+            {% assign adviser_name = article.title | split: "|" | first %}
+            {% assign adviser_passion = article.title | split: "|" | last %}
+          
+            <div class="feedback">
+              {% if article.image %}
+                <div class="feedback__photo">
+                  <div class="img-holder bg-cover">
+                    <img src="{{ article | img_url: 'grande' }}" alt="{{ article.title }}">
+                  </div>
+                </div>
+              {% endif %}
+              <div class="feedback__desc">
+                <h3 class="feedback__name">{{ adviser_name }}</h3>
+                <p class="feedback__passion">{{ adviser_passion }}</p>
+                <div class="feedback__info">
+                  {% assign content_html = article.content %}
+                  {% include 'strip_html_tags' with content_html %}
+
+                  {% assign split_contact = '[contact]' %}
+                  {% if content contains split_contact %}
+                    {% assign feedback_text = content | split: split_contact | first %}
+                    {% assign contact_text = content | split: split_contact | last %}
+
+                    {{ feedback_text }}
+
+                    <div class="feedback__contact">
+                      {% if contact_text contains  '[/contact]' %}
+                       {{ contact_text | split: '[/contact]' | first }}
+                      {% endif %}
+                    </div>
+                  {% else %}
+                    {{ article.content }}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+              
+          {% endfor %}
+        </div>
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>

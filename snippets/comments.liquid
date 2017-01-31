@@ -1,0 +1,129 @@
+{% assign number_of_comments = article.comments_count %}
+
+{% comment %}
+If a comment was just submitted and it has no blank fields, we have an extra comment to count.
+{% endcomment %}
+{% if comment and comment.created_at %}
+  {% assign number_of_comments = article.comments_count | plus: 1 %}
+{% endif %}
+<section class="section">
+  {% comment %}
+  Comments.
+  Comments are enabled in Admin -> Online Store -> Blog Posts -> Manage blogs - > [blog] -> Comments -> [choose type of moderation]
+  {% endcomment %}  
+  {% if blog.comments_enabled? %}
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item one-whole">
+          <div class="comments">
+              
+            {% paginate article.comments by 30 %}
+                         
+              {% if number_of_comments > 0 %}
+  
+                <h3 class="heading--add">{{ 'blogs.comments.heading' | t }}</h3>
+                {% if comment and comment.created_at %}
+                  <div class="comments__info-message">
+                    {% if blog.moderated? %}
+                      {{ 'blogs.comments.success_moderated_html' | t }}
+                    {% else %}
+                      {{ 'blogs.comments.success_html' | t }}
+                    {% endif %}
+                  </div>
+                {% endif %}
+                <ul class="comments__list">
+                  {% comment %}
+                    If a comment was just submitted with no blank field, show it.
+                  {% endcomment %}
+                  {% if comment and comment.created_at %}
+                    <li id="{{ comment.id }}" class="comment comments__list-item">
+                      <div class="comment">
+  
+                        <div class="comment__avatar">
+                          <img src="{{ 'img_comments_default_avatar.png' | asset_url }}" alt="">
+                        </div>
+  
+                        <div class="comment__body">
+                          <div class="comment_info">
+                            <span>{{ 'blogs.comments.posted_on' | t }} <strong><time>{{ comment.created_at | date: "%b %-d, %Y" }}</time></strong> {{ 'blogs.comments.posted_by' | t }} <strong>{{ comment.author }}</strong></span>
+                          </div>
+                          
+                          <div class="rte comment__content">
+                            {{ comment.content }}
+                          </div>
+                        </div> <!-- End comment__body -->
+   
+                      </div> <!-- End comment -->
+                    </li>
+                  {% endif %}
+              
+                  {% comment %}
+                    Showing the rest of the comments.
+                  {% endcomment %}
+                  {% for comment in article.comments %}
+                    <li id="{{ comment.id }}" class="comment comments__list-item">
+                      <div class="comment">
+                        <div class="comment__avatar">
+                          <img src="{{ 'img_comments_default_avatar.png' | asset_url }}" alt="">
+                        </div>
+  
+                        <div class="comment__body">
+                          <div class="comment_info">
+                            <span>{{ 'blogs.comments.posted_on' | t }} <strong><time>{{ comment.created_at | date: "%b %-d, %Y" }}</time></strong> {{ 'blogs.comments.posted_by' | t }} <strong>{{ comment.author }}</strong></span>
+                          </div>
+                          
+                          <div class="rte comment__content">
+                            {{ comment.content }}
+                          </div>
+                        </div> <!-- End comment__body -->
+   
+                      </div> <!-- End comment -->
+                    </li>
+  
+                  {% endfor %}
+                </ul>
+              
+                {% if paginate.pages > 1 %}
+                  <div class="pagination">
+                    {% include 'pagination' %}
+                  </div>
+                {% endif %}
+              {% endif %}
+              
+              
+              
+              {% form 'new_comment', article, class: "form form--default form--comments form-validation" %}
+  
+                <h3 class="heading--add">{{ 'blogs.comments.title' | t }}</h4>
+              
+                {{ form.errors | default_errors }}
+  
+                <div class="form__row">
+                  <textarea class="form__field--textarea-neutral form__field--full" name="comment[body]" id="CommentBody" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
+                  <label class="form__field--placeholder" for="CommentBody">{{ 'blogs.comments.message' | t }}</label>
+                </div>
+                
+                <div class="form__row form__row-blocks">
+                  <div class="form__row-block">
+                    <input class="form__field" type="text" name="comment[author]" id="CommentAuthor" value="{{ form.author }}" autocapitalize="words" placeholder="{{ 'blogs.comments.name' | t }}">
+                    <label class="form__field--placeholder" for="CommentAuthor">{{ 'blogs.comments.name' | t }}</label>
+                  </div> <!-- End form__row-block --> 
+                
+                  <div class="form__row-block">
+                    <input class="form__field" type="email" name="comment[email]" id="CommentEmail" value="{{ form.email }}" autocorrect="off" autocapitalize="off" placeholder="{{ 'blogs.comments.email' | t }}">
+                    <label class="form__field--placeholder" for="CommentEmail">{{ 'blogs.comments.email' | t }}</label>
+                  </div> <!-- End form__row-block --> 
+                </div> <!-- End form__row -->
+              
+                <button class="btn btn--default btn--full" type="submit">{{ 'blogs.comments.post' | t }}</button>
+              
+              {% endform %}
+              
+            {% endpaginate %}
+          </div> <!-- End comments -->
+        </div> <!-- End grid__item -->
+      </div> <!-- End grid -->
+    </div> <!-- End wrapper -->
+  
+  {% endif %}
+</section>

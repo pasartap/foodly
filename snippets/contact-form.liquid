@@ -1,0 +1,50 @@
+<div class="contact-page-wrapper">
+    
+    {% comment %}
+    Contact form.
+    More information:
+    - https://docs.shopify.com/manual/configuration/store-customization/communicating-with-customers/provide-contact-points/add-a-contact-form
+    - https://docs.shopify.com/manual/configuration/store-customization/communicating-with-customers/provide-contact-points/adding-fields-to-the-liquid-contact-form
+    {% endcomment %}
+    {% if settings.contact_form_enable %}
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item one-whole">
+            <hr class="hr--clear-inverse">
+            
+            
+            {% form 'contact', class: 'form form--default form--contact form-validation' %}
+              <h2 class="heading--page">{{ 'contact.form.heading' | t }}</h2>
+            
+              {% if form.posted_successfully? %}
+                <div class="contact-success">
+                  {{ 'contact.form.post_success_html' | t }}
+                </div>
+              {% endif %}
+            
+              <div class="form__row">
+                <textarea class="form__field--textarea-neutral form__field--full" id="contactFormMessage" name="contact[body]" rows="10" placeholder="My message..."></textarea>
+                <label class="form__field--placeholder" for="contactFormMessage">{{ 'contact.form.message' | t }}</label>
+              </div>
+            
+              <div class="form__row form__row-blocks">
+                <div class="form__row-block">
+                  <input class="form__field" id="contactFormName" type="text" name="contact[name]" placeholder="My name is...">
+                  <label class="form__field--placeholder" for="contactFormName">{{ 'contact.form.name' | t }}</label>
+                </div> <!-- End form__row-block -->
+    
+                <div class="form__row-block">
+                  <input class="form__field" id="contactFormEmail" type="email" name="contact[email]" placeholder="Reply me to email...">       
+                  <label class="form__field--placeholder" for="contactFormEmail">{{ 'contact.form.email' | t }}</label>
+                </div> <!-- End form__row-block -->
+              </div> <!-- End form__row -->
+            
+              <div class="form__row">
+                <button class="btn btn--default btn--full btn--submit" id="contactFormSubmit" type="submit">{{ 'contact.form.send_button' | t }}</button>
+              </div>
+            {% endform %}
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+    {% endif %}
+  </div>

@@ -1,0 +1,40 @@
+{% if settings.featured_collections_list != blank %}
+  {% assign featured_list = settings.featured_collections_list | split: ',' %}
+  {% assign counter = 1 %}
+
+  {% if featured_list.size == 1 %}
+    {% assign item_width = 'one' %}
+  {% elsif featured_list.size == 2 %}
+    {% assign item_width = 'two' %}
+  {% else %}
+    {% assign item_width = 'three' %}
+  {% endif %}
+
+  <section class="featured-collections clearfix">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item">
+          <ul class="featured-collections__list">
+            {% for item in featured_list limit: 3 %}
+              {% assign collection_item = collections[item] %}
+            
+                <li class="featured-collections__item item__{{counter}} {{item_width}}">
+                  <a class="item__link" href="{{ collection_item.url }}">
+                    <div class="img-holder img-holder--block item__image">
+                      {% if collection_item.image %}
+                        <img src="{{ collection_item | img_url: 'large' }}"  alt="{{ collection_item.title | escape }}" display="block" width="120px" />
+                      {% else %}
+                        <img src="{{ collection_item.products.first | img_url: 'large' }}"  alt="{{ collection_item.title | escape }}" display="block" width="120px" />
+                      {% endif %}
+                    </div>
+                    <h3 class="item__title">{{ collection_item.title }}</h3>
+                  </a>
+                </li>
+                {% assign counter = counter | plus: 1 %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}

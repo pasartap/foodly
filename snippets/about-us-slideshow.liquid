@@ -1,0 +1,48 @@
+{% if settings.homepage_about_enable %}
+  <section class="section section--advantages">
+    <div class="wrapper clearfix">
+      <div class="grid">
+        <div class="grid__item one-whole"> 
+
+          {% comment %}
+          Snippet for advantages on homepage.
+          For settings go to Admin -> Theme -> Customize Theme -> Home page 
+          {% endcomment %}
+          {% if settings.homepage_about_heading != blank %}
+            <h3 class="section-heading section-heading--advantages heading--page">{{ settings.homepage_about_heading | upcase }}</h3>
+          {% endif %}
+          <!-- Swiper -->
+          <div class="swiper-container slider-advantages">
+            <div class="swiper-wrapper">
+              {% for article in blogs[settings.homepage_about_blog].articles %}
+                <div class="swiper-slide swiper-slide--{{ forloop.index }}">
+                  {% assign header = article.title | split: '|' %}
+
+                  {% if article.image %}
+                    <div class="img-holder">
+                      <span class="slide-overlay-phrase">{{ header[1] | strip | upcase }}</span>
+                      <img src="{{ article | img_url: 'large' }}" alt="{{ aticle.title }}">
+                    </div>
+                  {% endif %}
+
+                  <span class="slide-index">0{{ forloop.index }}</span>
+                  
+                  <div class="slide-info">
+                    <h4 class="heading--add">{{ header[0] | strip }}</h4>
+                    <p>{{ article.excerpt_or_content }}</p>
+                  </div>
+
+                </div>
+              {% endfor %}
+            </div>
+
+            <!-- Add Arrows -->
+            <div class="swiper-button-next">{{ 'layout.general.next_button' | t }}</div>
+            <div class="swiper-button-prev">{{ 'layout.general.back_button' | t }}</div>
+          </div>
+
+        </div> <!-- End grid__item -->
+      </div> <!-- End grid -->
+    </div> <!-- End wrapper -->
+  </section>
+{% endif %}

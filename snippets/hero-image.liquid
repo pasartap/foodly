@@ -1,0 +1,11 @@
+<section class="hero-image">
+  <div class="hero-image__content text-center">
+    {% if settings.hero_image_title != blank %}
+      <h1 class="hero-image__title">{{ settings.hero_image_title }}</h1>
+    {% endif %}
+    {% if settings.hero_image_desc != blank %}
+      <p class="hero-image__desc">{{ settings.hero_image_desc }}</p>
+    {% endif %}
+    <a class="btn btn--default" href="{{ settings.hero_image_link }}" title="{{ 'additional_blocks.hero_image.button' | t }}">{{ 'additional_blocks.hero_image.button' | t }}</a>
+  </div>
+</section>

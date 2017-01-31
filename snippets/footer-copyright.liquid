@@ -1,0 +1,9 @@
+<p class="copyright copyright-mobile">
+Customized by 
+&copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. {{ 'layout.copyright.right_reserved' | t }} 
+  {%comment %}
+  {% if settings.copyright_link != blank %}
+    <a class="text-link--default" href="{{ settings.copyright_link }}" target="_blank" title="{{ settings.copyright_link_text }}">{{ settings.copyright_link_text }}</a>
+  {% endif %}
+  {% endcomment %}
+</p>
