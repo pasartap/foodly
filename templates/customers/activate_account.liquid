@@ -1,0 +1,44 @@
+{% comment %}
+Template with form for activation account
+- https://docs.shopify.com/themes/theme-development/templates/customers-activate-account
+{% endcomment %}
+<section class="section section--form section--form-small">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        <div class="page-description">
+          <h1 class="heading--page">{{ 'customer.activate_account.heading' | t }}</h1>
+          <h2 class="subheading--page-small">
+            <em>{{ 'customer.activate_account.subheading' | t }}</em>
+          </h2>
+        </div>
+        
+        {% form 'activate_customer_password', class:"form form--default form--activate"  %}
+        
+          {{ form.errors | default_errors }}
+        
+          <div class="form__row">            
+            <input class="form__field" type="password" value="" name="customer[password]" id="customer_password" size="16" placeholder="{{ 'customer.activate_account.password' | t }}">
+            <label class="form__field--placeholder" for="password">{{ 'customer.activate_account.password' | t }}</label>
+            <p class="form__field--info">{{ 'customer.general.password_info' | t }}</p>
+          </div>
+        
+          <div class="form__row">            
+            <input class="form__field" type="password" value="" name="customer[password_confirmation]" id="customer_password_confirmation" size="16" placeholder="{{ 'customer.activate_account.confirm_password' | t }}">
+            <label class="form__field--placeholder" for="password_confirmation">{{ 'customer.activate_account.confirm_password' | t }}</label>
+            <p class="form__field--info">{{ 'customer.general.password_info' | t }}</p>
+          </div>
+        
+          <div class="form__row">
+            <button class="btn btn--default btn--full btn--submit" type="submit">{{ 'customer.activate_account.activate_button' | t }}</button>
+          </div>
+
+          <div class="form__row form__row--text text-center">
+            <input class="text-link--default" type="submit" name="decline" id="customer_decline" value="{{ 'customer.activate_account.decline_invitation' | t }}">
+          </div>
+          
+        {% endform %}
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>

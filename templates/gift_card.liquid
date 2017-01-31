@@ -1,0 +1,169 @@
+{% comment %}
+Gift card template with special layout
+- https://docs.shopify.com/manual/your-store/gift-cards
+
+Information how to activate gift cards:
+- https://docs.shopify.com/manual/your-store/gift-cards/activate-gift-cards
+{% endcomment %}
+{% layout none %}
+
+{% assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros %}
+{% assign value_with_currency = gift_card.initial_value | money_with_currency %}
+
+{% capture value %}{{ gift_card.initial_value | money_without_currency }}{%endcapture%}
+{% assign currency = value_with_currency | split: value | last %}
+
+{% capture currency_sign %}{{ value_with_currency | split: value | first }}{% endcapture %}
+{% assign value_clear = formatted_initial_value | split: currency_sign  %}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <!-- Helpers ================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- Title and description ================================================== -->
+  <title>Here's your {{ gift_card.initial_value | money_without_trailing_zeros }} gift card for {{ shop.name }}!</title>
+  <meta name="description" content="Here's your gift card!">
+
+  <!-- CSS ================================================== --> 
+  {{ 'style.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'modernizr.gift-card.js' | shopify_asset_url | script_tag }}
+
+  <!-- Fonts ================================================== -->
+  {% include 'google-fonts' %}
+
+  <!-- IE support ================================================== -->
+  <!--[if lt IE 9]>
+    {{ 'vendor/html5shiv.js' | shopify_asset_url | script_tag }}
+  <![endif]-->
+
+  <!-- Favicons ================================================== -->
+  {% unless favicon_enable %}
+    <link rel="shortcut icon" href="{{ 'favicon.ico' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ 'favicon_apple-touch-icon-152x152.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ 'favicon_apple-touch-icon-144x144.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ 'favicon_apple-touch-icon-114x114.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ 'favicon_apple-touch-icon-72x72.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ 'favicon_apple-touch-icon-57x57.png' | asset_url }}">
+  {% else %}
+    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}">
+  {% endunless %}
+
+  <script type='text/javascript'>
+    function selectText(element) {
+      var doc = document;
+      var text = doc.getElementById(element);
+      if (doc.body.createTextRange) { // ms
+          var range = doc.body.createTextRange();
+          range.moveToElementText(text);
+          range.select();
+      } else if (window.getSelection) { // moz, opera, webkit
+          var selection = window.getSelection();
+          var range = doc.createRange();
+          range.selectNodeContents(text);
+          selection.removeAllRanges();
+          selection.addRange(range);
+      }
+    }
+  </script>
+
+</head>
+
+<body class="gift-card-template">
+
+  <div class="gift-card-container">
+
+    <div class="wrapper text-center">
+      <div class="gift-card-wrapper">
+        <header>
+          <h1 class="heading--page-small">{{ 'gift_cards.general.first_name_call' | t }} {{ gift_card.customer.first_name }}!</h1>
+          <p class="gift-card_desc">{{ 'gift_cards.general.subheading' | t }} </p>
+        </header>
+        
+        <main role="main">
+            <div id="gift-card-holder">
+              
+              <div class="gift-card {% if gift_card.expired or gift_card.enabled != true %}disabled{% endif %}">
+                <img class="gift-card__img" src="{{ 'img_svg_gift-card.svg' | asset_url }}" alt="Gift card illustration">
+        
+                <div class="gift-card__body">
+                  {% comment %}
+                  For money with big value
+                  {% endcomment %}
+                  {% assign initial_value_size = formatted_initial_value | size %}
+                  <div class="{% if initial_value_size > 6 %}medium{% endif %} gift-card__value">
+                    <strong>{{ value_clear }}</strong>
+                    <small>{{ currency }}</small>
+                  </div>
+                          
+                  <div class="gift-card__code" onclick="selectText('gift-card-code-digits');">
+                    <strong id="gift-card-code-digits">{{ gift_card.code | format_code }}</strong>
+                  </div>
+                          
+                  <div class="gift-card__expire">
+                    {% unless gift_card.enabled %}
+                      <span>{{ 'gift_cards.general.disabled' | t }}</span>
+                    {% endunless %}
+                            
+                    {% if gift_card.expired and gift_card.enabled %}
+                       <span class="gift-card__expire-title">{{ 'gift_cards.general.expiration_date' | t }}</span>
+                       <span class="gift-card__expire-date">{{ gift_card.expires_on | date: "%d / %m / %Y" }}</span>
+                    {% endif %}
+                            
+                    {% if gift_card.expired != true and gift_card.expires_on and gift_card.enabled %}
+                      <span class="gift-card__expire-title">{{ 'gift_cards.general.expiration_date' | t }}</span>
+                      <span class="gift-card__expire-date">{{ gift_card.expires_on | date: "%d / %m / %Y" }}</span>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="gift-card__actions clearfix">
+              <a class="gift-card__action text-link--default left" href="javascript:void(0);" onclick="window.print();">
+                {{ 'gift_cards.general.print' | t }}
+                <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="21" height="21" viewBox="0 0 21 21">
+                  <path d="M19.000,18.000 L17.000,18.000 L17.000,19.000 C17.000,20.105 16.105,21.000 15.000,21.000 L6.000,21.000 C4.895,21.000 4.000,20.105 4.000,19.000 L4.000,18.000 L2.000,18.000 C0.895,18.000 -0.000,17.105 -0.000,16.000 L-0.000,6.000 C-0.000,4.896 0.895,4.000 2.000,4.000 L4.000,4.000 L4.000,2.000 C4.000,0.896 4.895,0.000 6.000,0.000 L15.000,0.000 C16.105,0.000 17.000,0.896 17.000,2.000 L17.000,4.000 L19.000,4.000 C20.105,4.000 21.000,4.896 21.000,6.000 L21.000,16.000 C21.000,17.105 20.105,18.000 19.000,18.000 ZM6.000,18.000 C6.000,18.552 6.448,19.000 7.000,19.000 L14.000,19.000 C14.552,19.000 15.000,18.552 15.000,18.000 L15.000,16.000 C15.000,15.448 14.552,15.000 14.000,15.000 L7.000,15.000 C6.448,15.000 6.000,15.448 6.000,16.000 L6.000,18.000 ZM15.000,3.000 C15.000,2.448 14.552,2.000 14.000,2.000 L7.000,2.000 C6.448,2.000 6.000,2.448 6.000,3.000 L6.000,4.000 L15.000,4.000 L15.000,3.000 ZM19.000,7.000 C19.000,6.448 18.552,6.000 18.000,6.000 L3.000,6.000 C2.448,6.000 2.000,6.448 2.000,7.000 L2.000,15.000 C2.000,15.552 2.448,16.000 3.000,16.000 L4.000,16.000 L4.000,15.000 C4.000,13.896 4.895,13.000 6.000,13.000 L15.000,13.000 C16.105,13.000 17.000,13.896 17.000,15.000 L17.000,16.000 L18.000,16.000 C18.552,16.000 19.000,15.552 19.000,15.000 L19.000,7.000 ZM16.000,9.000 L14.000,9.000 C13.448,9.000 13.000,8.552 13.000,8.000 C13.000,7.448 13.448,7.000 14.000,7.000 L16.000,7.000 C16.552,7.000 17.000,7.448 17.000,8.000 C17.000,8.552 16.552,9.000 16.000,9.000 Z"/>
+                </svg>
+              </a>
+        
+              <a class="btn btn--default" href="{{ shop.url }}" target="_blank">{{ 'gift_cards.general.start_shopping_button' | t }}</a>
+        
+              <a class="gift-card__action text-link--default right" href="mailto:{{ settings.gift_card_email }}">                
+                <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="21" height="21" viewBox="0 0 21 21">
+                  <path d="M19.000,19.000 L2.000,19.000 C0.895,19.000 -0.000,18.105 -0.000,17.000 L-0.000,5.000 C-0.000,3.896 0.895,3.000 2.000,3.000 L19.000,3.000 C20.105,3.000 21.000,3.896 21.000,5.000 L21.000,17.000 C21.000,18.105 20.105,19.000 19.000,19.000 ZM3.603,5.000 L10.514,10.365 L17.402,5.000 L3.603,5.000 ZM19.000,6.240 L10.663,12.734 C10.598,12.669 10.546,12.616 10.492,12.562 C10.440,12.610 10.397,12.647 10.337,12.704 L2.000,6.232 L2.000,16.000 C2.000,16.552 2.448,17.000 3.000,17.000 L18.000,17.000 C18.552,17.000 19.000,16.552 19.000,16.000 L19.000,6.240 Z"/>
+                </svg>
+                {{ 'gift_cards.general.email' | t }}
+              </a>
+            </div>
+        </main> <!-- / Main -->
+      </div> <!-- End gift-card-wrapper-->
+    </div> <!-- End wrapper -->
+  </div> <!-- End gift-card-container -->
+
+  <footer class="footer">
+    <p class="copyright">
+      &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. {{ 'layout.copyright.right_reserved' | t }} 
+      {% if settings.copyright_link != blank %}
+        <a class="text-link--default" href="{{ settings.copyright_link }}" target="_blank" title="{{ settings.copyright_link_text }}">{{ settings.copyright_link_text }}</a>
+      {% endif %}
+    </p>
+  
+    {% if settings.logo_use_image %}
+      <a class="logo" href="{{ shop.url }}">
+        <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}">
+      </a>
+    {% else %}
+      <a class="text-logo" href="{{ shop.url }}">{{ shop.name }}</a>
+    {% endif %}
+  </footer>
+
+</body>
+</html>

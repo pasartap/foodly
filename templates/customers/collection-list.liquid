@@ -1,0 +1,141 @@
+<section class="section section--page">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        <div class="page-description">
+          <h1 class="heading--page">{{ collection.title }}</h1>
+          <h2 class="subheading--page-small">
+            <em>{{ collection.products.size }} {{ 'collections.product_list.products_in_collection' | t }}</em>
+          </h2>
+        </div>
+        
+        {% comment %}
+        Snippet for toolbar with types of view and sorting options
+        {% endcomment %}
+        {% assign coll-list = true %}
+        {% include 'collection-toolbar' with coll-list %}
+        
+        {% comment %}
+        Show products (grid view)
+        {% endcomment %}
+        {% capture product_namber %}{{ settings.collection_list_product_number }}{% endcapture %}
+        {% paginate collection.products by 10 %}
+        
+          {% for product in collection.products %}
+            {% assign description_text = '' %}
+            {% assign content_html = '' %}
+
+            {% if product.first_available_variant.sku != settings.cart_special_sku %}
+        
+            {% comment %}
+            Split description from nutritional value if it available.
+            {% endcomment %}
+            {% if product.description contains settings.product_nutritional_energy %}
+              {% assign description_text = product.description | split: settings.product_nutritional_energy | first %}
+            {% endif %}
+        
+            <div itemscope itemtype="http://schema.org/Product" class="product product--list">
+              <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+              <meta itemprop="image" content="{{ product.featured_image.src | product_img_url: 'grande' }}">
+              <a class="product__link {% unless product.available %}product--sold-out{% endunless %}" href="{{ product.url }}" title="{{ product.title }}">
+                <div class="img-holder img-holder--product {% unless product.featured_image.size > 0 %}img-holder--no-product{% endunless %}">
+                  <img src="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'large'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}" alt="{{ product.title }}">
+                </div>
+                <span class="product__price-point"> 
+                  <meta itemprop="priceCurrency" content="{{ shop.currency }}">      
+                  <span itemprop="price" class="product__price" >{{ product.price | money }}</span><br>
+                  
+                  {% if settings.collection_product_badge == 'price'%}
+                    {% if product.compare_at_price_min > product.price %}
+                      <span class="product__compare-price">{{ product.compare_at_price_max | money }}  </span>
+                    {% endif %}
+                  {% endif %}
+                </span>
+        
+                {% if settings.collection_product_badge == 'badge' and product.compare_at_price_min > product.price %}
+                  <span class="product__badge">{{ 'products.general.sale_badge_text' | t }}</span>
+                {% endif %} 
+              </a> 
+        
+              <div class="product__info">
+                <h4 class="product__title"><a href="{{ product.url }}" title="{{ product.title }}" itemprop="name">{{ product.title }}</a></h4>
+                <span class="product__spec">
+                  {{ product.type | link_to_type }}
+                
+                  <span itemprop="availability">{% if product.available %}
+                    &nbsp;|&nbsp;
+                    {{ 'products.general.in_stock' | t }}
+                  {% else %}
+                    &nbsp;|&nbsp;
+                    {{ 'products.general.out_stock' | t }}
+                  {% endif %}
+                  </span>
+                
+                  {% if product.first_available_variant.option1 != 'Default Title' %}
+                    &nbsp;|&nbsp;
+                    {{ product.first_available_variant.option1 }}
+                  {% else %}
+                    &nbsp;|&nbsp;
+                    {{ product.first_available_variant.weight_unit }}
+                  {% endif %}
+                </span>
+
+                {% comment %}
+                Strip unnecessary html
+                {% endcomment %}
+                {% assign content_html = product.description %}
+                {% include 'strip_html_tags' with content_html %}
+          
+                {% assign split_nutritional = '[Nutritional value]' %}
+                {% if content contains split_nutritional %}
+                  {% assign description_text = content | split: split_nutritional | first %}
+                {% endif %}
+                
+                {% comment %}
+                Product decription
+                {% endcomment %}
+                <div class="product__desc rte">
+                  {% if description_text != blank %}
+                    {{ description_text | truncatewords: 39}}
+                  {% else %}
+                    {{ product.description | truncatewords: 39 }}
+                  {% endif %}
+                </div> <!-- End product__desc -->
+              </div> <!-- End product__info --> 
+        
+              <div class="product__add-cart">
+                <form action="/cart/add" method="POST" id="product-actions-{{ product.id }}">
+                  {% if product.available %}
+                    <input type="hidden" name="id" value="{{ product.variants[0].id }}">
+                    <div class="form__row btn--underlines-container">
+                      <input class="btn btn--underlines js-add-to-card" type="submit" value="{{ 'layout.general.add_to_cart_button' | t }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="61" height="12" viewBox="0 0 61 12">
+                        <path d="M60.217,1.433 C45.717,2.825 31.217,4.217 16.717,5.609 C13.227,5.944 8.806,6.200 6.390,5.310 C7.803,4.196 11.676,3.654 15.204,3.216 C28.324,1.587 42.033,-0.069 56.184,0.335 C58.234,0.394 60.964,0.830 60.217,1.433 ZM50.155,5.670 C52.205,5.728 54.936,6.165 54.188,6.767 C39.688,8.160 25.188,9.552 10.688,10.943 C7.198,11.278 2.778,11.535 0.362,10.645 C1.774,9.531 5.647,8.988 9.175,8.551 C22.295,6.922 36.005,5.265 50.155,5.670 Z" class="cls-1"/>
+                      </svg>
+                    </div>
+                  {% else %}
+                    <div class="form__row btn--underlines-container btn--underlines-disable">
+                      <input class="btn btn--underlines" type="button" value="{{ 'products.general.out_stock' | t }}" disabled>
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="61" height="12" viewBox="0 0 61 12">
+                        <path d="M60.217,1.433 C45.717,2.825 31.217,4.217 16.717,5.609 C13.227,5.944 8.806,6.200 6.390,5.310 C7.803,4.196 11.676,3.654 15.204,3.216 C28.324,1.587 42.033,-0.069 56.184,0.335 C58.234,0.394 60.964,0.830 60.217,1.433 ZM50.155,5.670 C52.205,5.728 54.936,6.165 54.188,6.767 C39.688,8.160 25.188,9.552 10.688,10.943 C7.198,11.278 2.778,11.535 0.362,10.645 C1.774,9.531 5.647,8.988 9.175,8.551 C22.295,6.922 36.005,5.265 50.155,5.670 Z" class="cls-1"/>
+                      </svg>
+                    </div>
+                  {% endif %}
+                </form>
+              </div> <!-- End product__add-cart -->
+              
+            </div> <!-- End product-list -->
+            {% endif %}
+          {% endfor %}
+          
+          {% if paginate.pages > 1 %}
+            <div class="pagination">
+              {% include 'pagination' %}
+            </div>
+          {% endif %}
+        
+        {% endpaginate %}
+        </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>

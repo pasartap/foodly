@@ -1,0 +1,146 @@
+{% include 'header' %}
+{% comment %}
+Template for wishlist page
+{% endcomment %}
+<section class="section section--page">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole js-wishlist">
+        <div class="page-description">
+          <h1 class="heading--page">{{ 'layout.wishlist_page.heading' | t }}</h1>
+          <h2 class="subheading--page-small">
+            <em>{{ 'layout.wishlist_page.subheading' | t }}</em>
+          </h2>
+        </div>
+
+        {% if customer %}
+          <div class="table-wrapper">
+            <table class="table table--clear table--wishlist">
+              <thead>
+                <tr>
+                  <th>
+                    {{ 'layout.wishlist_page.item' | t }}
+                  </th>
+                  <th>
+                    {{ 'layout.wishlist_page.price' | t }}
+                  </th>
+                  <th>
+                    {{ 'layout.wishlist_page.delete' | t }}
+                  </th>
+                  <th>
+                    {{ 'layout.wishlist_page.add_to_bag' | t }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% assign wish_list_active = false %}
+                {% for tag in customer.tags %}
+                  {% assign the_test = 'nutthin' %}
+                  {% capture tag_id %}{{ tag }}{% endcapture %}
+                  {% assign tag_size = tag_id.size %}
+                  {% for tag in customer.tags %}
+                    {% capture cur_tag %}{{ tag }}{% endcapture %}
+                    {% if cur_tag contains tag_id %}
+                      {% assign difference = tag_size | minus:cur_tag.size %}
+                      {% if difference == 0 %}
+                        {% assign the_test = tag_id %}
+                      {% else %}
+                        {% assign the_test = 'nutthin' %}
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+            
+                  {% for collection in collections %}
+                    {% paginate collection.products by collection.all_products_count %}
+                      {% for product in collection.products %}
+                          {% capture product_id %}{{ product.id }}{% endcapture %}
+                          {% unless used contains product_id %}
+                            {% capture diff %}{{ tag_size | minus:product_id.size | money_without_currency | times:100 |   divided_by:2 }}{% endcapture %}
+                            {% assign check = diff | split:'.' %}
+                            {% if check[1] contains '5' %}{% assign display = false %}{% else %}{% assign display = true %}{%   endif %}
+                            {% if display and the_test contains product_id %}
+                              {% assign wish_list_active = true %}
+                              <tr class="wishlist__item" id="x{{ tag_id }}">
+                                <td class="wishlist__info">
+                                  <div class="img-holder img-holder--circle">
+                                    <a href="{{ product.url }}">
+                                      <img src="{{ product | img_url: 'compact' }}"  alt="{{ product.title | escape }}" />
+                                    </a>
+                                  </div>
+                                  <div class="wishlist__item-title">
+                                    <a href="{{ product.url }}" title="{{ product.title }}">
+                                    {{ product.title }}
+                                    </a>
+                                  </div>
+                                </td>
+                                <td class="wishlist__item-price">
+                                  <span class="money">{{ product.price | money }}</span>
+                                </td>
+                                <td class="wishlist__remove-item">
+                                  <a href="#0" class="js-remove-button">
+                                    <span class="icon icon--delete"></span>
+                                    <span class="fallback-text">Remove</span>
+                                  </a>
+                                </td>
+                                <td class="wishlist__item-bag">
+                                  <a class="js-add-to-cart" href='#0' data-id="{{ product.variants[0].id }}">
+                                    <span class="icon icon--cart">
+                                      <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="16" height="20" viewBox="0 0 16 20">
+                                        <path d="M14.000,20.000 L2.000,20.000 C0.895,20.000 -0.000,19.105 -0.000,18.000 L-0.000,7.000 C-0.000,5.896 0.895,5.000 2.000,5.000 L4.000,5.000 L4.000,4.000 C4.000,1.791 5.791,0.000 8.000,0.000 C10.209,0.000 12.000,1.791 12.000,4.000 L12.000,5.000 L14.000,5.000 C15.105,5.000 16.000,5.896 16.000,7.000 L16.000,18.000 C16.000,19.105 15.105,20.000 14.000,20.000 ZM10.000,4.000 C10.000,2.895 9.105,2.000 8.000,2.000 C6.895,2.000 6.000,2.895 6.000,4.000 L6.000,5.000 L10.000,5.000 L10.000,4.000 ZM14.000,8.000 C14.000,7.448 13.552,7.000 13.000,7.000 L3.000,7.000 C2.448,7.000 2.000,7.448 2.000,8.000 L2.000,17.000 C2.000,17.552 2.448,18.000 3.000,18.000 L13.000,18.000 C13.552,18.000 14.000,17.552 14.000,17.000 L14.000,8.000 ZM12.000,17.000 C11.448,17.000 11.000,16.552 11.000,16.000 L11.000,13.000 C11.000,12.448 11.448,12.000 12.000,12.000 C12.552,12.000 13.000,12.448 13.000,13.000 L13.000,16.000 C13.000,16.552 12.552,17.000 12.000,17.000 Z" class="cls-1"/>
+                                      </svg>
+                                    </span>
+                                    <span class="fallback-text">Add to Cart</span>
+                                  </a>
+                                </td>
+                              </tr>
+                              {% capture used %}{{ product_id }} {{ used }}{% endcapture %}
+                            {% endif %}
+                          {% endunless %}
+                        {% endfor %}
+                    {% endpaginate %}
+                  {% endfor %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div> <!-- End table-wrapper -->
+        
+          <form method='post' action='/contact' id='remove' accept-charset='UTF-8'>
+            <input name='form_type' type='hidden' value='customer'/>
+            <input name='utf8' type='hidden' value='✓'>
+            <input type='hidden' name='contact[email]' value='{{ customer.email }}'/>
+            <input type='hidden' name='contact[tags]' id='remove-value' value='' />
+          </form>
+        
+          <form class="wishlist-add-cart" action='/cart/add' id='add-product' method='post'>
+            <input type='hidden' name='id' id='product-select' value='' />
+          </form>
+
+          <div class="wishlist-empty text-center {% unless wish_list_active == false %}display-none{% endunless %}">
+            <h5 class="heading--add-small">{{ 'layout.wishlist_page.empty_heading' | t }}</h5>
+            <p class="wishlist-empty__info">{{ 'layout.wishlist_page.empty_info_html' | t }}</p>
+            <a class="btn btn--underlines" href="/collections/all" title="{{ 'cart.empty.button' | t }}">
+              {{ 'cart.empty.button' | t }}
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="61" height="12" viewBox="0 0 61 12">
+                <path d="M60.217,1.433 C45.717,2.825 31.217,4.217 16.717,5.609 C13.227,5.944 8.806,6.200 6.390,5.310 C7.803,4.196 11.676,3.654 15.204,3.216 C28.324,1.587 42.033,-0.069 56.184,0.335 C58.234,0.394 60.964,0.830 60.217,1.433 ZM50.155,5.670 C52.205,5.728 54.936,6.165 54.188,6.767 C39.688,8.160 25.188,9.552 10.688,10.943 C7.198,11.278 2.778,11.535 0.362,10.645 C1.774,9.531 5.647,8.988 9.175,8.551 C22.295,6.922 36.005,5.265 50.155,5.670 Z" class="cls-1"/>
+              </svg> 
+            </a>
+          </div>
+        
+        
+        {% else %}
+          <p>To create a wish list you must <a href='/account/login'>sign in</a> or <a href='/account/register'>create an account</a>.</p>
+        {% endif %}
+
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>
+
+{% if wish_list_active == false %}
+  <script>
+    $('.table-wrapper').hide();
+  </script>
+{% endif %}
+{% include 'instagram-feed' %}
+{% include 'divider-clear' %}
+{% include 'footer' %}

@@ -1,0 +1,99 @@
+{% comment %}
+Search template
+{% endcomment %}
+<section class="section section--page section--page-search {% if search.results_count > 0 %}section--page-search-alt{% endif %}">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item text-center">
+        <div class="search-container search-container--lg">
+          <form action="/search" method="GET" class="form form--search-primary" role="search">
+            {% if settings.search_type == 'products' %}
+              <input type="hidden" name="type" value="product" />
+            {% endif %}
+          
+            <div class="form__row form--search-lg">
+              <input type="text" name="q" class="form__field" placeholder="{{ 'layout.search.placeholder' | t }}" autocomplete="off">
+            </div>
+
+            <input type="submit" class="btn--submit" value="{{ 'layout.search.button' | t }}">
+
+            <div class="icon icon--search">
+              <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="18" height="18" viewBox="0 0 18 18">
+                <path d="M17.950,16.536 L16.536,17.950 L12.900,14.314 C11.546,15.367 9.848,16.000 8.000,16.000 C3.582,16.000 0.000,12.418 0.000,8.000 C0.000,3.582 3.582,-0.000 8.000,-0.000 C12.418,-0.000 16.000,3.582 16.000,8.000 C16.000,9.848 15.367,11.546 14.314,12.900 L17.950,16.536 ZM8.000,2.000 C4.686,2.000 2.000,4.686 2.000,8.000 C2.000,11.314 4.686,14.000 8.000,14.000 C11.314,14.000 14.000,11.314 14.000,8.000 C14.000,4.686 11.314,2.000 8.000,2.000 ZM8.000,6.000 L8.000,4.000 C10.209,4.000 12.000,5.791 12.000,8.000 L10.000,8.000 C10.000,6.895 9.105,6.000 8.000,6.000 Z" class="cls-1"/>
+              </svg>
+            </div>
+              
+          </form>
+        </div> <!-- End search-container -->
+        
+        {% if search.performed %}
+          <div class="page-description page-description--alt">
+            <h1 class="heading--page">{{ 'layout.search.results' | t }} <strong>'{{ search.terms }}'</strong></h1>
+            <h2 class="subheading--page-small">
+              <em>{{search.results_count}} {{ 'layout.search.result_count' | t }}</em>
+            </h2>
+          </div>
+        
+          {% if search.results_count == 0 %}
+        
+            {% comment %}
+            Search without results
+            {% endcomment %}
+            <div class="msg msg--no-result">
+              <p>{{ 'layout.search.nothing_to_found_html' | t }}</p>
+              <a class="btn btn--underlines" href="{{ settings.search_fallback_link }}">
+                {{ 'layout.general.check_it_button' | t }}
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="61" height="12" viewBox="0 0 61 12">
+                  <path d="M60.217,1.433 C45.717,2.825 31.217,4.217 16.717,5.609 C13.227,5.944 8.806,6.200 6.390,5.310 C7.803,4.196 11.676,3.654 15.204,3.216 C28.324,1.587 42.033,-0.069 56.184,0.335 C58.234,0.394 60.964,0.830 60.217,1.433 ZM50.155,5.670 C52.205,5.728 54.936,6.165 54.188,6.767 C39.688,8.160 25.188,9.552 10.688,10.943 C7.198,11.278 2.778,11.535 0.362,10.645 C1.774,9.531 5.647,8.988 9.175,8.551 C22.295,6.922 36.005,5.265 50.155,5.670 Z" class="cls-1"/>
+                </svg>
+              </a>
+            </div>
+          {% else %}
+          
+            {% comment %}
+            If results are exist
+            {% endcomment %}
+            {% paginate search.results by settings.search_result_amount %}
+        
+              <div class="search-results">
+                {% if settings.search_type == 'products' %}
+                  {% for product in search.results %}
+                    {% include 'product-item-grid' %}
+                  {% endfor %}
+                {% else %}
+                  {% for item in search.results %}
+                    {% if item.object_type == 'product' %}
+                      {% assign product = item %}
+                      {% include 'product-item-grid' with product %}
+                    {% else %}
+                
+                      <div class="grid--in-row grid--in-row-fix search-result">
+                        <h4 class="search-result__title"><a href="{{ item.url }}" title="{{ item.title }}">{{ item.title | highlight: search.terms }}</a></h4>
+                        {% if item.created_at %}
+                          <time class="date">{{ item.created_at | date: "%B %-d, %Y" }}</time>
+                        {% endif %}
+                        <div class="search-result__desc">
+                          {{ item.content | strip_html | truncatewords: 45 | highlight: search.terms }}
+                        </div>
+                        {% if item.author %}
+                          <p class="search-result__author">{{ 'blogs.general.by_author' | t }} {{ item.author }}</p>
+                        {% endif %}
+                      </div>
+                
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+              </div> <!-- End search-results -->
+        
+              {% if paginate.pages > 1 %}
+                <div class="pagination">
+                  {% include 'pagination' %}
+                </div>
+              {% endif %}
+            {% endpaginate %}
+          {% endif %}
+        {% endif %}
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>

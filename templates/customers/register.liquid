@@ -1,0 +1,57 @@
+{% comment %}
+Template for register new  customer
+- https://docs.shopify.com/themes/theme-development/templates/customers-register
+{% endcomment %}
+{% include 'space-20' %}
+<section class="section section--form">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+
+        <div class="page-description">
+          <h1 class="heading--page">{{ 'customer.registration.heading' | t }}</h1>
+          {% comment %}
+          <h2 class="subheading--page-small">
+            <em>{{ 'customer.registration.subheading' | t }}</em>
+          </h2>
+          {% endcomment %}
+        </div>
+        
+        {% form 'create_customer', class:"form form--default form--register form-validation" %}
+        
+          {{ form.errors | default_errors }}
+        
+          <div class="form__row">
+            <input class="form__field" type="text" name="customer[first_name]" id="firstName" autocapitalize="words" autofocus placeholder="{{ 'customer.registration.first_name' | t }}">
+            <label class="form__field--placeholder" for="firstName">{{ 'customer.registration.first_name' | t }}</label>
+          </div>
+        
+          <div class="form__row">
+            <input class="form__field" type="text" name="customer[last_name]" id="lastName" class="input-full" autocapitalize="words" placeholder="{{ 'customer.registration.last_name' | t }}">
+            <label class="form__field--placeholder" for="lastName">{{ 'customer.registration.last_name' | t }}</label>
+          </div>
+        
+          <div class="form__row">
+            <input class="form__field" type="email" name="customer[email]" id="email" autocorrect="off" autocapitalize="off" placeholder="{{ 'customer.registration.email' | t }}">
+            <label class="form__field--placeholder" for="email">{{ 'customer.registration.email' | t }}</label>
+          </div>
+        
+          <div class="form__row">
+            <input class="form__field" type="password" name="customer[password]" id="createPassword" placeholder="{{ 'customer.registration.password' | t }}">      
+            <label class="form__field--placeholder" for="createPassword" class="hidden-label">{{ 'customer.registration.password' | t }}</label>
+            <p class="form__field--info">{{ 'customer.general.password_info' | t }}</p>
+          </div>
+        
+          <div class="form__row">
+            <button class="btn btn--default btn--full btn--submit" type="submit">{{ 'customer.registration.create_my_account_button' | t }}</button>
+          </div>
+
+          <div class="form__row form__row--text text-center">
+            <a class="text-link--default" href="{{ shop.url }}">{{ 'customer.registration.cancel' | t }}</a>
+          </div>
+       	{% endform %}
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>
+{% include 'space-40' %}

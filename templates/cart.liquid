@@ -1,0 +1,407 @@
+{% layout none %}
+
+<!doctype html>
+<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->  
+<head>
+  
+  <!-- Basic page needs ================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <!-- Title and description ================================================== -->
+  <title>
+  {{ page_title }}
+
+  {% if current_tags %}
+    {% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}
+  {% endif %}
+
+  {% if current_page != 1 %} 
+    &ndash; {{ 'general.meta.page' | t: page: current_page }}
+  {% endif %}
+
+  {% unless page_title contains shop.name %} 
+    {% if page_title != blank %}
+      &ndash; {{ shop.name }}
+    {% else %}
+      {{ shop.name }}
+    {% endif %}
+  {% endunless %}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <!-- Social meta ================================================== -->
+  {% include 'social-meta-tags' %}
+
+  <!-- Helpers ================================================== -->
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_primary }}">
+
+  <!-- Fonts ================================================== -->
+  {% include 'google-fonts' %}
+
+  <!-- CSS ================================================== -->
+  {% include 'styleheets' %}
+  
+  <!-- Header hook for plugins ================================================== -->
+  {{ content_for_header }}
+
+  {% include 'oldIE-js' %}
+
+  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
+  {{ '//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js' | script_tag }}
+  {{ '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/redmond/jquery-ui.css' | stylesheet_tag}}
+
+  <!-- Favicons ================================================== -->
+  {% unless settings.favicon_enable %}
+    <link rel="shortcut icon" href="{{ 'favicon.ico' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ 'favicon_apple-touch-icon-152x152.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ 'favicon_apple-touch-icon-144x144.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ 'favicon_apple-touch-icon-114x114.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ 'favicon_apple-touch-icon-72x72.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ 'favicon_apple-touch-icon-57x57.png' | asset_url }}">
+  {% else %}
+    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}">
+  {% endunless %}
+
+  {% comment %}
+  If you store has customer accounts disabled, you can remove the following JS file
+  {% endcomment %}
+  {% if template contains 'customers' %}
+    {{ "customer_area.js" | shopify_asset_url  | script_tag }}
+  {% endif %}
+
+</head>
+
+<body id="{{ page_title | handle }}" class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+  {% comment %}
+  Cart template
+  - https://docs.shopify.com/themes/theme-development/templates/cart-liquid
+  {% endcomment %}
+  <header class="header header--cart header--fixed-off">
+    <div class="cart-continue-shop">
+      <a class="text-link--default cart-continue-shop__link" href="/collections/all" title="{{ 'cart.cart_page.continue_shopping' | t }}">
+        <span class="icon icon--arrow-left"></span>
+        {{ 'cart.cart_page.continue_shopping' | t }}
+        <span class="text-clear">{{ 'cart.cart_page.within' | t }}</span>
+        </a>
+    </div>
+
+    <!-- Shop logo -->
+    {% if settings.logo_use_image %}
+      <a class="site-logo" href="/">
+        <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}">
+      </a>
+    {% else %}
+      <a href="/">{{ shop.name }}</a>
+    {% endif %}
+    <!-- End shop logo -->
+
+    <div class="display-none">
+      {% comment %}
+      Dropdown for currency
+      {% endcomment %}
+      {% include 'currency-picker' %}
+    </div>
+  </header>
+
+  <div class="main-content">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item one-whole">
+          <div id="cart">    
+            <div class="cart cart--lg">
+              <form class="{% if cart.item_count == 0 %}display-none{% endif %}" action="/cart" method="POST" id="cart-form">
+
+                <h3 class="heading--add-small">{{ 'cart.general.heading' | t | upcase }}</h3>
+                
+                <div class="cart-header">
+                  <div class="cart-header__item">
+                    {{ 'cart.general.price' | t }}
+                  </div>
+                
+                  <div class="cart-header__item">
+                    {{ 'cart.general.quantity' | t }}
+                  </div>
+                </div>
+                  
+                <ul class="cart-list">
+                  {% for item in cart.items %}
+                    <li class="cart-list__item">
+                      <div class="cart-list__item--img clearfix">
+                        <div class="img-holder img-holder--circle img-holder--circle-sm">
+                          <a href="{{ item.product.url }}">
+                          
+                            <img src="{% if product.featured_image.size > 0 %}{{ item.product.featured_image.src | product_img_url: 'small' }}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}" alt="{{ item.title | escape }}">
+                          </a>
+                        </div>
+                      </div>
+                
+                      <div class="cart-list__item--title">
+                        <a href="{{ item.product.url | within: collection.all }}">{{ item.title | truncate: 20 }}</a>
+                      </div>
+              
+                      <div class="cart-list__item--quantity">
+                        <div class="quantity-field">
+                          <span class="icon icon--arrow-up js-up-quantity"></span>
+                          <input id="updates_{{ item.id }}" type="number" name="updates[]" min="1" value="{{ item.quantity }}" size="5">
+                          <span class="icon icon--arrow-down js-down-quantity"></span>
+                        </div>
+                      </div>  
+                      
+                      <div class="cart-list__item--price">
+                        <span class="money">{{ item.price | money }}</span>
+                      </div>
+              
+                      <div class="cart-list__item--remove">
+                        <a href="/cart/change?line={{ forloop.index }}&quantity=0">
+                          <span class="icon icon--delete"></span>
+                        </a>
+                      </div>
+                      
+                    </li>
+                  {% endfor %}
+                  
+                </ul>
+                    
+                <div class="cart__block cart__package">
+                  {% comment %}
+                  Snippet for adding additional packing to cart.
+                  For more information, visit:
+                  - https://docs.shopify.com/manual/configuration/store-customization/page-specific/cart-page/ask-customer-for-more-information
+                  {% endcomment %}
+                  {% include 'adding-wooden-box' %}
+                </div>
+                
+                <div class="cart__block cart__total clearfix">
+                  <h3 class="heading--add-small">{{ 'cart.general.total' | t | upcase }}</h3>
+                  
+                  <span class="cart-total__amount">
+                    <span class="money">{{ cart.total_price | money }}</span>
+                  </span>
+                  
+                  <a id="update-cart" class="update-cart" href="javascript:void(0);">
+                    <span>{{ 'cart.general.update_cart' | t }}</span>
+                    <span class="icon icon--refresh">
+                      <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="21" height="19" viewBox="0 0 21 19">
+                        <path d="M21.008,13.709 C21.076,14.311 20.717,14.884 20.205,14.988 C19.694,15.091 19.223,14.687 19.155,14.084 L19.000,13.670 C17.453,16.818 14.244,19.000 10.500,19.000 C6.491,19.000 3.069,16.513 1.674,13.000 L3.869,13.000 C5.127,15.378 7.623,17.000 10.500,17.000 C13.275,17.000 15.685,15.483 16.981,13.242 L16.340,13.524 C15.877,13.808 15.314,13.611 15.083,13.085 C14.852,12.559 15.041,11.903 15.504,11.619 L18.423,10.334 C18.559,10.181 18.721,10.058 18.918,10.018 C19.223,9.956 19.501,10.089 19.701,10.322 C19.722,10.342 19.737,10.372 19.757,10.395 C19.790,10.442 19.829,10.482 19.855,10.536 C19.882,10.579 19.918,10.610 19.940,10.659 C20.001,10.799 20.029,10.948 20.034,11.097 L21.008,13.709 ZM18.750,13.000 L18.579,12.539 L17.531,13.000 L18.750,13.000 ZM10.500,2.000 C8.067,2.000 5.911,3.162 4.543,4.959 C5.011,4.791 5.528,4.967 5.754,5.419 C6.003,5.918 5.800,6.540 5.301,6.809 L3.260,7.924 C3.103,8.127 2.882,8.280 2.620,8.327 C2.291,8.385 1.991,8.259 1.776,8.038 C1.752,8.019 1.737,7.991 1.715,7.969 C1.679,7.925 1.638,7.887 1.610,7.835 C1.581,7.795 1.541,7.765 1.518,7.719 C1.452,7.587 1.422,7.447 1.416,7.307 L0.367,4.880 C0.293,4.309 0.680,3.766 1.232,3.668 C1.784,3.570 2.291,3.953 2.364,4.524 L2.399,4.603 C4.061,1.854 7.052,-0.000 10.500,-0.000 C14.880,-0.000 18.558,2.968 19.656,7.000 L17.564,7.000 C16.533,4.089 13.764,2.000 10.500,2.000 Z"/>
+                       </svg>
+                    </span>
+                  </a>          
+                  <p class="cart-total__info clearfix">{{ 'cart.general.total_information' | t }}</p>      
+                </div> <!-- End cart__total -->
+                
+                {% include 'local-delivery-cart' %}
+                
+                <div class="cart__block cart__note form form--default">
+                  <div class="form__row">
+                    <label class="heading--add-small" for="{{ 'cart.general.note' | t | handle }}">{{ 'cart.general.note_heading' | t | upcase }}</label>
+                  </div>
+                  <div class="form__row">
+                    <textarea class="form__field form__field--textarea" id="{{ 'cart.general.note_heading' | t | handle }}" name="attributes[{{ 'cart.general.note_heading' | t }}]" rows="10" placeholder="{{ 'cart.general.note_placeholder' | t }}"></textarea>
+                    <label  class="form__field--placeholder" for="{{ 'cart.general.note_heading' | t | handle }}">{{ 'cart.general.note_placeholder' | t }}</label>
+                  </div>
+                </div>
+                
+                  <div class="text-center cart__checkout-btn">
+                    <button class="btn btn--default btn--full" type="submit" name="checkout">{{ 'cart.general.checkout_button' | t | upcase }}</button>
+                  </div>
+                  
+                  <div class="cart__block cart__shipping-calculator">
+                    {% comment %}
+                    Snippet for adding shipping calculator.
+                    For more information, visit:
+                    - https://docs.shopify.com/manual/configuration/store-customization/page-specific/cart-page/add-shipping-rates-calculator
+                    {% endcomment %}
+                    {% include 'shipping-calculator' %}
+                  </div>
+                <div>
+                  <span>{{rates.length}}</span>
+                </div>
+              </form>
+                  
+              <div class="cart-empty display-none">
+                <div class="cart-empty__wrapper">
+                  <h5 class="heading--add-small">{{ 'cart.empty.heading' | t | upcase }}</h5>
+                  <p class="cart-empty__info">{{ 'cart.empty.additional_information_html' | t }}</p>
+                  <a class="btn btn--underlines" href="/collections/all" title="{{ 'cart.empty.button' | t }}">
+                    {{ 'cart.empty.button' | t }}
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="61" height="12" viewBox="0 0 61 12">
+                      <path d="M60.217,1.433 C45.717,2.825 31.217,4.217 16.717,5.609 C13.227,5.944 8.806,6.200 6.390,5.310 C7.803,4.196 11.676,3.654 15.204,3.216 C28.324,1.587 42.033,-0.069 56.184,0.335 C58.234,0.394 60.964,0.830 60.217,1.433 ZM50.155,5.670 C52.205,5.728 54.936,6.165 54.188,6.767 C39.688,8.160 25.188,9.552 10.688,10.943 C7.198,11.278 2.778,11.535 0.362,10.645 C1.774,9.531 5.647,8.988 9.175,8.551 C22.295,6.922 36.005,5.265 50.155,5.670 Z" class="cls-1"/>
+                    </svg> 
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div> <!-- end cart -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% comment %}
+  Snippet for footer
+  {% endcomment %}
+  {% include 'footer' %}
+
+  <script>
+    window.addEventListener('load', function loadFontAwesome() {
+      loadCSS('https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');
+      window.removeEventListener('load', loadFontAwesome);
+    });
+  </script>
+
+  {% unless settings.shipping_calculator == 'Disabled' %}
+    {{ '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js' | script_tag }}
+    {{ '/services/javascripts/countries.js' | script_tag }}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {{ 'jquery.cart.min.js' | asset_url | script_tag }}
+  {% endunless %}
+
+  <script>
+  function require(src, callback) {
+      var script = window.document.createElement('script');
+      script.src = src;
+      script.async = true;
+      document.body.appendChild(script);
+      if (callback && typeof(callback) === 'function') {
+          script.onload = callback;
+      }
+      return script;
+  }
+  {% if settings.foter_above == 'instagram' %}
+    
+    window.addEventListener('load', function(){    
+    // ---------------------------------------------------------
+    // Instagram feed
+    // ---------------------------------------------------------
+    
+      var instaFeedSelector = document.getElementById('instafeed');
+      var instaFeedSelectorCoord = instaFeedSelector.getBoundingClientRect();
+      var startLoad = instaFeedSelectorCoord.top - window.innerHeight * 2;
+
+      function instaInit() {
+        var feed = new Instafeed({
+            get: 'user',
+            userId: '{{ settings.footer_instagram_user_id }}',
+            accessToken: '{{ settings.footer_instagram_access_token }}',
+            clientId: '{{ settings.footer_instagram_client }}',
+            limit: 8,
+            resolution: 'low_resolution',
+            after: function(){
+              var instaLinks = instaFeedSelector.getElementsByTagName('a');
+              for (var i = 0, max = instaLinks.length; i < max; i++) {
+                instaLinks[i].target = "_blank";
+              }
+            }
+        });
+        feed.run();
+      }
+
+      window.addEventListener('scroll', function loadInsta() {
+        if ( window.pageYOffset >  startLoad) {
+          require("{{ 'instafeed.js' | asset_url }}", instaInit);
+          window.removeEventListener('scroll', loadInsta);
+        }
+      });
+    })
+      
+    {% endif %} 
+
+    // ---------------------------------------------------------
+    // Special packing
+    // ---------------------------------------------------------
+    {% if linklists.special-packing.links.size > 0 and linklists.special-packing.links.first.type == 'product_link' %}
+      initSpecialPacking();
+      function initSpecialPacking() {
+        Shopify.Cart = Shopify.Cart || {};
+        
+        Shopify.Cart.GiftWrap = {};
+          
+        Shopify.Cart.GiftWrap.set = function() {
+          jQuery.ajax({
+            type: 'POST',
+            url: '/cart/update.js', 
+            data: { updates: { {{ id }}: 1 }, attributes: { 'special_pack': true } }, 
+            dataType: 'json',
+            success: function(data) { global.updateCart() }
+          })
+        }
+        
+        Shopify.Cart.GiftWrap.remove = function() {
+          jQuery.ajax({
+            type: 'POST',
+            url: '/cart/update.js', 
+            data: { updates: { {{ id }}: 0 }, attributes: { 'special_pack': '' } }, 
+            dataType: 'json',
+            success: function() { global.updateCart() }
+          });
+        }
+        
+        // If we have nothing but gift-wrap items in the cart.
+        {% if cart.items.size == 1 and gift_wraps_in_cart > 0 %}
+        jQuery(function() {
+          Shopify.Cart.GiftWrap.remove();
+        });
+        // If we have more than one gift-wrap item in the cart.
+        {% elsif gift_wraps_in_cart > 1 %}
+        jQuery(function() {
+          Shopify.Cart.GiftWrap.set();
+        });
+        // If we have a gift-wrap item in the cart but our special packing cart attribute has not   been set.
+        {% elsif gift_wraps_in_cart > 0 and cart.attributes.special_pack == blank  %}
+        jQuery(function() {
+          Shopify.Cart.GiftWrap.set();
+        });
+        // If we have no gift-wrap item in the cart but our special packing cart attribute has been   set.
+        {% elsif gift_wraps_in_cart == 0 and cart.attributes.special_pack != blank  %}
+        jQuery(function() {
+          Shopify.Cart.GiftWrap.set();
+        });
+        {% endif %}
+        
+        // When the special packing checkbox is checked or unchecked.
+        jQuery(function() {
+          jQuery('[name="attributes\[choose_package\]"]').change(function() {
+            if (jQuery('#giftWrap').is(':checked')) {
+              Shopify.Cart.GiftWrap.set();    
+            }
+            else {
+              Shopify.Cart.GiftWrap.remove();
+            }
+          });
+        });
+      }
+    {% endif %}
+
+    // ---------------------------------------------------------
+    // Shipping calculator
+    // ---------------------------------------------------------
+    {% unless settings.shipping_calculator == 'Disabled' %}
+      initShippingCalculator();
+      function initShippingCalculator() {
+        Shopify.Cart.ShippingCalculator.show( {
+          submitButton: {{ settings.shipping_calculator_submit_button_label | default: 'Calculate shipping' | json }}, 
+          submitButtonDisabled: {{ settings.shipping_calculator_submit_button_label_disabled | default: 'Calculating...' | json }}{% if   customer %},
+          customerIsLoggedIn: true{% endif %},
+          moneyFormat: {{ shop.money_with_currency_format | json }}
+        } );
+      }
+    {% endunless %}
+  </script>
+  
+  {% comment %}
+  Snippet for scripts that are used on every page
+  {% endcomment %}
+  {% include 'currencies' %}   
+  {{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+  {{ 'scrollbar.min.js' | asset_url | script_tag }}
+  {{ 'foodly.js' | asset_url | script_tag }}
+  <script>Shopify.money_format = "{{ shop.money_format }}";</script>
+</body>
+</html>

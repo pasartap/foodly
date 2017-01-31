@@ -1,0 +1,161 @@
+{% comment %}
+Template for customer account
+- https://docs.shopify.com/themes/theme-development/templates/customers-account
+{% endcomment %}
+{% include 'space-20' %}
+<section class="section section--page">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        <div class="page-description">
+          <h1 class="heading--page">{{ 'customer.account.heading' | t }}</h1>
+          <h2 class="subheading--page-small">
+            <em>{{ 'customer.account.subheading' | t }}</em>
+          </h2>
+        </div>
+        
+        <div class="orders">
+          {% paginate customer.orders by 20 %}
+            {% if customer.orders.size != 0 %}
+              <div class="table-wrapper">
+                <table class="table table--clear table--orders">
+                  <thead>
+                    <tr>
+                      <th>{{ 'customer.orders.order_number' | t }}</th>
+                      <th>{{ 'customer.orders.date' | t }}</th>
+                      <th>{{ 'customer.orders.payment_status' | t }}</th>
+                      <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                      <th>{{ 'customer.orders.total' | t }}</th>
+                    </tr>
+                  </thead>
+                          
+                  <tbody>
+                    {% for order in customer.orders %}
+                      <tr>
+                        <td>{{ order.name | link_to: order.customer_url }}</td>
+                        <td>{{ order.created_at | date: '%b %-d, %Y' }}</td>
+                        <td>{{ order.financial_status_label }}</td>
+                        <td>{{ order.fulfillment_status_label }}</td>
+                        <td><span class="money">{{ order.total_price | money }}</span></td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div> <!-- End table -->
+            {% else %}
+          
+              <div class="orders-empty">
+                <p class="orders-empty__info">{{ 'customer.orders.none' | t }}</p>
+                <a class="btn btn--underlines" href="/collections/all" title="{{ 'layout.general.check_it_button' | t }}">
+                  {{ 'layout.general.check_it_button' | t }}
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="61" height="12" viewBox="0 0 61 12">
+                    <path d="M60.217,1.433 C45.717,2.825 31.217,4.217 16.717,5.609 C13.227,5.944 8.806,6.200 6.390,5.310 C7.803,4.196 11.676,3.654 15.204,3.216 C28.324,1.587 42.033,-0.069 56.184,0.335 C58.234,0.394 60.964,0.830 60.217,1.433 ZM50.155,5.670 C52.205,5.728 54.936,6.165 54.188,6.767 C39.688,8.160 25.188,9.552 10.688,10.943 C7.198,11.278 2.778,11.535 0.362,10.645 C1.774,9.531 5.647,8.988 9.175,8.551 C22.295,6.922 36.005,5.265 50.155,5.670 Z" class="cls-1"/>
+                  </svg> 
+                </a>
+              </div>
+          
+            {% endif %}
+          </div> <!-- End orders -->
+        
+          {% if paginate.pages > 1 %}
+            <div class="pagination">
+              {% include 'pagination' %}
+            </div>
+          {% endif %}
+        {% endpaginate %}
+        
+        <aside class="customer-sidebar">
+          <a href="/tools/customr" title="{{ 'customer.general.edit_customer' | t }}">
+          {% comment %}
+          <a class="text-link--default js-edit-address" data-address-id="{{ customer.id }}" href="#" title="{{ 'customer.general.edit_customer' | t }}">
+          {% endcomment %}
+            <h4 class="customer__name">{{ customer.name }}</h4>
+          </a>
+          {% if customer.default_address != nil %}
+            <address class="address address--customer">
+              {{ customer.default_address.address1 }}<br>
+          
+              {% if customer.default_address.address2 != blank %}
+                {{ customer.default_address.address2 }}<br>
+              {% endif %}
+          
+              {% if customer.default_address.city != blank %}
+                {{ customer.default_address.city }}<br>
+              {% endif %}
+          
+              {% if customer.default_address.province_code != blank %}
+                {{ customer.default_address.province_code }}<br>
+              {% endif %}
+          
+              {% if customer.default_address.zip != blank %}
+                {{ customer.default_address.zip }}<br>
+              {% endif %}
+          
+              {% if customer.default_address.country != blank %}
+                {{ customer.default_address.country }}<br>
+              {% endif %}
+          
+              {% if customer.default_address.phone != blank %}
+                {{ customer.default_address.phone }}
+              {% endif %}
+            </address>
+
+            <a class="text-link--default" href="/account/addresses" title="{{ 'customer.account.view_addresses' | t }}">{{ 'customer.account.view_addresses' | t }}</a>
+
+            {% if settings.wishlist_enable %}
+              <a class="text-link--default" href="/pages/wishlist" title="{{ 'customer.account.wish_list' | t }}">{{ 'customer.account.wish_list' | t }}</a>
+            {% endif %}
+
+          {% else %}
+
+            <a class="text-link--default" href="/account/addresses" title="{{ 'customer.addresses.add_new_address' | t }}">{{ 'customer.addresses.add_new_address' | t }}</a>
+
+            {% if settings.wishlist_enable %}
+              <a class="text-link--default" href="/pages/wishlist" title="{{ 'customer.account.wish_list' | t }}">{{ 'customer.account.wish_list' | t }}</a>
+            {% endif %}
+        
+          {% endif %}
+      
+          <div class="customer__logout-link">{{ 'customer.login.logout' | t | customer_logout_link }}</div>
+        </aside>
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+  {% comment %}
+  Form for editing customer details. Taken from Edit Address modal template.
+  {% endcomment %}
+  <div id="EditAddress_{{ customer.id }}" class="modal modal--address display-none">
+    <div class="modal-container">
+      <button class="modal__btn-close btn btn--text js-modal__btn-close" type="button">
+        <span>{{ 'layout.cart.close_cart' | t }}</span>
+      </button>
+
+      <h4 class="heading--page-small">{{ 'customer.addresses.edit_address_heading' | t }}</h4>
+
+      <div class="modal__body">
+        {% form 'customer', customer, class: "form form--default form--default--inverse modal-form" %}                     
+                      
+        <div class="form__row">
+          <input class="form__field" type="text" id="firstName_{{ form.id }}" name="customer[first_name]" value="{{ form.first_name }}" autocapitalize="words" placeholder="{{ 'customer.general.first_name' | t }}">
+          <label class="form__field--placeholder" for="firstName_{{ form.id }}">{{ 'customer.general.first_name' | t }}</label>
+        </div>
+
+        <div class="form__row">
+          <input class="form__field" type="text" id="lastName_{{ form.id }}" name="customer[last_name]" value="{{ form.last_name }}" autocapitalize="words" placeholder="{{ 'customer.general.last_name' | t }}">
+          <label class="form__field--placeholder" class="form__field" for="lastName_{{ form.id }}">{{ 'customer.general.last_name' | t }}</label>
+        </div>
+
+        <div class="form__row">
+          <button class="btn btn--default btn--full btn--submit" type="submit">{{ 'customer.addresses.update_address' | t }}</button>
+        </div>
+
+        <div class="form__row">
+          <a class="text-link--default form__text-link js-modal__btn-close" href="#" >{{ 'customer.addresses.cancel' | t }}</a>
+        </div>
+
+        {% endform %}
+      </div> <!-- End modal__body -->
+    </div> <!-- End modal-container -->
+  </div> <!-- End modal -->
+</section>
+{% include 'space-40' %}
