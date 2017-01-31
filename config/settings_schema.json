@@ -1,0 +1,3277 @@
+[
+  {
+    "name": "theme_info",
+    "logo": "https:\/\/cdn.shopify.com\/s\/global\/branding\/shopify_logo_256x256.png",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Foodly Theme"
+      },
+      {
+        "type": "paragraph",
+        "content": "v 1.0.0"
+      },
+      {
+        "type": "paragraph",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus perspiciatis unde eveniet velit aliquid, ea obcaecati deserunt provident minima pariatur!"
+      },
+      {
+        "type": "paragraph",
+        "content": "See [documentation](http:\/\/gozha.net\/test\/foodly\/documentation)"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Background"
+      },
+      {
+        "type": "radio",
+        "id": "bg_image_choice",
+        "label": "Image",
+        "options": [
+          {
+            "value": "",
+            "label": "No background image"
+          },
+          {
+            "value": "bg_custom",
+            "label": "Custom image (upload below)"
+          }
+        ]
+      },
+      {
+        "type": "image",
+        "id": "bg_custom.png",
+        "label": "Upload image"
+      },
+      {
+        "type": "radio",
+        "id": "bg_image_display",
+        "label": "Image display",
+        "options": [
+          {
+            "value": "bg_image_title",
+            "label": "Title"
+          },
+          {
+            "value": "bg_image_stretch",
+            "label": "Stretch"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Theme colors"
+      },
+      {
+        "type": "color",
+        "id": "color_body_bg",
+        "label": "Body background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary color",
+        "default": "#5c4b51",
+        "info": "Brand color. Used for hover state of buttons and "
+      },
+      {
+        "type": "color",
+        "id": "color_highlight",
+        "label": "Hightlight color",
+        "default": "#f06060",
+        "info": "Used for buttons, sale badge, text link and error states"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent color",
+        "default": "#f3b562",
+        "info": "Used for special badge, overlay headings and some notification"
+      },
+      {
+        "type": "color",
+        "id": "color_additional",
+        "label": "Additional color",
+        "default": "#8cbeb2",
+        "info": "Used for succsesful notification"
+      },
+      {
+        "type": "color",
+        "id": "color_inverse",
+        "label": "Inverse color",
+        "default": "#ffffff",
+        "info": "Used for inverse text on darken background, background for social media buttons"
+      },
+      {
+        "type": "header",
+        "content": "Text colors"
+      },
+      {
+        "type": "color",
+        "id": "color_body_text",
+        "label": "Body text",
+        "default": "#5c4b51"
+      },
+      {
+        "type": "color",
+        "id": "color_headers",
+        "label": "Heading color",
+        "default": "#5c4b51"
+      },
+      {
+        "type": "color",
+        "id": "color_add_headers",
+        "label": "Additoinal heading color",
+        "default": "#ada2a4",
+        "info": "Used for subheadings and small headings"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Body font"
+      },
+      {
+        "type": "select",
+        "id": "font_body_family",
+        "label": "Font family",
+        "options": [
+          {
+            "value": "'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+            "label": "Avant Garde",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'Gill Sans', 'Gill Sans MT', Calibri, sans-serif",
+            "label": "Gill Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "label": "Helvetica Neue",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Arial, 'Helvetica Neue', Helvetica, sans-serif",
+            "label": "Arial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif",
+            "label": "Candara",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Geneva, Tahoma, Verdana, sans-serif",
+            "label": "Geneva",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Google_Raleway_300,400,500,600,800_sans",
+            "label": "Raleway",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Droid+Sans_400,700_sans",
+            "label": "Droid Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Lato_400,700_sans",
+            "label": "Lato",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Montserrat_400,700_sans",
+            "label": "Montserrat",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Open+Sans_400,700_sans",
+            "label": "Open Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_PT+Sans_400,700_sans",
+            "label": "PT Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Roboto_400,700_sans",
+            "label": "Roboto",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Source+Sans+Pro_400,700_sans",
+            "label": "Source Sans Pro",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Ubuntu_400,700_sans",
+            "label": "Ubuntu",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif",
+            "label": "Big Calson",
+            "group": "Serif"
+          },
+          {
+            "value": "'Calisto MT', 'Bookman Old Style', Bookman, 'Goudy Old Style', Garamond, 'Hoefler Text', 'Bitstream Charter', Georgia, serif",
+            "label": "Calisto MT",
+            "group": "Serif"
+          },
+          {
+            "value": "Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif",
+            "label": "Baskerville",
+            "group": "Serif"
+          },
+          {
+            "value": "Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Garamond",
+            "group": "Serif"
+          },
+          {
+            "value": "Georgia, 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Georgia",
+            "group": "Serif"
+          },
+          {
+            "value": "TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif",
+            "label": "Times New Roman",
+            "group": "Serif"
+          },
+          {
+            "value": "Google_Bitter_400,400italic,700_serif",
+            "label": "Bitter",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Arvo_400,400_serif",
+            "label": "Arvo",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Crimson+Text_400,700_serif",
+            "label": "Crimson Text",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Droid+Serif_400,700_serif",
+            "label": "Droid Serif",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Lora_400,700_serif",
+            "label": "Lora",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_PT+Serif_400,700_serif",
+            "label": "PT Serif",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Vollkorn_400,700_serif",
+            "label": "Vollkorn",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Alex+Brush",
+            "label": "Alex Brush",
+            "group": "Handwriting | Google Web Fonts"
+          }
+        ],
+        "default": "Google_Raleway_300,400,500,600,800_sans"
+      },
+      {
+        "type": "text",
+        "id": "font_body_size",
+        "label": "Font size",
+        "default": "16px"
+      },
+      {
+        "type": "header",
+        "content": "Page heading font",
+        "info": "Used for slide headings, headings for pages, headings for special sections"
+      },
+      {
+        "type": "select",
+        "id": "font_header_page_family",
+        "label": "Font family",
+        "options": [
+          {
+            "value": "'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+            "label": "Avant Garde",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'Gill Sans', 'Gill Sans MT', Calibri, sans-serif",
+            "label": "Gill Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "label": "Helvetica Neue",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Arial, 'Helvetica Neue', Helvetica, sans-serif",
+            "label": "Arial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif",
+            "label": "Candara",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Geneva, Tahoma, Verdana, sans-serif",
+            "label": "Geneva",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Google_Raleway_300,400,500,600,800_sans",
+            "label": "Raleway",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Droid+Sans_400,700_sans",
+            "label": "Droid Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Lato_400,700_sans",
+            "label": "Lato",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Montserrat_400,700_sans",
+            "label": "Montserrat",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Open+Sans_400,700_sans",
+            "label": "Open Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_PT+Sans_400,700_sans",
+            "label": "PT Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Roboto_400,700_sans",
+            "label": "Roboto",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Source+Sans+Pro_400,700_sans",
+            "label": "Source Sans Pro",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Ubuntu_400,700_sans",
+            "label": "Ubuntu",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif",
+            "label": "Big Calson",
+            "group": "Serif"
+          },
+          {
+            "value": "'Calisto MT', 'Bookman Old Style', Bookman, 'Goudy Old Style', Garamond, 'Hoefler Text', 'Bitstream Charter', Georgia, serif",
+            "label": "Calisto MT",
+            "group": "Serif"
+          },
+          {
+            "value": "Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif",
+            "label": "Baskerville",
+            "group": "Serif"
+          },
+          {
+            "value": "Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Garamond",
+            "group": "Serif"
+          },
+          {
+            "value": "Georgia, 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Georgia",
+            "group": "Serif"
+          },
+          {
+            "value": "TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif",
+            "label": "Times New Roman",
+            "group": "Serif"
+          },
+          {
+            "value": "Google_Bitter_400,400italic,700_serif",
+            "label": "Bitter",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Arvo_400,400_serif",
+            "label": "Arvo",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Crimson+Text_400,700_serif",
+            "label": "Crimson Text",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Droid+Serif_400,700_serif",
+            "label": "Droid Serif",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Lora_400,700_serif",
+            "label": "Lora",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_PT+Serif_400,700_serif",
+            "label": "PT Serif",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Vollkorn_400,700_serif",
+            "label": "Vollkorn",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Alex+Brush",
+            "label": "Alex Brush",
+            "group": "Handwriting | Google Web Fonts"
+          }
+        ],
+        "default": "Google_Raleway_300,400,500,600,800_sans"
+      },
+      {
+        "type": "text",
+        "id": "font_header_page_size",
+        "label": "H1 font size",
+        "default": "32px"
+      },
+      {
+        "type": "header",
+        "content": "Text heading font",
+        "info": "Used for headings in articles, RTE content"
+      },
+      {
+        "type": "select",
+        "id": "font_header_family",
+        "label": "Font family",
+        "options": [
+          {
+            "value": "'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+            "label": "Avant Garde",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'Gill Sans', 'Gill Sans MT', Calibri, sans-serif",
+            "label": "Gill Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "label": "Helvetica Neue",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Arial, 'Helvetica Neue', Helvetica, sans-serif",
+            "label": "Arial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif",
+            "label": "Candara",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Geneva, Tahoma, Verdana, sans-serif",
+            "label": "Geneva",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Google_Raleway_300,400,500,600,800_sans",
+            "label": "Raleway",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Droid+Sans_400,700_sans",
+            "label": "Droid Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Lato_400,700_sans",
+            "label": "Lato",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Montserrat_400,700_sans",
+            "label": "Montserrat",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Open+Sans_400,700_sans",
+            "label": "Open Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_PT+Sans_400,700_sans",
+            "label": "PT Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Roboto_400,700_sans",
+            "label": "Roboto",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Source+Sans+Pro_400,700_sans",
+            "label": "Source Sans Pro",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Ubuntu_400,700_sans",
+            "label": "Ubuntu",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif",
+            "label": "Big Calson",
+            "group": "Serif"
+          },
+          {
+            "value": "'Calisto MT', 'Bookman Old Style', Bookman, 'Goudy Old Style', Garamond, 'Hoefler Text', 'Bitstream Charter', Georgia, serif",
+            "label": "Calisto MT",
+            "group": "Serif"
+          },
+          {
+            "value": "Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif",
+            "label": "Baskerville",
+            "group": "Serif"
+          },
+          {
+            "value": "Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Garamond",
+            "group": "Serif"
+          },
+          {
+            "value": "Georgia, 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Georgia",
+            "group": "Serif"
+          },
+          {
+            "value": "TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif",
+            "label": "Times New Roman",
+            "group": "Serif"
+          },
+          {
+            "value": "Google_Bitter_400,400italic,700_serif",
+            "label": "Bitter",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Arvo_400,400_serif",
+            "label": "Arvo",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Crimson+Text_400,700_serif",
+            "label": "Crimson Text",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Droid+Serif_400,700_serif",
+            "label": "Droid Serif",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Lora_400,700_serif",
+            "label": "Lora",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_PT+Serif_400,700_serif",
+            "label": "PT Serif",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Vollkorn_400,700_serif",
+            "label": "Vollkorn",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Alex+Brush",
+            "label": "Alex Brush",
+            "group": "Handwriting | Google Web Fonts"
+          }
+        ],
+        "default": "Google_Bitter_400,400italic,700_serif"
+      },
+      {
+        "type": "text",
+        "id": "font_header_size",
+        "label": "H1 font size",
+        "default": "32px"
+      },
+      {
+        "type": "header",
+        "content": "Additional body font",
+        "info": "Used for emphasizing links, text, subheadings"
+      },
+      {
+        "type": "select",
+        "id": "font_additional_family",
+        "label": "Font family",
+        "options": [
+          {
+            "value": "'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+            "label": "Avant Garde",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'Gill Sans', 'Gill Sans MT', Calibri, sans-serif",
+            "label": "Gill Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "label": "Helvetica Neue",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Arial, 'Helvetica Neue', Helvetica, sans-serif",
+            "label": "Arial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif",
+            "label": "Candara",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Geneva, Tahoma, Verdana, sans-serif",
+            "label": "Geneva",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Google_Raleway_300,400,500,600,800_sans",
+            "label": "Raleway",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Droid+Sans_400,700_sans",
+            "label": "Droid Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Lato_400,700_sans",
+            "label": "Lato",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Montserrat_400,700_sans",
+            "label": "Montserrat",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Open+Sans_400,700_sans",
+            "label": "Open Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_PT+Sans_400,700_sans",
+            "label": "PT Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Roboto_400,700_sans",
+            "label": "Roboto",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Source+Sans+Pro_400,700_sans",
+            "label": "Source Sans Pro",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Ubuntu_400,700_sans",
+            "label": "Ubuntu",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif",
+            "label": "Big Calson",
+            "group": "Serif"
+          },
+          {
+            "value": "'Calisto MT', 'Bookman Old Style', Bookman, 'Goudy Old Style', Garamond, 'Hoefler Text', 'Bitstream Charter', Georgia, serif",
+            "label": "Calisto MT",
+            "group": "Serif"
+          },
+          {
+            "value": "Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif",
+            "label": "Baskerville",
+            "group": "Serif"
+          },
+          {
+            "value": "Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Garamond",
+            "group": "Serif"
+          },
+          {
+            "value": "Georgia, 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Georgia",
+            "group": "Serif"
+          },
+          {
+            "value": "TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif",
+            "label": "Times New Roman",
+            "group": "Serif"
+          },
+          {
+            "value": "Google_Bitter_400,400italic,700_serif",
+            "label": "Bitter",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Arvo_400,400_serif",
+            "label": "Arvo",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Crimson+Text_400,700_serif",
+            "label": "Crimson Text",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Droid+Serif_400,700_serif",
+            "label": "Droid Serif",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Lora_400,700_serif",
+            "label": "Lora",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_PT+Serif_400,700_serif",
+            "label": "PT Serif",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Vollkorn_400,700_serif",
+            "label": "Vollkorn",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Alex+Brush",
+            "label": "Alex Brush",
+            "group": "Handwriting | Google Web Fonts"
+          }
+        ],
+        "default": "Google_Bitter_400,400italic,700_serif",
+        "info": "Heading in footer"
+      },
+      {
+        "type": "header",
+        "content": "Accent font"
+      },
+      {
+        "type": "select",
+        "id": "font_accent_family",
+        "label": "Font family",
+        "options": [
+          {
+            "value": "'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+            "label": "Avant Garde",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'Gill Sans', 'Gill Sans MT', Calibri, sans-serif",
+            "label": "Gill Sans",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "label": "Helvetica Neue",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Arial, 'Helvetica Neue', Helvetica, sans-serif",
+            "label": "Arial",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif",
+            "label": "Candara",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Geneva, Tahoma, Verdana, sans-serif",
+            "label": "Geneva",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Google_Raleway_300,400,500,600,800_sans",
+            "label": "Raleway",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Droid+Sans_400,700_sans",
+            "label": "Droid Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Lato_400,700_sans",
+            "label": "Lato",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Montserrat_400,700_sans",
+            "label": "Montserrat",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Open+Sans_400,700_sans",
+            "label": "Open Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_PT+Sans_400,700_sans",
+            "label": "PT Sans",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Roboto_400,700_sans",
+            "label": "Roboto",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Source+Sans+Pro_400,700_sans",
+            "label": "Source Sans Pro",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Ubuntu_400,700_sans",
+            "label": "Ubuntu",
+            "group": "Sans-serif | Google Web Fonts"
+          },
+          {
+            "value": "'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif",
+            "label": "Big Calson",
+            "group": "Serif"
+          },
+          {
+            "value": "'Calisto MT', 'Bookman Old Style', Bookman, 'Goudy Old Style', Garamond, 'Hoefler Text', 'Bitstream Charter', Georgia, serif",
+            "label": "Calisto MT",
+            "group": "Serif"
+          },
+          {
+            "value": "Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif",
+            "label": "Baskerville",
+            "group": "Serif"
+          },
+          {
+            "value": "Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Garamond",
+            "group": "Serif"
+          },
+          {
+            "value": "Georgia, 'Hoefler Text', 'Times New Roman', serif",
+            "label": "Georgia",
+            "group": "Serif"
+          },
+          {
+            "value": "TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif",
+            "label": "Times New Roman",
+            "group": "Serif"
+          },
+          {
+            "value": "Google_Bitter_400,400italic,700_serif",
+            "label": "Bitter",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Arvo_400,400_serif",
+            "label": "Arvo",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Crimson+Text_400,700_serif",
+            "label": "Crimson Text",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Droid+Serif_400,700_serif",
+            "label": "Droid Serif",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Lora_400,700_serif",
+            "label": "Lora",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_PT+Serif_400,700_serif",
+            "label": "PT Serif",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Vollkorn_400,700_serif",
+            "label": "Vollkorn",
+            "group": "Serif | Google Web Fonts"
+          },
+          {
+            "value": "Google_Alex+Brush",
+            "label": "Alex Brush",
+            "group": "Handwriting | Google Web Fonts"
+          }
+        ],
+        "default": "Google_Alex+Brush"
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Logo"
+      },
+      {
+        "type": "checkbox",
+        "id": "logo_use_image",
+        "label": "Use custom logo"
+      },
+      {
+        "type": "image",
+        "id": "logo.png",
+        "label": "Custom logo",
+        "max-width": 260,
+        "max-height": 200,
+        "info": "Maximum logo dimensions are 128px wide by 96px high. The uploaded file will be resized to fit within those constraints."
+      },
+      {
+        "type": "checkbox",
+        "id": "mobile_logo_enable",
+        "label": "Show logo on the top of the page",
+        "info": "by default, the logo is shown in the menu of navigation"
+      },
+      {
+        "type": "header",
+        "content": "Store description"
+      },
+      {
+        "type": "text",
+        "id": "header_store_description_left",
+        "label": "Left text", 
+        "default": "Organic food by Whytes\'"
+      },
+      {
+        "type": "text",
+        "id": "header_store_description_right",
+        "label": "Right text", 
+        "default": "from Manitoba, Canada"
+      },
+      {
+        "type": "header",
+        "content": "Custom favicon"
+      },
+      {
+        "type": "checkbox",
+        "id": "favicon_enable",
+        "label": "Use custom favicon"
+      },
+      {
+        "type": "image",
+        "id": "favicon.png",
+        "label": "16px x 16px png",
+        "max-width": 16,
+        "max-height": 16
+      },
+      {
+        "type": "header",
+        "content": "Mega menu for collections (desktop layout)"
+      },
+      {
+        "type": "checkbox",
+        "id": "main_menu_collection_enable",
+        "label": "Use image and description",
+        "info": "Image and description will be taken from the collection" 
+      },
+      {
+        "type": "text",
+        "id": "main_menu_collections",
+        "label": "Collections for the collection mega menu",
+        "info": "Separated with commas"
+      },
+      {
+        "type": "header",
+        "content": "Fixed top bar for mobile devices"
+      },
+      {
+        "type": "checkbox",
+        "id": "fixed_bar_enable",
+        "label": "Show fixed top bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "fixed_bar_search_enable",
+        "label": "Show search icon"
+      },
+      {
+        "type": "link_list",
+        "id": "fixed_bar_links",
+        "label": "Links",
+        "info": "Max 4 links"
+      },
+      {
+        "type": "header",
+        "content": "Header with social icons"
+      }, 
+      {
+        "type": "text",
+        "id": "header_social_msg",
+        "label": "Left text",
+        "default": "Call to us: <strong>1-800-Foodly</strong>",
+        "info": "Separated with commas"
+      }     
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Footer styles"
+      },
+      {
+        "type": "color",
+        "id": "color_footer_bg",
+        "label": "Backgroung color",
+        "default": "#f5f4f4"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_img_enable",
+        "label": "Use image for background"
+      },
+      {
+        "type": "image",
+        "id": "img_footer_bg.png",
+        "label": "Upload backgroung image",
+        "max-width": 2000,
+        "max-height": 2000,
+        "info": "Max width 2000px and max height 2000px"
+      },
+      {
+        "type": "header",
+        "content": "Footer layout"
+      },
+      {
+        "type": "radio",
+        "id": "foter_above",
+        "label": "What show before footer",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "instagram",
+            "label": "Show instagram feed"
+          },
+          {
+            "value": "subscribe_form",
+            "label": "Show subscribe form"
+          }
+        ],
+        "info": "Subscribe settings are available in appropriate item"
+      },
+      {
+        "type": "text",
+        "id": "footer_instagram_user_id",
+        "label": "User ID",
+        "info": "[How to get user id](http:\/\/jelled.com\/instagram\/lookup-user-id)"
+      },
+      {
+        "type": "text",
+        "id": "footer_instagram_access_token",
+        "label": "Istagram access token",
+        "info": "[How to get access token](http:\/\/pinceladasdaweb.com.br\/instagram\/access-token)"
+      },
+      {
+        "type": "text",
+        "id": "footer_instagram_client",
+        "label": "Instagram clientID",
+        "default": "ba61a580286a4ae9a340f12c709c6bb2",
+        "info": "[How to get clientID](http:\/\/darkwhispering.com\/how-to\/get-a-instagram-client_id-key)"
+      },
+      {
+        "type": "text",
+        "id": "footer_instagram_account",
+        "label": "Instagram account",
+        "default": "olechka_dumka",
+        "info": "Images aren't showing in live preview"
+      },
+      {
+        "type": "text",
+        "id": "footer_instagram_heading",
+        "label": "Instagram heading",
+        "default": "Instagram"
+      },
+      {
+        "type": "text",
+        "id": "footer_instagram_subheading",
+        "label": "Instagram subheading",
+        "default": "let’s have a look what is behind the scenes"
+      },
+      {
+        "type": "text",
+        "id": "footer_subscribe_heading",
+        "label": "Subscribe heading",
+        "default": "Get notified"
+      },      
+      {
+        "type": "text",
+        "id": "footer_subscribe_subheading",
+        "label": "Subscribe subheading",
+        "default": "joining newsletter from Foodly to get the latest news and offers"
+      },
+      {
+        "type": "header",
+        "content": "Latest blog"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_blog_enable",
+        "label": "Show latest blog post"
+      },
+      {
+        "type": "text",
+        "id": "footer_blog_heading",
+        "label": "Blog heading",
+        "default": "Latest post"
+      },
+      {
+        "type": "blog",
+        "id": "footer_blog",
+        "label": "Blog"
+      },
+      {
+        "type": "header",
+        "content": "Footer menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_menu_enable",
+        "label": "Show footer menu"
+      },
+      {
+        "type": "text",
+        "id": "footer_menu_heading",
+        "label": "Menu heading",
+        "default": "More info"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_quicklinks_linklist",
+        "label": "Footer menu"
+      },
+      {
+        "type": "header",
+        "content": "Secondary footer menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_second_menu_enable",
+        "label": "Show additional footer menu"
+      },
+      {
+        "type": "text",
+        "id": "footer_second_menu_heading",
+        "label": "Additional menu heading",
+        "default": "Foodly family"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_second_menu",
+        "label": "Additional footer menu"
+      },
+      {
+        "type": "header",
+        "content": "Contact info"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_address_enable",
+        "label": "Show contact info"
+      },
+      {
+        "type": "text",
+        "id": "footer_address_heading",
+        "label": "Contact info heading",
+        "default": "Contact info"
+      },
+      {
+        "type": "textarea",
+        "id": "footer_address_text",
+        "label": "Contact info text",
+        "default": "<ul><li><i class='fa fa-envelope'></i><a href='mailto:contact@foodly.com'>contact@foodly.com</a></li><li><i class='fa fa-mobile'></i>912-823-5448</li><li><i class='fa fa-map-marker'></i>Foodly Inc Suite<br>109 273 – 3000 High Way<br>Whistler, BC, V0N 2B5 </li></ul>",
+        "info": "Use basic HTML to format text"
+      },
+      {
+        "type": "header",
+        "content": "Payment methods"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_show_methods_of_payment",
+        "label": "Show methods of payment"
+      },
+      {
+        "type": "text",
+        "id": "footer_payments_heading",
+        "label": "Payments heading",
+        "default": "Payment methods"
+      },
+      {
+        "type": "header",
+        "content": "Social media icons"
+      },  
+      {
+        "type": "checkbox",
+        "id": "footer_social_enable",
+        "label": "Show social media icons"
+      },
+      {
+        "type": "text",
+        "id": "footer_social_heading",
+        "label": "Social media heading",
+        "default": "Follow Us"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook link"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter link"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest link"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram link"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "Youtube link"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr_link",
+        "label": "Tumblr link"
+      },
+      {
+        "type": "header",
+        "content": "Copyright"
+      },
+      {
+        "type": "text",
+        "id": "copyright_link",
+        "label": "Copyright link",
+        "default": "http:\/\/themeforest.net\/user\/congruityhub\/portfolio"
+      },
+      {
+        "type": "text",
+        "id": "copyright_link_text",
+        "label": "Copyright link text",
+        "default": "Theme by Congruity Hub"
+      }
+    ]
+  },
+  {
+    "name": "Home page - slideshow",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "homepage_slideshow_enable",
+        "label": "Show slideshow"
+      },
+      {
+        "type": "select",
+        "id": "homepage_slideshow_effect",
+        "label": "Slideshow effect",
+        "options": [
+          {
+            "value": "fade",
+            "label": "Fade"
+          },
+          {
+            "value": "slide",
+            "label": "Slide"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_slideshow_autoplay",
+        "label": "Autoplay"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slideshow_time_animation",
+        "label": "Time for changing slides",
+        "default": "7000",
+        "info": "Works if autoplay is enabled.Time in milliseconds"
+      },
+      {
+        "type": "header",
+        "content": "Slide 1"
+      },
+      {
+        "type": "image",
+        "id": "img_homepage_slide_1.jpg",
+        "label": "Slide image"
+      },
+      {
+        "type": "image",
+        "id": "img_thumb_homepage_slide_1.jpg",
+        "label": "Slide thumb image"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_1_link",
+        "label": "Link to",
+        "default": "\/products\/tomatoes"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_slide_1_text_enable",
+        "label": "Show slide text"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_1_heading",
+        "label": "Heading",
+        "default": "Tomato season"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_1_subheading",
+        "label": "Subheading",
+        "default": "nutritious & delicious"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_1_price",
+        "label": "Price",
+        "default": "$3.05"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_1_price_desc",
+        "label": "Price description",
+        "default": "start point"
+      },
+      {
+        "type": "header",
+        "content": "Slide 2"
+      },
+      {
+        "type": "image",
+        "id": "img_homepage_slide_2.jpg",
+        "label": "Slide image"
+      },
+      {
+        "type": "image",
+        "id": "img_thumb_homepage_slide_2.jpg",
+        "label": "Slide thumb image"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_2_link",
+        "label": "Link to",
+        "default": "\/collections\/liquid"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_slide_2_text_enable",
+        "label": "Show slide text"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_2_heading",
+        "label": "Heading",
+        "default": "Paella or Pasta?"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_2_subheading",
+        "label": "Subheading",
+        "default": "you’ll need this sweet pepper for both"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_2_price",
+        "label": "Price",
+        "default": "$3.05"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_2_price_desc",
+        "label": "Price description",
+        "default": "start point"
+      },
+      {
+        "type": "header",
+        "content": "Slide 3"
+      },
+      {
+        "type": "image",
+        "id": "img_homepage_slide_3.jpg",
+        "label": "Slide image"
+      },
+      {
+        "type": "image",
+        "id": "img_thumb_homepage_slide_3.jpg",
+        "label": "Slide thumb image"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_3_link",
+        "label": "Link to",
+        "default": "\/blogs\/news"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_slide_3_text_enable",
+        "label": "Show slide text"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_3_heading",
+        "label": "Heading",
+        "default": "Apple Pie?"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_3_subheading",
+        "label": "Subheading",
+        "default": "of Gala Cultivar"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_3_heading_add",
+        "label": "Additional heading",
+        "default": "Yes, <strong>Please<\/strong>!"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_3_subheading_add",
+        "label": "Additional subheading",
+        "default": "Mmmmm..."
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_3_price",
+        "label": "Price",
+        "default": "$3.05"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_3_price_desc",
+        "label": "Price description",
+        "default": "start point"
+      }
+    ]
+  },
+  {
+    "name": "Box slideshow",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "box_slideshow_autoplay",
+        "label": "Autoplay"
+      },
+      {
+        "type": "header",
+        "content": "Slide 1"
+      },
+      {
+        "type": "image",
+        "id": "img_box_slide_1.jpg",
+        "label": "Slide image"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_1_link",
+        "label": "Link to",
+        "default": "\/products\/tomatoes"
+      },
+      {
+        "type": "checkbox",
+        "id": "box_slide_1_text_enable",
+        "label": "Show slide text"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_1_heading",
+        "label": "Heading",
+        "default": "Tomato season"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_1_subheading",
+        "label": "Subheading",
+        "default": "nutritious & delicious"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_1_price",
+        "label": "Price",
+        "default": "$3.05"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_1_price_desc",
+        "label": "Price description",
+        "default": "start point"
+      },
+      {
+        "type": "header",
+        "content": "Slide 2"
+      },
+      {
+        "type": "image",
+        "id": "img_box_slide_2.jpg",
+        "label": "Slide image"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_2_link",
+        "label": "Link to",
+        "default": "\/collections\/liquid"
+      },
+      {
+        "type": "checkbox",
+        "id": "box_slide_2_text_enable",
+        "label": "Show slide text"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_2_heading",
+        "label": "Heading",
+        "default": "Paella or Pasta?"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_2_subheading",
+        "label": "Subheading",
+        "default": "you’ll need this sweet pepper for both"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_2_price",
+        "label": "Price",
+        "default": "$3.05"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_2_price_desc",
+        "label": "Price description",
+        "default": "start point"
+      },
+      {
+        "type": "header",
+        "content": "Slide 3"
+      },
+      {
+        "type": "image",
+        "id": "img_box_slide_3.jpg",
+        "label": "Slide image"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_3_link",
+        "label": "Link to",
+        "default": "\/blogs\/news"
+      },
+      {
+        "type": "checkbox",
+        "id": "box_slide_3_text_enable",
+        "label": "Show slide text"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_3_heading",
+        "label": "Heading",
+        "default": "Apple Pie?"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_3_subheading",
+        "label": "Subheading",
+        "default": "of Gala Cultivar"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_3_heading_add",
+        "label": "Additional heading",
+        "default": "Yes, <strong>Please<\/strong>!"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_3_subheading_add",
+        "label": "Additional subheading",
+        "default": "Mmmmm..."
+      },
+      {
+        "type": "text",
+        "id": "box_slide_3_price",
+        "label": "Price",
+        "default": "$3.05"
+      },
+      {
+        "type": "text",
+        "id": "box_slide_3_price_desc",
+        "label": "Price description",
+        "default": "start point"
+      }
+     ]
+    },
+  {
+    "name": "Home page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Background video"
+      },
+      {
+        "type": "text",
+        "id": "bg_video_mp4",
+        "label": "Format mp4",
+        "default": "https://cdn.shopify.com/s/files/1/1082/5190/files/from_the_earth.mp4",
+        "info": "Must be a direct link"
+      },
+      {
+        "type": "text",
+        "id": "bg_video_webm",
+        "label": "Format webm (fallback)",
+        "default": "https://cdn.shopify.com/s/files/1/1082/5190/files/from_the_earth.webm",
+        "info": "Must be a direct link"
+      },
+      {
+        "type": "text",
+        "id": "bg_video_ogv",
+        "label": "Format ogv (fallback)",
+        "default": "https://cdn.shopify.com/s/files/1/1082/5190/files/from_the_earth.ogv",
+        "info": "Must be a direct link"
+      },
+      {
+        "type": "image",
+        "id": "bg_video_image.jpg",
+        "label": "Background image",
+        "info": "Fallback for devices that don't support video"
+      },
+      {
+        "type": "header",
+        "content": "Hero image"
+      },
+      {
+        "type": "checkbox",
+        "id": "hero_image_enable",
+        "label": "Show hero image"
+      },
+      {
+        "type": "image",
+        "id": "img_hero_image.jpg",
+        "label": "Background image"
+      },
+      {
+        "type": "text",
+        "id": "hero_image_title",
+        "label": "Heading",
+        "default": "Real Food Projects"
+      },
+      {
+        "type": "textarea",
+        "id": "hero_image_desc",
+        "label": "Description",
+        "default": "Featuring 30 Skills and 47 Recipes from Scratch, this book will change the way you cook."
+      },
+      {
+        "type": "text",
+        "id": "hero_image_link",
+        "label": "Button link"
+      },
+      {
+        "type": "header",
+        "content": "About Us (hero block)"
+      },
+      {
+        "type": "image",
+        "id": "img_about_us_hero.jpg",
+        "label": "Background image"
+      },
+      {
+        "type": "textarea",
+        "id": "about_us_hero_text",
+        "label": "Heading and description text",
+        "default": "<h2><em>The<\/em> family story<\/h2><p>Farming since 1950.<br>We know the ropes of farming craft.<\/p>"
+      },
+
+      {
+        "type": "header",
+        "content": "Hero block with Products"
+      },
+      {
+        "type": "image",
+        "id": "img_hero_products.jpg",
+        "label": "Background image"
+      },
+      {
+        "type": "text",
+        "id": "hero_products_title",
+        "label": "Heading",
+        "default": "Green"
+      },
+      {
+        "type": "text",
+        "id": "hero_products_subtitle",
+        "label": "Subheading",
+        "default": "It’s for health"
+      },
+      {
+        "type": "product",
+        "id": "hero_products_product_1",
+        "label": "Product (left)"
+      },
+      {
+        "type": "product",
+        "id": "hero_products_product_2",
+        "label": "Product (right)"
+      },
+
+      {
+        "type": "header",
+        "content": "Special offer block 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_special_1_enable",
+        "label": "Show special offer block 1"
+      },
+      {
+        "type": "image",
+        "id": "img_homepage_special_1.jpg",
+        "label": "Background image"
+      },      
+      {
+        "type": "image",
+        "id": "img_homepage_special_mb_1.jpg",
+        "label": "Background image for mobile devices"
+      },
+      {
+        "type": "text",
+        "id": "homepage_special_1_heading",
+        "label": "Heading",
+        "default": "Start your day"
+      },
+      {
+        "type": "text",
+        "id": "homepage_special_1_subheading",
+        "label": "Subheading",
+        "default": "with vit-plate"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_special_1_mark_enable",
+        "label": "Show offer point"
+      },
+      {
+        "type": "color",
+        "id": "color_homepage_special_1_mark",
+        "label": "Point color",
+        "default": "#f3b562"
+      },
+      {
+        "type": "color",
+        "id": "color_homepage_special_1_mark_text",
+        "label": "Text color",
+        "default": "#5c4b51"
+      },
+      {
+        "type": "text",
+        "id": "homepage_special_1_mark_title",
+        "label": "Offer point title",
+        "default": "Healthy deal"
+      },
+      {
+        "type": "text",
+        "id": "homepage_special_1_mark_price",
+        "label": "Offer point price",
+        "default": "special pack"
+      },
+      {
+        "type": "text",
+        "id": "homepage_special_1_btn_url",
+        "label": "Button link",
+        "default": "\/collections"
+      },
+      {
+        "type": "header",
+        "content": "Special offer block 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_special_2_enable",
+        "label": "Show special offer block 2"
+      },
+      {
+        "type": "image",
+        "id": "img_homepage_special_2.jpg",
+        "label": "Background image"
+      },
+      {
+        "type": "image",
+        "id": "img_homepage_special_mb_2.jpg",
+        "label": "Background image for mobile devices"
+      },
+      {
+        "type": "text",
+        "id": "homepage_special_2_heading",
+        "label": "Heading",
+        "default": "C - overload"
+      },
+      {
+        "type": "text",
+        "id": "homepage_special_2_subheading",
+        "label": "Subheading"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_special_2_mark_enable",
+        "label": "Show offer point"
+      },
+      {
+        "type": "color",
+        "id": "color_homepage_special_2_mark",
+        "label": "Point color",
+        "default": "#8cbeb2"
+      },
+      {
+        "type": "color",
+        "id": "color_homepage_special_2_mark_text",
+        "label": "Text color",
+        "default": "#fffad5"
+      },
+      {
+        "type": "text",
+        "id": "homepage_special_2_mark_title",
+        "label": "Offer point title",
+        "default": "September deal"
+      },
+      {
+        "type": "text",
+        "id": "homepage_special_2_mark_price",
+        "label": "Offer point price",
+        "default": "$ 0.99"
+      },
+      {
+        "type": "text",
+        "id": "homepage_special_2_btn_url",
+        "label": "Button link",
+        "default": "\/collections"
+      },
+      {
+        "type": "header",
+        "content": "Featured product carousel"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_featured_enable",
+        "label": "Show featured product carousel"
+      },
+      {
+        "type": "collection",
+        "id": "homepage_featured_collection",
+        "label": "Feature Collection"
+      },
+      {
+        "type": "text",
+        "id": "homepage_featured_auplay",
+        "label": "Time for changing slides",
+        "info": "If this parameter is not specified, autoplay will be disabled"
+      },
+      {
+        "type": "header",
+        "content": "Popular collections"
+      },
+      {
+        "type": "text",
+        "id": "popular_collections",
+        "label": "List of popular collections",
+        "default": "fresh,sale,liquid"
+      },
+      {
+        "type": "header",
+        "content": "Information promobox"
+      },
+      {
+        "type": "textarea",
+        "id": "info_promobox_msg",
+        "label": "Message",
+        "default": "<h2 class='heading--page'>Have any questions?</h2><p>call to us <strong>1-800-Foodly</strong></p>",
+        "info": "HTML tags could be used"
+      },
+      {
+        "type": "header",
+        "content": "Special offer"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_special_product_enable",
+        "label": "Show special offer product"
+      },
+      {
+        "type": "product",
+        "id": "homepage_special_product",
+        "label": "Product"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_special_product_img_enable",
+        "label": "Use for offer product own image",
+        "info": "by default is using image from product"
+      },
+      {
+        "type": "image",
+        "id": "img_homepage_special_product.png",
+        "label": "Image for special product"
+      },
+      {
+        "type": "text",
+        "id": "homepage_special_product_heading",
+        "label": "Heading",
+        "default": "Special offer"
+      },
+      {
+        "type": "text",
+        "id": "homepage_special_product_subheading_overlap",
+        "label": "Overlap subheading",
+        "default": "Fall"
+      },
+      {
+        "type": "header",
+        "content": "Special offer type 2"
+      },
+      {
+        "type": "product",
+        "id": "homepage_product_offer_2",
+        "label": "Product"
+      },
+      {
+        "type": "header",
+        "content": "Special offer product with options"
+      },
+      {
+        "type": "product",
+        "id": "homepage_product_offer_3",
+        "label": "Product"
+      },
+      {
+        "type": "header",
+        "content": "About us"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_about_enable",
+        "label": "Show about us section"
+      },
+
+      {
+        "type": "blog",
+        "id": "homepage_about_blog",
+        "label": "Blog for slider"
+      },
+      {
+        "type": "text",
+        "id": "homepage_about_heading",
+        "label": "Heading",
+        "default": "Discover &nbsp;origin"
+      },
+      {
+        "type": "text",
+        "id": "homepage_about_subheading_overlap",
+        "label": "Overlap subheading",
+        "default": "The"
+      },
+      {
+        "type": "header",
+        "content": "Subscribe form"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_subscribe_form_enable",
+        "label": "Show subscribe form",
+        "info": "Subscribe settings are available in appropriate item"
+      },
+      {
+        "type": "text",
+        "id": "homepage_subscribe_form_heading_html",
+        "label": "Heading",
+        "default": "Business<br> Values<br> Attitude"
+      },
+      {
+        "type": "text",
+        "id": "homepage_subscribe_form_subheading",
+        "label": "Subheading",
+        "default": "Join folks at Foodly family to get the latest news and the best offers"
+      },
+      {
+        "type": "text",
+        "id": "homepage_subscribe_block_subheading_overlap",
+        "label": "Overlap subheading",
+        "default": "Family"
+      },
+      {
+        "type": "header",
+        "content": "Season Offer"
+      },
+      {
+        "type": "text",
+        "id": "offer_season_heading",
+        "label": "Heading",
+        "default": "offer of strength"
+      },
+      {
+        "type": "text",
+        "id": "offer_season_overlap_subheading",
+        "label": "Overlap subheading",
+        "default": "Summer"
+      },
+      {
+        "type": "image",
+        "id": "img_offer_season.jpg",
+        "label": "Image for background"
+      },
+      {
+        "type": "product",
+        "id": "offer_season_left_product",
+        "label": "Left product"
+      },
+      {
+        "type": "product",
+        "id": "offer_season_right_product",
+        "label": "Right product"
+      },
+      {
+        "type": "header",
+        "content": "Recipes"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_recipes_enable",
+        "label": "Show recipes"
+      },
+      {
+        "type": "blog",
+        "id": "homepage_recipes_blog",
+        "label": "Choose blog with recipes"
+      },
+      {
+        "type": "text",
+        "id": "homepage_recipes_heading",
+        "label": "Heading",
+        "default": "Picked recipes"
+      },
+      {
+        "type": "text",
+        "id": "homepage_recipes_subheading",
+        "label": "Subheading",
+        "default": "with love from the bottom of Foodly heart"
+      },
+      {
+        "type": "text",
+        "id": "homepage_recipes_subheading_overlap",
+        "label": "Overlap subheading",
+        "default": "Hand"
+      },
+
+      {
+        "type": "header",
+        "content": "Recipes with authors"
+      },
+      {
+        "type": "blog",
+        "id": "homepage_recipes_authors_blog",
+        "label": "Choose blog with recipes",
+        "info": "To use authors photos, upload a image into assets folder with a name of author. Example: 'caroline-stanley.jpg'."
+      },
+      {
+        "type": "text",
+        "id": "homepage_recipes_authors_heading",
+        "label": "Heading",
+        "default": "Picked recipes"
+      },
+      {
+        "type": "text",
+        "id": "homepage_recipes_authors_subheading",
+        "label": "Subheading",
+        "default": "enjoy berries season as we do here at Foodly"
+      },
+      {
+        "type": "text",
+        "id": "homepage_recipes_authors_subheading_overlap",
+        "label": "Overlap subheading",
+        "default": "Hand"
+      },
+
+      {
+        "type": "header",
+        "content": "Featured collections"
+      },
+      {
+        "type": "text",
+        "id": "featured_collections_list",
+        "label": "List of featured collections",
+        "default": "fresh,liquid,dried"
+      },
+      {
+        "type": "header",
+        "content": "Recipe block 1"
+      },
+      {
+        "type": "image",
+        "id": "img_recipe_block_1.jpg",
+        "label": "Image for recipe"
+      },
+      {
+        "type": "text",
+        "id": "recipes_block_1_title",
+        "label": "Block Heading",
+        "default": "Nothing Tastes Better"
+      },
+      {
+        "type": "text",
+        "id": "recipes_block_1_desc",
+        "label": "Block description",
+        "default": "than homemade pie made of raspberries & almond"
+      },
+      {
+        "type": "text",
+        "id": "recipes_block_1_link",
+        "label": "Button link"
+      },
+      {
+        "type": "header",
+        "content": "Recipe block 2"
+      },
+      {
+        "type": "image",
+        "id": "img_recipe_block_2.jpg",
+        "label": "Image for recipe"
+      },
+      {
+        "type": "text",
+        "id": "recipes_block_2_title",
+        "label": "Block Heading",
+        "default": "HOMEMADE SNICKERS?!"
+      },
+      {
+        "type": "text",
+        "id": "recipes_block_2_desc",
+        "label": "Block description",
+        "default": "Why not! Just follow our instructions and enjoy it!"
+      },
+      {
+        "type": "text",
+        "id": "recipes_block_2_link",
+        "label": "Button link"
+      },
+
+      {
+        "type": "header",
+        "content": "Customer feedbacks"
+      },
+      {
+        "type": "blog",
+        "id": "blog_with_feedbacks",
+        "label": "Choose blog with feedbacks",
+        "info": "The article with feedback is chosen randomly"
+      },
+      {
+        "type": "text",
+        "id": "feedback_section_heading",
+        "label": "Heading",
+        "default": "Customer feedback"
+      },
+      {
+        "type": "text",
+        "id": "feedback_section_overlap",
+        "label": "Overlap subheading",
+        "default": "Happy"
+      },
+
+      {
+        "type": "header",
+        "content": "Pack of products (offer)"
+      },
+      {
+        "type": "product",
+        "id": "pack_with_products",
+        "label": "Choose pack with products"
+      },
+      {
+        "type": "text",
+        "id": "pack_offer_heading",
+        "label": "Heading",
+        "default": "Balls"
+      },
+      {
+        "type": "text",
+        "id": "pack_offer_overlap",
+        "label": "Overlap subheading",
+        "default": "Veggie"
+      },
+      {
+        "type": "product",
+        "id": "pack_product_lt",
+        "label": "Left top product"
+      },
+      {
+        "type": "product",
+        "id": "pack_product_rt",
+        "label": "Right top product"
+      },
+      {
+        "type": "product",
+        "id": "pack_product_lb",
+        "label": "Left bottom product"
+      },
+      {
+        "type": "product",
+        "id": "pack_product_rb",
+        "label": "Right bottom product"
+      },
+
+      {
+        "type": "header",
+        "content": "Embedded video"
+      },
+      {
+        "type": "text",
+        "id": "embedded_video_heading",
+        "label": "Heading",
+        "default": "Few words about us"
+      },
+      {
+        "type": "textarea",
+        "id": "embedded_video",
+        "label": "Embedded video"
+      },
+      {
+        "type": "header",
+        "content": "Staff section"
+      },
+      {
+        "type": "blog",
+        "id": "blog_with_staff",
+        "label": "Choose blog with your team",
+        "info": "The example of an article name: 'James Whyte|Passionate about farming'"
+      },
+      {
+        "type": "text",
+        "id": "staff_section_heading",
+        "label": "Heading",
+        "default": "of dedicated farmers"
+      },
+      {
+        "type": "text",
+        "id": "staff_section_overlap",
+        "label": "Overlap subheading",
+        "default": "Team"
+      }
+    ]
+  },
+  {
+    "name": "Product page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Share buttons"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_share_btns_anable",
+        "label": "Show share buttons"
+      },
+      {
+        "type": "text",
+        "id": "product_share_btns_heading",
+        "label": "Heading",
+        "default": "Share"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_share_btns_facebook",
+        "label": "Facebook"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_share_btns_twitter",
+        "label": "Twitter"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_share_btns_pinterest",
+        "label": "Pinterest"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_share_btns_google_p",
+        "label": "Google+"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_share_btns_fancy",
+        "label": "Fancy"
+      },
+      {
+        "type": "header",
+        "content": "Sections"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_description_enable",
+        "label": "Show description of product"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_nutritional_enable",
+        "label": "Show nutritional value of product"
+      },
+      {
+        "type": "text",
+        "id": "product_nutritional_energy",
+        "label": "Nutritional value heading",
+        "default": "Nutritional value",
+        "info": "It uses for splitting product decription on parts"
+      },
+      {
+        "type": "text",
+        "id": "product_nutritional_vitamins",
+        "label": "Vitamins heading",
+        "default": "Vitamins:",
+        "info": "It uses for splitting product decription on parts"
+      },
+      {
+        "type": "text",
+        "id": "product_nutritional_minerals",
+        "label": "Minerals heading",
+        "default": "Minerals:",
+        "info": "It uses for splitting product decription on parts"
+      },
+      {
+        "type": "radio",
+        "id": "product_reviews_recipe",
+        "options": [
+          {
+            "value": "reviews",
+            "label": "Show customer reviews"
+          },
+          {
+            "value": "recipe",
+            "label": "Show special recipe"
+          }
+        ],
+        "default": "recipe"
+      },
+      {
+        "type": "blog",
+        "id": "product_recipe_blog",
+        "label": "Blog with recipe"
+      },
+      {
+        "type": "text",
+        "id": "product_recipe_blog_ingredients",
+        "label": "Heading for ingredients",
+        "default": "Ingredients"
+      },
+      {
+        "type": "text",
+        "id": "product_recipe_blog_directions",
+        "label": "Heading for directions",
+        "default": "Directions"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_similar_enable",
+        "label": "Show show similar products"
+      },
+      {
+        "type": "text",
+        "id": "product_similar_number",
+        "label": "Number of similar products",
+        "default": "4"
+      },
+      {
+        "type": "radio",
+        "id": "product_similar_type",
+        "label": "Type of similar products",
+        "options": [
+          {
+            "value": "tags",
+            "label": "by Tags"
+          },
+          {
+            "value": "collection",
+            "label": "by Collection"
+          }
+        ],
+        "default": "tags"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Special packaging product"
+      },
+      {
+        "type": "text",
+        "id": "cart_special_sku",
+        "label": "SKU number for special package",
+        "default": "0001"
+      }
+    ]
+  },
+  {
+    "name": "Collection page",
+    "settings": [
+      {
+        "type": "text",
+        "id": "collection_grid_product_number",
+        "label": "Number products on page (grid view)",
+        "default": "12",
+        "info": "Max 50 products"
+      },
+      {
+        "type": "text",
+        "id": "collection_list_product_number",
+        "label": "Number products on page (list view)",
+        "default": "10",
+        "info": "Max 50 products"
+      },
+      {
+        "type": "radio",
+        "id": "collection_product_badge",
+        "label": "Sale badge look",
+        "options": [
+          {
+            "value": "badge",
+            "label": "Badge"
+          },
+          {
+            "value": "price",
+            "label": "Compare price"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Add to cart"
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_add_cart_thumb",
+        "label": "Show 'Add to cart' button on collection page with thumbnails",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Sorting"
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_for_sorting_enable",
+        "label": "Show collection for sorting"
+      },
+      {
+        "type": "text",
+        "id": "collection_for_sorting",
+        "label": "Collection for sorting",
+        "default": "State, Any states, Fresh, Frozen, Dried, Liquid",
+        "info": "All collections are seperated by coma and space. The first - name of sorting. The second - name for showing all products by this sorting. The rest - collections for sorting"
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_sort_tags_enable",
+        "label": "Show sort by tags (second option)"
+      },
+      {
+        "type": "text",
+        "id": "collection_sort_tags",
+        "label": "Tags for sorting",
+        "default": "Type, Any types, Fruit, Vegetables, Herbals, Condiments",
+        "info": "All tags are seperated by coma and space. The first tag - name of sorting. The second - name for showing all products by this sorting. The rest - sorting tags"
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_sort_default_enable",
+        "label": "Show default sort"
+      }
+    ]
+  },
+  {
+    "name": "Blogs",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Article"
+      },
+      {
+        "type": "checkbox",
+        "id": "article_share_btns_anable",
+        "label": "Show share buttons"
+      },
+      {
+        "type": "text",
+        "id": "article_share_btns_heading",
+        "label": "Heading",
+        "default": "Share"
+      },
+      {
+        "type": "checkbox",
+        "id": "article_share_btns_facebook",
+        "label": "Facebook"
+      },
+      {
+        "type": "checkbox",
+        "id": "article_share_btns_twitter",
+        "label": "Twitter"
+      },
+      {
+        "type": "checkbox",
+        "id": "article_share_btns_pinterest",
+        "label": "Pinterest"
+      },
+      {
+        "type": "checkbox",
+        "id": "article_share_btns_google_p",
+        "label": "Google+"
+      },
+      {
+        "type": "checkbox",
+        "id": "article_share_btns_fancy",
+        "label": "Fancy"
+      },
+      {
+        "type": "image",
+        "id": "img_comments_default_avatar.png",
+        "label": "Avatar for comments"
+      },
+      {
+        "type": "header",
+        "content": "General settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "article_image_license_enable",
+        "label": "Show license mark for images with author URL",
+        "info": "How to add URL you can find in the [documentation]()"
+      },
+      {
+        "type": "blog",
+        "id": "blog_recipes",
+        "label": "Blog with recipes",
+        "info": "Used for special layout for articles with recipe"
+      },
+      {
+        "type": "header",
+        "content": "Blog sorting"
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_sorting_enable",
+        "label": "Enable Blog sorting",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "blog_sorting_api_key",
+        "label": "Api key",
+        "info": "Blog sorting requires Shopify API credentials. [How to get Api key](https:\/\/help.shopify.com\/api\/guides\/api-credentials#get-credentials-through-the-shopify-admin)" 
+      },
+      {
+        "type": "text",
+        "id": "blog_sorting_api_password",
+        "label": "Api password",
+        "info": "Blog sorting requires Shopify API credentials. [How to get Api password](https:\/\/help.shopify.com\/api\/guides\/api-credentials#get-credentials-through-the-shopify-admin)" 
+      },
+      {
+        "type": "text",
+        "id": "blog_article_per_page",
+        "label": "Amount of articles per the page with pagination",
+        "default": "5"
+      },
+      {
+        "type": "header",
+        "content": "Sidebar"
+      },
+      {
+        "type": "checkbox",
+        "id": "sidebar_recent_articles_enable",
+        "label": "Show recent articles",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sidebar_tags_enable",
+        "label": "Show blog tags",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sidebar_facebook_enable",
+        "label": "Show Facebook Social Plugin",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Recipes for picking"
+      },
+      {
+        "type": "blog",
+        "id": "blog_pick_products",
+        "label": "Choose blog with recipes"
+      },
+      {
+        "type": "text",
+        "id": "pick_products_heading",
+        "label": "Heading",
+        "default": "best dinner courses"
+      },
+      {
+        "type": "text",
+        "id": "pick_products_subheading_overlap",
+        "label": "Overlap subheading",
+        "default": "The"
+      },
+      {
+        "type": "text",
+        "id": "pick_products_subheading",
+        "label": "Subheading",
+        "default": "pick direction you’d like to go further and recieve the list of product options"
+      }
+    ]
+  },
+  {
+    "name": "Contact page",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "To use this template, please, [choose 'page.contact' template](https:\/\/docs.shopify.com\/manual\/configuration\/store-customization\/communicating-with-customers\/provide-contact-points\/add-a-contact-form#set-page-to-use-template) for your contact page. "
+      },
+      {
+        "type": "checkbox",
+        "id": "contact_banner_enable",
+        "label": "Show banner image"
+      },
+      {
+        "type": "image",
+        "id": "img_contact_banner.jpg",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "contact_heading_em",
+        "label": "Emphasize heading",
+        "default": "Our"
+      },
+      {
+        "type": "text",
+        "id": "contact_heading",
+        "label": "Heading",
+        "default": "doors are always open"
+      },
+      {
+        "type": "header",
+        "content": "Short contact information"
+      },
+      {
+        "type": "checkbox",
+        "id": "contact_short_hours_enable",
+        "label": "Show hours"
+      },
+      {
+        "type": "text",
+        "id": "contact_short_hours",
+        "label": "Hours",
+        "default": "09.00-17.00 (PST) MON - FRI"
+      },
+      {
+        "type": "checkbox",
+        "id": "contact_short_email_enable",
+        "label": "Show email"
+      },
+      {
+        "type": "text",
+        "id": "contact_short_email",
+        "label": "Email",
+        "default": "contact@foodly.com"
+      },
+      {
+        "type": "checkbox",
+        "id": "contact_short_phone_enable",
+        "label": "Show phone"
+      },
+      {
+        "type": "text",
+        "id": "contact_short_phone",
+        "label": "Phone",
+        "default": "912-823-5448"
+      },
+      {
+        "type": "header",
+        "content": "Detailed contact information"
+      },
+      {
+        "type": "text",
+        "id": "contact_google_api",
+        "label": "Google API key",
+        "info": "[Get API key](https:\/\/console.developers.google.com\/apis)"
+      },
+      {
+        "type": "checkbox",
+        "id": "contact_block1_enable",
+        "label": "Show farm facilities"
+      },
+      {
+        "type": "textarea",
+        "id": "contact_block1",
+        "label": "Farm facilities",
+        "info": "HTML tags could be used"
+      },
+      {
+        "type": "text",
+        "id": "contact_block1_lat",
+        "label": "Latitude"
+      },
+      {
+        "type": "text",
+        "id": "contact_block1_lng",
+        "label": "Longitude",
+        "info": "[GPS coordinates of an address](https:\/\/gps-coordinates.net)"
+      },      
+      {
+        "type": "text",
+        "id": "contact_block1_zoom",
+        "label": "Map zoom",
+        "default": "16"
+      },
+      {
+        "type": "checkbox",
+        "id": "contact_block2_enable",
+        "label": "Show farm facilities"
+      },
+      {
+        "type": "textarea",
+        "id": "contact_block2",
+        "label": "Grocery store",
+        "info": "HTML tags could be used"
+      },
+      {
+        "type": "text",
+        "id": "contact_block2_lat",
+        "label": "Latitude"
+      },
+      {
+        "type": "text",
+        "id": "contact_block2_lng",
+        "label": "Longitude",
+        "info": "[GPS coordinates of an address](https:\/\/gps-coordinates.net)"
+      },      
+      {
+        "type": "text",
+        "id": "contact_block2_zoom",
+        "label": "Map zoom",
+        "default": "16"
+      },
+      {
+        "type": "header",
+        "content": "Contact form"
+      },
+      {
+        "type": "checkbox",
+        "id": "contact_form_enable",
+        "label": "Show contact form"
+      }
+    ]
+  },
+  {
+    "name": "404 page and password page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "404 page"
+      },
+      {
+        "type": "checkbox",
+        "id": "404_link_list_enable",
+        "label": "Show fallback link list"
+      },
+      {
+        "type": "link_list",
+        "id": "404_link_list",
+        "label": "Link list"
+      },
+      {
+        "type": "header",
+        "content": "Password page"
+      },
+      {
+        "type": "image",
+        "id": "img_password_page_bg.jpg",
+        "label": "Background image"
+      },
+      {
+        "type": "checkbox",
+        "id": "password_page_use_logo",
+        "label": "Show logo"
+      },
+      {
+        "type": "image",
+        "id": "img_password_page_logo.png",
+        "label": "Logo image",
+        "info": "Maximum logo dimensions are 128px wide by 96px high. The uploaded file will be resized to fit within those constraints."
+      },
+      {
+        "type": "checkbox",
+        "id": "password_page_share_enable",
+        "label": "Show social share buttons"
+      },
+      {
+        "type": "text",
+        "id": "password_page_share_heading",
+        "label": "Heading",
+        "default": "Spread the word"
+      },
+      {
+        "type": "checkbox",
+        "id": "password_page_share_facebook",
+        "label": "Facebook"
+      },
+      {
+        "type": "checkbox",
+        "id": "password_page_share_twitter",
+        "label": "Twitter"
+      },
+      {
+        "type": "checkbox",
+        "id": "password_page_share_google",
+        "label": "Google+"
+      }
+    ]
+  },
+  {
+    "name": "Wishlist",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "wishlist_enable",
+        "label": "Wishlist enable"
+      }
+    ]
+  },
+  {
+    "name": "Search",
+    "settings": [
+      {
+        "type": "radio",
+        "id": "search_type",
+        "label": "Search results",
+        "options": [
+          {
+            "value": "all",
+            "label": "Show all (articles, pages and products)"
+          },
+          {
+            "value": "products",
+            "label": "Show only products"
+          }
+        ],
+        "default": "products"
+      },
+      {
+        "type": "text",
+        "id": "search_fallback_link",
+        "label": "URL for fallback button",
+        "default": "\/collections",
+        "info": "Page without result"
+      },
+      {
+        "type": "checkbox",
+        "id": "search_ajax_enable",
+        "label": "Ajax search enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "search_result_amount",
+        "label": "Amount of search results per the page with pagination",
+        "default": "12"
+      }
+    ]
+  },
+  {
+    "name": "Landing page",
+    "settings": [
+      {
+        "type": "image",
+        "id": "img_landing_hero.jpg",
+        "label": "Hero background"
+      },
+      {
+        "type": "text",
+        "id": "landing_heading",
+        "label": "Page heading",
+        "default": "‘Tis the Season to be saving!"
+      },
+      {
+        "type": "text",
+        "id": "landing_subheading",
+        "label": "Page subheading",
+        "default": "Save 25% on a bundle purchase."
+      },
+      {
+        "type": "checkbox",
+        "id": "landing_countdown",
+        "label": "Show countdown"
+      },
+      {
+        "type": "text",
+        "id": "landing_countdown_date",
+        "label": "Countdown date",
+        "default": "2016.12.31",
+        "info": "Date must be in format YYYY.MM.DD"
+      },
+      {
+        "type": "checkbox",
+        "id": "landing_product_section_enable",
+        "label": "Show product section"
+      },
+      {
+        "type": "text",
+        "id": "landing_product_section_heading",
+        "label": "Heading",
+        "default": "Season bundle"
+      },
+      {
+        "type": "text",
+        "id": "landing_product_section_overlap",
+        "label": "Back phrase",
+        "default":  "Choose"
+      },
+      {
+        "type": "collection",
+        "id": "landing_product_collection",
+        "label": "Collection with special products",
+        "info": "from 1 to 3 products in collection"
+      },
+      {
+        "type": "checkbox",
+        "id": "landing_benefit_section_enable",
+        "label": "Show benefit section"
+      },
+      {
+        "type": "text",
+        "id": "landing_benefit_section_heading",
+        "label": "Heading",
+        "default": "The benefits you gain"
+      },
+      {
+        "type": "text",
+        "id": "landing_benefit_section_overlap",
+        "label": "Back phrase",
+        "default":  "Know"
+      },
+      {
+        "type": "blog",
+        "id": "landing_benefit_blog",
+        "label": "Blog with product packs benefits"
+      },
+      {
+        "type": "checkbox",
+        "id": "landing_reviews_section_enable",
+        "label": "Show reviews section"
+      },
+      {
+        "type": "text",
+        "id": "landing_reviews_section_heading",
+        "label": "Heading",
+        "default": "on chef’s opinion"
+      },
+      {
+        "type": "text",
+        "id": "landing_reviews_section_overlap",
+        "label": "Back phrase",
+        "default": "Rely"
+      },
+      {
+        "type": "blog",
+        "id": "landing_reviews_blog",
+        "label": "Blog with reviews"
+      },
+      {
+        "type": "checkbox",
+        "id": "landing_cta_section_enable",
+        "label": "Show CTA section with buttons"
+      },
+      {
+        "type": "text",
+        "id": "landing_cta_section_heading",
+        "label": "Heading",
+        "default": "Hurry! Sale endes soon"
+      },
+      {
+        "type": "text",
+        "id": "landing_cta_section_subheading",
+        "label": "Subheading",
+        "default": "Limited offer of three popular bundles"
+      }
+    ]
+  },
+  {
+    "name": "Subscribe form and gift card",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Subscribe form"
+      },      
+      {        
+        "type": "radio",
+        "id": "subscribe_form_variant",
+        "label": "Choose subscribe form",
+        "options": [
+          {
+            "value": "mailchimp",
+            "label": "Use MailChimp subscribe form"
+          },
+          {
+            "value": "standart",
+            "label": "Use standart(shopify) subscribe form"
+          }
+        ],
+        "default": "mailchimp"
+      },
+      {
+        "type": "text",
+        "id": "subscribe_form_url",
+        "label": "MailChimp form action URL",
+        "default": "\/\/designzway.us10.list-manage.com\/subscribe\/post?u=579323687b7e07d00f80f3245&amp;id=a8c0b445bb",
+        "info": "[How to get MailChimp action URL](http:\/\/atech.designzway.com\/documentation\/#HowtoworkwithMailChimpSubscribeForms?)"
+      },
+      {
+        "type": "header",
+        "content": "Gift card"
+      },
+      {
+        "type": "text",
+        "id": "gift_card_email",
+        "label": "Email for button on gift card page",
+        "default": "mail@mail.com"
+      }
+    ]
+  },
+  {
+    "name": "Notification button",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "info_btn_enable",
+        "label": "Show notification button"
+      },
+      {
+        "type": "text",
+        "id": "info_btn_heading",
+        "label": "Heading",
+        "default": "Don’t miss a chance"
+      },
+      {
+        "type": "textarea",
+        "id": "info_btn_news",
+        "label": "Notification text",
+        "default": "<div class=\"coupon-code\">20fp20fp<\/div>  use the code above to get 20% discount for first purchase at Foodly store",
+        "info": "HTML is allowed"
+      },
+      {
+        "type": "text",
+        "id": "info_btn_text_link",
+        "label": "Link text",
+        "default": "Create your Account"
+      },
+      {
+        "type": "text",
+        "id": "info_btn_url_link",
+        "label": "Link url",
+        "default": "http:\/\/foodly-store.myshopify.com\/account\/register"
+      },
+      {
+        "type": "checkbox",
+        "id": "info_btn_cookie_enable",
+        "label": "Enable using of cookies",
+        "default": true,
+        "info": "If true, after opening of notification button, script makes a record in the cookie and the button won't show to the customer after page refresh."
+      },
+      {
+        "type": "text",
+        "id": "info_btn_cookie_unique",
+        "label": "Unique identifier",
+        "default": "01",
+        "info": "Unique identifier helps to show new messages when option \"using of cookies\" is enabled. Change it when you want to show a new message."
+      },
+      {
+        "type": "checkbox",
+        "id": "info_btn_pulse_enable",
+        "label": "Enable pulse animation",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "info_btn_delay",
+        "label": "Delay of showing",
+        "default": "5000",
+        "info": "Time in milliseconds"
+      }
+    ]
+  },
+  {
+    "name": "Shipping Rates Calculator",
+    "settings": [
+      {
+        "type": "select",
+        "id": "shipping_calculator",
+        "label": "Show the shipping calculator",
+        "options": [
+          {
+            "value": "Disabled",
+            "label": "No"
+          },
+          {
+            "value": "Enabled",
+            "label": "Yes"
+          }
+        ],
+        "default": "Enabled"
+      },
+      {
+        "type": "text",
+        "id": "shipping_calculator_heading",
+        "label": "Heading text",
+        "default": "Delivery estimation"
+      },
+      {
+        "type": "text",
+        "id": "shipping_calculator_default_country",
+        "label": "Default country selection",
+        "default": "United States"
+      },
+      {
+        "type": "paragraph",
+        "content": "If your customer is logged-in, the country in his default shipping address will be selected. If you are not sure about the  spelling to use here, refer to the first checkout page."
+      },
+      {
+        "type": "text",
+        "id": "shipping_calculator_submit_button_label",
+        "label": "Submit button label",
+        "default": "Calculate delivery"
+      },
+      {
+        "type": "text",
+        "id": "shipping_calculator_submit_button_label_disabled",
+        "label": "Submit button label when calculating",
+        "default": "Calculating..."
+      }
+    ]
+  },
+  {
+    "name": "Currency",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_multiple_currencies",
+        "label": "Enable currency conversion",
+        "default": true,
+        "info": "Even though prices are displayed in different currencies, orders will still be processed in your store's currency."
+      },
+      {
+        "type": "select",
+        "id": "currency_format",
+        "label": "Format",
+        "options": [
+          {
+            "value": "money_format",
+            "label": "Without currency ($10.00)"
+          },
+          {
+            "value": "money_with_currency_format",
+            "label": "With currency ($10.00 CAD)"
+          }
+        ],
+        "default": "money_with_currency_format"
+      },
+      {
+        "type": "text",
+        "id": "supported_currencies",
+        "label": "Supported currencies",
+        "default": "INR GBP CAD USD AUD EUR JPY",
+        "info": "Use the country's ISO [currency code](http://www.xe.com/iso4217.php). Separate your currency codes with a space."
+      },
+      {
+        "type": "text",
+        "id": "default_currency",
+        "label": "Default currency",
+        "default": "USD"
+      }
+    ]
+  },
+  {
+    "name": "Dividers",
+    "settings": [
+      {
+        "type": "text",
+        "id": "divider-icon",
+        "label": "Icon for divider",
+        "default": "fa-map-marker",
+        "info": "Use class name from [FontAwesome](http:\/\/fontawesome.io\/icons\/)"
+      }
+    ]
+  }
+
+]
