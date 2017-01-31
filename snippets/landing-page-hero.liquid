@@ -1,0 +1,58 @@
+{% include 'header' %}
+<div class="landing-page">
+  {% comment %}
+  Landing page heading
+  {% endcomment %}
+  <div class="hero-img {% if settings.contact_banner_enable %}hero-img--landing{% endif %}">
+    <div class="hero-img__content">
+      {% if settings.landing_heading != blank %}
+        <h1 class="heading--strong">{{ settings.landing_heading | upcase }}</h1>
+      {% endif %}
+  
+      {% if settings.landing_subheading != blank %}
+        <h2 class="subheading--page"><em>{{ settings.landing_subheading }}</em></h2>
+      {% endif %}
+  
+      <div class="countdown-clock-wrapper">
+        <div class="countdown-clock">
+          
+        </div> <!-- End countdown-clock -->
+      </div>
+    </div> <!-- End hero-img__content -->
+  </div> <!-- End hero-img -->
+</div>
+
+{{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
+{{ 'flipclock.js' | asset_url | script_tag }}
+
+<script>
+  FlipClock.Lang.Custom = { 
+    days:'{{ "landing_page.countdown.countdown_days" | t }}', 
+    hours:'{{ "landing_page.countdown.countdown_hours" | t }}', 
+    minutes:'{{ "landing_page.countdown.countdown_minutes" | t }}', 
+    seconds:'{{ "landing_page.countdown.countdown_seconds" | t }}' 
+  };
+
+  var currentDate = new Date();
+  var strDate = '{{ settings.landing_countdown_date }}';
+  var dateParts = strDate.split(".");
+
+  var futureDate = new Date(dateParts[0], (dateParts[1] - 1), dateParts[1]);
+  var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
+
+  if (diff <= 0) {
+    diff = 0;
+  };
+
+  var clock = $('.countdown-clock').FlipClock(diff, {
+    clockFace: 'DailyCounter',
+    countdown: true,
+    callbacks: {
+        start: function() {
+          if ( $('.countdown-clock').outerHeight() > 90 ) {
+            $('.countdown-clock').addClass('countdown-clock--big')
+          }
+        }
+      }
+  });
+</script>

@@ -1,0 +1,64 @@
+{% assign header_type = "header--clear" %}
+{% include 'header' with header_type %}
+
+{% if settings.homepage_slideshow_enable %}
+  <section>
+    {% comment %}
+    Homepage slideshow 
+    For settings go to Admin -> Theme -> Customize Theme -> Home page Slideshow
+    {% endcomment %}
+    <!-- Flexslider -->
+    <div class="flexslider flexslider-thumb flexslider-thumb--homepage">
+      <ul class="slides">
+        {% for slide_num in (1..3) %}
+
+          {% comment %}
+          Capture variables for every slide
+          {% endcomment %}
+          {% capture slide_img %}img_homepage_slide_{{ slide_num }}.jpg{% endcapture %}
+          {% capture slide_thumb_img %}img_thumb_homepage_slide_{{ slide_num }}.jpg{% endcapture %}
+
+          {% capture slide_link %}homepage_slide_{{ slide_num }}_link{% endcapture %}
+          {% capture slide_text_enable %}homepage_slide_{{ slide_num }}_text_enable{% endcapture %}
+          {% capture slide_heading %}homepage_slide_{{ slide_num }}_heading{% endcapture %}
+          {% capture slide_subheading %}homepage_slide_{{ slide_num }}_subheading{% endcapture %}
+          {% capture slide_price %}homepage_slide_{{ slide_num }}_price{% endcapture %}
+          {% capture slide_price_desc %}homepage_slide_{{ slide_num }}_price_desc{% endcapture %}
+
+          {% capture slide_heading_add %}homepage_slide_{{ slide_num }}_heading_add{% endcapture %}
+          {% capture slide_subheading_add %}homepage_slide_{{ slide_num }}_subheading_add{% endcapture %}
+
+
+          <li class="slide slide--{{ slide_num }} js-img-holder-cover" data-thumb="{{ slide_thumb_img | asset_url }}">
+
+              <img class="slide__image" src="{{ slide_img | asset_url }}" alt="{{ settings[slide_heading] }}" />
+              
+              {% if settings[slide_text_enable] %}
+                <div class="slide__info-wrapper">
+                  <div class="slide__info-part">
+                    <h1 class="heading--page slide__heading"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}">{{ settings[slide_heading] | upcase }}</a></h1>
+                    <h2 class="subheading--page slide__subheading"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}"><em>{{ settings[slide_subheading] }}</em></a></h2>
+                  </div>
+                  <div class="slide__price-point">
+                    <a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}">
+                      <span class="slide__price"><span class="money">{{ settings[slide_price] }}</span></span>
+                      <span class="slide__desc"><em>{{ settings[slide_price_desc] }}</em></span>
+                    </a>
+                  </div>
+                  {% if settings[slide_heading_add] != blank and settings[slide_subheading_add] != blank %}
+                  <div class="slide__info-part">
+                    <h1 class="heading--page slide__heading"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading_add] }}">{{ settings[slide_heading_add] | upcase }}</a></h1>
+                    <h2 class="subheading--page slide__subheading"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading_add] }}"><em>{{ settings[slide_subheading_add] }}</em></a></h2>
+                  </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+            
+          </li>
+          
+        {% endfor %}
+      </ul>
+    </div>
+    <!-- End flexslider -->
+  </section>
+{% endif %}

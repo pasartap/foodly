@@ -1,0 +1,69 @@
+{% comment %}
+Snippet for social media buttons
+{% endcomment %}
+{% if template contains 'article' or template contains 'blog' %}
+  {% capture permalinkURL %}{{ shop.url }}{{ article.url }}{% endcapture %}
+  {% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
+{% elsif template contains 'product' %}
+  {% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
+  {% capture shareTitle %}{{ product.title | url_param_escape }}{% endcapture %}
+{% elsif template == 'password' %}
+  {% capture permalinkURL %}{{ shop.url }}{% endcapture %}
+  {% capture shareTitle %}{% unless shop.description == blank %}{{ shop.description | url_param_escape }}{% else %}{{ shop.name | url_param_escape }}{% endunless %}{% endcapture %}
+{% endif %}
+
+<div data-permalink="{{ permalinkURL }}">
+
+  <span class="heading--add-small social-sharing__title">{{ 'layout.general.share_title' | t }}</span>
+
+  {% if settings.product_share_btns_facebook or settings.article_share_btns_facebook or settings.password_page_share_facebook %}
+    <a class="social-sharing__item" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" target="_blank" >
+      <i class="fa fa-facebook"></i>
+      <span class="fallback-text">Facebook</span>
+    </a>
+  {% endif %}
+
+  {% if settings.product_share_btns_twitter or settings.article_share_btns_twitter or settings.password_page_share_twitter %}
+    <a class="social-sharing__item" href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}" target="_blank" >
+      <i class="fa fa-twitter"></i>
+      <span class="fallback-text">Twitter</span>
+    </a>
+  {% endif %}
+
+  {% if product.featured_image or article.image %}
+
+    {% if settings.product_share_btns_pinterest or settings.article_share_btns_pinterest %}
+      <a class="social-sharing__item" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media=http:{% if template contains 'product' %}{{ product | img_url: '1024x1024' }}{% else %}{{ article | img_url: '1024x1024' }}{% endif %}&amp;description={{ shareTitle }}" target="_blank" >
+        <i class="fa fa-pinterest-p"></i>
+        <span class="fallback-text">Pinterest</span>
+      </a>
+    {% endif %}
+
+  {% endif %}
+
+  {% if settings.product_share_btns_google_p or settings.article_share_btns_google_p or settings.password_page_share_google %}
+    <a class="social-sharing__item" target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}" class="share-google">
+      <!-- Cannot get Google+ share count with JS yet -->
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="20" height="12" viewBox="0 0 20 12">
+        <path d="M20.000,6.857 L18.182,6.857 L18.182,8.571 L16.364,8.571 L16.364,6.857 L14.545,6.857 L14.545,5.143 L16.364,5.143 L16.364,3.429 L18.182,3.429 L18.182,5.143 L20.000,5.143 L20.000,6.857 ZM6.364,12.000 C2.849,12.000 0.000,9.314 0.000,6.000 C0.000,2.686 2.849,0.000 6.364,0.000 C7.998,0.000 9.483,0.586 10.610,1.540 L8.794,3.080 C8.125,2.583 7.282,2.286 6.364,2.286 C4.188,2.286 2.424,3.948 2.424,6.000 C2.424,8.051 4.188,9.714 6.364,9.714 C8.116,9.714 9.600,8.634 10.111,7.143 L6.364,7.143 L6.364,5.143 L10.193,5.143 L12.655,5.143 C12.698,5.424 12.727,5.708 12.727,6.000 C12.727,9.314 9.878,12.000 6.364,12.000 Z" class="cls-1"/>
+      </svg>
+      
+      <span class="fallback-text">Google+</span>
+    </a>
+  {% endif %}
+
+  {% if product.featured_image or article.image %}
+    
+    {% if settings.product_share_btns_fancy or settings.article_share_btns_fancy %}
+      <a class="social-sharing__item" href="//fancy.com/fancyit?ItemURL={{ permalinkURL }}&amp;Title={{ shareTitle }}&amp;Category=Other&amp;ImageURL={% if template contains 'product' %}{{ product | img_url: '1024x1024' }}{% else %}{{ article | img_url: '1024x1024' }}{% endif %}" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="9" height="16" viewBox="0 0 9 16">
+          <path d="M5.727,11.556 L5.727,16.000 L3.273,16.000 L3.273,11.556 L-0.000,11.556 L-0.000,4.889 C-0.000,2.189 2.015,0.000 4.500,0.000 C6.985,0.000 9.000,2.189 9.000,4.889 L9.000,11.556 L5.727,11.556 Z" class="cls-1"/>
+        </svg>
+        <span class="fallback-text">Fancy</span>
+      </a>
+    {% endif %}
+
+  {% endif %}
+
+</div>
+

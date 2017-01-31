@@ -1,0 +1,54 @@
+<ul>
+  {% if paginate.previous %}
+    <li class="pagination__item pagination__item--prev">
+      <a class="pagination__link" href="{{ paginate.previous.url }}" title="{{ paginate.previous.title }}">
+        <span class="icon icon--arrow-left"></span>
+      </a>
+    </li>
+  {% else %}
+    <li class="pagination__item pagination__item--prev disabled">
+      <a class="pagination__link" href="javascript:void(0)">
+        <span class="icon icon--arrow-left"></span>
+      </a>
+    </li>
+  {% endif %}
+
+  <li class="pagination__item--parts">
+    <ul class="pagination__parts">
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+          <li class="pagination__item pagination__item--center">
+            <a class="pagination__link" href="{{ part.url }}" title="{{ part.title }}">{{ part.title }}</a>
+          </li>
+        {% else %}
+          {% if part.title == '&hellip;' %}
+            <li class="pagination__item pagination__item--ellip">
+              <a class="pagination__link" href="javascript:void(0)">{{ part.title }}</a>
+            </li>
+          {% else %}
+            {% assign part_title = part.title | plus: 0 %}
+            {% assign pages_number = paginate.pages | minus: 1 %}
+
+            <li class="pagination__item active {% if part_title > 2 and part_title < pages_number %}pagination__item--ellip-add{% endif %}">
+              <a class="pagination__link" href="javascript:void(0)" title="{{ part.title }}">{{ part.title }}</a>
+            </li>
+          {% endif %}
+        {% endif %}
+      {% endfor %}   
+    </ul>
+  </li>  
+
+  {% if paginate.next %}
+    <li class="pagination__item pagination__item--next">
+      <a class="pagination__link" href="{{ paginate.next.url }}">
+        <span class="icon icon--arrow-right"></span>
+      </a>
+    </li>
+  {% else %}
+    <li class="pagination__item pagination__item--next disabled">
+      <a class="pagination__link" href="javascript:void(0)">
+        <span class="icon icon--arrow-right"></span>
+      </a>
+    </li>
+  {% endif %}    
+</ul>

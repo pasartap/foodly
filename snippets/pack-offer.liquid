@@ -1,0 +1,142 @@
+<section class="section section--pack">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:900" rel="stylesheet">
+  <div class="wrapper clearfix">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        {% comment %}
+        Snippet for recipes from blog
+        For settings go to Admin -> Theme -> Customize Theme -> Homepage
+        {% endcomment %}
+        
+        {% if settings.pack_offer_heading != blank %}
+          <h3 class="section-heading heading--page">{{ settings.pack_offer_heading | upcase }}</h3>
+        {% endif %}
+
+        <div class="pack-container product--lg">
+          <div class="pack__image">
+          
+            {% assign pack_products = all_products[settings.pack_with_products] %}
+          
+            {% if pack_products.featured_image.size > 0 %}
+              <img src="{{ pack_products.featured_image | img_url: 'grande'}}" alt="{{ pack_products.title }}">
+            {% endif %} 
+
+            {% if settings.pack_product_lt != blank %}
+              {% assign product_lt = all_products[settings.pack_product_lt] %}
+              <div class="pack-product pack-product-lt">
+                <h5 class="pack-product__title">
+                  <a href="{{ product_lt.url }}" title="{{ product_lt.title }}">
+                    {{ product_lt.title }}
+                  </a>
+                </h5>
+                <span class="pack-product__spec">
+                  {{ product_lt.type | link_to_type }}
+                
+                  {% if product_lt.available %}
+                    &nbsp;|&nbsp;
+                    {{ 'products.general.in_stock' | t }}
+                  {% else %}
+                    &nbsp;|&nbsp;
+                    {{ 'products.general.out_stock' | t }}
+                  {% endif %}
+                 
+                </span>
+              </div>
+            {% endif %} 
+
+            {% if settings.pack_product_lb != blank %}
+              {% assign product_lb = all_products[settings.pack_product_lb] %}
+              <div class="pack-product pack-product-lb">
+                <h5 class="pack-product__title">
+                  <a href="{{ product_lb.url }}" title="{{ product_lb.title }}">
+                    {{ product_lb.title }}
+                  </a>
+                </h5>
+                <span class="pack-product__spec">
+                  {{ product_lb.type | link_to_type }}
+                
+                  {% if product_lb.available %}
+                    &nbsp;|&nbsp;
+                    {{ 'products.general.in_stock' | t }}
+                  {% else %}
+                    &nbsp;|&nbsp;
+                    {{ 'products.general.out_stock' | t }}
+                  {% endif %}
+                 
+                </span>
+              </div>
+            {% endif %}
+
+            {% if settings.pack_product_rt != blank %}
+              {% assign product_rt = all_products[settings.pack_product_rt] %}
+              <div class="pack-product pack-product-rt">
+                <h5 class="pack-product__title">
+                  <a href="{{ product_rt.url }}" title="{{ product_rt.title }}">
+                    {{ product_rt.title }}
+                  </a>
+                </h5>
+                <span class="pack-product__spec">
+                  {{ product_rt.type | link_to_type }}
+                
+                  {% if product_rt.available %}
+                    &nbsp;|&nbsp;
+                    {{ 'products.general.in_stock' | t }}
+                  {% else %}
+                    &nbsp;|&nbsp;
+                    {{ 'products.general.out_stock' | t }}
+                  {% endif %}
+                 
+                </span>
+              </div>
+            {% endif %}             
+
+            {% if settings.pack_product_rb != blank %}
+              {% assign product_rb = all_products[settings.pack_product_rb] %}
+              <div class="pack-product pack-product-rb">
+                <h5 class="pack-product__title">
+                  <a href="{{ product_rb.url }}" title="{{ product_rb.title }}">
+                    {{ product_rb.title }}
+                  </a>
+                </h5>
+                <span class="pack-product__spec">
+                  {{ product_rb.type | link_to_type }}
+                
+                  {% if product_rb.available %}
+                    &nbsp;|&nbsp;
+                    {{ 'products.general.in_stock' | t }}
+                  {% else %}
+                    &nbsp;|&nbsp;
+                    {{ 'products.general.out_stock' | t }}
+                  {% endif %}
+                 
+                </span>
+              </div>
+            {% endif %}
+
+          </div>
+          
+          <span class="pack__price"><span class="money">{{ pack_products.price | money }}</span></span>
+          
+          <div class="pack__desc">
+            {{ pack_products.description }}
+          </div>
+          <div class="form-wrapper">
+            <form class="form form--default" action="/cart/add" method="post">
+              <div class="form__row">
+                <div class="quantity-field">
+                  <span class="icon icon--arrow-right js-up-quantity"></span>
+                  <input class="form__field" type="number" id="quantity" name="quantity" value="1" min="1" >
+                  <span class="icon icon--arrow-left js-down-quantity"></span>
+                </div>
+                <span class="js-price-and-value">x <span class="money">{{ pack_products.price | money }}</span> = <span class="js-total-price money">{{ pack_products.price | money }}</span></span>
+              </div>
+              <div class="form__row">
+                <button {% unless pack_products.available %}disabled{% endunless %} class="btn btn--default btn--full btn--submit {% unless pack_products.available %}btn--disabled{% endunless %} js-add-to-card" type="submit" >{% unless pack_products.available %}{{ 'products.general.out_stock' | t }}{% else %} {{ 'layout.general.add_to_cart_button' | t }}{% endunless %}</button>
+              </div>
+            </form>
+          </div> <!-- End form-wrapper -->
+        </div>
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>

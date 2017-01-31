@@ -1,0 +1,36 @@
+<section class="offer-season">
+  <h3 class="section-heading section-heading--season heading--page">offer of strength</h3>
+  <div class="offer-season__content">
+    <div class="offer-season__product-one">
+      {% if settings.offer_season_left_product %}
+        {% assign left_product = all_products[settings.offer_season_left_product] %}
+        <a href="{{ left_product.url  }}" title="{{ left_product.title }}">
+          <span class="img-holder">
+            <img src="{{ left_product.featured_image.src | img_url: "large" }}" alt="{{ left_product.title }}">
+          </span>          
+          <span class="offer-season__product-title">{{ left_product.title }}</span>
+          <span class="arrow arrow--next">
+            <span class="icon icon--arrow-right"></span>
+          </span>
+        </a>
+      {% endif %}
+    </div>
+    <div class="offer-season__img">
+      
+    </div>
+    <div class="offer-season__product-two">
+      {% if settings.offer_season_right_product %}
+        {% assign right_product = all_products[settings.offer_season_right_product] %}
+        <a href="{{ right_product.url  }}" title="{{ right_product.title }}">
+          <span class="img-holder">
+            <img src="{{ right_product.featured_image.src | img_url: "large" }}" alt="{{ right_product.title }}">
+          </span>          
+          <span class="offer-season__product-title">{{ right_product.title }}</span>
+          <span class="arrow arrow--next">
+            <span class="icon icon--arrow-right"></span>
+          </span>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>

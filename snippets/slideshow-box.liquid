@@ -1,0 +1,80 @@
+<div class="swiper-container box-slider">
+  <div class="swiper-wrapper">
+    {% for slide_num in (1..3) %}
+
+      {% comment %}
+      Capture variables for every slide
+      {% endcomment %}
+      {% capture slide_img %}img_box_slide_{{ slide_num }}.jpg{% endcapture %}
+
+      {% capture slide_link %}box_slide_{{ slide_num }}_link{% endcapture %}
+      {% capture slide_text_enable %}box_slide_{{ slide_num }}_text_enable{% endcapture %}
+      {% capture slide_heading %}box_slide_{{ slide_num }}_heading{% endcapture %}
+      {% capture slide_subheading %}box_slide_{{ slide_num }}_subheading{% endcapture %}
+      {% capture slide_price %}box_slide_{{ slide_num }}_price{% endcapture %}
+      {% capture slide_price_desc %}box_slide_{{ slide_num }}_price_desc{% endcapture %}
+
+      {% capture slide_heading_add %}box_slide_{{ slide_num }}_heading_add{% endcapture %}
+      {% capture slide_subheading_add %}box_slide_{{ slide_num }}_subheading_add{% endcapture %}
+
+
+      <div class="swiper-slide slide--{{ slide_num }} js-img-holder-cover" style="background-size:contain">
+		  
+          <img class="slide__image" src="{{ slide_img | asset_url }}" alt="{{ settings[slide_heading] }}" />
+          
+          {% if settings[slide_text_enable] %}
+            <div class="slide__info-wrapper">
+              <div class="slide__info-part">
+                <h1 class="heading--page slide__heading"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}">{{ settings[slide_heading] | upcase }}</a></h1>
+                <h2 class="subheading--page slide__subheading"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}"><em>{{ settings[slide_subheading] }}</em></a></h2>
+              </div>
+              <div class="slide__price-point">
+                <a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}">
+                  <span class="slide__price"><span class="money">{{ settings[slide_price] }}</span></span>
+                  <span class="slide__desc"><em>{{ settings[slide_price_desc] }}</em></span>
+                </a>
+              </div>
+              {% if settings[slide_heading_add] != blank and settings[slide_subheading_add] != blank %}
+              <div class="slide__info-part">
+                <h1 class="heading--page slide__heading"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading_add] }}">{{ settings[slide_heading_add] | upcase }}</a></h1>
+                <h2 class="subheading--page slide__subheading"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading_add] }}"><em>{{ settings[slide_subheading_add] }}</em></a></h2>
+              </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        
+      </div>
+      
+    {% endfor %}
+  </div>
+
+  <div class="swiper-button swiper-button-next">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="12" height="13" viewBox="0 0 12 13">
+      <path fill="#ada2a4" d="M11.520,7.366 L2.897,12.366 C2.801,12.422 2.698,12.447 2.595,12.468 C2.430,12.780 2.112,13.000 1.734,13.000 C1.191,13.000 0.750,12.559 0.750,12.016 L0.750,1.984 C0.750,1.812 0.806,1.659 0.884,1.518 C0.692,1.215 0.660,0.829 0.856,0.500 C1.141,0.022 1.771,-0.142 2.264,0.134 L11.192,5.134 C11.444,5.275 11.608,5.505 11.673,5.760 C11.752,5.830 11.829,5.903 11.884,6.000 C12.159,6.478 11.996,7.090 11.520,7.366 ZM9.265,6.364 L2.719,2.698 L2.719,10.160 L9.265,6.364 Z"/>
+    </svg>
+  </div>
+  <div class="swiper-button swiper-button-prev">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="11" height="13" viewBox="0 0 11 13">
+      <path fill="#ada2a4" d="M10.813,1.509 C10.886,1.644 10.937,1.790 10.937,1.953 L10.937,12.047 C10.937,12.573 10.511,13.000 9.984,13.000 C9.610,13.000 9.294,12.779 9.138,12.465 C9.041,12.444 8.943,12.420 8.852,12.366 L0.467,7.366 C0.004,7.090 -0.155,6.478 0.113,6.000 C0.167,5.903 0.241,5.830 0.318,5.760 C0.381,5.505 0.541,5.275 0.786,5.134 L9.467,0.134 C9.946,-0.142 10.559,0.022 10.836,0.500 C11.024,0.826 10.995,1.208 10.813,1.509 ZM9.031,10.164 L9.031,2.694 L2.660,6.364 L9.031,10.164 Z"/>
+    </svg>
+  </div>
+</div>
+
+<script>
+var boxSliderElement = document.querySelector('.box-slider');
+
+if ( boxSliderElement ) {
+  require("{{ 'swiper.min.js' | asset_url }}", function() {
+    var boxSlider = new Swiper(boxSliderElement,  {
+      nextButton: '.swiper-button-next',
+      prevButton: '.swiper-button-prev',
+      slidesPerView: 1,
+      loop: true,
+      {% if settings.box_slideshow_autoplay %}
+      autoplay: 7000,
+      autoplayDisableOnInteraction: true
+      {% endif %}
+    });
+  });
+}
+</script>

@@ -1,0 +1,24 @@
+<div class="landing-page">
+  {% comment %}
+  CTA
+  {% endcomment %}
+  {% if settings.landing_cta_section_enable %} 
+    <section class="section section--landing-cta">
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item one-whole text-center">
+            <h2 class="heading--strong">{{ settings.landing_cta_section_heading | upcase}}</h2>
+            <h3 class="subheading--page"><em>{{ settings.landing_cta_section_subheading }}</em></h3>
+            <ul class="cta-btn-list">
+              {% for product in collections[settings.landing_product_collection].products limit:3 %}
+                <li class="cta-btn-list__item">
+                  <a class="btn btn--default btn--cta btn--cta-{{ forloop.index }}" href="{{ product.url }}">{{ 'landing_page.general.get_for_button' | t | upcase }} {{ product.title | upcase }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+    </section>  
+  {% endif %}
+</div> <!-- End landing-page -->

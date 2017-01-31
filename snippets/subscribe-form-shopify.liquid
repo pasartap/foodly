@@ -1,0 +1,21 @@
+{% comment %}
+Snippet for standart (shopify) subscribe form
+For setting go to Admin -> Theme -> Customize Theme -> Product page
+- https://docs.shopify.com/manual/configuration/store-customization/communicating-with-customers/accounts-and-newsletters/add-signup-form
+{% endcomment %}
+{% form 'customer', class: "form form--subscribe" %}
+
+  {% if form.posted_successfully? %}
+    <p>Thanks for signing up!</p>
+  {% endif %}
+
+  <input type="hidden" id="contact_tags" name="contact[tags]" value="prospect,newsletter">
+  
+  <div class="form__row">
+    <input class="form__field" type="text" id="contact_email" name="contact[email]" placeholder="Your e-mail" required>
+  </div>
+  
+  <input class="btn btn--default btn--submit" type='submit' value="{{ 'layout.general.subscribe_button' | t }}" >
+
+
+{% endform %}

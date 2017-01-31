@@ -1,0 +1,103 @@
+{% if settings.homepage_special_product_enable %}
+  <section class="section section--special-offer">
+    <div class="wrapper clearfix">
+      <div class="grid">
+        <div class="grid__item one-whole">
+          {% comment %}
+          Special offered product (Used on homepage)
+          {% endcomment %}
+          <div class="product product--lg product--lg-alt">
+            {% assign offered_product = settings.homepage_special_product %}
+
+            {% if offered_product and collections["all"] %}
+              {% for product in collections["all"].products %}
+                {% if offered_product == product.handle %}
+                  {% assign target_product = product %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            
+            {% if settings.homepage_special_product_heading != blank %}
+              <h3 class="section-heading heading--page">{{ settings.homepage_special_product_heading | upcase }}</h3>
+            {% endif %}
+
+            {% if offered_product != blank %}
+
+              <div class="bg-cover product__img">
+                <div class="img-holder img-holder--block">
+                  <a href="{{ target_product.url }}" title="{{ target_product.title }}">
+                    {% if settings.homepage_special_product_img_enable %}
+                      <img src="{{ 'img_homepage_special_product.png' | asset_url }}" alt="{{ target_product.title }}">
+                    {% else %}
+                      <img src="{% if target_product.featured_image.size > 0 %}{{ target_product.featured_image | img_url: 'large'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}" alt="{{ target_product.title }}">
+                    {% endif %}
+                  </a>
+                </div>
+              </div>
+              
+              <div class="product__info">
+                <h4 class="product__title"><a href="{{ target_product.url }}" title="{{ target_product.title }}">{{ target_product.title }}</a></h4>
+                <span class="product__spec">
+                  {{ target_product.type | link_to_type }} |
+                
+                  {% if target_product.variants.first.inventory_quantity > 0 %}
+                    {{ 'products.general.in_stock' | t }}
+                  {% else %}
+                    {{ 'products.general.out_stock' | t }}
+                  {% endif %} | 
+
+                  {% if target_product.first_available_variant.option1 != 'Default Title' %}
+                    {{ target_product.first_available_variant.option1 }}
+                  {% else %}
+                    {{ target_product.first_available_variant.weight_unit }}
+                  {% endif %}        
+                </span>
+                
+                <div class="product__expense">
+                  <span class="product__price money">{{ target_product.price | money }}</span>
+                
+                  {% if target_product.variants.first.option1 != 'Default Title' %} 
+                    {% capture weight_unit %}{{ target_product.variants.first.option1 }}{% endcapture %}
+                  {% else %}
+                    {% capture weight_unit %}{{ target_product.variants.first.weight_unit }}{% endcapture %}
+                  {% endif %}
+
+                  <p class="product__size-unit">
+                    <em>
+                      {{ 'products.general.per' | t }}
+                      {% if weight_unit == "kg" %}
+                        {{ 'products.general.kilogram' | t }}
+                      {% else %}
+                        {{ weight_unit | downcase }}
+                      {% endif %}
+                    </em>
+                  </p> 
+                </div>
+                
+                <div class="form-wrapper">
+                  <form class="form form--default" action="/cart/add" method="post">
+                    <div class="form__row">
+                      <div class="quantity-field">
+                        <span class="icon icon--arrow-right js-up-quantity"></span>
+                        <input class="form__field" type="number" id="quantity" name="quantity" value="1" min="1" >
+                        <span class="icon icon--arrow-left js-down-quantity"></span>
+                      </div>
+                      <span class="js-price-and-value">x <span class="money">{{ target_product.price | money }}</span> = <span class="js-total-price money"></span></span>
+                    </div>
+
+                    <div class="form__row">
+                      <input type="hidden" name="id" value="{{ target_product.variants[0].id }}"> 
+                      <button type="submit" class="btn btn--default btn--full btn--submit js-add-to-card">{{ 'layout.general.add_to_cart_button' | t }}</button>
+                    </div>
+                  </form>
+                </div> <!-- End form-wrapper -->
+              </div> <!-- End product__info -->
+            {% endif %}
+
+          </div>
+
+        </div> <!-- End grid__item -->
+      </div> <!-- End grid -->
+    </div> <!-- End wrapper -->
+  </section>
+{% endif %}

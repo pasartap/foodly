@@ -1,0 +1,21 @@
+<div class="landing-page">
+  {% if settings.landing_benefit_section_enable %}
+    <section class="section section--landing-benefit">
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item one-whole">
+            <h2 class="section-heading section-heading--landing heading--page-md">{{ settings.landing_benefit_section_heading }}</h2>
+            <ol class="benefit-list">
+              {% for article in blogs[settings.landing_benefit_blog].articles %}
+                <li class="benefit-list__item">
+                  <h4 class="benefit-list__title">{{ article.title }}</h4>
+                  <p class="benefit-list__content">{{ article.content }}</p>
+                </li>
+              {% endfor %}
+            </ol>
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+    </section>  
+  {% endif %}
+</div>

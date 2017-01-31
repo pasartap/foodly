@@ -1,0 +1,78 @@
+{% comment %}
+Snippet for list-collections
+{% endcomment %}
+
+<div class="wrapper">
+  <div class="grid">
+    <div class="grid__item one-whole">
+      <div class="collections-list-wrapper">
+        <h1 class="heading--page">{{ 'collections.list_collections.heading' | t }}</h1>
+        {% if linklists.all-collections.links.size > 0 %}
+          {% comment %}
+          Custom list of collections. 
+          For more information go:
+          - https://docs.shopify.com/manual/configuration/store-customization/page-specific/collections/taking-control-of-collections-listing
+          {% endcomment %}
+          <ul class="collections-list">
+            {% for link in linklists.all-collections.links %}
+              {% assign collection = link.object %}
+            
+              {% unless collection.handle == 'frontpage' %}
+                <li class="collections-list__item">
+                  <a class="collections-list__link" href="{{ collection.url }}" title="{{ collection.title }}">
+                    {% if collection.image %}
+                      <img src="{{ collection.image | img_url: 'large' }}" alt="{{ collection.title }}">
+                    {% else %}
+                      <img src="{{ collection.products.first.featured_image | img_url: 'large' }}" alt="{{ collection.title }}">              
+                    {% endif %}
+                  </a>
+        
+                  <h2 class="collections-list__title">
+                    <a href="{{ collection.url }}" title="{{ collection.title }}">{{ collection.title }}</a>
+                  </h2>
+                  
+                </li>
+              {% endunless %}
+            
+            {% endfor %}
+          </ul>
+        {% else %}
+          <ul class="collections-list">
+            {% comment %}
+            List of all collections in store
+            {% endcomment %}
+            {% paginate collections by 20 %}
+              {% for collection in collections %}
+              
+                {% unless collection.handle == 'frontpage' %}
+                  <li class="collections-list__item">
+                    <a class="collections-list__link" href="{{ collection.url }}" title="{{ collection.title }}">
+                      {% if collection.image %}
+                        <img src="{{ collection.image | img_url: 'large' }}" alt="{{ collection.  title }}">
+                      {% else %}
+                        <img src="{{ collection.products.first.featured_image | img_url: 'large' }}"   alt="{{ collection.title }}">              
+                      {% endif %}
+                    </a>
+                    
+                    <h2 class="collections-list__title">
+                      <a href="{{ collection.url }}" title="{{ collection.title }}">{{ collection.title }}</a>
+                    </h2>
+                    
+                  </li>
+                {% endunless %}
+              
+              {% endfor %}
+          
+              {% if paginate.pages > 1 %}
+                <div class="pagination">
+                  {% include 'pagination' %}
+                </div>
+              {% endif %}
+        
+            {% endpaginate %}
+          </ul>
+        {% endif %}
+      </div> <!-- End collections-list-wrapper -->
+    </div> <!-- End grid__item -->
+  </div> <!-- End grid -->
+</div> <!-- End wrapper -->

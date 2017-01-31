@@ -1,0 +1,55 @@
+<div class="landing-page">
+  
+  {% if settings.landing_product_section_enable %}
+    <section class="section section--landing-product">
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item one-whole">
+            <h2 class="section-heading section-heading--landing heading--page-md">{{ settings.landing_product_section_heading }}</h2>
+            <div class="product-pack-wrapper">
+              {% assign min_price = 0 %}
+              {% assign equal_price = 0 %}
+              {% for product in collections[settings.landing_product_collection].products limit:3 %}
+                <div class="product-pack product-pack--{{ forloop.index }}">
+                  <div class="product-pack__header">
+                    <h3 class="product-pack__title">{{ product.title }}!</h3>
+                  </div>
+                  <div class="product-pack__content">
+                    {{ product.content }}
+                  </div>
+
+                  <form class="form form--default js-messages-disable" action="/cart/add" method="post">
+                    <div class="form__row">
+                      <input type="hidden" name="id" value="{{ product.variants[0].id }}"> 
+                      <button class="btn btn--underlines btn--submit js-add-to-card" type="submit" >
+                        {{ 'landing_page.general.purchase' | t | upcase }}
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="61" height="12" viewBox="0 0 61 12">
+                          <path d="M60.217,1.433 C45.717,2.825 31.217,4.217 16.717,5.609 C13.227,5.944 8.806,6.200 6.390,5.310 C7.803,4.196 11.676,3.654 15.204,3.216 C28.324,1.587 42.033,-0.069 56.184,0.335 C58.234,0.394 60.964,0.830 60.217,1.433 ZM50.155,5.670 C52.205,5.728 54.936,6.165 54.188,6.767 C39.688,8.160 25.188,9.552 10.688,10.943 C7.198,11.278 2.778,11.535 0.362,10.645 C1.774,9.531 5.647,8.988 9.175,8.551 C22.295,6.922 36.005,5.265 50.155,5.670 Z"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </form>
+                </div> <!-- End product-pack -->
+                {% if forloop.first == true %}
+                  {% assign min_price = product.price %}
+                {% endif %}
+              
+                {% if min_price == product.price %}
+                  {% assign equal_price = product.price %}
+                {% elsif min_price > product.price %}
+                  {% assign min_price = product.price %}
+                {% endif %}
+              
+              {% endfor %}
+            </div> <!-- End product-pack-wrapper -->
+            
+            {% capture value_min %}{{ min_price | money | split: '.' | first }}{% endcapture %}
+            {% capture value_equal %}{{ equal_price | money | split: '.' | first }}{% endcapture %}
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+    </section>
+  {% endif %}
+</div>
+
+{% include 'landing-page-deal' %}

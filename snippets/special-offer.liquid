@@ -1,0 +1,79 @@
+<section class="section">
+  {% comment %}
+  Calculation columns for spesial offer
+  {% endcomment %}
+  {% assign num_special_offer = 0 %}
+  {% if settings.homepage_special_1_enable %}
+    {% assign num_special_offer = num_special_offer | plus: 1 %}
+  {% endif%}
+
+  {% if settings.homepage_special_2_enable %}
+    {% assign num_special_offer = num_special_offer | plus: 1 %}
+  {% endif%}
+
+  {% comment %}
+  Choose css grid for columns number
+  {% endcomment %}
+  {% case num_special_offer %}
+    {% when 0 %}
+    {% when 1 %}
+      {% assign special_offer_colunm_width = 'spesial-offer spesial-offer--full' %}
+    {% when 2 %}
+      {% assign special_offer_colunm_width = 'spesial-offer' %}
+  {% endcase %}
+
+
+  <div class="special-offer-container">
+    {% comment %}
+    The first section with special offer
+    For settings go to Admin -> Theme -> Customize Theme -> Homepage
+    {% endcomment %}
+    {% if settings.homepage_special_1_enable %}
+      <a href="{{ settings.homepage_special_1_btn_url }}">
+        <div class="spesial-offer--one {{ special_offer_colunm_width }}">
+          <h3 class="heading--page">{{ settings.homepage_special_1_heading | upcase }}</h3>
+          <h4 class="subheading--page"><em>{{ settings.homepage_special_1_subheading }}</em></h4>
+          
+          {% comment %}
+          Special offer point 
+          For settings go to Admin -> Theme -> Customize Theme -> Homepage
+          {% endcomment %}
+          {% if settings.homepage_special_1_mark_enable %}
+            <div class="spesial-offer__info">
+              <span class="spesial-offer__mark">
+                <strong>{{ settings.homepage_special_1_mark_price }}</strong>
+              </span>
+              <span class="spesial-offer__desc">
+                <strong>{{ settings.homepage_special_1_mark_title }}</strong>
+              </span>
+            </div>
+          {% endif %}
+        </div> <!-- End spesial-offer -->
+      </a>
+    {% endif %}
+    
+    {% if settings.homepage_special_2_enable %}
+      <a href="{{ settings.homepage_special_2_btn_url }}">
+        <div class="spesial-offer--two {{ special_offer_colunm_width }}">
+          <h3 class="heading--page">{{ settings.homepage_special_2_heading | upcase }}</h3>
+          <h4 class="subheading--page"><em>{{ settings.homepage_special_2_subheading }}</em></h4>
+          
+          {% comment %}
+          Special offer point 
+          For setting go to Admin -> Theme -> Customize Theme -> Homepage
+          {% endcomment %}
+          {% if settings.homepage_special_2_mark_enable %}
+            <div class="spesial-offer__info">
+              <span class="spesial-offer__mark">
+                <strong>{{ settings.homepage_special_2_mark_price }}</strong>
+              </span>
+              <span class="spesial-offer__desc">
+                <strong>{{ settings.homepage_special_2_mark_title }}</strong>
+              </span>
+            </div>
+          {% endif %}
+        </div> <!-- End spesial-offer -->
+      </a>
+    {% endif %}
+  </div> <!-- End special-offer-container -->
+</section>

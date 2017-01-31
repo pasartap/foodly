@@ -1,0 +1,136 @@
+{% if settings.homepage_product_offer_3 %}
+  {% assign special_product = all_products[settings.homepage_product_offer_3] %}  
+  <section class="section section--offer-product-options">
+    <div class="product__block">
+      <div class="product__block-item js-images">
+        <div class="product__images-container">
+          {% for variant in special_product.variants limit: 3 %}
+            <a class="{% if forloop.first %}show-in{% endif %}" href="{{special_product.url}}" data-variant-id="{{ variant.id }}">
+              <div class="img-holder img-holder--product">
+                <img src="{{ variant.image | img_url: '1024x1024'}}" alt="{{ special_product.title }}">
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="product__block-item product">
+        <div class="product__content">
+          <h1 itemprop="name" class="product__title">{{ special_product.title }}</h1>
+          <div class="product__info">
+            <span class="product__spec">
+              {{ special_product.type }} |
+            
+              {% if special_product.first_available_variant.inventory_quantity > 0 %}
+                {{ 'products.general.in_stock' | t }}
+              {% else %}
+                {{ 'products.general.out_stock' | t }}
+              {% endif %} |
+              
+              {{ special_product.first_available_variant.weight_unit }}
+                       
+            </span>
+            <div class="product__desc">
+              {% assign content_html = special_product.description %}
+              {% include 'strip_html_tags' with content_html %}
+        
+              {% assign split_nutritional = '[Nutritional value]' %}
+                {% if content contains split_nutritional %}
+                  {% assign description_text = content | split: split_nutritional | first %}
+                  {% assign nutritional_value_text = content | split: split_nutritional | last %}
+                {% endif %}
+                
+                {% comment %}
+                Product decription
+                {% endcomment %}
+                {% if settings.product_description_enable %}
+                  <div itemprop="description" class="rte product__desc-content">
+                    {% if description_text != blank %}
+                      {{ description_text | truncatewords: 30 }}
+                    {% else %}
+                      {{ special_product.description | truncatewords: 30 }}
+                    {% endif %}
+                  </div>
+                {% endif %}
+            </div>
+            {% if special_product.variants.size > 1 and special_product.available %}
+              
+              <select id="product-variants" name="id">
+                {% for variant in special_product.variants limit: 3 %}
+                  <option {% if variant == special_product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }}</option>
+                {% endfor %}
+              </select>
+
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<script>
+  var selectVariantsDOM     = document.getElementById('product-variants');
+  var radioBtnContainerDOM  = document.createElement('div');
+  var imagesContainerDOM    = document.querySelector('.js-images');
+  var wrapperRadioBtnDOM;
+
+  selectVariantsDOM.style.display = 'none';
+
+  for ( var i = 0, max = selectVariantsDOM.options.length; i < max; i++ ) {
+    wrapperRadioBtnDOM = greateRadioVariantsDOM(selectVariantsDOM.options[i]);
+    radioBtnContainerDOM.appendChild(wrapperRadioBtnDOM);
+  }
+
+  radioBtnContainerDOM.className = 'product-variants-radio-btns';
+
+  selectVariantsDOM.parentElement.insertBefore(radioBtnContainerDOM, selectVariantsDOM.nextSibling);
+
+  function greateRadioVariantsDOM(option) {
+
+    if ( !option ) {
+      return null;
+    }
+
+    var optionText = option.textContent.toLowerCase()
+
+    var wrapperDOM = document.createElement('div');
+    wrapperDOM.className = 'radio-btn'
+
+    var labelDOM = document.createElement('label');
+    labelDOM.innerHTML = option.innerHTML;
+    labelDOM.setAttribute('for', optionText);
+
+    var radioBtnDOM   = document.createElement('input');
+    radioBtnDOM.type  = 'radio';
+    radioBtnDOM.name  = 'variants';
+    radioBtnDOM.id    = optionText;
+    radioBtnDOM.value = option.value;
+
+    if ( option.selected) {
+      radioBtnDOM.checked = true;
+    }
+
+    radioBtnDOM.addEventListener('change', function(e){
+      
+      selectVariantsDOM.value = e.currentTarget.value;
+      
+      var currentImage = imagesContainerDOM.querySelector('.show-in');
+      currentImage.classList.remove('show-in');
+      
+      var choosedImage = imagesContainerDOM.querySelector('[data-variant-id="' + e.currentTarget.value + '"]');
+      choosedImage.classList.add('show-in');
+      
+    })
+
+    var radioPointDOM = document.createElement('span');
+    radioPointDOM.className = 'radio-point';
+    radioPointDOM.style.backgroundColor = optionText;
+
+    wrapperDOM.appendChild(radioBtnDOM);
+    wrapperDOM.appendChild(labelDOM);
+    wrapperDOM.appendChild(radioPointDOM);
+    
+    return wrapperDOM;
+  };
+
+</script>

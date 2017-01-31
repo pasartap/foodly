@@ -1,0 +1,63 @@
+{% if settings.homepage_recipes_enable %}
+  <section class="section section--homepage-recipe">
+    <div class="wrapper clearfix">
+      <div class="grid">
+        <div class="grid__item one-whole">
+          {% comment %}
+          Snippet for recipes from blog
+          For settings go to Admin -> Theme -> Customize Theme -> Homepage
+          {% endcomment %}
+          {% if settings.homepage_recipes_heading != blank %}
+            <h3 class="section-heading heading--page">{{ settings.homepage_recipes_heading | upcase }}</h3>
+          {% endif %}
+
+          {% if settings.homepage_recipes_subheading != blank %}
+            <p class="section__info text-center">{{ settings.homepage_recipes_subheading }}</p>
+          {% endif %}
+
+          {% if settings.homepage_recipes_blog %}
+            {% capture rundom_article %}{{ 'now' | date: '%S' | times:  blogs[settings.homepage_recipes_blog].articles_count | divided_by: 60 }}{% endcapture %}
+
+
+            {% for article in blogs[settings.homepage_recipes_blog].articles offset:rundom_article limit:1 %}
+              <article class="article article--blog">
+                {% if article.image %}
+                  <div class="img-holder">
+                    <a href="{{ article.url }}" title="{{ article.title }}">
+                      <img src="{{ article | img_url: 'large' }}" alt="{{ article.title }}">
+                    </a>
+                  </div>
+                {% endif %}
+                <div class="article__info">
+                  <h5 class="heading--add article__title">
+                    <a href="{{ article.url }}" title="{{ article.title }}">{{ article.title }}</a>
+                  </h5>
+                  <p class="article__date">
+                    <time class="date">{{ article.created_at | date: '%B %-d, %Y' }}</time>
+                  </p>
+                  <div class="rte article__content">
+                    {% assign  content_html =  article.excerpt_or_content %}
+
+                    {% comment %}
+                    Strip unnecessary html
+                    {% endcomment %}
+                    {% include 'strip_html_tags' with content_html %}
+                    {% if content contains '[ingredients]' %}
+                      {{ content | split: '[ingredients]' | first }}
+                      {{ content | split: '[ingredients]' | last |  truncatewords: 15 }}
+                    {% else %} 
+                      {{ article.excerpt_or_content |  truncatewords: 50 }}
+                    {% endif %}
+                  
+                  </div>
+                  <p class="article__author">by {{ article.author }}</p>
+                </div>
+              </article>
+            {% endfor %}
+            
+          {% endif %}
+        </div> <!-- End grid__item -->
+      </div> <!-- End grid -->
+    </div> <!-- End wrapper -->
+  </section>
+{% endif %}

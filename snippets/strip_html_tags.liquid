@@ -1,0 +1,31 @@
+{% comment %}
+Strip span tags
+{% endcomment %}
+{% assign content = content_html | split: ']<' | join: '] <' %}
+{% assign content = content | split: '>[' | join: '> [' %}
+{% assign content = content | split: '[</span>' | join: '[' %}
+{% assign content = content | split: '<span>]' | join: ']' %}
+{% assign content = content | split: '[</span><span>' | join: '[' %}
+{% assign content = content | split: '</span><span>]' | join: ']' %}
+{% assign content = content | split: '[<span>' | join: '[' %}
+{% assign content = content | split: '</span>]' | join: ']' %}
+
+{% comment %}
+Strip P tags
+{% endcomment %}
+{% assign content = content | split: '[</p>' | join: '[' %}
+{% assign content = content | split: '<p>]' | join: ']' %}
+{% assign content = content | split: '[</p><p>' | join: '[' %}
+{% assign content = content | split: '</p><p>]' | join: ']' %}
+{% assign content = content | split: '[<p>' | join: '[' %}
+{% assign content = content | split: '</p>]' | join: ']' %}
+
+{% comment %}
+Strip div tags
+{% endcomment %}
+{% assign content = content | split: '[</div>' | join: '[' %}
+{% assign content = content | split: '<div>]' | join: ']' %}
+{% assign content = content | split: '[</div><div>' | join: '[' %}
+{% assign content = content | split: '</div><div>]' | join: ']' %}
+{% assign content = content | split: '[<div>' | join: '[' %}
+{% assign content = content | split: '</div>]' | join: ']' %}

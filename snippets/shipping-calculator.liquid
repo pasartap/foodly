@@ -1,0 +1,65 @@
+{% comment %}
+Shipping calculator. For more information, visit:
+- https://docs.shopify.com/manual/configuration/store-customization/page-specific/cart-page/add-shipping-rates-calculator
+{% endcomment %}
+{% unless settings.shipping_calculator == 'Disabled' %}
+  <hr class="hr--clear">
+              
+  <div class="cart__block cart__shipping-calculator">
+
+    <div class="shipping-calculator" id="shipping-calculator">
+        
+      <h3 class="heading--add-small">{{ settings.shipping_calculator_heading | default: 'Get shipping estimates' | upcase }}</h3>
+    
+      <div id="wrapper-response"></div>
+    
+      <div class="shipping-calculator__container form form--default">
+        <div class="field">
+          <label class="label-hide" for="address_country">{{ 'cart.calculator.country' | t }}</label>
+          <select class="js-dropdown-scroll" id="address_country" name="address[country]" data-default="{% if shop.customer_accounts_enabled and customer %}{{ customer.default_address.country }}{% elsif settings.shipping_calculator_default_country != '' %}{{ settings.shipping_calculator_default_country }}{% endif %}">{{   country_option_tags }}</select>
+        </div>
+        <div class="field" id="address_province_container" style="display:none;">
+          <label  class="label-hide" for="address_province" id="address_province_label">{{ 'cart.calculator.province' | t }}</label>
+          <select class="js-dropdown-scroll"  id="address_province" name="address[province]" data-default="{% if shop.customer_accounts_enabled and customer and customer.default_address.province != '' %}{{ customer.default_address.province }}{% endif %}"></select>
+        </div>  
+        <div class="field form__row">
+          <input class="form__field" type="text" id="address_zip" name="address[zip]"{% if shop.customer_accounts_enabled and customer %} value="{{ customer.default_address.zip   }}"{% endif %} placeholder="{{ 'cart.calculator.zip' | t }}"/>
+          <label class="form__field--placeholder" for="address_zip">{{ 'cart.calculator.zip' | t }}</label>
+        </div>
+        <div class="field-full">
+          <button type="button" class="get-rates btn btn--default btn--full">{{ settings.shipping_calculator_submit_button_label }}</button>
+        </div>
+      </div>
+      
+    </div>
+
+    {% comment %}
+    Template for shipping rates (undescore.js)
+    {% endcomment %}
+    <script id="shipping-calculator-response-template" type="text/template">
+      <p id="shipping-rates-feedback" <% if (success) { %> class="success" <% } else { %> class="error" <% } %>>
+      <% if (success) { %>
+        <% if (rates.length > 1) { %> 
+          There are <%= rates.length %> shipping rates available for <%= address %>, starting at <%= rates[0].price %>.
+        <% } else if (rates.length == 1) { %>
+          There is one shipping rate available for <%= address %>.
+        <% } else { %>
+          We do not ship to this destination.
+        <% } %>
+      <% } else { %>
+        <%= errorFeedback %>
+      <% } %>
+      </p>
+      <ul id="shipping-rates">
+        <% for (var i=0; i<rates.length; i++) { %>
+        <li><%= rates[i].name %> at <%= rates[i].price %></li>
+        <% } %>
+      </ul> 
+    </script>
+    
+    <!--[if lte IE 8]> 
+    <style> #shipping-calculator { display: none; } </style> 
+    <![endif]--> 
+ 
+  </div>
+{% endunless %}

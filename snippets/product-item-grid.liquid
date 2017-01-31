@@ -1,0 +1,73 @@
+{% comment %}
+Snippet is used to show products in 'collection.liquid', 'similar-product-carousel-collection.liquid'
+{% endcomment %}
+<div class="product grid--in-row">
+  <div class="product__visuals">
+    <a class="product__link {% unless product.available %}product--sold-out{% endunless %}" href="{{ product.url }}" title="{{ product.title }}" style="background-image: url({{ product.featured_image | img_url: 'medium'}});min-height:260px">
+      <div class="img-holder img-holder--product {% unless product.featured_image.size > 0 %}img-holder--no-product{% endunless %}">
+
+        <img src="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'grande'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}" alt="{{ product.title }}">
+
+      </div>
+    </a>
+    {% comment %}
+	Snippet below is to enable the add-to-cart thumb
+	{% endcomment %}
+    {% if settings.collection_add_cart_thumb %}
+    <div class="product__cart">
+      <form class="form form--default js-form-cart-alt" action="/cart/add" method="post">
+
+        <div class="quantity-field">
+          <button type="button" class="btn btn--default btn--circle js-down-quantity"><span class="icon--minus"></span></button>
+          <div class="quantity__info">
+            <span class="quantity__counter">1</span>
+            <span>in your bag</span>
+          </div>
+          <button type="button" class="btn btn--default btn--circle js-up-quantity"><span class="icon--plus"></span></button>
+        </div>
+
+        <button {% unless product.available %}disabled{% endunless %} class="btn btn--default btn--submit btn--circle {% unless product.available %}btn--disabled{% endunless %} js-add-to-card" type="submit" title="{{ 'layout.general.add_to_cart_button' | t }}"><span class="icon--plus"></span></button>
+        <input type="hidden" name="id" value="{{ product.variants[0].id }}" /> 
+
+      </form>
+    </div>
+    {% endif %}
+    <span class="product__price-point">       
+      <span class="product__price"><span class="money">{{ product.price | money }}</span></span><br>
+
+      {% if settings.collection_product_badge == 'price'%}
+        {% if product.compare_at_price_min > product.price %}
+          <span class="product__compare-price"><span class="money">{{ product.compare_at_price_max | money }}</span></span>
+        {% endif %}
+      {% endif %}
+    </span>
+
+    {% if settings.collection_product_badge == 'badge' and product.compare_at_price_min > product.price %}
+      <span class="product__badge">{{ 'products.general.sale_badge_text' | t }}</span>
+    {% endif %}	
+  </div>
+  <div class="product__info">
+    <h4 class="product__title"><a href="{{ product.url }}" title="{{ product.title }}">{{ product.title | truncatewords: 4 }}</a></h4>
+    
+    <span class="product__spec">
+      {{ product.type | link_to_type }}
+    
+      {% if product.available %}
+        &nbsp;|&nbsp;
+        {{ 'products.general.in_stock' | t }}
+      {% else %}
+        &nbsp;|&nbsp;
+        {{ 'products.general.out_stock' | t }}
+      {% endif %}
+    
+      {% if product.first_available_variant.option1 != 'Default Title' %}
+        &nbsp;|&nbsp;
+        {{ product.first_available_variant.option1 }}
+      {% else %}
+        &nbsp;|&nbsp;
+        {{ product.first_available_variant.weight_unit }}
+      {% endif %}            
+    </span>
+  </div> <!-- End product__info -->
+
+</div> <!-- End product -->

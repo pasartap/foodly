@@ -1,0 +1,72 @@
+
+<div class="product product--lg product--lg-alt product--full">
+  <div class="image-wrapper {% unless special_product.available %}product--sold-out{% endunless %}">
+    <div class="img-holder img-holder--product {% unless special_product.featured_image.size > 0 %}img-holder--no-product{% endunless %}">
+      <img src="{% if special_product.featured_image.size > 0 %}{{ special_product.featured_image | img_url: '2048x2048'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}" alt="{{ special_product.title }}">
+    </div>
+  </div>
+
+  {% if settings.collection_product_badge == 'badge' and product.compare_at_price_min > product.price %}
+    <span class="product__badge">{{ 'products.general.sale_badge_text' | t }}</span>
+  {% endif %} 
+
+  <div class="product__info">
+    <div class="product__info-container">
+      <h4 class="product__title"><a href="{{ special_product.url }}" title="{{ special_product.title }}">{{ special_product.title }}</a></h4>
+      <span class="product__spec">
+        {{ special_product.type | link_to_type }} |
+      
+        {% if special_product.variants.first.inventory_quantity > 0 %}
+          {{ 'products.general.in_stock' | t }}
+        {% else %}
+          {{ 'products.general.out_stock' | t }}
+        {% endif %} | 
+      
+        {% if special_product.first_available_variant.option1 != 'Default Title' %}
+          {{ special_product.first_available_variant.option1 }}
+        {% else %}
+          {{ special_product.first_available_variant.weight_unit }}
+        {% endif %}        
+      </span>
+      
+      <div class="product__expense">
+        <span class="product__price money">{{ special_product.price | money }}</span>
+      
+        {% if special_product.variants.first.option1 != 'Default Title' %} 
+          {% capture weight_unit %}{{ special_product.variants.first.option1 }}{% endcapture %}
+        {% else %}
+          {% capture weight_unit %}{{ special_product.variants.first.weight_unit }}{% endcapture %}
+        {% endif %}
+      
+        <p class="product__size-unit">
+          <em>
+            {{ 'products.general.per' | t }}
+            {% if weight_unit == "kg" %}
+              {{ 'products.general.kilogram' | t }}
+            {% else %}
+              {{ weight_unit | downcase }}
+            {% endif %}
+          </em>
+        </p> 
+      </div>
+      
+      <div class="form-wrapper">
+        <form class="form form--default" action="/cart/add" method="post">
+          <div class="form__row">
+            <div class="quantity-field">
+              <span class="icon icon--arrow-right js-up-quantity"></span>
+              <input class="form__field quantity" type="number" name="quantity" value="1" min="1" >
+              <span class="icon icon--arrow-left js-down-quantity"></span>
+            </div>
+            <span class="js-price-and-value">x <span class="money">{{ special_product.price | money }}</span> = <span class="js-total-price money">{{ special_product.price | money }}</span></span>
+          </div>
+      
+          <div class="form__row">
+            <input type="hidden" name="id" value="{{ special_product.variants[0].id }}"> 
+            <button type="submit" class="btn btn--default btn--full btn--submit js-add-to-card">{{ 'layout.general.add_to_cart_button' | t }}</button>
+          </div>
+        </form>
+      </div> <!-- End form-wrapper -->
+    </div>
+  </div> <!-- End product__info -->
+</div> <!-- End product -->

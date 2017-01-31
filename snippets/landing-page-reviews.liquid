@@ -1,0 +1,68 @@
+<div class="landing-page">
+  {% comment %}
+  Reviews
+  {% endcomment %}
+  {% if settings.landing_reviews_section_enable %}
+    <hr class="hr--clear-inverse hr--wrapper">
+    <section class="section section--landing-reviews">
+      <h2 class="section-heading section-heading--landing heading--page-md">{{ settings.landing_reviews_section_heading }}</h2>
+
+      <ul class="reviews-list">
+        {% for article in blogs[settings.landing_reviews_blog].articles %}
+          {% assign review_title = article.title | split: ' | ' %}
+            <li class="reviews-list__item reviews-list__item--{{ forloop.index }} {% if forloop.first %}left{% endif %}{% if forloop.last %}right{% endif %}{% unless forloop.first or forloop.last %}center{% endunless %}">
+              <div class="img-holder img-holder--block img-holder--circle">
+                <img src="{{ article.image.src | img_url: 'compact' }}" alt="">
+              </div>
+              <div class="review__body">
+                <div class="review__header">
+                  <h4 class="review__title">{{ review_title.first }}</h4>
+                  <span>{{ review_title.last }}</span>
+                </div>
+                <p class="review__content">{{ article.content }}</p>
+              </div>
+
+              <div class="review__navigation">
+                <span class="review__navigation-btn prev">{{ 'landing_page.general.prev_review' | t | upcase }}</span>
+                
+                <span class="review__navigation-btn next">{{ 'landing_page.general.next_review' | t | upcase }}</span>
+              </div>
+
+              <div class="icon icon--underline-big">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 827 235" preserveAspectRatio="xMidYMin slice">
+                  <path d="M825.512,10.341 C624.267,51.769 423.019,93.193 221.774,134.622 C173.337,144.592 111.730,154.836 76.507,145.819 C94.631,127.889 148.130,114.404 196.943,102.917 C378.476,60.192 568.237,16.189 767.288,0.784 C796.132,-1.448 835.081,0.671 825.512,10.341 ZM690.791,85.518 C719.638,83.287 758.587,85.408 749.014,95.075 C547.770,136.503 346.525,177.931 145.279,219.355 C96.841,229.325 35.235,239.574 0.011,230.556 C18.135,212.628 71.633,199.141 120.445,187.650 C301.981,144.929 491.740,100.917 690.791,85.518 Z" class="cls-1"/>
+                </svg>
+              </div>
+            </li>
+        {% endfor %}
+      </ul>
+
+      
+    </section>
+
+    <hr class="hr--clear-inverse hr--wrapper"> 
+  {% endif %}
+</div>
+
+<script>
+  var $reviewList = $('.reviews-list');
+  $reviewList.on('click', function(e) {
+    var $target = $(e.target);
+
+
+    var $leftItem   = $reviewList.find('.left');
+    var $middleItem = $reviewList.find('.center');
+    var $rightItem  = $reviewList.find('.right');
+
+    if ($target.hasClass('right') || $target.closest('.right').length > 0 ) {
+      $middleItem.removeClass('center').addClass('right');
+      $rightItem.removeClass('right').addClass('center');
+      
+    }
+
+    if ($target.hasClass('left') || $target.closest('.left').length > 0 ) {
+      $middleItem.removeClass('center').addClass('left');
+      $leftItem.removeClass('left').addClass('center');
+    }
+  });
+</script>

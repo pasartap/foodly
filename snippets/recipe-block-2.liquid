@@ -1,0 +1,25 @@
+<section class="recipe-block-2">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        <div class="block">
+          <div class="block__half block__half--bg">     
+          </div>
+          <div class="block__half bg-neutral">
+            <div class="block__content">
+              {% if settings.recipes_block_2_title != blank %}
+                <h3 class="block__title">{{ settings.recipes_block_2_title }}</h3>
+              {% endif %}
+        
+              {% if settings.recipes_block_2_desc != blank %}
+                <p class="block__desc">{{ settings.recipes_block_2_desc }}</p>
+              {% endif %}
+
+              <a class="btn btn--default btn--inverse" href="{{ settings.recipes_block_2_link }}" title="{{ 'additional_blocks.recipe_block_2.button' | t }}">{{ 'additional_blocks.recipe_block_2.button' | t }}</a>
+            </div>      
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>

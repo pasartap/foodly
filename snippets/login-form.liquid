@@ -1,0 +1,89 @@
+{% comment %}
+Login page template
+- https://docs.shopify.com/themes/theme-development/templates/customers-login
+{% endcomment %}
+<section id="loginForm" class="section section--form section--form-login">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole login-form">
+        <div class="page-description">
+          <h1 class="heading--page">{{ 'customer.login.heading' | t }}</h1>
+          {% comment %}
+          <h2 class="subheading--page-small">
+            <em>{{ 'customer.login.subheading' | t }}</em>
+          </h2>
+          {% endcomment %}
+        </div>
+        
+        <div class="note form-success" id="ResetSuccess" style="display:none;text-align:center">
+          {{ 'customer.recover_password.success' | t }}
+        </div>
+        
+        {% comment %}
+        Form for login
+        {% endcomment %}
+        <div class="form-wrapper--login">
+          {% form 'customer_login', class:"form form--default form--login form-validation" %}
+              
+            {{ form.errors | default_errors }}
+          
+            <div class="form__row">            
+              <input class="form__field" type="email" name="customer[email]" id="CustomerEmail"   autocorrect="off" autocapitalize="off" autofocus placeholder="{{ 'customer.login.email' | t }}">
+              <label class="form__field--placeholder" for="CustomerEmail">{{ 'customer.login.email' | t }}</label>
+            </div>
+          
+            {% if form.password_needed %}
+              <div class="form__row">              
+                <input class="form__field" type="password" value="" name="customer[password]" id="CustomerPassword" placeholder="{{ 'customer.login.password' | t }}">
+                <label class="form__field--placeholder" for="CustomerPassword">{{ 'customer.login.password' | t }}</label>
+                <p class="form__field--info">{{ 'customer.general.password_info' | t }}</p>
+              </div>
+              <div class="form__row form__row--recover-pass text-center">
+                <a class="text-link--default js-forget-password" href="/#recover" id="RecoverPasswordLink" title="{{ 'customer.login.forgot_password' | t }}">{{ 'customer.login.forgot_password' | t }}</a>
+              </div>
+            {% endif %}
+          
+            <button class="btn btn--default btn--full btn--submit" type="submit">{{ 'customer.login.login_button_large' | t }}</button>
+          
+            <div class="form__row form__row--text text-center">
+              {{ 'customer.login.dont_have_account' | t }}
+              <a class="text-link--default" href="/account/register" title="{{ 'customer.login.create_it' | t }}">{{ 'customer.login.create_it' | t }}</a>
+            </div>
+          
+          {% endform %}
+        </div> <!-- End js-forget-password -->
+        
+        {% comment %}
+        Form for password recovery
+        {% endcomment %}
+        <div class="form-wrapper--recover-password display-none" id="recover_password" 
+        >
+        
+          <p class="recover-info">{{ 'customer.recover_password.title' | t }}</p>
+        
+          {% form 'recover_customer_password', class:"form form--default form--recover form-validation" %}
+        
+            {{ form.errors | default_errors }}
+          
+            <div class="form__row">
+              <input class="form__field" type="email" value="" name="email" id="RecoverEmail" autocorrect="off" autocapitalize="off" placeholder="{{ 'customer.recover_password.email' | t }}">
+              <label class="form__field--placeholder" for="RecoverEmail">{{ 'customer.recover_password.email' | t }}</label>
+            </div>
+        
+            <div class="form__row">
+              <button class="btn btn--default btn--full btn--submit" type="submit" onSubmit="return">{{ 'customer.recover_password.button' | t }}</button>
+            </div>
+
+            <div class="form__row form__row--text text-center">
+              <button class="text-link--default js-forget-password-cancel" type="button" id="HideRecoverPasswordLink">{{ 'customer.recover_password.cancel' | t }}</button>
+            </div>
+          {% endform %}
+        
+        </div>  <!-- End recover_password -->
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>
+
+
+

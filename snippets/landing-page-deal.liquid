@@ -1,0 +1,28 @@
+<div class="landing-page">
+  
+  {% if settings.landing_product_section_enable %}
+    <section class="section section--landing-product">
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item one-whole">
+            <div class="product-pack__cta clearfix">
+              <ul class="product-pack__cta-list">
+                <li class="product-pack__cta-item">{{ 'landing_page.general.product_cta_text_left' | t | upcase }}</li>
+                <li class="product-pack__cta-item product-pack__cta-circle">
+                  {% if min_price == equal_price %}
+                    <span>{{ value_equal }}</span>
+                    <span><em>{{ 'landing_page.general.for_each' | t }}</em></span>
+                  {% else %}
+                    <span>{{ value_min }}</span>
+                    <span><em>{{ 'landing_page.general.from' | t }}</em></span>
+                  {% endif %}
+                </li>
+                <li class="product-pack__cta-item">{{ 'landing_page.general.product_cta_text_right' | t | upcase }}</li>
+              </ul>
+            </div> <!-- End product-pack__cta -->
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+    </section>
+  {% endif %}
+</div>

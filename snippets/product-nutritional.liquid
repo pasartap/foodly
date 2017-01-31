@@ -1,0 +1,86 @@
+<div class="product-wrapper">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="product product--lg grid__item one-whole {% if product.featured_image.size > 0 %}fade-up delay-three{% endif %}">
+
+          {% comment %}
+          Product nutritional values
+          {% endcomment %}
+          {% if settings.product_nutritional_enable and  nutritional_value_text != blank %}
+          
+            {% comment %}
+            Get string with minerals
+            {% endcomment %}
+            {% if settings.product_nutritional_minerals != blank and nutritional_value_text contains settings.product_nutritional_minerals %}
+              {% assign vitamins_and_energy_text = nutritional_value_text | split: settings.product_nutritional_minerals | first %}
+              {% assign minerals_text = nutritional_value_text | split: settings.product_nutritional_minerals | last %}
+            {% endif %}
+          
+            {% comment %}
+            Get strings with energy value and vitamins
+            {% endcomment %}
+            {% if settings.product_nutritional_vitamins != blank and nutritional_value_text contains settings.product_nutritional_vitamins %}
+              {% assign energy_text = vitamins_and_energy_text | split: settings.product_nutritional_vitamins | first  | strip_html %}
+              {% assign vitamins_text = vitamins_and_energy_text | split: settings.product_nutritional_vitamins | last  | strip_html %}
+            {% endif %}
+          
+            {% comment %}
+            Get array of energy, vitamins and minerals
+            {% endcomment %}
+            {% assign energy_array = energy_text  | split: ', ' %}
+            {% assign vitamins_array = vitamins_text | split: ',' %}
+            {% assign minerals_array = minerals_text | split: ',' %}
+          
+            <div class="product__desc product__desc--components fold">
+              <h3 class="heading--add fold__toggle">{{ 'products.product_page.nutritional_title' | t }}</h3>
+              {% comment %}
+              Show energy values
+              {% endcomment %}
+              <div class="fold__content">
+                <div class="components-container">
+                  <ul class="components-list">
+                    {% for i in (0..energy_array.size) %}
+                      {% if forloop.last %} {% break %} {% endif %}
+                      <li class="components-list__item">
+                        {{ energy_array[i] | split: '|' | first | strip }} <span class="components-list__value" ><strong>{{ energy_array[i] | split: '|' | last | strip }}</strong></span>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                      
+                {% comment %}
+                Show vitamins list
+                {% endcomment %}
+                <div class="components-container">
+                  <span class="components__title">{{ settings.product_nutritional_vitamins }}</span>
+                  <ul class="components-list components-list--elements">
+                    {% for i in (0..vitamins_array.size) %}
+                      {% if forloop.last %} {% break %} {% endif %}
+                      <li class="components-list__item">
+                        {{ vitamins_array[i] | strip_html | strip }}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div> <!-- End components-container -->
+                      
+                {% comment %}
+                Show mineral list
+                {% endcomment %}
+                <div class="components-container">
+                  <span class="components__title">{{ settings.product_nutritional_minerals }}</span>
+                  <ul class="components-list components-list--elements">
+                    {% for i in (0..minerals_array.size) %}
+                      {% if forloop.last %} {% break %} {% endif %}
+                      <li class="components-list__item">
+                        {{ minerals_array[i] | strip_html | strip }}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div> <!-- End components-container -->
+              </div> <!-- End product__desc-content -->
+            </div> <!-- End product__desc -->
+          {% endif %}
+        </div> <!-- End grid__item -->
+      </div> <!-- End grid -->
+    </div> <!-- End wrapper -->
+</div>

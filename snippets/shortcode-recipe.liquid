@@ -1,0 +1,20 @@
+{% assign content_html = article.content %}
+
+{% include 'strip_html_tags' with content_html %}
+
+{% comment %}
+Split directions from article discription
+{% endcomment %}
+{% if content contains '[ingredients]' %}
+  {% assign first_part = content | split: '[ingredients]' | first %}
+  {% assign second_part  = content | split: '[ingredients]' | last %}
+  {% assign ingredients_part  = second_part | split: '[/ingredients]' | first %}
+  {% assign directions_first_part  = second_part | split: '[directions]' | last %}
+  {% assign directions_part  = directions_first_part | split: '[/directions]' | first %}
+  {% assign other_description  = directions_first_part | split: '[/directions]' | last %}
+{% endif %}
+
+{% if content contains '[license-url]' and settings.article_image_license_enable %}
+  {% assign license_mark_last = other_description | split: '[license-url]' | last %}
+  {% assign license_mark = license_mark_last | split: '[/license-url]' | first %}
+{% endif %}

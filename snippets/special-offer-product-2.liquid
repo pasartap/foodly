@@ -1,0 +1,6 @@
+{% if settings.homepage_product_offer_2 %}
+  {% assign special_product = all_products[settings.homepage_product_offer_2] %}  
+  <section class="section section--special-offer">
+    {% include 'product-additional-grid' with special_product %}
+  </section>
+{% endif %}

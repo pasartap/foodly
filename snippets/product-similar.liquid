@@ -1,0 +1,29 @@
+<div class="product-wrapper">
+  {% if settings.product_similar_enable %}
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item">
+          <div class="fold similar-product {% if product.featured_image.size > 0 %}fade-up delay-five{% endif %}">
+            <h3 class="heading heading--add fold__toggle">{{ 'products.product_page.similar_products_title' | t }}</h3>
+          
+            <div class="fold__content">
+              {% if settings.product_similar_type == "tags" %}
+                {% comment %}
+                Snippet for similar products which are chosen by similar tags
+                For setting go to Admin -> Theme -> Customize Theme -> Product page
+                {% endcomment %}
+                {% include 'similar-product-carousel-tag' %}
+              {% elsif settings.product_similar_type == "collection" %}
+                {% comment %}
+                Snippet for similar products which are chosen by similar collection
+                For setting go to Admin -> Theme -> Customize Theme -> Product page
+                {% endcomment %}
+                {% include 'similar-product-carousel-collection' %}
+              {% endif %}
+            </div> <!-- End fold__content -->
+          </div> <!-- End fold -->
+        </div> <!-- End grid__item -->
+      </div> <!-- End grid -->
+    </div> <!-- End wraper -->
+  {% endif %}
+</div>

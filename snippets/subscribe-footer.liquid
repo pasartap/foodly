@@ -1,0 +1,18 @@
+<div class="subscribe-form subscribe-form--footer">
+  <h2 class="heading--page">{{ settings.footer_subscribe_heading | upcase }}</h2>
+  <h4 class="subheading--page-small"><em>{{ settings.footer_subscribe_subheading }}</em></h4>
+  {% if settings.subscribe_form_variant == 'mailchimp' %}
+    {% comment %}
+    Snippet for MailChimp subscribe form
+    For setting go to Admin -> Theme -> Customize Theme -> Homepage
+    {% endcomment %}
+    {% include 'subscribe-form-mailchimp' %}
+  {% elsif settings.subscribe_form_variant == 'standart' %}
+    {% comment %}
+    Snippet for standart (Shopify) subscribe form
+    For setting go to Admin -> Theme -> Customize Theme -> Homepage
+    {% endcomment %}
+    {% include 'subscribe-form-shopify'%}
+  {% endif %}
+</div>
+<hr class="hr--clear"></hr>

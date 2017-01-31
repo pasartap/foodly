@@ -1,0 +1,40 @@
+<section class="section section--staff">
+  <div class="wrapper clearfix">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        {% comment %}
+        Snippet for recipes from blog
+        For settings go to Admin -> Theme -> Customize Theme -> Homepage
+        {% endcomment %}
+        
+        {% if settings.staff_section_heading != blank %}
+          <h3 class="section-heading heading--page">{{ settings.staff_section_heading | upcase }}</h3>
+        {% endif %}
+
+        <div class="employee-container">
+          {% for article in blogs[settings.blog_with_staff].articles reversed %}
+          
+            {% assign employee_name = article.title | split: "|" | first %}
+            {% assign employee_passion = article.title | split: "|" | last %}
+          
+            <div class="employee">
+              {% if article.image %}
+                <div class="employee__photo bg-cover">
+                  <div class="img-holder">
+                    <img src="{{ article | img_url: 'grande' }}" alt="{{ article.title }}">
+                  </div>
+                </div>
+              {% endif %}
+              <div class="employee__desc">
+                <h3 class="employee__name">{{ employee_name }}</h3>
+                <p class="employee__passion">{{ employee_passion }}</p>
+                <p class="employee__info">{{ article.content }}</p>
+              </div>
+            </div>
+              
+          {% endfor %}
+        </div>
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>

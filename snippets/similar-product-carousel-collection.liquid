@@ -1,0 +1,74 @@
+{% assign number_of_similar_products_to_show = settings.product_similar_number | plus:1 %}
+{% assign current_product = product %}
+{% assign product_count = 1 %}
+
+{% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all-products' or  collection.handle == 'packs' %}
+  {% assign found_a_collection = false %}
+
+  {% for c in product.collections %}
+    {% if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all-products' and collection.handle != 'packs' and c.all_products_count > 1 %}
+      {% assign found_a_collection = true %}
+      {% assign collection = c %}
+    {% endif %}
+  {% endfor %}
+
+{% endif %}
+{% comment %}
+Rundom collection
+- https://docs.shopify.com/manual/configuration/store-customization/showcasing-products/can-i-feature-one-randomly-picked-product
+{% endcomment %}
+
+<!-- Swiper -->
+<div class="swiper-container carousel carousel--product">
+  <div class="swiper-wrapper">
+
+    {% if collection and collection.products_count > 1 %}
+      {% comment %}
+      Collection of current product
+      {% endcomment %}
+      {% for product in collection.products %}
+        {% if product.handle != current_product.handle and product.first_available_variant.sku != settings.cart_special_sku and product_count < number_of_similar_products_to_show %}
+          
+          <div class="swiper-slide">
+            {% include 'product-item-grid' %}
+          </div>
+          
+          {% assign product_count = product_count | plus:1 %}
+        {% else %}
+          {% continue %}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {% comment %}
+      Random collection
+      {% endcomment %}
+      {% capture rundom_collection %}{{ 'now' | date: '%S' | times: product.collections.size  | divided_by: 60 }}{% endcapture %}
+      {% for collection in product.collections offset:rundom_collection limit:1 %}
+        {% if collection and collection.handle != 'packs' and collection.all_products_count > 1 %}
+          {% for product in collection.products %}
+            {% if product.handle != current_product.handle and product.first_available_variant.sku != settings.cart_special_sku and product_count < number_of_similar_products_to_show %}
+              
+              <div class="swiper-slide">
+                {% include 'product-item-grid' %}
+              </div>
+              
+              {% assign product_count = product_count | plus:1 %}
+            {% else %}
+              {% continue %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    
+  </div>
+    
+  <!-- Add Arrows -->
+  <div class="swiper-button-next carousel-button-next">
+    <span class="icon icon--arrow-right"></span>
+  </div>  
+  <div class="swiper-active-slide"></div>
+  <div class="swiper-button-prev carousel-button-prev">
+    <span class="icon icon--arrow-left"></span>
+  </div>
+</div>

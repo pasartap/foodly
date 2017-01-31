@@ -1,0 +1,218 @@
+<div class="product-wrapper">
+<div class="wrapper">
+      <div class="grid">
+        <div itemscope itemtype="http://schema.org/Product" class="product product--lg grid__item one-whole">
+          <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+          <meta itemprop="image" content="{{ product.featured_image.src | product_img_url: 'grande' }}">
+          <h1 itemprop="name" class="product__title {% if product.featured_image.size > 0 %}fade-up{% endif %}">{{ product.title }}</h1>
+          <div class="product__info {% if product.featured_image.size > 0 %}fade-up{% endif %}">
+            <span class="product__spec">
+              {{ product.type }} |
+          
+              {% if product.first_available_variant.inventory_quantity > 0 %}
+                {{ 'products.general.in_stock' | t }}
+              {% else %}
+                {{ 'products.general.out_stock' | t }}
+              {% endif %} |
+              {% if product.first_available_variant.option1 != 'Default Title' %}
+                {{ product.first_available_variant.option1 }}
+              {% else %}
+                {{ product.first_available_variant.weight_unit }}
+              {% endif %}          
+            </span>
+          
+            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="product__expense">
+              <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+              <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+    
+              <span class="product__price"><span itemprop="price" class="money">{{ product.price | money }}</span></span>
+            
+              {% if product.variants.first.option1 != 'Default Title' %} 
+                {% capture weight_unit %}{{ product.variants.first.option1 }}{% endcapture %}
+              {% else %}
+                {% capture weight_unit %}{{ product.variants.first.weight_unit }}{% endcapture %}
+              {% endif %}
+            
+              <p class="product__size-unit">
+                <em>
+                  {{ 'products.general.per' | t }}
+                  {% if weight_unit == "kg" %}
+                    {{ 'products.general.kilogram' | t }}
+                  {% else %}
+                    {{ weight_unit | downcase }}
+                  {% endif %}
+                </em>
+              </p>
+            </div>
+            {% comment %}
+            Add to cart button
+            {% endcomment %}
+            <div class="form-wrapper">
+              <form class="form form--default" action="/cart/add" method="post">
+                <div class="form__row">
+                  {% if product.variants.size > 1 and product.available %}
+
+                    <select id="product-variants" name="id">
+                      {% for variant in product.variants %}
+                        <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" data-variant-price={{ variant.price }}>{{ variant.title }}</option>
+                      {% endfor %}
+                    </select>
+
+                  {% else %}
+
+                    <input type="hidden" name="id" value="{{ product.variants[0].id }}" />              
+                  {% endif %}
+                </div>
+                <div class="form__row">
+                  <div class="quantity-field">
+                    <span class="icon icon--arrow-right js-up-quantity"></span>
+                    <input class="form__field" type="number" id="quantity" name="quantity" value="1" min="1" >
+                    <span class="icon icon--arrow-left js-down-quantity"></span>
+                  </div>
+                  <span class="js-price-and-value">x <span class="money">{{ product.price | money }}</span> = <span class="js-total-price money"></span></span>
+                </div>
+                <div class="form__row">
+                  <button {% unless product.available %}disabled{% endunless %} class="btn btn--default btn--full btn--submit {% unless product.available %}btn--disabled{% endunless %} js-add-to-card" type="submit" >{% unless product.available %}{{ 'products.general.out_stock' | t }}{% else %} {{ 'layout.general.add_to_cart_button' | t }}{% endunless %}</button>
+                </div>
+              </form>
+            </div> <!-- End form-wrapper -->
+
+            {% if settings.wishlist_enable %}
+    
+              <div class="form-wrapper form-wrapper--wishlist js-wishlist-form">
+                {% if customer %}
+                  {% assign value = product.id %}
+                  {% capture productID %}{{ product.id }}{% endcapture %}
+                  {% for tag in customer.tags %}
+                    {% capture tagID %}{{ tag }}{% endcapture %}
+                    {% if tagID contains productID %}
+                      {% capture value %}x{{ tagID }}{% endcapture %}
+                    {% endif %}
+                    {% if value.size == 0 %}{% assign value = productID %}{% endif %}
+                  {% endfor %}
+              
+                  {% unless value.size == 0 %}
+                    {% capture check %}{{ value.size | minus:productID.size | money_without_currency | times:100 | divided_by:2 }}{% endcapture %}
+                    {% assign check = check | split:'.' %}
+                    {% if check[1] contains "5" %}{% assign display = false %}{% else %}{% assign display = true %}{% endif %}
+                  {% endunless %}
+              
+                  {% if display %}
+                    <form accept-charset="UTF-8" id="add-to-wish-list" action="/contact" method="post">
+                      <input name="form_type" type="hidden" value="customer">
+                      <input name="utf8" type="hidden" value="✓">
+                      <input type="hidden" name="contact[email]" value="{{ customer.email }}"/>
+                      <input id="update-me" type="hidden" name="contact[tags]" value="{{ value }}" />
+                      <button class="text-link--default" type="submit">
+                      <span class="icon icon--plus"></span>
+                      {{ 'layout.wishlist_page.add_to_wishlist' | t }}
+                      </button>
+                    </form>
+                  {% else %}
+                    <p>{{ 'layout.wishlist_page.added_to_wishlist' | t }} <a class="text-link--default" href="/pages/wishlist">{{ 'layout.wishlist_page.wishlist' | t }}</a></p>
+                  {% endif %}
+                {% endif %}
+              </div>
+            {% endif %}
+          </div> <!-- End product__info -->
+        </div> <!-- End grid__item -->
+      </div> <!-- End grid -->
+    </div> <!-- End wrapper -->
+</div>
+
+<script>
+  var selectVariantsDOM     = document.getElementById('product-variants');
+  
+  initVariants();
+
+  function initVariants () {
+    var radioBtnContainerDOM  = document.createElement('div');
+    var wrapperRadioBtnDOM;
+
+    if ( !selectVariantsDOM ) {
+      return null;
+    }
+
+    selectVariantsDOM.style.display = 'none';
+
+    for ( var i = 0, max = selectVariantsDOM.options.length; i < max; i++ ) {
+      wrapperRadioBtnDOM = greateRadioVariantsDOM(selectVariantsDOM.options[i]);
+      radioBtnContainerDOM.appendChild(wrapperRadioBtnDOM);
+    }
+
+    radioBtnContainerDOM.className = 'product-variants-radio-btns';
+
+    selectVariantsDOM.parentElement.insertBefore(radioBtnContainerDOM, selectVariantsDOM.nextSibling);
+  }
+
+  function greateRadioVariantsDOM(option) {
+
+    if ( !option ) {
+      return null;
+    }
+
+    var optionText = option.textContent.toLowerCase()
+
+    var wrapperDOM = document.createElement('div');
+    var productPriceDOM      = selectVariantsDOM.parentElement.parentElement.querySelector('.js-price-and-value > .money');
+    var productPriceTotalDOM = selectVariantsDOM.parentElement.parentElement.querySelector('.js-total-price');
+    var product
+    wrapperDOM.className = 'radio-btn'
+
+    var labelDOM = document.createElement('label');
+    labelDOM.innerHTML = option.innerHTML;
+    labelDOM.setAttribute('for', optionText);
+
+    var radioBtnDOM   = document.createElement('input');
+    radioBtnDOM.type  = 'radio';
+    radioBtnDOM.name  = 'variants';
+    radioBtnDOM.id    = optionText;
+    radioBtnDOM.value = option.value;
+    radioBtnDOM.setAttribute('data-price', option.getAttribute('data-variant-price') );
+
+    if ( option.selected) {
+      radioBtnDOM.checked = true;
+    }
+
+    radioBtnDOM.addEventListener('change', function(e){
+      var price;
+      
+      selectVariantsDOM.value = e.currentTarget.value;
+      price = e.currentTarget.getAttribute('data-price');
+      
+      {% if settings.show_multiple_currencies %}      
+      if ( productPriceDOM.getAttribute('data-currency') !== '' ){
+        productPriceDOM.removeAttribute('data-currency-' + Currency.currentCurrency.toLowerCase());
+        productPriceDOM.removeAttribute('data-currency');
+      }
+      if ( productPriceTotalDOM.getAttribute('data-currency') !== '' ){
+        productPriceTotalDOM.removeAttribute('data-currency-' + Currency.currentCurrency.toLowerCase());
+        productPriceTotalDOM.removeAttribute('data-currency');
+      }
+      {% endif %}
+      
+      productPriceDOM.innerHTML = Shopify.formatMoney(price, "{{ shop.money_format }}");
+      productPriceTotalDOM.innerHTML = Shopify.formatMoney(price, "{{ shop.money_format }}");
+                                                      
+      if ( window.shopCurrency != Currency.currentCurrency ) {
+        Currency.convertAll(shopCurrency, $('[name=currencies]').val(), '.form span.money', 'money_format');
+      }
+      
+      var quantityInputDOM = selectVariantsDOM.parentElement.parentElement.querySelector('.form__field[name=quantity]');
+      var event = new Event('change');
+      quantityInputDOM.dispatchEvent(event)
+      
+    })
+
+    var radioPointDOM = document.createElement('span');
+    radioPointDOM.className = 'radio-point';
+    radioPointDOM.style.backgroundColor = optionText;
+
+    wrapperDOM.appendChild(radioBtnDOM);
+    wrapperDOM.appendChild(labelDOM);
+    wrapperDOM.appendChild(radioPointDOM);
+    
+    return wrapperDOM;
+  };
+
+</script>

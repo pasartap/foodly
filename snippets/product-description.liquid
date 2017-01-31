@@ -1,0 +1,37 @@
+<div class="product-wrapper">
+  <div class="product-description-flex">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="product product--lg product-container grid__item one-whole {% if product.featured_image.size > 0 %}fade-up delay-one{% endif %}">
+          <div class="product__desc fold">
+          {% comment %}
+          Strip unnecessary html
+          {% endcomment %}
+          {% assign content_html = product.description %}
+          {% include 'strip_html_tags' with content_html %}
+    
+          {% assign split_nutritional = '[Nutritional value]' %}
+            {% if content contains split_nutritional %}
+              {% assign description_text = content | split: split_nutritional | first %}
+              {% assign nutritional_value_text = content | split: split_nutritional | last %}
+            {% endif %}
+            
+            {% comment %}
+            Product decription
+            {% endcomment %}
+            {% if settings.product_description_enable %}
+              <h3 class="heading--add fold__toggle">{{ 'products.product_page.description_title' | t }}</h3>
+              <div itemprop="description" class="rte product__desc-content fold__content">
+                {% if description_text != blank %}
+                  {{ description_text }}
+                {% else %}
+                  {{ product.description }}
+                {% endif %}
+              </div>
+            {% endif %}
+          </div> <!-- End product__desc -->
+        </div> <!-- End grid__item -->
+      </div> <!-- End grid -->
+    </div> <!-- End wrapper -->
+  </div>
+</div>

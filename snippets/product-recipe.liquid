@@ -1,0 +1,155 @@
+<div class="product-wrapper">
+   
+    {% comment %}
+    Add product review widget, must install Product Review App:
+    https://apps.shopify.com/product-reviews
+    {% endcomment %}
+    {% if settings.product_reviews_recipe == 'reviews' %}
+      <div class="wrapper">
+        <div class="grid paste">
+          <div class="grid__item one-whole fold product-reviews {% if product.featured_image.size > 0 %}fade-up delay-four{% endif %}">
+            <h3 class="heading--add fold__toggle">{{ 'products.product_page.customer_reviews' | t }}</h3>
+            <div class="fold__content">
+              <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+            </div>
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+    {% elsif settings.product_reviews_recipe == 'recipe' %}
+      <div class="wrapper">
+        <div class="grid">
+          <div class="product product--lg grid__item one-whole product-container {% if product.featured_image.size > 0 %}fade-up delay-four{% endif %}">         
+              {% assign current_product_title = product.title | downcase %}
+              
+              {% if settings.product_recipe_blog != blank %}
+                {% assign matched_article = false %}
+                {% assign first_article = false %}
+                {% assign random_article = false %}
+            
+                {% for article in blogs[settings.product_recipe_blog].articles %}
+    
+                  {% comment %}
+                  Checking if article tags have some word from product title
+                  {% endcomment %}
+                  {% for tag in article.tags %}
+                    {% assign tag = tag | downcase %}
+                    {% assign product_title = product.title | downcase %}
+
+                    {% if product_title contains tag %}
+                      {% assign matched_article = true %}
+                      {% break %}
+                    {% endif %}
+                  {% endfor %}
+            
+                  {% if matched_article == true and first_article == false %}
+
+                    {% include 'shortcode-recipe' with article.content %}
+
+                    <div class="product-recipe fold">
+                      <h3 class="heading--add fold__toggle">{{ 'products.product_page.special_recipe_title' | t }}</h3>
+    
+                      <div class="fold__content">
+                        <div class="text-center">
+                          <div class="bg-cover">
+                            <div class="img-holder img-holder--block">
+                              {% if settings.product_recipe_blog_ingredients != blank %}
+                                <span class="product-recipe__spec-title left"><strong>{{ settings.product_recipe_blog_ingredients }}</strong></span>
+                              {% endif %}
+                          
+                              <img src="{{ article.image | img_url: 'large' }}" alt="{{ article.title }}">
+                              <span class="license-mark">{{ license_mark }}</span>
+                          
+                              {% if settings.product_recipe_blog_directions != blank %}
+                                <span class="product-recipe__spec-title right"><strong>{{ settings.product_recipe_blog_directions }}</strong></span>
+                              {% endif %}
+                            </div> <!-- End img-holder -->
+                          </div> <!-- End bg-cover -->
+                        </div> <!-- End text-center -->
+    
+                        <h4 class="product-recipe__title">{{ article.title }}</h4>
+                                
+                      
+                        {% comment %}{% if introduction_text != blank %}
+                          {{ introduction_text }}
+                        {% endif %}{% endcomment %}
+                                
+                        <div class="rte product-recipe__content left">
+                          {{ ingredients_part }}
+                        </div>
+                                
+                        <div class="rte product-recipe__content right">
+                          {{ directions_part }}
+                        </div>
+                                
+                        {% comment %}
+                        Show the first matched article
+                        {% endcomment %}
+                        {% assign first_article = true %}
+                        {% assign random_article = true %}
+                      </div> <!-- End fold__content -->
+                    </div> <!-- End product-recipe -->
+                  {% endif %}
+                {% endfor %}
+    
+                {% comment %}
+                Random article (if article tags don't have words from product title)
+                {% endcomment %}
+                {% if random_article == false %}
+                  {% capture index %}{{ 'now' | date: '%S' | times: blogs[settings.product_recipe_blog].articles.size | divided_by: 60 }}{% endcapture %}
+                  {% for article in blogs[settings.product_recipe_blog].articles offset:index limit:1 %}
+            
+                    <div class="product-recipe fold">
+                      <h3 class="heading--add fold__toggle">{{ 'products.product_page.special_recipe_title' | t }}</h3>
+              
+                      <div class="fold__content">
+                        <div class="text-center">
+                          <div class="bg-cover">
+                            <div class="img-holder img-holder--block">
+                              {% if settings.product_recipe_blog_ingredients != blank %}
+                                <span class="product-recipe__spec-title left"><strong>{{ settings.product_recipe_blog_ingredients }}</strong></span>
+                              {% endif %}
+                          
+                              <img src="{{ article.image | img_url: 'large' }}" alt="{{ article.title }}">
+                          
+                              {% if settings.product_recipe_blog_directions != blank %}
+                                <span class="product-recipe__spec-title right"><strong>{{ settings.product_recipe_blog_directions }}</strong></span>
+                              {% endif %}
+                            </div> <!-- End img-holder -->
+                          </div> <!-- End bg-cover -->
+                        </div> <!-- End text-center -->
+    
+                        <h4 class="product-recipe__title">{{ article.title }}</h4>
+                                
+                        {% include 'shortcode-recipe' with article.content %}
+                                
+                        {% comment %}{% if introduction_text != blank %}
+                          {{ introduction_text }}
+                        {% endif %}{% endcomment %}
+                                
+                        <div class="rte product-recipe__content left">
+                          {{ ingredients_part }}
+                        </div>
+                                
+                        <div class="rte product-recipe__content right">
+                          {{ directions_part }}
+                        </div>
+                                
+                        {% comment %}
+                        Show the first matched article
+                        {% endcomment %}
+                        {% assign first_article = true %}
+                        {% assign random_article = true %}
+                      </div> <!-- End fold__content -->
+                    </div> <!-- End product-recipe -->
+                  
+                  {% endfor %}
+                {% endif %}
+    
+              {% endif %}          
+    
+          </div> <!-- End grid__item -->
+        </div> <!-- End grid -->
+      </div> <!-- End wrapper -->
+    {% endif %}
+</div>
+

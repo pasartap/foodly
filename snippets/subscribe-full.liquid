@@ -1,0 +1,36 @@
+<section class="section section--subscribe">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        <div class="heading-block">
+        {% comment %}
+          Subscribe form headings
+          {% endcomment %}
+          {% if settings.homepage_subscribe_form_heading != blank %}
+            <h3 class="section-heading heading--page">{{ settings.homepage_subscribe_form_heading_html | upcase }}</h3>
+          {% endif %}
+        </div>
+
+        <div class="form-wrapper">            
+          {% if settings.homepage_subscribe_form_subheading != blank %}
+            <p class="section__info text-center">{{ settings.homepage_subscribe_form_subheading }}</p>
+          {% endif %}
+
+          {% if settings.subscribe_form_variant == 'mailchimp' %}
+            {% comment %}
+            Snippet for MailChimp subscribe form
+            For setting go to Admin -> Theme -> Customize Theme -> Homepage
+            {% endcomment %}
+            {% include 'subscribe-form-mailchimp' %}
+          {% elsif settings.subscribe_form_variant == 'standart' %}
+            {% comment %}
+            Snippet for standart (Shopify) subscribe form
+            For setting go to Admin -> Theme -> Customize Theme -> Homepage
+            {% endcomment %}
+            {% include 'subscribe-form-shopify'%}
+          {% endif %}
+        </div> <!-- End form-wrapper -->
+      </div> <!-- End grid__item -->
+    </div> <!-- End grid -->
+  </div> <!-- End wrapper -->
+</section>
