@@ -1,0 +1,156 @@
+<!doctype html>
+<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->  
+<head>
+  
+  <!-- Basic page needs ================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <!-- Title and description ================================================== -->
+  <title>
+  {% if page_title contains "[price:" %}
+    {% assign page_title_recipe = page_title | split: "[price:" | first %}
+    {{ page_title_recipe }}
+  {% else %}
+    {{ page_title }}
+  {% endif %}
+  {% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <script>
+//     var link = window.location.href;
+//     if ( link.indexOf('https') < 0 ) {
+//       link = link.replace('http://', 'https://');
+//       window.location.href = link;
+//     }
+
+    function require(src, callback) {
+        var script = window.document.createElement('script');
+        script.src = src;
+        script.async = true;
+        document.body.appendChild(script);
+        if (callback && typeof(callback) === 'function') {
+            script.onload = callback;
+        }
+        return script;
+    }
+  </script>
+
+  <!-- Social meta ================================================== -->
+  {% include 'social-meta-tags' %}
+ 
+  <!-- Helpers ================================================== -->
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_primary }}">
+
+  <!-- CSS ================================================== -->
+  {% include 'styleheets' %}
+
+  <!-- Header hook for plugins ================================================== -->
+  {{ content_for_header }}
+
+  <!-- IE support ================================================== -->
+  {% include 'oldIE-js' %}
+
+  <!-- Favicons ================================================== -->
+  {% unless settings.favicon_enable %}
+    <link rel="shortcut icon" href="{{ 'favicon.ico' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ 'favicon_apple-touch-icon-152x152.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ 'favicon_apple-touch-icon-144x144.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ 'favicon_apple-touch-icon-114x114.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ 'favicon_apple-touch-icon-72x72.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ 'favicon_apple-touch-icon-57x57.png' | asset_url }}">
+  {% else %}
+    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}">
+  {% endunless %}
+
+  {% comment %}
+  If you store has customer accounts disabled, you can remove the following JS file
+  {% endcomment %}
+  {% if template contains 'customers' %}
+    {{ "customer_area.js" | shopify_asset_url  | script_tag }}
+  {% endif %}
+
+
+
+<!-- BeginConsistentCartAddon --><script>{% if customer %}Shopify.merge_cart_text = '{{ "consistent_cart_addon.merge_cart_text" | t }}' ;Shopify.customer_logged_in = true ;Shopify.customer_email = "{{ customer.email }}" ;{% else %}Shopify.customer_logged_in = false ;Shopify.customer_email = "" ;{% endif %}</script><!-- EndConsistentCartAddon -->
+</head>
+
+<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" style="overflow-y: scroll">
+  
+  <div class="content-wrapper">
+    <div style="display:none">
+      <p>JavaScript is disabled in your browser, this may cause some limitations to apply, and some functions may not be available.</p>
+    </div>
+    
+    {% if settings.fixed_bar_enable %}
+     <div class="fixed-bar">
+    
+        <ul class="fixed-bar__list">
+          {% if settings.fixed_bar_links != blank %}
+            {% for link in linklists[settings.fixed_bar_links].links limit:2 %}
+              <li class="fixed-bar__list-item">
+                <a class="fixed-bar__list-link" class="fixed-bar__list-link" href="{{ link.url }}" title="{{ link.title }}"><em>{{ link.title }}</em></a>
+              </li>
+            {% endfor %}
+          {% endif %}
+    
+          {% if settings.fixed_bar_search_enable %}
+            <li class="fixed-bar__list-item fixed-bar__list-item--search">
+              <a class="fixed-bar__list-link fixed-bar__list-link--icon" href="/search" title="{{ layout.search.heading | t }}">
+              <span class="icon">
+                <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="18" height="18" viewBox="0 0 18 18">
+                  <path class="svg-icon__path" d="M17.950,16.536 L16.536,17.950 L12.900,14.314 C11.546,15.367 9.848,16.000 8.000,16.000 C3.582,16.000 0.000,12.418 0.000,8.000 C0.000,3.582 3.582,-0.000 8.000,-0.000 C12.418,-0.000 16.000,3.582 16.000,8.000 C16.000,9.848 15.367,11.546 14.314,12.900 L17.950,16.536 ZM8.000,2.000 C4.686,2.000 2.000,4.686 2.000,8.000 C2.000,11.314 4.686,14.000 8.000,14.000 C11.314,14.000 14.000,11.314 14.000,8.000 C14.000,4.686 11.314,2.000 8.000,2.000 ZM8.000,6.000 L8.000,4.000 C10.209,4.000 12.000,5.791 12.000,8.000 L10.000,8.000 C10.000,6.895 9.105,6.000 8.000,6.000 Z"/>
+                </svg>
+              </span>
+              <span class="fallback-text">{{ layout.search.heading | t }}</span>
+              </a>
+            </li>
+          {% endif %}
+    
+          {% if settings.fixed_bar_links != blank %}
+            {% for link in linklists[settings.fixed_bar_links].links offset:2 limit:2 %}
+              <li class="fixed-bar__list-item">
+                <a class="fixed-bar__list-link" href="{{ link.url }}" title="{{ link.title }}"><em>{{ link.title }}</em></a>
+              </li>
+            {% endfor %}
+          {% endif %}
+          
+        </ul>
+     </div>
+    {% endif %}
+
+    {% include 'header-social' %}
+    
+    <!-- *** Main content *** -->
+    <main class="main-content {% unless template == 'index' or template == 'product' %} main-content--top{% endunless %} {% if template == 'product' %}{% unless product.featured_image.size > 0 %} main-content--top{% endunless %}{% endif %}" role="main">
+        {{ content_for_layout }}
+    </main>
+    <!-- *** End main content *** -->
+    
+ 	{% include 'footer' %}
+
+ 	{% include 'footer-copyright' %}	
+    
+  </div> <!-- End content-wrapper -->
+
+  <script>
+    window.addEventListener('load', function loadFontAwesome() {
+      loadCSS('https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');
+      window.removeEventListener('load', loadFontAwesome);
+    });
+  </script>
+  
+  {% comment %}
+  Snippet for scripts that are used on every page
+  {% endcomment %}
+  {% include 'scripts' %}
+
+</body>
+</html>
