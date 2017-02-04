@@ -151,91 +151,52 @@
         var activeSlideContainer = document.querySelector('.swiper-active-slide');
         // Featured carousels
         var allowLinksClick = true;
-        // Carousel 1
-        var carouselHomepage1 = new Swiper('.carousel--homepage_1', {
-          nextButton: '.homepage-swiper-btn-next',
-          prevButton: '.homepage-swiper-btn-prev',
-          preventClicks: false,
-          spaceBetween: 3,
-          slidesPerGroup: 'auto',
-          slidesPerView: 'auto',
-          loop: false,
-          autoplay: "{{ settings.homepage_featured_auplay }}",
-          onInit: function(carouselHomepage1) {
-            var slideNumber = carouselHomepage1.slides.length;
-            var bdImage, slideLink;
-            activeSlideContainer.textContent = carouselHomepage1.activeIndex + 1 + "/" + slideNumber;
-      
-            for ( var i = 0, max = slideNumber; i < max; i++ ) {
-              bdImage = carouselHomepage1.slides[i].getAttribute('data-img-bg');
-              slideLink = carouselHomepage1.slides[i].querySelector('.product__link ');
-              slideLink.style.backgroundImage = 'url(' + bdImage + ')';
-            }    
-          },
-          onSlideChangeStart: function(carouselHomepage1) {
-            var slideNumber = carouselHomepage1.slides.length;
-            activeSlideContainer.textContent = carouselHomepage1.activeIndex + 1 + "/" + slideNumber;
-          },
-          preloadImages: false,
-          lazyLoading: true,
-          breakpoints: {
-            1024: {
-              slidesPerView: 3,
-              slidesPerGroup: 3
+        var carousels = [];
+        for (var i = 1, carouselCount = 6; i <= carouselCount; i++) {
+          // Initialize each carousel 
+          var carousel = new Swiper('.carousel--homepage_' + i, {
+            nextButton: '.homepage-swiper-btn-next',
+            prevButton: '.homepage-swiper-btn-prev',
+            preventClicks: false,
+            spaceBetween: 3,
+            slidesPerGroup: 'auto',
+            slidesPerView: 'auto',
+            loop: false,
+            autoplay: "{{ settings.homepage_featured_auplay }}",
+            onInit: function(carousel) {
+              var slideNumber = carousel.slides.length;
+              var bdImage, slideLink;
+              activeSlideContainer.textContent = carousel.activeIndex + 1 + "/" + slideNumber;
+        
+              for ( var i = 0, max = slideNumber; i < max; i++ ) {
+                bdImage = carousel.slides[i].getAttribute('data-img-bg');
+                slideLink = carousel.slides[i].querySelector('.product__link ');
+                slideLink.style.backgroundImage = 'url(' + bdImage + ')';
+              }    
             },
-            768: {
-              slidesPerView: 2,
-              slidesPerGroup: 2
+            onSlideChangeStart: function(carousel) {
+              var slideNumber = carousel.slides.length;
+              activeSlideContainer.textContent = carousel.activeIndex + 1 + "/" + slideNumber;
             },
-            480: {
-              slidesPerView: 1,
-              slidesPerGroup: 1
+            preloadImages: false,
+            lazyLoading: true,
+            breakpoints: {
+              1024: {
+                slidesPerView: 3,
+                slidesPerGroup: 3
+              },
+              768: {
+                slidesPerView: 2,
+                slidesPerGroup: 2
+              },
+              480: {
+                slidesPerView: 1,
+                slidesPerGroup: 1
+              }
             }
-          }
-        });
-   
-   		// Carousel 2
-   		var carouselHomepage2 = new Swiper('.carousel--homepage_2', {
-          nextButton: '.homepage-swiper-btn-next',
-          prevButton: '.homepage-swiper-btn-prev',
-          preventClicks: false,
-          spaceBetween: 3,
-          slidesPerGroup: 'auto',
-          slidesPerView: 'auto',
-          loop: false,
-          autoplay: "{{ settings.homepage_featured_auplay }}",
-          onInit: function(carouselHomepage2) {
-            var slideNumber = carouselHomepage2.slides.length;
-            var bdImage, slideLink;
-            activeSlideContainer.textContent = carouselHomepage2.activeIndex + 1 + "/" + slideNumber;
-      
-            for ( var i = 0, max = slideNumber; i < max; i++ ) {
-              bdImage = carouselHomepage2.slides[i].getAttribute('data-img-bg');
-              slideLink = carouselHomepage2.slides[i].querySelector('.product__link ');
-              slideLink.style.backgroundImage = 'url(' + bdImage + ')';
-            }    
-          },
-          onSlideChangeStart: function(carouselHomepage2) {
-            var slideNumber = carouselHomepage2.slides.length;
-            activeSlideContainer.textContent = carouselHomepage2.activeIndex + 1 + "/" + slideNumber;
-          },
-          preloadImages: false,
-          lazyLoading: true,
-          breakpoints: {
-            1024: {
-              slidesPerView: 3,
-              slidesPerGroup: 3
-            },
-            768: {
-              slidesPerView: 2,
-              slidesPerGroup: 2
-            },
-            480: {
-              slidesPerView: 1,
-              slidesPerGroup: 1
-            }
-          }
-        });
+          });
+          carousels.push(carousel);
+        }
       }
 
       require("{{ 'swiper.min.js' | asset_url }}", initHomepageCarousel);
