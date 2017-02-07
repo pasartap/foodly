@@ -11,6 +11,10 @@
     {% if settings.footer_blog_enable %}
       {% assign num_footer_columns = num_footer_columns | plus: 1 %}
     {% endif %}
+
+    {% if settings.footer_newsletter_enable %}
+      {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+    {% endif %}
         
     {% if settings.footer_menu_enable %}
       {% assign num_footer_columns = num_footer_columns | plus: 1 %}
@@ -40,7 +44,7 @@
       {% when 1 %}
         {% assign footer_column_width = 'text-center' %}
       {% when 2 %}
-        {% assign footer_column_width = 'large--one-half medium--one-half one-whole' %}
+        {% assign footer_column_width = 'text-center large--one-half medium--one-half one-whole' %}
       {% when 3 %}
         {% assign footer_column_width = 'large--one-third medium--one-third one-whole' %}
       {% when 4 %}
@@ -49,13 +53,59 @@
         
     <div class="grid">
       {% comment %}
+      Footer menu.
+      For setting go to Admin -> Theme -> Customize Theme -> Footer
+      {% endcomment %}
+      {% if settings.footer_menu_enable %}
+        <div class="grid__item {{ footer_column_width }} footer__item footer__item--menu">
+          <h4 class="heading--add-small">{{ settings.footer_menu_heading | upcase }}</h4>
+          <ul class="footer-list">
+            {% for link in linklists[settings.footer_quicklinks_linklist].links %}
+              <li class="footer-list__item">
+                <a class="footer-list__link" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% comment %}
+      Footer newsletter menu.
+      For setting go to Admin -> Theme -> Customize Theme -> Footer
+      {% endcomment %}
+      {% if settings.footer_newsletter_enable %}
+        <div class="grid__item {{ footer_column_width }} footer__item footer__item--menu">
+          {% comment %}<h4 class="heading--add-small">{{ settings.footer_newsletter_heading | upcase }}</h4>{% endcomment %}
+          {% include 'subscribe-footer' %}
+        </div>
+      {% endif %}
+
+      {% comment %}
+      Footer additional menu.
+      For setting go to Admin -> Theme -> Customize Theme -> Footer
+      {% endcomment %}
+      {% if settings.footer_second_menu_enable %}
+        <div class="grid__item {{ footer_column_width }} footer__item footer__item--menu">
+          <h4 class="heading--add-small">{{ settings.footer_second_menu_heading | upcase }}</h4>
+          <ul class="footer-list">
+            {% for link in linklists[settings.footer_second_menu].links %}
+              <li class="footer-list__item">
+                <a class="footer-list__link" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+          {% include 'subscribe-footer' %}
+        </div>
+      {% endif %}
+          
+      {% comment %}
       Contact information.
       For setting go to Admin -> Theme -> Customize Theme -> Footer
       {% endcomment %}          
       {% if settings.footer_address_enable %}
         <div class="grid__item {{ footer_column_width }} footer__item footer__item--contact {% if settings.footer_show_methods_of_payment %}footer__item--contact-half{% endif %}">
           {% if settings.footer_address_text != blank %}
-            <h4 class="heading--add-small">{{ settings.footer_second_menu_heading | upcase }}</h4>
+            <h4 class="heading--add-small">{{ settings.footer_address_heading | upcase }}</h4>
             <div>{{ settings.footer_address_text }}</div>
           {% endif %}
         </div>
@@ -82,40 +132,6 @@
               <h5 class="article-title">{{ article.title | link_to: article.url | truncatewords: 6 }}</h5>  
             </div>
           </div>
-        </div>
-      {% endif %}
-          
-      {% comment %}
-      Footer menu.
-      For setting go to Admin -> Theme -> Customize Theme -> Footer
-      {% endcomment %}
-      {% if settings.footer_menu_enable %}
-        <div class="grid__item {{ footer_column_width }} footer__item footer__item--menu">
-          <h4 class="heading--add-small">{{ settings.footer_menu_heading | upcase }}</h4>
-          <ul class="footer-list">
-            {% for link in linklists[settings.footer_quicklinks_linklist].links %}
-              <li class="footer-list__item">
-                <a class="footer-list__link" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
-          
-      {% comment %}
-      Footer additional menu.
-      For setting go to Admin -> Theme -> Customize Theme -> Footer
-      {% endcomment %}
-      {% if settings.footer_second_menu_enable %}
-        <div class="grid__item {{ footer_column_width }} footer__item footer__item--menu">
-          <h4 class="heading--add-small">{{ settings.footer_second_menu_heading | upcase }}</h4>
-          <ul class="footer-list">
-            {% for link in linklists[settings.footer_second_menu].links %}
-              <li class="footer-list__item">
-                <a class="footer-list__link" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
-              </li>
-            {% endfor %}
-          </ul>
         </div>
       {% endif %}
           
