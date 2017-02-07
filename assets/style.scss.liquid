@@ -860,6 +860,7 @@ body {
 
   .main-content {
     opacity: 1;
+    margin-top: 200px;
   }
 }
 
@@ -2280,7 +2281,7 @@ th, td {
 @media (min-width: 769px) {
   .header {
     height: 200px; //223px; 
-    position: relative;
+    position: fixed; //relative;
     background-color: #fff; //$colorNeutral;
   }
 
@@ -3273,6 +3274,11 @@ th, td {
         box-sizing: border-box;
         opacity: 0;
         visibility: hidden;
+        /* Added for scrolling */
+        min-height: auto;
+        max-height: 60vh;
+        overflow-y: scroll;
+        /**/
 
         @include transition(opacity 320ms ease-in-out);
         @include transform(translateX(-50%));
