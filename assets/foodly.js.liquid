@@ -397,10 +397,10 @@
 			Shopify.getCart(function(cart) {
 				foodly.doUpdateDropdownCart(cart, false);
 				{% if settings.collection_add_cart_thumb %}
-          if ( cart.item_count > 0 && $('body')[0].classList.contains('template-collection')) {
-            $this.updateForms(cart, false);
-          }
-        {% endif %}
+		          if ( cart.item_count > 0) { // && $('body')[0].classList.contains('template-collection')) {
+		            $this.updateForms(cart, false);
+		          }
+		        {% endif %}
 			});
 		},
 
