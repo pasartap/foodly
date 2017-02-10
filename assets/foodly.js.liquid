@@ -405,36 +405,36 @@
 		},
 
 		updateForms: function(cart, removeItemId){
-      var $forms = $('.js-form-cart-alt');
-      
-      if (!cart || $forms.length <= 0 ) {
-        return null;
-      }
-      
-      var variantId, $productVisual, $quantityCounter;
-              
-      for (var i = 0, maxI = $forms.length; i < maxI; i++) {
-        variantId = $($forms[i]).find('input[name=id]').val();
-        
-        $productVisual   = $($forms[i]).closest('.product__visuals');
-        $quantityCounter = $($forms[i]).find('.quantity__counter');
-                
-        for (var j = 0, maxJ = cart.items.length; j < maxJ; j++) {
-          if (removeItemId[0] && removeItemId[0] == variantId && $productVisual.hasClass('product-in-cart') ) {
-            
-            $quantityCounter.text('1');
-            $productVisual.removeClass('product-in-cart');
-          } else if ( removeItemId[0] && removeItemId[0] == cart.items[j].id ) {
+	      var $forms = $('.js-form-cart-alt');
+	      
+	      if (!cart || $forms.length <= 0 ) {
+	        return null;
+	      }
+	      
+	      var variantId, $productVisual, $quantityCounter;
+	              
+	      for (var i = 0, maxI = $forms.length; i < maxI; i++) {
+	        variantId = $($forms[i]).find('input[name=id]').val();
+	        
+	        $productVisual   = $($forms[i]).closest('.product__visuals');
+	        $quantityCounter = $($forms[i]).find('.quantity__counter');
+	                
+	        for (var j = 0, maxJ = cart.items.length; j < maxJ; j++) {
+	          if (removeItemId[0] && removeItemId[0] == variantId && $productVisual.hasClass('product-in-cart') ) {
+	            
+	            $quantityCounter.text('1');
+	            $productVisual.removeClass('product-in-cart');
+	          } else if ( removeItemId[0] && removeItemId[0] == cart.items[j].id ) {
 
-            continue;
-          } else if ( variantId == cart.items[j].id ) {
-            
-            $quantityCounter.text(cart.items[j].quantity);
-            $productVisual.addClass('product-in-cart');
-          }
-        }
-      }
-    },
+	            continue;
+	          } else if ( variantId == cart.items[j].id ) {
+	            
+	            $quantityCounter.text(cart.items[j].quantity);
+	            $productVisual.addClass('product-in-cart');
+	          }
+	        }
+	      }
+	    },
 
 		// Update shopping cart items
 		doUpdateDropdownCart: function(cart, removeItem) {
