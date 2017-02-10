@@ -23,7 +23,7 @@ Snippet for toolbar with types of view and sorting options (collection page)
     {% comment %}
     Sort products by type.
     For enable/disable go: Admin -> Online Store -> Themes -> Customize theme -> Collection page
-    {% endcomment %}
+
     {% if settings.collection_for_sorting_enable and settings.collection_for_sorting != blank %}
       {% assign current_tags = settings.collection_for_sorting %}
       {% assign collection_array = settings.collection_for_sorting | split: ', ' %}
@@ -38,11 +38,12 @@ Snippet for toolbar with types of view and sorting options (collection page)
     
       </select>
     {% endif %}
-    
+    {% endcomment %}
+
     {% comment %}
     Sort products by state.
     For enable/disable go: Admin -> Online Store -> Themes -> Customize theme -> Collection page
-    {% endcomment %}
+    
     {% if settings.collection_sort_tags_enable and settings.collection_sort_tags != blank %}
       {% assign current_tags = settings.collection_sort_tags %}
       {% assign tags_array = settings.collection_sort_tags | split: ', ' %}
@@ -58,15 +59,62 @@ Snippet for toolbar with types of view and sorting options (collection page)
     
       </select>
     {% endif %}
+    {% endcomment %}
     
+    {% assign tag_counter = 0 %}
+    {% for tag in collection.all_tags %}
+      {% if tag_counter > 1 %}
+          {% break %}
+      {% else %}
+          {% assign tag_counter = tag_counter | plus: 1 %}
+      {% endif %}     
+    {% endfor %}
+
+    {% if tag_counter > 1 %}
+      <select id="tag-filter" class="sort-filter sort-filter--tags js-dropdown" name="" >
+        <option value="">All types</option>
+        {% for tag in collection.all_tags %}
+          {% if current_tags contains tag %}
+            <option value="{{ tag | handle }}" selected>{{ tag }}</option>
+          {% else %}
+            <option value="{{ tag | handle }}">{{ tag }}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    {% endif %}
+    
+    {% comment %}
+    {% assign vendor_counter = 0 %}
+    {% for vendor in collection.all_vendors %}
+      {% if vendor_counter > 1 %}
+          {% break %}
+      {% else %}
+          {% assign vendor_counter = vendor_counter | plus: 1 %}
+      {% endif %}     
+    {% endfor %}
+
+    {% if vendor_counter > 1 %}
+      <select id="type-filter" class="sort-filter sort-filter--vendors js-dropdown" name="" >
+        <option value="">All brands</option>
+        {% for vendor in collection.all_vendors %}
+          {% if current_tags contains vendor %}
+            <option value="{{ vendor | handle }}" selected>{{ vendor }}</option>
+          {% else %}
+            <option value="{{ vendor | handle }}">{{ vendor }}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    {% endif %}   
+    {% endcomment %}
+
     {% comment %}
     Default sort.
     For enable/disable go: Admin -> Online Store -> Themes -> Customize theme -> Collection page
     {% endcomment %}
     {% if settings.collection_sort_default_enable %}
       <select id="sort_by" class="sort-filter sort-filter--order js-dropdown" name="sort-by">
-        <option value="manual">By order</option>
-        <option value="">None</option>
+        {% comment %}<option value="manual">By order</option>{% endcomment %}
+        <option value="">Sort by</option>
         <option value="best-selling">Best selling</option>
         <option value="title-ascending">Alphabetically: A-Z</option>
         <option value="title-descending">Alphabetically: Z-A</option>

@@ -1047,6 +1047,10 @@
 
 			$this = this;
 			var link = location.href;
+			var searchPath = location.search;
+			var pathURL = location.pathname.slice( location.pathname.indexOf('/collections/') + 13);
+			var selectedTag = pathURL.slice(pathURL.lastIndexOf('/') + 1);	
+			var orderQuery = searchPath.slice(searchPath.indexOf('sort_by') + 8);
 
 			for ( var i = 0, max = $selects.length; i < max; i++) {
 				
@@ -1058,14 +1062,14 @@
 				$('<span/>').addClass('icon').appendTo($dropdownContainer);
 
 				var $dropdownList = $('<ul/>').addClass('dropdown-list');
+				var selectedValue = $selects[i].id === 'tag-filter' ? selectedTag : orderQuery;
 
 				for ( var j = 0, maxj = $selects[i].length; j < maxj; j++) {
 
-					if ( link.indexOf($selects[i][j].value) !=-1) {
+					if ( selectedValue === $selects[i][j].value ) {
 						$dropdownButton.text($selects[i][j].textContent);
 					} else if ( j === 0 ) {
 						$dropdownButton.text($selects[i][j].textContent);
-						continue;
 					};
 
 					$('<li/>').addClass('dropdown-list__item').text($selects[i][j].textContent).attr('data-value', $selects[i][j].value).appendTo($dropdownList);
