@@ -12529,7 +12529,7 @@ th, td {
 /* Box slider block
 /* -------------------------------------------------------------------------- */
 .box-slider {
-  height: 500px;
+  height: 430px; //500px;
 
   .swiper-slide {
     .slide__info-wrapper {
@@ -12663,25 +12663,10 @@ th, td {
     }
   }
 
-  .slide-buggy-1 {
-    background: url({{ 'img_box_slide_1.jpg' | asset_url }}) 50% 50% no-repeat;
-  	background-size: contain;
-  }
-  
-  .slide-buggy-2 {
-    background: url({{ 'img_box_slide_2.jpg' | asset_url }}) 50% 50% no-repeat;
-  	background-size: contain;
-  }
-  
-  .slide-buggy-3 {
-    background: url({{ 'img_box_slide_3.jpg' | asset_url }}) 50% 50% no-repeat;
-  	background-size: contain;
-  }
-  
   .swiper-button {
     width: 48px;
     height: 48px;
-    background: $colorNeutral;
+    background: transparent; //$colorNeutral;
     text-align: center;
     line-height: 50px;
     border-radius: 50%;
@@ -12689,12 +12674,14 @@ th, td {
   }
 
   .swiper-button:hover {
-    background: $colorPrimary;
+    background: $colorNeutral; //colorPrimary;
   }
 }
 
 @media (max-width: 769px) {
   .box-slider {
+    height: 375px; //added
+
     .swiper-slide {
       .slide__info-wrapper {
         width: 100%;
@@ -12721,6 +12708,8 @@ th, td {
     }
 
     .slide--1 {
+      background: url({{ 'img_box_slide_1_mobile.jpg' | asset_url }}) center/contain no-repeat !important; //added
+
       .slide__price-point {
         left: 50%;
         margin-left: -70px;
@@ -12728,6 +12717,8 @@ th, td {
     }
 
     .slide--2 {
+      background: url({{ 'img_box_slide_2_mobile.jpg' | asset_url }}) center/contain no-repeat !important; //added
+
       .slide__price-point {
         margin-top: 35px;
       }
@@ -12738,6 +12729,8 @@ th, td {
     }
 
     .slide--3 {
+      background: url({{ 'img_box_slide_3_mobile.jpg' | asset_url }}) center/contain no-repeat !important; //added
+
       .slide__info-wrapper {
         top: 20%;
       }
