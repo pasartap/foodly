@@ -72,7 +72,7 @@ Snippet for toolbar with types of view and sorting options (collection page)
 
     {% if tag_counter > 1 %}
       <select id="tag-filter" class="sort-filter sort-filter--tags js-dropdown" name="" >
-        <option value="">All types</option>
+        <option value="">All tags</option>
         {% for tag in collection.all_tags %}
           {% if current_tags contains tag %}
             <option value="{{ tag | handle }}" selected>{{ tag }}</option>

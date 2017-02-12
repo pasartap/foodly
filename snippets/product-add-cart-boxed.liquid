@@ -48,20 +48,21 @@
                         {% assign image_urls = image_urls | append: image_url | append: ',' %}
                     {% endif %}
 
-
                   {% endfor %}
                 
                 {% endif %}
         
               </div>
-        
-              <div class="carousel__navigation"></div>
-              <div class="swiper-button-next carousel-button-next">
-                <span class="icon icon--arrow-right"></span>
-              </div>
-              <div class="swiper-button-prev carousel-button-prev">
-                <span class="icon icon--arrow-left"></span>
-              </div>
+              
+              {% if product.images > 1 %}
+                <div class="carousel__navigation"></div>
+                <div class="swiper-button-next carousel-button-next">
+                  <span class="icon icon--arrow-right"></span>
+                </div>
+                <div class="swiper-button-prev carousel-button-prev">
+                  <span class="icon icon--arrow-left"></span>
+                </div>
+              {% endif %}
             </div>
             
             
@@ -72,8 +73,11 @@
               <h1 itemprop="name" class="product__title">{{ product.title }}</h1>
               <div class="product__info">
                 <span class="product__spec">
-                  {{ product.type }} |
-                
+                  {{ product.type | link_to_type }} |
+                  {% for tag in product.tags %}
+                    {{ tag | link_to_tag: tag }} |
+                  {% endfor %}
+
                   {% if product.available %}
                     {{ 'products.general.in_stock' | t }}
                   {% else %}
