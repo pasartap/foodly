@@ -91,8 +91,27 @@
     
     {% if settings.fixed_bar_enable %}
      <div class="fixed-bar">
-    
-        <ul class="fixed-bar__list">
+        <div class="fixed-bar__search-container fixed-bar__search-container--lg">
+          <form action="/search" method="GET" class="form form--search-primary" role="search">
+            {% if settings.search_type == 'products' %}
+              <input type="hidden" name="type" value="product" />
+            {% endif %}
+          
+            <div class="form__row form--search-lg">
+              <input type="text" name="q" class="form__field" placeholder="{{ 'layout.search.placeholder' | t }}" autocomplete="off">
+            </div>
+
+            <input type="submit" class="btn--submit" value="{{ 'layout.search.button' | t }}">
+
+            <div class="icon icon--search">
+              <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="18" height="18" viewBox="0 0 18 18">
+                <path d="M17.950,16.536 L16.536,17.950 L12.900,14.314 C11.546,15.367 9.848,16.000 8.000,16.000 C3.582,16.000 0.000,12.418 0.000,8.000 C0.000,3.582 3.582,-0.000 8.000,-0.000 C12.418,-0.000 16.000,3.582 16.000,8.000 C16.000,9.848 15.367,11.546 14.314,12.900 L17.950,16.536 ZM8.000,2.000 C4.686,2.000 2.000,4.686 2.000,8.000 C2.000,11.314 4.686,14.000 8.000,14.000 C11.314,14.000 14.000,11.314 14.000,8.000 C14.000,4.686 11.314,2.000 8.000,2.000 ZM8.000,6.000 L8.000,4.000 C10.209,4.000 12.000,5.791 12.000,8.000 L10.000,8.000 C10.000,6.895 9.105,6.000 8.000,6.000 Z" class="cls-1"/>
+              </svg>
+            </div>
+              
+          </form>
+        </div> <!-- End search-container -->
+        {% comment %}<ul class="fixed-bar__list">
           {% if settings.fixed_bar_links != blank %}
             {% for link in linklists[settings.fixed_bar_links].links limit:2 %}
               <li class="fixed-bar__list-item">
@@ -122,7 +141,7 @@
             {% endfor %}
           {% endif %}
           
-        </ul>
+        </ul>{% endcomment %}
      </div>
     {% endif %}
 

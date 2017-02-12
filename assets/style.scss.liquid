@@ -4343,6 +4343,62 @@ th, td {
   }
 }
 
+.fixed-bar__search-container {
+  background-color: $colorTopBar;
+  color: $colorTextBodyLight;
+
+  .icon--search {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  
+    .svg-icon path {
+      fill: white;
+    }
+  }
+}
+
+.fixed-bar__search-container--lg {
+  margin: 0 auto; 
+  max-width: 520px;
+
+  .form--search-primary {
+    .btn--submit {
+      width: 30px;
+      height: 30px;
+      display: block;
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      text-indent: 999px;
+      opacity: .1;
+      z-index: 2;
+    }
+
+    .form__field {
+      padding: 10px 0px;
+      color: white;
+    }
+  }
+
+  .form--search-primary ::-webkit-input-placeholder {
+    color: white;
+  }
+  
+  .form--search-primary :-moz-placeholder { /* Firefox 18- */
+    color: white;  
+  }
+  
+  .form--search-primary ::-moz-placeholder {  /* Firefox 19+ */
+    color: white;  
+  }
+  
+  .form--search-primary :-ms-input-placeholder {  
+    color: white;  
+  }
+}
+
 /* Media styles */
 @media (min-width: 769px) {
   .fixed-bar.show {
