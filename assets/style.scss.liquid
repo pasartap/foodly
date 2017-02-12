@@ -14882,6 +14882,16 @@ th, td {
   @include transform(translateY(0%));
 }
 
+@media (max-width: 768px) {
+  .product__visuals .product__cart .btn--submit  {
+    opacity: 1;
+    visibility: visible;
+    @include transform(translateY(0%));
+    transition: opacity 300ms ease-in-out, visibility 300ms ease-in-out, transform 300ms ease-in-out;
+    z-index: 5;
+  }
+}
+
 .btn--circle {
   width: 60px;
   height: 60px;
