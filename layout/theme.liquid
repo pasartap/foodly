@@ -92,6 +92,10 @@
     {% if settings.fixed_bar_enable %}
      <div class="fixed-bar">
         <div class="fixed-bar__search-container fixed-bar__search-container--lg">
+          <a class="site-logo site-logo--mobile" href="/">
+            <img src="{{ 'logo_green.png' | asset_url }}" alt="{{ shop.name }}">
+          </a>
+          
           <form action="/search" method="GET" class="form form--search-primary" role="search">
             {% if settings.search_type == 'products' %}
               <input type="hidden" name="type" value="product" />

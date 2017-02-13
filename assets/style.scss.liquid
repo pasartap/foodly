@@ -2396,7 +2396,7 @@ th, td {
     }
 
     .drawer--menu .site-logo {
-      margin-top: 4px; //17px;
+      margin-top: 35px; //17px;
       padding: 0 35px; //added
     }
 
@@ -2761,7 +2761,7 @@ th, td {
 
   .drawer__header {
     text-align: left; //center;
-    padding-left: 32px; //added
+    padding-left: 35px; //added
   }
 
   &.open {
@@ -2783,7 +2783,7 @@ th, td {
   }
 
   .site-logo img {
-    max-width: 130px;
+    max-width: 150px; //130px;
   }
 
   .store-desc {
@@ -2820,6 +2820,14 @@ th, td {
 
 .drawer--menu.open .drawer__wrapper {
   @include transform(translate3d(0%, 0, 0));
+}
+
+@media (max-width: 768px) {
+  .drawer--menu {
+    .site-logo img {
+      margin-top: 10px;
+    }
+  }
 }
 
 // Drawer cart
@@ -4355,6 +4363,33 @@ th, td {
   
     .svg-icon path {
       fill: white;
+    }
+  }
+
+  .site-logo--mobile {
+    position: relative;
+    top: 12px;
+    left: 50%;
+    max-width: 120px;
+    @include transform(translateX(-50%));
+    z-index: 4;
+    display: block;
+  }
+
+  .site-logo--mobile img {
+    width: 100%;
+  }
+
+  .drawer__wrapper .site-logo {
+    //display: none;
+  }
+
+  @media (min-width: 769px) {
+    .site-logo--mobile {
+      display: none;
+    }
+    .drawer__wrapper .site-logo {
+      display: inline-block;
     }
   }
 }
@@ -14257,9 +14292,9 @@ th, td {
 {% if settings.logo_use_image and settings.mobile_logo_enable %}
   .header .site-logo--mobile {
     position: absolute;
-    top: 5px;
+    top: 12px; //5px;
     left: 50%;
-    max-width: 70px;
+    max-width: 120px; //70px;
     @include transform(translateX(-50%));
     z-index: 4;
     display: block;
