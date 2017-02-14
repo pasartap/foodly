@@ -2725,10 +2725,11 @@ th, td {
 .drawer {
   position: absolute;
   top: 0;
+  z-index: 11; //added
 
   .drawer__btn-open {
     padding: 12px 10px;
-    position: absolute;
+    position: fixed; //absolute;
     top: 10px;
     left: 10px;
     cursor: pointer;
@@ -2833,6 +2834,7 @@ th, td {
 // Drawer cart
 .drawer--cart {
   right: 0;
+  position: fixed; //added
 
   .drawer__header {
     padding: 19px 20px;
@@ -2851,6 +2853,7 @@ th, td {
     top: 6px;
     right: 37px;
     min-width: 0px;
+
     -webkit-transition: color 300ms ease-in-out, transform 450ms cubic-bezier(0.5, 0.13, 0.5, 0.87);
         -ms-transition: color 300ms ease-in-out, transform 450ms cubic-bezier(0.5, 0.13, 0.5, 0.87);
             transition: color 300ms ease-in-out, transform 450ms cubic-bezier(0.5, 0.13, 0.5, 0.87);
@@ -2860,7 +2863,7 @@ th, td {
       color: $colorHighlight;
 
       .svg-icon path {
-        fill: $colorHighlight;
+        fill: white; //$colorHighlight;
       }
     }
   }
@@ -2890,7 +2893,7 @@ th, td {
     right: -15px;
 
     .svg-icon path {
-      fill: $colorTextBody;
+      fill: white; //$colorTextBody;
     }
   }
 
@@ -4278,12 +4281,12 @@ th, td {
   top: 0;
   z-index: 10;
 
-  @include transform(translate3d(0, -100%, 0));
+  @include transform(translate3d(0, 0, 0));
   -webkit-backface-visibility: hidden;
 }
 
 .fixed-bar.show {
-  @include animation( showBar 500ms cubic-bezier(0.55, 0, 0, 1.195) 0ms forwards);
+  //@include animation( showBar 500ms cubic-bezier(0.55, 0, 0, 1.195) 0ms forwards);
 }
 
 // Show fixed bar
@@ -4358,7 +4361,7 @@ th, td {
   .icon--search {
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 20px; //10px;
     cursor: pointer;
   
     .svg-icon path {
@@ -4404,8 +4407,8 @@ th, td {
       height: 30px;
       display: block;
       position: absolute;
-      top: -2px;
-      right: -2px;
+      top: 5px; //-2px;
+      right: 15px; //-2px;
       text-indent: 999px;
       opacity: .1;
       z-index: 2;
@@ -4414,6 +4417,7 @@ th, td {
     .form__field {
       padding: 10px 0px;
       color: white;
+      margin-left: 20px;
     }
   }
 
@@ -4487,6 +4491,7 @@ th, td {
 
   .form__row {
     position:relative;
+    width: 90%; //added
   }
 
   .form__row-block {
@@ -5300,7 +5305,7 @@ th, td {
     height: 2px;
     position: absolute;
     left: 0;
-    background-color: $colorPrimary;
+    background-color: white; //$colorPrimary;
   }
 
   span:first-child {
@@ -5333,7 +5338,7 @@ th, td {
     position: absolute;
     left: 50%;
     top: 50%;
-    background-color: $colorPrimary;
+    background-color: white; //$colorPrimary;
 
     @include transform-origin($top: 50%, $left: 50%);
   }
@@ -15789,6 +15794,6 @@ th, td {
   }
   
   .main-content {
-    margin-top: 70px;
+    margin-top: 84px;
   }
 }
