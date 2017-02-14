@@ -171,10 +171,12 @@
 			}
 
 			var $drawerWrapper = $drawer.find('.drawer__wrapper');
+			var $fixedBar = $('.fixed-bar');
 
 			$this.cache.$body.addClass('drawer-open');
 				
 			if ( $drawer.hasClass('close') && $drawerWrapper.length > 0 ) {
+				$fixedBar.hide(450);
 				$drawer.removeClass('close').addClass('open');
 				$drawer.css('zIndex', '8');
 				$drawerWrapper.one('webkitTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function showIt() {
@@ -195,8 +197,9 @@
 			}
 
 			var $drawerWrapper = $drawer.find('.drawer__wrapper');
+			var $fixedBar = $('.fixed-bar');
 
-			if ( $drawer.hasClass('open') && $drawerWrapper.length > 0 ) {
+			if ( $drawer.hasClass('open') && $drawerWrapper.length > 0 ) {				
 				$drawer.removeClass('open').addClass('close');
 
 				$drawerWrapper.one('webkitTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function hideIt() {
@@ -205,6 +208,8 @@
 
 					$drawerWrapper.off('webkitTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', hideIt);
 				});
+				
+				$fixedBar.show(450);
 			} else if ( $drawer.hasClass('open') ) {
 				$drawer.removeClass('open').addClass('close');
 			}

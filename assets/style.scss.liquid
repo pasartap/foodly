@@ -2725,17 +2725,16 @@ th, td {
 .drawer {
   position: absolute;
   top: 0;
-  z-index: 11; //added
 
   .drawer__btn-open {
     padding: 12px 10px;
-    position: fixed; //absolute;
+    position: absolute;
     top: 10px;
     left: 10px;
     cursor: pointer;
 
     &:hover .icon--hamburger span {
-      background-color: $colorHighlight;
+      background-color: white; //$colorHighlight;
     }
   }
 
@@ -2746,8 +2745,8 @@ th, td {
     right: 11px;
     cursor: pointer;
 
-    &:hover .icon--close:before,
-    &:hover .icon--close:after {
+    .icon--close:before,
+    .icon--close:after {
       background-color: $colorHighlight;
     }
   }
@@ -2863,7 +2862,7 @@ th, td {
       color: $colorHighlight;
 
       .svg-icon path {
-        fill: white; //$colorHighlight;
+        fill: $colorHighlight;
       }
     }
   }
@@ -2893,7 +2892,7 @@ th, td {
     right: -15px;
 
     .svg-icon path {
-      fill: white; //$colorTextBody;
+      fill: $colorTextBody;
     }
   }
 
@@ -4443,6 +4442,10 @@ th, td {
   .fixed-bar.show {
     display: none;
   }
+
+  #fixed-bar-search {
+    display: none;
+  }
 }
 
 /* ==========================================================================
@@ -5338,7 +5341,7 @@ th, td {
     position: absolute;
     left: 50%;
     top: 50%;
-    background-color: white; //$colorPrimary;
+    background-color: $colorPrimary;
 
     @include transform-origin($top: 50%, $left: 50%);
   }
@@ -15795,5 +15798,39 @@ th, td {
   
   .main-content {
     margin-top: 84px;
+  }
+
+  .drawer {
+    z-index: 11;
+
+    .drawer__btn-open {
+      position: fixed;
+    }
+  }
+
+  .drawer--cart {
+    position: fixed;
+
+    .drawer__btn-open {
+      &:hover {
+        color: white;
+
+        .svg-icon path {
+          fill: white;
+        }
+      }
+    }
+
+    .drawer__header {
+      .svg-icon path {
+        fill: white;
+      }
+    }
+
+    .icon--cart {
+      .svg-icon path {
+        fill: white;
+      }
+    }
   }
 }
