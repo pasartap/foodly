@@ -65,7 +65,7 @@ Snippet is used to show products in 'collection.liquid', 'similar-product-carous
         {{ product.first_available_variant.option1 }}
       {% else %}
         &nbsp;|&nbsp;
-        {{ product.first_available_variant.weight_unit }}
+        {{ product.first_available_variant.weight | weight_with_unit }}
       {% endif %}            
     </span>
   </div> <!-- End product__info -->
