@@ -66,6 +66,10 @@
       17.3. Password page
       17.4. Wishlist page
       17.5. Landing page
+      17.6. Tentangpt page
+
+
+
 
     18. Footer - [8916 line]
     19. Other components - [9169 line]
@@ -9670,6 +9674,42 @@ th, td {
     }
   }
 }
+
+
+/* Tentangpt page
+/* -------------------------------------------------------------------------- */
+.tentangpt-image {
+  height: 100vh;
+  max-height: 1000px;
+  background: url({{ 'img_tentangpt.jpg' | asset_url }}) 50% 50% no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.tentangpt-image .tentangpt-image__content {
+  position: absolute;
+  top: 330px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 720px;
+  width: 100%;
+}
+
+.tentangpt-image__title {
+  color: #ffffff;
+}
+
+.tentangpt-image__desc {
+  color: #ffffff;
+  max-width: 720px;
+  text-align: justify;
+}
+
+@media (min-width: 769px){
+  .tentangpt-image .tentangpt-image__content {
+    top: 325px;  }
+}
+
 
 /* ==========================================================================
    Footer
