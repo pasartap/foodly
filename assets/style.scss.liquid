@@ -13059,7 +13059,7 @@ th, td {
 .static-image {
   height: 100vh;
   max-height: 500px;
-  background: url({{ 'ASSEENON-04.jpg' | asset_url }}) 50% 50% no-repeat;
+  background: url({{ 'banner_as_seen_on.jpg' | asset_url }}) 50% 50% no-repeat;
   background-size: contain;
   position: relative;
 }
@@ -13092,6 +13092,12 @@ th, td {
 @media (min-width: 769px){
   .static-image .static-image__content {
     top: 175px;
+  }
+}
+
+@media(max-width: 769px) {
+  .static-image {
+    background: url({{ 'banner_as_seen_on_mobile.jpg' | asset_url }}) center/contain no-repeat !important;
   }
 }
 
