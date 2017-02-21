@@ -2,8 +2,9 @@
 {% for coll_num in (1..6) %}
   {% capture current_collection %}homepage_featured_collection_{{ coll_num }}{% endcapture %}
   {% capture carousel_homepage %}carousel--homepage_{{ coll_num }}{% endcapture %}
-  {% capture homepage_swiper_btn_next %}homepage-swiper-btn-next_{{ coll_num }}{% endcapture %}
-  {% capture homepage_swiper_btn_prev %}homepage-swiper-btn-prev_{{ coll_num }}{% endcapture %}
+  {% capture js_swiper_btn_next %}js-swiper-btn-next_{{ coll_num }}{% endcapture %}
+  {% capture js_swiper_btn_prev %}js-swiper-btn-prev_{{ coll_num }}{% endcapture %}
+  {% capture swiper_active_slide %}swiper-active-slide_{{ coll_num }}{% endcapture %}
   {% assign coll = settings[current_collection] %}
   {% assign coll_relative_link = '/collections/' | append: collections[coll].handle %}
   
@@ -19,13 +20,25 @@
         <h1 class="heading--page" style="text-align:center">{{ collections[coll].title }}</h1>
         <a href= "{{ coll_relative_link }}"><h2 class="subheading--page-small" style="text-align:center"><em>View all {{ collections[coll].products_count }} {{ 'collections.product_list.products_in_collection' | t }}</em></h2></a>
         {% include 'space-20' %}
-        <div class="swiper-active-slide" style="display:none"></div>
-        <div class="swiper-wrapper">      
-          {% for product in collections[coll].products limit:10 %}
-          <div class="swiper-slide swiper-slide-buggy" data-img-bg="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'medium'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}">
+        <div class="swiper-wrapper">
+          {% assign products = collections[coll].products | sort: 'price' %}      
+          {% for product in products limit:15 %}
+          <div class="swiper-slide" data-img-bg="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'medium'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}">
             {% include 'product-item-grid' %}
           </div>
           {% endfor %}
+        </div>
+        <div class="carousel__navigation">
+          <!-- Add Arrows -->
+          <div class="homepage-swiper-btn-next carousel-button-next {{ js_swiper_btn_next }}">
+            <span class="icon icon--arrow-right"></span>
+          </div>
+          <!-- Add Pagination -->
+          <div class="{{ swiper_active_slide }}" style="display:none"></div>
+          
+          <div class="homepage-swiper-btn-prev carousel-button-prev {{ js_swiper_btn_prev }}">
+            <span class="icon icon--arrow-left"></span>
+          </div>
         </div>
       </div>
     {% include 'divider-inverse' %}

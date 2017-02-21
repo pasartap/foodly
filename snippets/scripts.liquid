@@ -148,19 +148,20 @@
     {% if template == 'index' and settings.homepage_featured_enable %}
       // Initialize SwiperinitHomepageCarousel
       function initHomepageCarousel() {
-        var activeSlideContainer = document.querySelector('.swiper-active-slide');
         // Featured carousels
         var allowLinksClick = true;
+        var activeSlideContainers = [];
         var carousels = [];
         for (var i = 1, carouselCount = 6; i <= carouselCount; i++) {
+          var activeSlideContainer = document.querySelector('.swiper-active-slide_' + i);
           // Initialize each carousel 
           var carousel = new Swiper('.carousel--homepage_' + i, {
-            nextButton: '.homepage-swiper-btn-next',
-            prevButton: '.homepage-swiper-btn-prev',
+            nextButton: '.js-swiper-btn-next_' + i,
+            prevButton: '.js-swiper-btn-prev_' + i,
             preventClicks: false,
             spaceBetween: 3,
-            slidesPerGroup: 'auto',
-            slidesPerView: 'auto',
+            slidesPerGroup: 5,
+            slidesPerView: 5,
             loop: false,
             autoplay: "{{ settings.homepage_featured_auplay }}",
             onInit: function(carousel) {
@@ -182,12 +183,12 @@
             lazyLoading: true,
             breakpoints: {
               1024: {
-                slidesPerView: 3,
-                slidesPerGroup: 3
+                slidesPerView: 4,
+                slidesPerGroup: 4
               },
               768: {
-                slidesPerView: 2,
-                slidesPerGroup: 2
+                slidesPerView: 3,
+                slidesPerGroup: 3
               },
               480: {
                 slidesPerView: 1,
@@ -195,6 +196,7 @@
               }
             }
           });
+          activeSlideContainers.push(activeSlideContainer);
           carousels.push(carousel);
         }
       }

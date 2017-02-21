@@ -1,83 +1,88 @@
-{% if settings.homepage_featured_enable %}  
-  {% for coll_num in (1..2) %}
-  <section class="clearfix">
-    {% capture current_collection %}homepage_featured_collection_{{ coll_num }}{% endcapture %}
-    {% capture carousel_homepage %}carousel--homepage_{{ coll_num }}{% endcapture %}
-    {% capture homepage_swiper_btn_next %}homepage-swiper-btn-next_{{ coll_num }}{% endcapture %}
-    {% capture homepage_swiper_btn_prev %}homepage-swiper-btn-prev_{{ coll_num }}{% endcapture %}
-    {% comment %}
-    Featured product carousel
-    For settings go to Admin -> Theme -> Customize Theme -> Home page
-    {% endcomment %}
-    <!-- Swiper -->
-    <div class="swiper-container carousel {{ carousel_homepage }}">
-      <div class="instagram-feed-container">
-        <h2 class="heading--page">{{ settings[current_collection] | upcase }}</h2>
-      </div>
-      <div class="carousel__navigation">
-        <!-- Add Arrows -->
-        <div class="homepage-swiper-btn-next carousel-button-next">
-          <span class="icon icon--arrow-right"></span>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-active-slide"></div>
-
-        <div class="homepage-swiper-btn-prev carousel-button-prev">
-          <span class="icon icon--arrow-left"></span>
-        </div>
-      </div>
-      <div class="swiper-wrapper">
-        {% assign coll = settings[current_collection] %}
-        {% for product in collections[coll].products %}
-        <div class="swiper-slide" data-img-bg="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'medium'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}">
-          {% include 'product-item-grid' %}
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-  {% include 'divider-inverse' %}
-  {% endfor %}
-{% endif %}
-
 {% comment %}
-
-{% if settings.homepage_featured_enable %}
-  <section class="clearfix">
-    {% comment %}
-    Featured product carousel
-    For settings go to Admin -> Theme -> Customize Theme -> Home page
-    {% endcomment %}
-
-    {% assign coll_relative_link = '/collections/' | append: collections[settings.homepage_featured_collection].handle %}
-    <!-- Swiper -->
-    <div class="swiper-container carousel carousel--homepage">
-      <div class="instagram-feed-container">
-      	<h2 class="heading--page">{{ settings.homepage_featured_collection | upcase | link_to: coll_relative_link }}</h2>
-      </div>
-      <div class="carousel__navigation">
-        <!-- Add Arrows -->
-        <div class="homepage-swiper-btn-next carousel-button-next">
-          <span class="icon icon--arrow-right"></span>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-active-slide"></div>
-        
-        <div class="homepage-swiper-btn-prev carousel-button-prev">
-          <span class="icon icon--arrow-left"></span>
-        </div>
-      </div>
-      <div class="swiper-wrapper">
-        {% for product in collections[settings.homepage_featured_collection].products %}
-          <div class="swiper-slide" data-img-bg="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'grande'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}">
-            {% include 'product-item-grid' %}
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-{% endif %}
-
+Featured product carousel
+For settings go to Admin -> Theme -> Customize Theme -> Home page
 {% endcomment %}
 
+<!-- Swiper -->
+<div class="swiper-container carousel carousel--homepage">
+  <div class="swiper-wrapper">
+    {% for product in collections[settings.homepage_featured_collection].products %}
+      <div class="swiper-slide" data-img-bg="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'medium'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}">
+        {% include 'product-item-grid' %}
+      </div>
+    {% endfor %}
+    
+  </div>
 
+ <div class="carousel__navigation">
+    <!-- Add Arrows -->
+    <div class="homepage-swiper-btn-next carousel-button-next">
+      <span class="icon icon--arrow-right"></span>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-active-slide"></div>
+    
+    <div class="homepage-swiper-btn-prev carousel-button-prev">
+      <span class="icon icon--arrow-left"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+
+    // Initialize SwiperinitHomepageCarousel
+    function initHomepageCarousel() {
+      var activeSlideContainer = document.querySelector('.swiper-active-slide');
+      // Featured carousel
+      var allowLinksClick = true;
+      var carouselHomepage = new Swiper('.carousel--homepage', {
+        nextButton: '.homepage-swiper-btn-next',
+        prevButton: '.homepage-swiper-btn-prev',
+        preventClicks: false,
+        spaceBetween: 3,
+        slidesPerGroup: 5,
+        slidesPerView: 5,
+        loop: false,
+        autoplay: "{{ settings.homepage_featured_auplay }}",
+        onInit: function(carouselHomepage) {
+          var slideNumber = carouselHomepage.slides.length;
+          var bdImage, slideLink;
+          activeSlideContainer.textContent = carouselHomepage.activeIndex + 1 + "/" + slideNumber;
+    
+          for ( var i = 0, max = slideNumber; i < max; i++ ) {
+            bdImage = carouselHomepage.slides[i].getAttribute('data-img-bg');
+            slideLink = carouselHomepage.slides[i].querySelector('.product__link ');
+            slideLink.style.backgroundImage = 'url(' + bdImage + ')';
+          }    
+        },
+        onSlideChangeStart: function(carouselHomepage) {
+          var slideNumber = carouselHomepage.slides.length;
+          activeSlideContainer.textContent = carouselHomepage.activeIndex + 1 + "/" + slideNumber;
+        },
+        preloadImages: false,
+        lazyLoading: true,
+        breakpoints: {
+          1024: {
+            slidesPerView: 3,
+            slidesPerGroup: 3
+          },
+          768: {
+            slidesPerView: 2,
+            slidesPerGroup: 2
+          },
+          480: {
+            slidesPerView: 1,
+            slidesPerGroup: 1
+          }
+        }
+      });
+    }
+                
+    if ( typeof Swiper !== 'undefined' && typeof Swiper === 'function' ) {
+      initHomepageCarousel();
+    } else {
+      require("{{ 'swiper.min.js' | asset_url }}", initHomepageCarousel);
+    }
+  });
+</script>
