@@ -30,13 +30,13 @@
         </div>
         <div class="carousel__navigation">
           <!-- Add Arrows -->
-          <div class="homepage-swiper-btn-next carousel-button-next {{ js_swiper_btn_next }}">
+          <div class="homepage-swiper-btn-next carousel-button-next {{ js_swiper_btn_next }}" style="{% if collections[coll].products_count < 6 %}display:none{% endif %}">
             <span class="icon icon--arrow-right"></span>
           </div>
           <!-- Add Pagination -->
           <div class="{{ swiper_active_slide }}" style="display:none"></div>
           
-          <div class="homepage-swiper-btn-prev carousel-button-prev {{ js_swiper_btn_prev }}">
+          <div class="homepage-swiper-btn-prev carousel-button-prev {{ js_swiper_btn_prev }}" style="{% if collections[coll].products_count < 6 %}display:none{% endif %}">
             <span class="icon icon--arrow-left"></span>
           </div>
         </div>
