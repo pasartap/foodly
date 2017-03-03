@@ -1,3 +1,5 @@
+
+
 <section class="section section--page">
   <div class="wrapper">
     <div class="page-description">
@@ -94,7 +96,7 @@
                         {{ product.first_available_variant.option1 }}
                       {% else %}
                         &nbsp;|&nbsp;
-                        {{ product.first_available_variant.weight_unit }}
+                        {{ product.first_available_variant.weight | weight_with_unit }}
                       {% endif %}            
                     </span>
                   </div> <!-- End product__info -->

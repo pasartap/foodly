@@ -7,7 +7,7 @@
     For setting go to Admin -> Theme -> Customize Theme -> Homepage
     {% endcomment %}
     {% include 'subscribe-form-mailchimp' %}
-  {% elsif settings.subscribe_form_variant == 'standart' %}
+  {% elsif settings.subscribe_form_variant == 'standard' %}
     {% comment %}
     Snippet for standart (Shopify) subscribe form
     For setting go to Admin -> Theme -> Customize Theme -> Homepage
@@ -15,4 +15,4 @@
     {% include 'subscribe-form-shopify'%}
   {% endif %}
 </div>
-<hr class="hr--clear"></hr>
+{% comment %}<hr class="hr--clear"></hr>{% endcomment %}

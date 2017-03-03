@@ -48,20 +48,21 @@
                         {% assign image_urls = image_urls | append: image_url | append: ',' %}
                     {% endif %}
 
-
                   {% endfor %}
                 
                 {% endif %}
         
               </div>
-        
-              <div class="carousel__navigation"></div>
-              <div class="swiper-button-next carousel-button-next">
-                <span class="icon icon--arrow-right"></span>
-              </div>
-              <div class="swiper-button-prev carousel-button-prev">
-                <span class="icon icon--arrow-left"></span>
-              </div>
+              
+              {% comment %}{% if product.images.size > 1 %}
+                <div class="carousel__navigation"></div>
+                <div class="swiper-button-next carousel-button-next">
+                  <span class="icon icon--arrow-right"></span>
+                </div>
+                <div class="swiper-button-prev carousel-button-prev">
+                  <span class="icon icon--arrow-left"></span>
+                </div>
+              {% endif %}{% endcomment %}
             </div>
             
             
@@ -72,15 +73,15 @@
               <h1 itemprop="name" class="product__title">{{ product.title }}</h1>
               <div class="product__info">
                 <span class="product__spec">
-                  {{ product.type }} |
-                
+                  {{ product.type | link_to_type }} |
+
                   {% if product.available %}
                     {{ 'products.general.in_stock' | t }}
                   {% else %}
                     {{ 'products.general.out_stock' | t }}
                   {% endif %} |
                   
-                  {{ product.first_available_variant.weight_unit }}
+                  {{ product.first_available_variant.weight | weight_with_unit }}
                            
                 </span>
                 <div class="product__desc">
@@ -88,9 +89,9 @@
                   {% include 'strip_html_tags' with content_html %}
             
                   {% assign split_nutritional = '[Nutritional value]' %}
-                    {% if content contains split_nutritional %}
-                      {% assign description_text = content | split: split_nutritional | first %}
-                      {% assign nutritional_value_text = content | split: split_nutritional | last %}
+                    {% if content_html contains split_nutritional %}
+                      {% assign description_text = content_html | split: split_nutritional | first %}
+                      {% assign nutritional_value_text = content_html | split: split_nutritional | last %}
                     {% endif %}
                     
                     {% comment %}
@@ -99,10 +100,10 @@
                     {% if settings.product_description_enable %}
                       <div itemprop="description" class="rte product__desc-content">
                         {% if description_text != blank %}
-                          {{ description_text | truncatewords: 30 }}
+                          {{ description_text }}
                         {% else %}
-                          {{ product.description | truncatewords: 30 }}
-                        {% endif %}
+                          {{ product.description }}
+                        {% endif %} 
                       </div>
                     {% endif %}
                 </div>

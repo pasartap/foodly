@@ -1,0 +1,29 @@
+<section class="recipe-block-1">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        <div class="block">
+          <a href="/collections/truestart-performance-coffee" title="TrueStart Performance Coffee">
+            <div class="block__half block__half--bg">
+            </div>
+          </a>
+          <div class="block__half bg-neutral">
+            <div class="block__content">
+              <img src={{ 'logo-truestart.png' | asset_url }} />
+              {% if settings.truestart_block_title != blank %}
+                <h3 class="block__title">{{ settings.truestart_block_title }}</h3>
+              {% endif %}
+        
+              {% if settings.truestart_block_desc != blank %}
+                <p class="block__desc">{{ settings.truestart_block_desc }}</p>
+              {% endif %}
+
+              <a class="btn btn--default" href="/collections/truestart-performance-coffee" title="TrueStart Performance Coffee">{{ 'additional_blocks.truestart_block.button' | t }}</a>
+            </div>      
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% include 'divider-inverse' %}

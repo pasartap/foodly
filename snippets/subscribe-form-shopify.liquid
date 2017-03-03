@@ -7,15 +7,15 @@ For setting go to Admin -> Theme -> Customize Theme -> Product page
 
   {% if form.posted_successfully? %}
     <p>Thanks for signing up!</p>
+  {% else %}
+  	{% if form.errors %}
+      {{ form.errors | default_errors }}
+	{% endif %}
+  	<input type="hidden" id="contact_tags" name="contact[tags]" value="prospect,newsletter">
+    <div class="form__row">
+    	<input class="form__field" type="text" id="contact_email" name="contact[email]" placeholder="Your e-mail" required>
+    	<input class="btn btn--default btn--submit" type='submit' value="{{ 'layout.general.subscribe_button' | t }}" >
+  	</div>
   {% endif %}
-
-  <input type="hidden" id="contact_tags" name="contact[tags]" value="prospect,newsletter">
-  
-  <div class="form__row">
-    <input class="form__field" type="text" id="contact_email" name="contact[email]" placeholder="Your e-mail" required>
-  </div>
-  
-  <input class="btn btn--default btn--submit" type='submit' value="{{ 'layout.general.subscribe_button' | t }}" >
-
-
+    
 {% endform %}

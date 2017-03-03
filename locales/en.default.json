@@ -1,1 +1,396 @@
-{"general":{"meta":{"tags":"Tagged \"{{ tags }}\"","page":"Page {{ page }}"},"form_popup_errors":{"name_html":"Please enter your first name.","last_name_html":"Please enter your last name.","fullname_html":"Please enter your full name.","author_html":"Please enter your name.","email_html":"Please enter a valid email.","password_html":"Please enter a valid password.","message_html":"This field is empty.","comment_author_html":"Please enter your comments.","city_html":"Please enter your city.","address1_html":"Please enter your address.","zip_html":"The zip code is invalid."}},"additional_blocks":{"recipe_block_1":{"button":"Check ingredients now"},"recipe_block_2":{"button":"Check the recipe"},"hero_image":{"button":"take a look at book"},"hero_about_us":{"button":"take a look at our story"}},"blogs":{"general":{"heading":"Blog","subheading":"with love from the bottom of PasarTap's heart","by_author":"by"},"sidebar":{"tags_title":"Tags","recent_articles_title":"Recent articles","facebook_title":"Our Facebook Community"},"article":{"older_post":"Older post","newer_post":"Newer post","by_author":"by","for_product":"for"},"comments":{"heading":"Comments","success_moderated_html":"<span>Hurray!<\/span> Your comment will be posted after moderation! Thank you!","success_html":"<span>Hurray!<\/span> Your comment was posted successfully! Thank you!","title":"Leave a Comment","posted_on":"Posted on","posted_by":"by","name":"Name","email":"Email","message":"Comment","post":"Post my comment","moderated":"Comments are moderated"},"sorting":{"show_more":"Show more","hide_tags":"Hide tags","reset_filters":"Reset Filters","sorting_alphabet":"abcdefghijklmnopqrstuvwxyz"},"months_for_sorting":{"january":"January","february":"February","march":"March","april":"April","may":"May","june":"June","july":"July","august":"August","september":"September","october":"October","november":"November","december":"December"}},"cart":{"general":{"heading":"Your Food bag","product_title":"Product Title","quantity":"QTY","price":"Price","remove":"x","total":"Total","total_information":"Price excludes delivery, which is applied at checkout.","note_heading":"Note to PasarTap","note_placeholder":"Leave your special requirements here","checkout_button":"Proceed to checkout","additional_information_heading":"Choose package","additional_information_one":"paper bag","update_cart":"Update cart","added_to_cart_html":"This product was successfully added."},"empty":{"heading":"Your food bag is empty.","additional_information_html":"Please browse through our product collections.","button":"check it out"},"calculator":{"country":"Country","province":"Province","zip":"Zip\/Postal Code"},"cart_page":{"continue_shopping":"Continue shopping","within":"within our product collections"}},"collections":{"list_collections":{"heading":"Product collections"},"product_list":{"products_in_collection":"products in collection"}},"products":{"general":{"sale_badge_text":"sale","in_stock":"In stock","out_stock":"Out of stock","per":"per","kilogram":"kilogram"},"product_page":{"description_title":"Description","nutritional_title":"Nutritional value","special_recipe_title":"Special Recipe","special_recipe_license_mark":"Credits:","customer_reviews":"Customer Reviews","similar_products_title":"Similar Products"}},"layout":{"general":{"check_it_button":"Check it out","subscribe_button":"Subscribe","add_to_cart_button":"Add to bag","next_button":"Next","previous_button":"Prev","back_button":"Back","share_title":"Share","share_title_password_page":"Spread the word"},"menu":{"open_menu":"Open menu","close_menu":"Close","view_account":"My account","create_account":"Create account","orders":"Orders","addresses":"Addresses","wishlist":"Wishlist","currency":"Currency"},"cart":{"open_cart":"Open cart","close_cart":"Close"},"search":{"heading":"Search","placeholder":"Looking for...","placeholder_for_header":"Looking for...","button":"Search Store","results":"Search results for","result_count":"items are found","nothing_to_found_html":"Oh, no! We don’t have such item. <br>Maybe you can find something similar in our product collections.","ajax_search_more_characters":"Please type more than 2 characters","ajax_search_no_results_html":"Oh, no! We don’t have such item <br> Please try another search request<br> or check our <a href='\/collections'>collections<\/a>"},"wishlist_page":{"heading":"Wishlist","subheading":"save products here for further shopping","item":"Item","price":"Price","delete":"Delete","add_to_bag":"Add to bag","add_to_wishlist":"Add to wishlist","added_to_wishlist":"This product is in your","wishlist":"wishlist","empty_heading":"OH, NOPE!","empty_info_html":"Your wishlist is empty.<br>Look at our fresh <strong>special offers<\/strong>, you would like it.","already_in_wishlist_html":"This product is in your <a class='text-link--default' href='\/pages\/wish-list'>wishlist<\/a>","error_state":"Sorry, something went wrong. Please try again."},"copyright":{"right_reserved":"All rights reserved."}},"customer":{"general":{"first_name":"First Name","last_name":"Last Name","email":"Email Address","password":"Password","password_info":"The password must be a minimum of 6 characters long. Only characters from A-Z, and 0-9 are allowed.","edit_customer":"Edit Details"},"registration":{"heading":"Create account","subheading":"to take advantage of personalized shopping","first_name":"First Name","last_name":"Last Name","email":"Email","password":"Password","create_my_account_button":"Create my account","create_account_button":"Create account","cancel":"Return to store"},"login":{"heading":"Login","subheading":"Please enter your credentials","email":"Email","password":"Password","forgot_password":"Forgot password","login_button":"Login","login_button_large":"Login to my Account","dont_have_account":"Don’t have an account yet?","create_it":"Create it here.","logout":"Logout"},"recover_password":{"title":"We will email you a link to the recovery page.","email":"Email","success":"An email has been sent with a link to update your password","button":"Recover my password","cancel":"Cancel"},"reset_password":{"heading":"Reset password","subheading":"Create a new password to get access to your account","password":"Password","password_confirm":"Confirm password","reset_password_button":"Reset password"},"account":{"heading":"My account","subheading":"Order history and personal information","view_addresses":"View addresses","wish_list":"Check wishlist"},"addresses":{"heading":"Addresses","subheading":"Below are your addresses","add_new_address":"Add address","add_new_address_heading":"New address","default_address":"Default address","first_name":"First name","last_name":"Last name","company":"Company","address1":"Address 1","address2":"Address 2","city":"City","country":"Country","province":"Province","zip":"ZIP","phone":"Phone","use_as_a_default":"Use as default address","default":"Default","add_address_button":"Add new address","cancel":"Cancel","edit_address":"Edit","edit_address_heading":"Edit address","delete_address":"Delete","update_address":"Update address","delete_address_heading":"Delete address","delete_address_info":"This address will be deleted. If you delete this address, you can no longer use it for delivery as all information will be lost.","delete_address_cancel_btn":"Cancel","delete_address_delete_confirm":"Delete"},"orders":{"heading":"Order","order_number":"Order","date":"Date","payment_status":"Payment status","fulfillment_status":"Fulfillment status","billing_address_title":"Billing address","shipping_address_title":"Shipping address","total":"Total","item":"Item","sku_item":"SKU","price_item":"Price","quantity_item":"Quantity","total_item":"Total","subtotal":"Subtotal","discount":"Discount","shipping":"Shipping","tax":"Tax","none":"You have no orders. Please browse through our product collections.","cancelled":"Oh, sorry... This order has been cancelled","cancelled_reason":"The reason it was cancelled is ","cancelled_contact_html":"If you have any questions about this order, please, let us know by filling in this <a href='\/pages\/contact' title='Contact with us'>contact form<\/a>"},"activate_account":{"heading":"Activate Account","subheading":"Create your password to activate your account","password":"Password","confirm_password":"Confirm password","activate_button":"Activate Account","decline_invitation":"Decline Invite"}},"contact":{"short":{"hours":"Hours","email":"Email","phone":"Phone"},"detailed":{"farm_facilities":"Farm Facilities","grocery_store":"Grocery store","show_map":"Check on map"},"form":{"heading":"Let’s have a chat","message":"My message...","name":"My name is...","email":"Reply me to email...","send_button":"Send my message","post_success_html":"<span>Hurray!<\/span> Your message successfully send"}},"tabs":{"products_picker":{"tab_one":"courses","tab_two":"ingredients","tab_three":"accessories","tab_four":"summary","ingredient_pack_from":"Ingredient pack from","first_button_name":"Check its ingredients","second_button_name":"Handcrafted dishes","third_button_name":"Sum up the order","fourth_button_name":"Complete order now","link_to_recipe":"Get to know the specifics of this meal"}},"landing_page":{"general":{"purchase":"Purchase","product_cta_text_left":"best deal of","product_cta_text_right":"fully packed","for_each":"for each","from":"from","get_for_button":"Get","prev_review":"Prev","next_review":"Next"},"countdown":{"countdown_days":"Days","countdown_hours":"Hours","countdown_minutes":"Minutes","countdown_seconds":"Seconds"}},"gift_cards":{"general":{"first_name_call":"Hey,","subheading":"Use the code below at checkout to redeem your gift card","expiration_date":"Expiration date","start_shopping_button":"Start shopping","email":"Email","print":"Print","disabled":"Card disabled","expirated":"Expirated on"}},"checkout_and_system":{"general":{"openning_soon":"Openning Soon","message_to_subscribe":"Curious what’s next?! Join our newsletter to be notified when we open."}},"404":{"general":{"home_link":"Home","search_link":"Search","not_found":"Not found","heading":"Sometimes being empty is not bad","explanation":"Maybe you’ll find better alternatives visiting our main collections"}},"consistent_cart_addon":{"merge_cart_text":"It seems you already have a cart from a previous session. Would you like to merge your previous cart with your current cart?"}}
+{
+	"general": {
+		"meta": {
+			"tags": "Tagged \"{{ tags }}\"",
+			"page": "Page {{ page }}"
+		},
+		"form_popup_errors": {
+			"name_html": "Please enter your first name.",
+			"last_name_html": "Please enter your last name.",
+			"fullname_html": "Please enter your full name.",
+			"author_html": "Please enter your name.",
+			"email_html": "Please enter a valid email.",
+			"password_html": "Please enter a valid password.",
+			"message_html": "This field is empty.",
+			"comment_author_html": "Please enter your comments.",
+			"city_html": "Please enter your city.",
+			"address1_html": "Please enter your address.",
+			"zip_html": "The zip code is invalid."
+		}
+	},
+	"additional_blocks": {
+		"recipe_block_1": {
+			"button": "Check ingredients now"
+		},
+		"recipe_block_2": {
+			"button": "Check the recipe"
+		},
+		"truestart_block": {
+			"button": "Check it out"
+		},
+		"hero_image": {
+			"button": "take a look at book"
+		},
+		"hero_about_us": {
+			"button": "take a look at our story"
+		}
+	},
+	"blogs": {
+		"general": {
+			"heading": "Blog",
+			"subheading": "with love from the bottom of PasarTap's heart",
+			"by_author": "by"
+		},
+		"sidebar": {
+			"tags_title": "Tags",
+			"recent_articles_title": "Recent articles",
+			"facebook_title": "Our Facebook Community"
+		},
+		"article": {
+			"older_post": "Older post",
+			"newer_post": "Newer post",
+			"by_author": "by",
+			"for_product": "for"
+		},
+		"comments": {
+			"heading": "Comments",
+			"success_moderated_html": "<span>Hurray!<\/span> Your comment will be posted after moderation! Thank you!",
+			"success_html": "<span>Hurray!<\/span> Your comment was posted successfully! Thank you!",
+			"title": "Leave a Comment",
+			"posted_on": "Posted on",
+			"posted_by": "by",
+			"name": "Name",
+			"email": "Email",
+			"message": "Comment",
+			"post": "Post my comment",
+			"moderated": "Comments are moderated"
+		},
+		"sorting": {
+			"show_more": "Show more",
+			"hide_tags": "Hide tags",
+			"reset_filters": "Reset Filters",
+			"sorting_alphabet": "abcdefghijklmnopqrstuvwxyz"
+		},
+		"months_for_sorting": {
+			"january": "January",
+			"february": "February",
+			"march": "March",
+			"april": "April",
+			"may": "May",
+			"june": "June",
+			"july": "July",
+			"august": "August",
+			"september": "September",
+			"october": "October",
+			"november": "November",
+			"december": "December"
+		}
+	},
+	"cart": {
+		"general": {
+			"heading": "Your Food bag",
+			"product_title": "Product Title",
+			"quantity": "QTY",
+			"price": "Price",
+			"remove": "x",
+			"total": "Total",
+			"total_information": "Price excludes delivery, which is applied at checkout.",
+			"note_heading": "Note to PasarTap",
+			"note_placeholder": "Leave your special requirements here",
+			"checkout_button": "Proceed to checkout",
+			"additional_information_heading": "Choose package",
+			"additional_information_one": "paper bag",
+			"update_cart": "Update cart",
+			"added_to_cart_html": "This product was successfully added."
+		},
+		"empty": {
+			"heading": "Your food bag is empty.",
+			"additional_information_html": "Please browse through our product collections.",
+			"button": "check it out"
+		},
+		"calculator": {
+			"country": "Country",
+			"province": "Province",
+			"zip": "Zip\/Postal Code"
+		},
+		"cart_page": {
+			"continue_shopping": "Continue shopping",
+			"within": "within our product collections"
+		}
+	},
+	"collections": {
+		"list_collections": {
+			"heading": "Product collections"
+		},
+		"product_list": {
+			"products_in_collection": "products in collection"
+		}
+	},
+	"products": {
+		"general": {
+			"sale_badge_text": "sale",
+			"in_stock": "In stock",
+			"out_stock": "Out of stock",
+			"per": "per",
+			"kilogram": "kilogram"
+		},
+		"product_page": {
+			"description_title": "Description",
+			"nutritional_title": "Nutritional value",
+			"special_recipe_title": "Special Recipe",
+			"special_recipe_license_mark": "Credits:",
+			"customer_reviews": "Customer Reviews",
+			"similar_products_title": "Similar Products"
+		}
+	},
+	"layout": {
+		"general": {
+			"check_it_button": "Check it out",
+			"subscribe_button": "Subscribe",
+			"add_to_cart_button": "Add to bag",
+			"next_button": "Next",
+			"previous_button": "Prev",
+			"back_button": "Back",
+			"share_title": "Share",
+			"share_title_password_page": "Spread the word"
+		},
+		"menu": {
+			"open_menu": "Open menu",
+			"close_menu": "Close",
+			"view_account": "My account",
+			"create_account": "Create account",
+			"orders": "Orders",
+			"addresses": "Addresses",
+			"wishlist": "Wishlist",
+			"currency": "Currency"
+		},
+		"cart": {
+			"open_cart": "Open cart",
+			"close_cart": "Close"
+		},
+		"search": {
+			"heading": "Search",
+			"placeholder": "Looking for...",
+			"placeholder_for_header": "Looking for...",
+			"button": "Search Store",
+			"results": "Search results for",
+			"result_count": "items are found",
+			"nothing_to_found_html": "Oh, no! We don’t have such item. <br>Maybe you can find something similar in our product collections.",
+			"ajax_search_more_characters": "Please type more than 2 characters",
+			"ajax_search_no_results_html": "Oh, no! We don’t have such item <br> Please try another search request<br> or check our <a href='\/collections'>collections<\/a>"
+		},
+		"wishlist_page": {
+			"heading": "Wishlist",
+			"subheading": "save products here for further shopping",
+			"item": "Item",
+			"price": "Price",
+			"delete": "Delete",
+			"add_to_bag": "Add to bag",
+			"add_to_wishlist": "Add to wishlist",
+			"added_to_wishlist": "This product is in your",
+			"wishlist": "wishlist",
+			"empty_heading": "OH, NOPE!",
+			"empty_info_html": "Your wishlist is empty.<br>Look at our fresh <strong>special offers<\/strong>, you would like it.",
+			"already_in_wishlist_html": "This product is in your <a class='text-link--default' href='\/pages\/wish-list'>wishlist<\/a>",
+			"error_state": "Sorry, something went wrong. Please try again."
+		},
+		"copyright": {
+			"right_reserved": "All rights reserved."
+		}
+	},
+	"customer": {
+		"general": {
+			"first_name": "First Name",
+			"last_name": "Last Name",
+			"email": "Email Address",
+			"password": "Password",
+			"password_info": "The password must be a minimum of 6 characters long. Only characters from A-Z, and 0-9 are allowed.",
+			"edit_customer": "Edit Details"
+		},
+		"registration": {
+			"heading": "Create account",
+			"subheading": "to take advantage of personalized shopping",
+			"first_name": "First Name",
+			"last_name": "Last Name",
+			"email": "Email",
+			"password": "Password",
+			"create_my_account_button": "Create my account",
+			"create_account_button": "Create account",
+			"cancel": "Return to store"
+		},
+		"login": {
+			"heading": "Login",
+			"subheading": "Please enter your credentials",
+			"email": "Email",
+			"password": "Password",
+			"forgot_password": "Forgot password",
+			"login_button": "Login",
+			"login_button_large": "Login to my Account",
+			"dont_have_account": "Don’t have an account yet?",
+			"create_it": "Create it here.",
+			"logout": "Logout"
+		},
+		"recover_password": {
+			"title": "We will email you a link to the recovery page.",
+			"email": "Email",
+			"success": "An email has been sent with a link to update your password",
+			"button": "Recover my password",
+			"cancel": "Cancel"
+		},
+		"reset_password": {
+			"heading": "Reset password",
+			"subheading": "Create a new password to get access to your account",
+			"password": "Password",
+			"password_confirm": "Confirm password",
+			"reset_password_button": "Reset password"
+		},
+		"account": {
+			"heading": "My account",
+			"subheading": "Order history and personal information",
+			"view_addresses": "View addresses",
+			"wish_list": "Check wishlist"
+		},
+		"addresses": {
+			"heading": "Addresses",
+			"subheading": "Below are your addresses",
+			"add_new_address": "Add address",
+			"add_new_address_heading": "New address",
+			"default_address": "Default address",
+			"first_name": "First name",
+			"last_name": "Last name",
+			"company": "Company",
+			"address1": "Address 1",
+			"address2": "Address 2",
+			"city": "City",
+			"country": "Country",
+			"province": "Province",
+			"zip": "ZIP",
+			"phone": "Phone",
+			"use_as_a_default": "Use as default address",
+			"default": "Default",
+			"add_address_button": "Add new address",
+			"cancel": "Cancel",
+			"edit_address": "Edit",
+			"edit_address_heading": "Edit address",
+			"delete_address": "Delete",
+			"update_address": "Update address",
+			"delete_address_heading": "Delete address",
+			"delete_address_info": "This address will be deleted. If you delete this address, you can no longer use it for delivery as all information will be lost.",
+			"delete_address_cancel_btn": "Cancel",
+			"delete_address_delete_confirm": "Delete"
+		},
+		"orders": {
+			"heading": "Order",
+			"order_number": "Order",
+			"date": "Date",
+			"payment_status": "Payment status",
+			"fulfillment_status": "Fulfillment status",
+			"billing_address_title": "Billing address",
+			"shipping_address_title": "Shipping address",
+			"total": "Total",
+			"item": "Item",
+			"sku_item": "SKU",
+			"price_item": "Price",
+			"quantity_item": "Quantity",
+			"total_item": "Total",
+			"subtotal": "Subtotal",
+			"discount": "Discount",
+			"shipping": "Shipping",
+			"tax": "Tax",
+			"none": "You have no orders. Please browse through our product collections.",
+			"cancelled": "Oh, sorry... This order has been cancelled",
+			"cancelled_reason": "The reason it was cancelled is ",
+			"cancelled_contact_html": "If you have any questions about this order, please, let us know by filling in this <a href='\/pages\/contact' title='Contact with us'>contact form<\/a>"
+		},
+		"activate_account": {
+			"heading": "Activate Account",
+			"subheading": "Create your password to activate your account",
+			"password": "Password",
+			"confirm_password": "Confirm password",
+			"activate_button": "Activate Account",
+			"decline_invitation": "Decline Invite"
+		}
+	},
+	"contact": {
+		"short": {
+			"hours": "Hours",
+			"email": "Email",
+			"phone": "Phone"
+		},
+		"detailed": {
+			"farm_facilities": "Farm Facilities",
+			"grocery_store": "Grocery store",
+			"show_map": "Check on map"
+		},
+		"form": {
+			"heading": "Let’s have a chat",
+			"message": "My message...",
+			"name": "My name is...",
+			"email": "Reply me to email...",
+			"send_button": "Send my message",
+			"post_success_html": "<span>Hurray!<\/span> Your message successfully send"
+		}
+	},
+	"tabs": {
+		"products_picker": {
+			"tab_one": "courses",
+			"tab_two": "ingredients",
+			"tab_three": "accessories",
+			"tab_four": "summary",
+			"ingredient_pack_from": "Ingredient pack from",
+			"first_button_name": "Check its ingredients",
+			"second_button_name": "Handcrafted dishes",
+			"third_button_name": "Sum up the order",
+			"fourth_button_name": "Complete order now",
+			"link_to_recipe": "Get to know the specifics of this meal"
+		}
+	},
+	"landing_page": {
+		"general": {
+			"purchase": "Purchase",
+			"product_cta_text_left": "best deal of",
+			"product_cta_text_right": "fully packed",
+			"for_each": "for each",
+			"from": "from",
+			"get_for_button": "Get",
+			"prev_review": "Prev",
+			"next_review": "Next"
+		},
+		"countdown": {
+			"countdown_days": "Days",
+			"countdown_hours": "Hours",
+			"countdown_minutes": "Minutes",
+			"countdown_seconds": "Seconds"
+		}
+	},
+	"gift_cards": {
+		"general": {
+			"first_name_call": "Hey,",
+			"subheading": "Use the code below at checkout to redeem your gift card",
+			"expiration_date": "Expiration date",
+			"start_shopping_button": "Start shopping",
+			"email": "Email",
+			"print": "Print",
+			"disabled": "Card disabled",
+			"expirated": "Expirated on"
+		}
+	},
+	"checkout_and_system": {
+		"general": {
+			"openning_soon": "Openning Soon",
+			"message_to_subscribe": "Curious what’s next?! Join our newsletter to be notified when we open."
+		}
+	},
+	"404": {
+		"general": {
+			"home_link": "Home",
+			"search_link": "Search",
+			"not_found": "Not found",
+			"heading": "Sometimes being empty is not bad",
+			"explanation": "Maybe you’ll find better alternatives visiting our main collections"
+		}
+	},
+	"consistent_cart_addon": {
+		"merge_cart_text": "It seems you already have a cart from a previous session. Would you like to merge your previous cart with your current cart?"
+	}
+}
