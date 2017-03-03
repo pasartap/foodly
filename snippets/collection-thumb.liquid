@@ -36,7 +36,7 @@
                     <a  class="product__link {% unless product.available %}product--sold-out{% endunless %}" href="{{ product.url }}" title="{{ product.title }}">
                       <div class="img-holder img-holder--product {% unless product.featured_image.size > 0 %}img-holder--no-product{% endunless %}">
                     
-                        <img src="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'large'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}" alt="{{ product.title }}">
+                        <img src="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'large'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}" alt="{{ product.title }}">  
                     
                       </div>
                     </a>
