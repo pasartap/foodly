@@ -377,7 +377,7 @@
 	},
 	"checkout_and_system": {
 		"general": {
-			"openning_soon": "Openning Soon",
+			"title": "We'll be back.",
 			"message_to_subscribe": "Curious what’s next?! Join our newsletter to be notified when we open."
 		}
 	},
