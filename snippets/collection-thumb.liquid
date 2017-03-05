@@ -1,5 +1,3 @@
-
-
 <section class="section section--page">
   <div class="wrapper">
     <div class="page-description">
@@ -23,6 +21,8 @@
           <div class="collection-wrapper">
           
             {% for product in collection.products %}
+              {% include 'bold-product' with product, hide_action: 'skip' %}
+              {% include 'bold-hidden-variants' with variant %}
               {% assign check_collection = false %}
 
               {% for collection in product.collections %}
@@ -65,13 +65,13 @@
                       <span class="product__price"><span class="money">{{ product.price | money }}</span></span><br>
                     
                       {% if settings.collection_product_badge == 'price'%}
-                        {% if product.compare_at_price_min > product.price %}
-                          <span class="product__compare-price"><span class="money">{{ product.compare_at_price_max | money }}</span></span>
+                        {% if bold_compare_at_price_min > product.price %}
+                          <span class="product__compare-price"><span class="money">{{ bold_compare_at_price_max | money }}</span></span>
                         {% endif %}
                       {% endif %}
                     </span>
                     
-                    {% if settings.collection_product_badge == 'badge' and product.compare_at_price_min > product.price %}
+                    {% if settings.collection_product_badge == 'badge' and bold_compare_at_price_min > product.price %}
                       <span class="product__badge">{{ 'products.general.sale_badge_text' | t }}</span>
                     {% endif %}
                   </div>
