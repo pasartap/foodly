@@ -12872,7 +12872,7 @@ th, td {
     }
 
     .slide--1 {
-      background: url({{ 'img_box_slide_1_mobile.jpg' | asset_url }}) center/contain no-repeat !important; //added
+      background: url({{ settings.box_slide_1_image_square | asset_url }}) center/contain no-repeat !important; //added
 
       .slide__price-point {
         left: 50%;
@@ -12881,7 +12881,7 @@ th, td {
     }
 
     .slide--2 {
-      background: url({{ 'img_box_slide_2_mobile.jpg' | asset_url }}) center/contain no-repeat !important; //added
+      background: url({{ settings.box_slide_2_image_square | asset_url }}) center/contain no-repeat !important; //added
 
       .slide__price-point {
         margin-top: 35px;
@@ -12893,7 +12893,7 @@ th, td {
     }
 
     .slide--3 {
-      background: url({{ 'img_box_slide_3_mobile.jpg' | asset_url }}) center/contain no-repeat !important; //added
+      background: url({{ settings.box_slide_3_image_square | asset_url }}) center/contain no-repeat !important; //added
 
       .slide__info-wrapper {
         top: 20%;
@@ -12920,6 +12920,10 @@ th, td {
       .slide__price-point {
         margin-top: 20px;
       }
+    }
+
+    .slide--4 {
+      background: url({{ settings.box_slide_4_image_square | asset_url }}) center/contain no-repeat !important; //added
     }
   }
 }
