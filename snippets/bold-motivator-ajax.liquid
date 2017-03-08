@@ -1,0 +1,45 @@
+<script>
+  function updateMotivator(cart, callback){
+    if(!shappify_motivator_goals || !shappify_motivator_goals.length) return;
+
+    var motivatorUpdater = '';
+    var needsUpdate = false;
+    var messages = [];
+
+    for(var i=0; i<shappify_motivator_goals.length; i++){
+      var goal = shappify_motivator_goals[i];
+      if(!goal.variant_id){
+        if(!window.is_premium && typeof trigger_messages === 'function')
+          trigger_messages();
+      }
+
+      //Does the shopper qualify for this goal?
+      if(motivatorUpdater) motivatorUpdater += '&';
+      var qty = (cart.total_price >= (goal.goal * 100) ? 1 : 0);
+      motivatorUpdater += 'updates[' + goal.variant_id + ']=' + qty;
+
+      //Do we actually need to update based on user's qualifications?
+      var foundInCart = false;
+      for(var item in cart.items){
+        if(cart.items[item].id == goal.variant_id){
+          foundInCart = true;
+          if(cart.items[item].quantity != qty) needsUpdate = true;
+          if(qty == 0)setCookie('motivator_confirmed_' + goal.id, '0');
+        }
+      }
+      if(!foundInCart && qty > 0) {
+        messages.push("<span class='shapp_confirmation'>" + goal.confirmation + "</span>");
+        needsUpdate = true;
+        setCookie('motivator_confirmed_' + goal.id, '1');
+      }
+    }
+
+    if(needsUpdate)  {
+      jQuery.ajax({ success:callback, url:'/cart/update.js', type:'post', dataType:'json', data:motivatorUpdater });
+      if(typeof show_messages === 'function')   
+        show_messages(messages);
+    }
+    else if(typeof callback === 'function')
+      callback(cart);
+  }
+</script>
