@@ -1,11 +1,11 @@
 <div class="swiper-container box-slider">
   <div class="swiper-wrapper">
-    {% for slide_num in (1..3) %}
+    {% for slide_num in (1..4) %}
 
       {% comment %}
       Capture variables for every slide
       {% endcomment %}
-      {% capture slide_img %}img_box_slide_{{ slide_num }}.jpg{% endcapture %}
+      {% capture slide_img %}box_slide_{{ slide_num }}_image{% endcapture %}
 
       {% capture slide_link %}box_slide_{{ slide_num }}_link{% endcapture %}
       {% capture slide_text_enable %}box_slide_{{ slide_num }}_text_enable{% endcapture %}
@@ -20,7 +20,7 @@
 
       <div class="swiper-slide slide--{{ slide_num }} js-img-holder-cover" style="background-size:contain">
 		  
-          <img class="slide__image" src="{{ slide_img | asset_url }}" alt="{{ settings[slide_heading] }}" />
+          <img class="slide__image" src="{{ settings[slide_img] | asset_url }}" alt="{{ settings[slide_heading] }}" />
           
           {% if settings[slide_text_enable] %}
             <div class="slide__info-wrapper">

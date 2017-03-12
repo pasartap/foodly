@@ -37,8 +37,9 @@
 	},
 	"blogs": {
 		"general": {
-			"heading": "Blog",
-			"subheading": "with love from the bottom of PasarTap's heart",
+			"heading": "Dato' Fazley Yaakob's",
+			"heading_second_line": "My Sucre Story Recipes",
+			"subheading": "<brief description of the recipes>",
 			"by_author": "by"
 		},
 		"sidebar": {
@@ -94,7 +95,7 @@
 			"price": "Price",
 			"remove": "x",
 			"total": "Total",
-			"total_information": "Price excludes delivery, which is applied at checkout.",
+			"total_information": "Minimum order amount is RM20. Price excludes 10% handling fee and RM3 delivery fee, which is applied at checkout.",
 			"note_heading": "Note to PasarTap",
 			"note_placeholder": "Leave your special requirements here",
 			"checkout_button": "Proceed to checkout",
@@ -387,7 +388,7 @@
 			"search_link": "Search",
 			"not_found": "Not found",
 			"heading": "Sometimes being empty is not bad",
-			"explanation": "Maybe you’ll find better alternatives visiting our main collections"
+			"explanation": "The page you are looking for cannot be found."
 		}
 	},
 	"consistent_cart_addon": {
