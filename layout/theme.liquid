@@ -155,7 +155,7 @@
     {% include 'header-social' %}
     
     <!-- *** Main content *** -->
-    <main class="main-content {% unless template == 'index' or template == 'product' %} main-content--top{% endunless %} {% if template == 'product' %}{% unless product.featured_image.size > 0 %} main-content--top{% endunless %}{% endif %}" role="main">
+    <main class="main-content" role="main">
         {{ content_for_layout }}
     </main>
     <!-- *** End main content *** -->

@@ -368,7 +368,7 @@
                       <div class="cart">
                         <form action="/cart" method="POST" id="cart-form">
                             
-                            <div class="cart-header">
+                            {% comment %}<div class="cart-header">
                               <div class="cart-header__item">
                                 {{ 'cart.general.price' | t }}
                               </div>
@@ -376,7 +376,7 @@
                               <div class="cart-header__item">
                                 {{ 'cart.general.quantity' | t }}
                               </div>
-                            </div>
+                            </div>{% endcomment %}
                             
                             <ul class="cart-list">
                               {% for item in cart.items %}
@@ -392,7 +392,7 @@
                                   </div>
                             
                                   <div class="cart-list__item--title">
-                                    <a href="{{ item.product.url | within: collection.all }}">{{ item.title | truncate: 20 }}</a>
+                                    <a href="{{ item.product.url | within: collection.all }}">{{ item.title }}</a>
                                   </div>
                             
                                   <div class="cart-list__item--quantity">

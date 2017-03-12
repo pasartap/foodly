@@ -1,0 +1,1197 @@
+{% assign blog_recipes = 'Recipes' %}
+<section class="section product-picker js-product-picker">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item">
+        {% if section.settings.heading != blank %}
+        <h3 class="section-heading heading--page">{{ section.settings.heading | upcase }}</h3>
+        {% endif %}
+
+        {% if section.settings.subheading != blank %}
+        <p class="section__info text-center">{{ section.settings.subheading }}</p>
+        {% endif %}
+
+        <div class="tab-wrapper js-picker-container">
+          <ul class="tab-list">
+            <li class="tab is-active" data-tab="#tab-one" data-next-btn-name="{{ 'tabs.products_picker.first_button_name' | t }}">
+              <a class="tab__link" href="#tab-one">
+                {{ 'tabs.products_picker.tab_one' | t }}
+                <svg class="underline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="94" height="11" viewBox="0 0 94 11">
+                  <path fill="#5c4b51" d="M93.816,1.151 C71.090,2.543 48.363,3.935 25.637,5.327 C20.167,5.662 13.239,5.918 9.452,5.029 C11.666,3.915 17.736,3.372 23.265,2.934 C43.829,1.306 65.316,-0.351 87.494,0.053 C90.708,0.112 94.987,0.549 93.816,1.151 ZM78.045,5.388 C81.259,5.447 85.538,5.884 84.367,6.486 C61.640,7.878 38.914,9.271 16.188,10.662 C10.718,10.997 3.790,11.254 0.003,10.364 C2.217,9.250 8.287,8.707 13.816,8.269 C34.380,6.641 55.867,4.983 78.045,5.388 Z"/>
+                </svg>
+              </a>
+            </li>
+            <li class="tab disable" data-tab="#tab-two" data-next-btn-name="{{ 'tabs.products_picker.second_button_name' | t }}">
+              <a class="tab__link" href="#tab-two">
+                {{ 'tabs.products_picker.tab_two' | t }}
+                <svg class="underline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="94" height="11" viewBox="0 0 94 11">
+                  <path fill="#5c4b51" d="M93.816,1.151 C71.090,2.543 48.363,3.935 25.637,5.327 C20.167,5.662 13.239,5.918 9.452,5.029 C11.666,3.915 17.736,3.372 23.265,2.934 C43.829,1.306 65.316,-0.351 87.494,0.053 C90.708,0.112 94.987,0.549 93.816,1.151 ZM78.045,5.388 C81.259,5.447 85.538,5.884 84.367,6.486 C61.640,7.878 38.914,9.271 16.188,10.662 C10.718,10.997 3.790,11.254 0.003,10.364 C2.217,9.250 8.287,8.707 13.816,8.269 C34.380,6.641 55.867,4.983 78.045,5.388 Z"/>
+                </svg>
+              </a>
+            </li>
+            <li class="tab disable" data-tab="#tab-three" data-next-btn-name="{{ 'tabs.products_picker.third_button_name' | t }}">
+              <a class="tab__link" href="#tab-three">
+                {{ 'tabs.products_picker.tab_three' | t }}
+                <svg class="underline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="94" height="11" viewBox="0 0 94 11">
+                  <path fill="#5c4b51" d="M93.816,1.151 C71.090,2.543 48.363,3.935 25.637,5.327 C20.167,5.662 13.239,5.918 9.452,5.029 C11.666,3.915 17.736,3.372 23.265,2.934 C43.829,1.306 65.316,-0.351 87.494,0.053 C90.708,0.112 94.987,0.549 93.816,1.151 ZM78.045,5.388 C81.259,5.447 85.538,5.884 84.367,6.486 C61.640,7.878 38.914,9.271 16.188,10.662 C10.718,10.997 3.790,11.254 0.003,10.364 C2.217,9.250 8.287,8.707 13.816,8.269 C34.380,6.641 55.867,4.983 78.045,5.388 Z"/>
+                </svg>
+              </a>
+            </li>
+            <li class="tab disable" data-tab="#tab-four" data-next-btn-name="{{ 'tabs.products_picker.fourth_button_name' | t }}">
+              <a class="tab__link" href="#tab-four">
+                {{ 'tabs.products_picker.tab_four' | t }}
+                <svg class="underline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="94" height="11" viewBox="0 0 94 11">
+                  <path fill="#5c4b51" d="M93.816,1.151 C71.090,2.543 48.363,3.935 25.637,5.327 C20.167,5.662 13.239,5.918 9.452,5.029 C11.666,3.915 17.736,3.372 23.265,2.934 C43.829,1.306 65.316,-0.351 87.494,0.053 C90.708,0.112 94.987,0.549 93.816,1.151 ZM78.045,5.388 C81.259,5.447 85.538,5.884 84.367,6.486 C61.640,7.878 38.914,9.271 16.188,10.662 C10.718,10.997 3.790,11.254 0.003,10.364 C2.217,9.250 8.287,8.707 13.816,8.269 C34.380,6.641 55.867,4.983 78.045,5.388 Z"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+
+          <div class="tabs-content">
+            <div class="tab-content is-active" id="tab-one">
+              <div class="picker-packs-container js-picker-content">
+
+                {% for pack in blogs[blog_recipes].articles %}
+
+                {% if pack.title contains "[price:" %}
+                  {% assign pack_title = pack.title | split: "[price:" | first %}
+                  {% assign pack_price = pack.title | split: "[price:" | last %}
+                  {% assign pack_price = pack_price | split: "]" | first %}
+                  {% assign pack_price = pack_price | replace: ".", "" %}
+                {% endif %}
+
+                <div class="picker-pack" data-price="{{ pack_price }}" data-image="{{ pack | img_url: 'large' }}" data-author="{{ pack.author }}" data-desc="{{ pack.excerpt }}" data-url="{{ pack.url }}" data-pack-id="{{ pack.id }}" data-title="{{ pack.title | truncatewords: 3 }}">
+                  <div class="image-holder">
+                    <img src="{{ pack | img_url: 'large' }}" alt="{{ pack.title | truncatewords: 3 }}">
+                    <span class="check-icon-wrapper">
+                      <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="24" height="22" viewBox="0 0 24 22">
+                        <path fill="none" d="M2.000,9.000 L9.000,20.000 L22.000,2.000 "/>
+                      </svg>
+                    </span>
+                  </div>
+
+                  <div class="checked-bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="401" height="287" viewBox="0 0 401 287">
+                      <path d="M9.615,31.961 C9.615,31.961 37.892,-26.746 216.717,17.344 C367.492,54.519 394.605,129.219 396.921,137.939 C399.037,145.904 403.816,161.608 395.682,184.402 C384.407,215.996 300.504,310.596 183.428,281.465 C70.756,253.429 -12.938,103.545 1.978,49.148 C3.266,44.451 1.762,47.172 9.615,31.961 Z"/>
+                    </svg>
+                  </div>
+                  
+                  <div class="picker-pack__info">
+                    <div class="title-container">
+                      <h4 class="picker-pack__title">{{ pack.title | truncatewords: 3 }}</h4>
+                      <span class="picker-pack__subtitle">{{ 'tabs.products_picker.ingredient_pack_from' | t }}</span>
+                    </div>
+                    <span class="picker-pack__price">
+                      <span class="money">{{ pack_price | money }}</span>
+                    </span>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              
+            </div>
+            {% comment %}
+            End tab-content one  
+            {% endcomment %}
+
+            <div class="tab-content" id="tab-two">
+              {% for pack in blogs[blog_recipes].articles %}
+
+                {% comment %}
+                Strip unnecessary html
+                {% endcomment %}
+                {% assign content_html =  pack.content %}
+                {% include 'strip_html_tags' with content_html %}
+
+                {% if content contains "[recipe-products]" %}
+                  <div class="pack-products" data-pack-id="{{ pack.id }}">
+                  {% assign product_list = content | split: "[recipe-products]" | last %}
+                  {% assign product_list = product_list | split: "[/recipe-products]" | first %}
+                  {% assign product_arr = product_list | split: "," %}
+                  
+                  {% for product in collections['Cooking Ingredients'].products %}
+                    {% assign product_title = product.title | downcase | strip %}
+                    {% for recipe_product in product_arr %}
+                      {% assign recipe_product_down = recipe_product | downcase | strip_html | strip %}
+                      {% if product_title contains recipe_product_down %}
+                        <div class="pack-product" data-product-price="{{ product.price }}">
+                          <span class="pack-product__checkbox">
+                            <input class="js-product-checkbox" type="checkbox" id="check_{{ pack.id }}_{{ product.first_available_variant.id }}" name="product-check" checked data-price="{{ product.price }}" data-product-id="{{ product.first_available_variant.id }}" data-name="{{ product.title }}" data-pack-id="{{ pack.id }}">
+                            <label for="check_{{ pack.id }}_{{ product.first_available_variant.id }}">
+                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="12" height="12" viewBox="0 0 12 12">
+                                  <path fill="none" d="M1.000,5.000 L5.000,11.000 L11.000,1.000 "/>
+                                </svg>
+                              </label>
+                          </span>
+                          <div class="image-holder">
+                            <img src="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'large'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}" alt="">
+                          </div>
+                          <div class="pack-product__info">
+                            <h3 class="pack-product__title">{{ product.title }}</h3>
+                            <span class="product__spec">
+                              1 {{ product.first_available_variant.weight_unit }}
+                              &nbsp;|&nbsp;
+                              {{ product.type }}
+                            </span>
+                          </div>
+                          <span class="pack-product__price">
+                            <span class="money">{{ product.price | money }}</span>
+                          </span>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+
+                  </div>
+                {% endif %}
+
+                
+              {% endfor %}
+              
+            </div>
+
+            <div class="tab-content" id="tab-three">
+              {% for pack in blogs[blog_recipes].articles %}
+
+                {% comment %}
+                Strip unnecessary html
+                {% endcomment %}
+                {% assign content_html =  pack.content %}
+                {% include 'strip_html_tags' with content_html %}
+
+                {% if content contains "[recipe-accessories]" %}
+                  <div class="pack-accessories" data-pack-id="{{ pack.id }}">
+                  {% assign product_list = content | split: "[recipe-accessories]" | last %}
+                  {% assign product_list = product_list | split: "[/recipe-accessories]" | first %}
+                  {% assign product_arr = product_list | split: "," %}
+                  
+                  {% for product in collections['all-products'].products %}
+                    {% assign product_title = product.title | downcase | strip %}
+                    {% for recipe_product in product_arr %}
+                      {% assign recipe_product_down = recipe_product | downcase | strip_html | strip %}
+                      {% if product_title contains recipe_product_down %}
+                        <div class="pack-product">
+                          <span class="pack-product__checkbox">
+                            <input class="js-product-checkbox" type="checkbox" id="check_{{ pack.id }}_{{ product.first_available_variant.id }}"  name="product-check"  data-price="{{ product.price }}" data-product-id="{{ product.first_available_variant.id }}" data-name="{{ product.title }}" data-pack-id="{{ pack.id }}" data-accessories="true">
+                            <label for="check_{{ pack.id }}_{{ product.first_available_variant.id }}">
+                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="12" height="12" viewBox="0 0 12 12">
+                                  <path fill="none" d="M1.000,5.000 L5.000,11.000 L11.000,1.000 "/>
+                                </svg>
+                              </label>
+                          </span>
+                          <div class="image-holder">
+                            <img src="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'large'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}" alt="">
+                          </div>
+                          <div class="pack-product__info">
+                            <h3 class="pack-product__title">{{ product.title }}</h3>
+                            <span class="product__spec">{{ product.type }}</span>
+                          </div>
+                          <span class="pack-product__price">
+                            <span class="money">{{ product.price | money }}</span>
+                          </span>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            <div class="tab-content" id="tab-four">
+              <div class="summary-container js-product-picker-summary">
+                <div class="picker-pack">
+                  <div class="image-holder">
+                    <img class="choosed-pack-image" src="" alt="">
+                  </div>
+                  <div class="checked-bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="401" height="287" viewBox="0 0 401 287">
+                      <path d="M9.615,31.961 C9.615,31.961 37.892,-26.746 216.717,17.344 C367.492,54.519 394.605,129.219 396.921,137.939 C399.037,145.904 403.816,161.608 395.682,184.402 C384.407,215.996 300.504,310.596 183.428,281.465 C70.756,253.429 -12.938,103.545 1.978,49.148 C3.266,44.451 1.762,47.172 9.615,31.961 Z"/>
+                    </svg>
+                  </div>
+                  <div class="picker-pack__info">
+                    <div class="title-container">
+                      <h4 class="picker-pack__title"></h4>
+                      <span class="picker-pack__subtitle">{{ 'tabs.products_picker.ingredient_pack_from' | t }}</span>
+                    </div>
+                    <span class="picker-pack__price">
+                      <span class="money"></span>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="ingredients-list-container">
+                </div>
+
+                <div class="accessories-list-container">
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="picker-nav">
+
+    <div class="picker-nav-container">
+      <div class="image-holder">
+        <img class="choosed-pack-image" src="" alt="">
+      </div>
+
+      <div class="choosed-pack-info">
+        <h4 class="total-heading">{{ 'cart.general.total' | t }}</h4>
+        <span class="choosed-pack-total">
+          <span class="money">{{ 0 | money }}</span>
+        </span>
+        <div class="choosed-pack-desc"></div>
+        <span class="choosed-pack-author"></span>
+      </div>
+
+      <div class="picker-nav-btns">
+        <a href="javascript:void(0)" class="btn btn--default btn--clear prev-btn disable" title="Previous Step">
+          <span class="arrow-l"></span>
+        </a>
+
+        <a href="javascript:void(0)" class="btn btn--default next-btn" data-tab="#tab-two" title="Next Step">
+          <span>{{ 'tabs.products_picker.first_button_name' | t }}</span> <span class="arrow-r"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // ----------------------------------------------------
+  //                      Tab
+  // ----------------------------------------------------
+  var tabController = new Tab('.js-product-picker', function(){
+
+
+    // hide/show prev button on the first tab
+    if ( this.activeTab.getAttribute('data-tab') === '#tab-one') {
+      productPicker.DOM.pickerNavPrevBtn.classList.add('disable');
+    } else {
+      productPicker.DOM.pickerNavPrevBtn.classList.remove('disable');
+    }  
+
+
+    if ( this.activeTab.getAttribute('data-tab') === '#tab-two' && this.activeTab.nextElementSibling.classList.contains('is-hide')) {
+      productPicker.DOM.pickerNavNextBtn.firstElementChild.textContent = this.activeTab.nextElementSibling.getAttribute('data-next-btn-name');
+    } else {
+      productPicker.DOM.pickerNavNextBtn.firstElementChild.textContent = this.activeTab.getAttribute('data-next-btn-name');
+    } 
+
+
+    // if accessorieses don't available go to next tab
+    if ( this.activeTab.getAttribute('data-tab') === '#tab-three' && this.activeTab.classList.contains('is-hide') ){
+      // change text for next button
+      
+      this.changeTabManually('#tab-four');
+    }
+
+    // add checkout link into next button on the last tab
+    if ( this.activeTab.getAttribute('data-tab') === '#tab-four') {
+      // if we on summary tab
+      productPicker.changeNavBtnAttr(this.prevTab.getAttribute('data-tab'), false);
+      productPicker.setSummary();
+
+      // resolve bug to fast href changing
+      setTimeout(function(){
+        productPicker.toggleCheckoutLink(true);
+      }, 40);
+
+    } else if ( this.activeTab.getAttribute('data-tab') === '#tab-one') {
+
+      productPicker.changeNavBtnAttr(false, this.activeTab.nextElementSibling.getAttribute('data-tab'));
+      productPicker.toggleCheckoutLink(false);
+    } else {
+
+      productPicker.changeNavBtnAttr(this.activeTab.previousElementSibling.getAttribute('data-tab'), this.activeTab.nextElementSibling.getAttribute('data-tab'));
+      productPicker.toggleCheckoutLink(false);
+    }
+
+    if ( this.activeTab.getAttribute('data-tab') === '#tab-four' && this.activeTab.previousElementSibling.classList.contains('is-hide') ){
+      productPicker.changeNavBtnAttr('#tab-two', false);
+    }
+
+    productPicker.checkStickedPickerNav();
+  });
+  
+  function Tab(tabContainerSelector, tabChangeCallback) {
+    if ( !tabContainerSelector ) {
+      console.error('tabContainerSelector isn\'t defined');
+      return null;
+    }
+
+    if (typeof tabChangeCallback == 'function' ) {
+      this.tabChangeCallback = tabChangeCallback;
+    }
+
+    var self = this;
+
+    this.DOM = {};
+    this.DOM.tabContainer     = document.querySelector(tabContainerSelector);
+    this.DOM.tabList          = this.DOM.tabContainer.querySelector('.tab-list');
+    this.DOM.tabsContent      = this.DOM.tabContainer.querySelector('.tabs-content');
+    this.DOM.activeTabContent = this.DOM.tabsContent.querySelector('.tab-content.is-active');
+
+    this.activeTab        = this.DOM.tabList.querySelector('.tab.is-active');
+    this.prevTab; // settings into changeTab()
+    this.nextTab; // settings into changeTab()
+
+    this.DOM.tabList.addEventListener('click', function(e){
+      e.preventDefault();
+
+      var target = e.target;
+      var clickedTab = target.closest('.tab__link');
+
+      if ( !clickedTab ||  clickedTab.parentElement === self.activeTab || clickedTab.parentElement.classList.contains('disable') ) {
+        return null;
+      }
+
+      self.changeTab(clickedTab);
+    });
+  }
+
+  Tab.prototype.changeTab = function(newTab) {
+    
+    this.activeTab.classList.remove('is-active')
+    newTab.parentElement.classList.add('is-active');
+
+
+    this.prevTab   = this.activeTab;
+    this.activeTab = newTab.parentElement;
+    this.nextTab   = this.activeTab.nextElementSibling;
+
+    this.showTabContent(newTab.hash);    
+    this.tabChangeCallback();
+  };
+
+  Tab.prototype.showTabContent = function(hash) {
+    var choosedTabContent = this.DOM.tabsContent.querySelector(hash);
+
+    if ( !choosedTabContent || choosedTabContent === this.DOM.activeTabContent ) {
+      return null;
+    }
+
+    this.DOM.activeTabContent.classList.remove('is-active');
+    choosedTabContent.classList.add('is-active')
+
+    this.DOM.activeTabContent = choosedTabContent;
+  };
+
+  Tab.prototype.changeTabManually = function(hash) {
+    var tabToChange = this.DOM.tabList.querySelector('a[href*="' + hash + '"]');
+    this.changeTab(tabToChange);
+  };
+
+  Tab.prototype.enableTab = function(tab) {
+    if ( tab.classList.contains('disable') ) {
+      tab.classList.remove('disable');
+    }
+  };
+
+  Tab.prototype.disableTab = function(tab) {
+    if ( !tab.classList.contains('disable') ) {
+      tab.classList.add('disable');
+    }
+  };
+
+  Tab.prototype.disableAllTabs = function(tab) {
+    var tabs = this.DOM.tabList.querySelectorAll('.tab');
+
+    for ( var i = 0, max = tabs.length; i < max; i++ ) {
+
+      if ( i !== 0 ){
+        this.disableTab(tabs[i]);
+      }
+    }
+  };
+
+  Tab.prototype.hideTab = function(hash) {
+    var tabToHide = this.DOM.tabList.querySelector('a[href*="' + hash + '"]').parentElement;
+    if ( !tabToHide.classList.contains('is-hide') ) {
+      tabToHide.classList.add('is-hide');
+    }
+  };
+
+  Tab.prototype.showTab = function(hash) {
+    var tabToShow = this.DOM.tabList.querySelector('a[href*="' + hash + '"]').parentElement;
+    if ( tabToShow.classList.contains('is-hide') ) {
+      tabToShow.classList.remove('is-hide');
+    }
+  };
+
+
+  // ----------------------------------------------------
+  //                  Product Picker
+  // ----------------------------------------------------
+  function ProductPicker(options){
+    // if ( !productPickerSelector ) {
+    //   console.error('productPickerSelector isn\'t defined');
+    //   return null;
+    // }
+
+    var self = this;
+
+    this.options = options;
+
+    this.total; // settings into setSummary()
+    this.summary = {};
+    this.summary.products = {};
+
+    this.checkoutLink; // settings into setSummary()
+
+    this.DOM = {};
+    this.DOM.productPicker    = document.querySelector(options.productPickerSelector);
+    this.DOM.pikerContainer   = this.DOM.productPicker.querySelector('.js-picker-container');
+    this.DOM.pikerContent     = this.DOM.productPicker.querySelector('.js-picker-content');
+
+    this.DOM.pickerNav        = this.DOM.productPicker.querySelector('.picker-nav');
+    this.DOM.pickerInfo       = this.DOM.pickerNav.querySelector('.choosed-pack-info');
+    this.DOM.pickerNavPrice   = this.DOM.pickerNav.querySelector('.choosed-pack-total .money');
+    this.DOM.pickerNavImage   = this.DOM.pickerNav.querySelector('.choosed-pack-image');
+    this.DOM.pickerNavAuthor  = this.DOM.pickerNav.querySelector('.choosed-pack-author');
+    this.DOM.pickerNavDesc    = this.DOM.pickerNav.querySelector('.choosed-pack-desc');
+
+    this.DOM.pickerNavNextBtn = this.DOM.pickerNav.querySelector('.next-btn');
+    this.DOM.pickerNavPrevBtn = this.DOM.pickerNav.querySelector('.prev-btn');
+
+    this.DOM.summaryContainer = this.DOM.productPicker.querySelector('.js-product-picker-summary');
+
+    this.DOM.activePack;
+    
+
+    this.ingredients = this.getIngredients();
+    this.accessories = this.getAccessories();
+    this.packPrices  = this.getPrices();
+
+    this.stickPickerNav();
+
+    document.addEventListener('DOMContentLoaded', function(){
+      self.setPrices();
+    });
+
+    window.addEventListener('load', function(){
+      self.pikerContentBottomCoord = self.getElemBottomCoord(self.DOM.pikerContainer);
+    })
+
+    this.DOM.pikerContent.addEventListener('click', function(e){
+      self.choosePack(e);
+    });
+
+    this.DOM.pickerNavNextBtn.addEventListener('click', function(e){
+
+      var currentTarget = e.currentTarget;
+      var hashTab = e.currentTarget.getAttribute('data-tab');
+
+      if ( !self.DOM.activePack) {
+        return null;
+      }
+
+      if ( hashTab === '#tab-two') { // ???
+        self.toggleVisibilityById(self.ingredients, self.DOM.activePack.getAttribute('data-pack-id'));
+      }
+
+      if ( hashTab === '#tab-three') { // ???
+        self.toggleVisibilityById(self.accessories, self.DOM.activePack.getAttribute('data-pack-id'));
+      }
+
+      if ( this.classList.contains('last') ) {
+        e.preventDefault();
+
+        var products = [], 
+            product;  
+        
+        for ( productId in self.summary.products ) {
+
+          product = {
+            'id': productId,
+            'quantity': self.summary.products[productId].quantity
+          }
+
+          products.push(product);
+        }
+
+        self.addToCartRequest(products, this);
+      }
+
+      self.options.navNextButtonAction(hashTab);
+      self.checkStickedPickerNav();
+    });
+
+    this.DOM.pickerNavPrevBtn.addEventListener('click', function(e){
+
+      var currentTarget = e.currentTarget;
+      var hashTab = e.currentTarget.getAttribute('data-tab');
+
+      self.options.navPrevButtonAction(hashTab);
+      self.checkStickedPickerNav();
+    });
+
+    this.DOM.pickerInfo.addEventListener('mouseover', function(e){
+
+      if ( !self.DOM.pickerNav.classList.contains('is-hover') &&  !self.DOM.pickerNav.classList.contains('is-stick')) {
+        self.DOM.pickerNav.classList.add('is-hover');
+      }
+    });
+
+    this.DOM.pickerInfo.addEventListener('mouseout', function(){
+
+      if ( self.DOM.pickerNav.classList.contains('is-hover') ) {
+        self.DOM.pickerNav.classList.remove('is-hover')
+      }
+    });
+  };
+
+  ProductPicker.prototype.choosePack = function(e) {
+    e.preventDefault();
+
+    var target = e.target,
+        self   = this;
+
+    var choosedPack = target.closest('.picker-pack');
+
+    if ( !choosedPack ) {
+      return null;
+    }
+
+    // reset summary
+    this.summary = {};
+    this.summary.products = {};
+
+    // add main class to show picker nav
+    this.DOM.productPicker.classList.add('pack-choosed');
+
+    if ( this.DOM.activePack && choosedPack === this.DOM.activePack ) {
+
+      // click on active tab
+      this.DOM.activePack.classList.remove('is-choosed');
+      this.DOM.productPicker.classList.remove('pack-choosed');
+      this.DOM.activePack = false;
+      this.options.resetPackAction();
+
+      this.transEnd(this.DOM.pickerNav,function(){
+        self.setPickerNav();
+      });      
+    } else if ( this.DOM.activePack ) {
+
+      // click on tab the different than active 
+      this.DOM.activePack.classList.remove('is-choosed');
+      choosedPack.classList.add('is-choosed');
+      this.DOM.activePack = choosedPack;
+      this.setPickerNav(choosedPack);
+      this.options.resetPackAction();
+    } else {
+
+      // click when no one tab is active
+      choosedPack.classList.add('is-choosed');
+      this.DOM.activePack = choosedPack;
+      this.setPickerNav(choosedPack);
+    }
+
+    this.checkAccessories();
+  };
+
+  ProductPicker.prototype.setPickerNav = function(choosedPack) {
+    
+    if ( !choosedPack ) {
+
+      this.DOM.pickerNavPrice.innerHTML  = Shopify.formatMoney('0', "{{ shop.money_format }}");
+      this.DOM.pickerNavImage.src        = '';
+      this.DOM.pickerNavDesc.innerHTML   = '';
+      this.DOM.pickerNavAuthor.innerHTML = '';
+
+      return;
+    }
+    
+    var packId, packPrice, packImage, packURL, packDesc, packAuthor, fullDesc;
+
+    packId     = choosedPack.getAttribute('data-pack-id');
+    packPrice  = choosedPack.getAttribute('data-price');
+    packImage  = choosedPack.getAttribute('data-image');
+    packURL    = choosedPack.getAttribute('data-url');
+    packDesc   = choosedPack.getAttribute('data-desc'); 
+    packAuthor = choosedPack.getAttribute('data-author');
+    fullDesc   = '';
+
+    this.summary.image    = packImage;
+    this.summary.packName = choosedPack.getAttribute('data-title');
+
+    this.total = this.packPrices[packId];   
+
+    this.DOM.pickerNavPrice.innerHTML    = Shopify.formatMoney(this.total, "{{ shop.money_format }}");
+    this.DOM.pickerNavImage.src          = packImage;
+
+    if ( packDesc ) {
+      this.DOM.pickerNavAuthor.innerHTML = '{{ "blogs.general.by_author" | t }} ' + packAuthor;
+      fullDesc = packDesc + ' <a href="' + packURL + '">{{ "tabs.products_picker.link_to_recipe" | t }}</a>'
+    } else {
+      this.DOM.pickerNavAuthor.innerHTML = '';
+    }
+
+    this.DOM.pickerNavDesc.innerHTML = fullDesc;
+
+    {% if settings.show_multiple_currencies %}
+      if ( this.DOM.pickerNavPrice && this.DOM.pickerNavPrice.getAttribute('data-currency') !== '' ){
+        this.DOM.pickerNavPrice.removeAttribute('data-currency-' + Currency.currentCurrency.toLowerCase());
+        this.DOM.pickerNavPrice.removeAttribute('data-currency');
+      }
+      if ( window.shopCurrency != Currency.currentCurrency ) {
+        Currency.convertAll(shopCurrency, Currency.currentCurrency, '.choosed-pack-total span.money', 'money_format');
+      }
+    {% endif %}
+  };
+
+  ProductPicker.prototype.changeNavBtnAttr = function(prevAttr, nextAttr) {
+
+    if ( prevAttr ) {
+      this.DOM.pickerNavPrevBtn.setAttribute('data-tab', prevAttr);
+    }
+
+    if ( nextAttr ) {
+      this.DOM.pickerNavNextBtn.setAttribute('data-tab', nextAttr);
+    }
+  };
+
+  ProductPicker.prototype.getIngredients = function() {
+
+    var ingredientsDOM = this.DOM.productPicker.querySelectorAll('.pack-products');
+    var ingredients = {},
+        self = this, 
+        packID;
+
+    for ( var i = 0, max = ingredientsDOM.length; i < max; i++) {
+
+      packID = ingredientsDOM[i].getAttribute('data-pack-id');
+      ingredients[packID] = ingredientsDOM[i];
+    }
+
+    return ingredients;
+  };
+
+  ProductPicker.prototype.getAccessories = function(id) {
+
+    var accessoriesDOM = this.DOM.productPicker.querySelectorAll('.pack-accessories');
+    var accessories = {},
+        self = this, 
+        packID;
+
+
+    for ( var i = 0, max = accessoriesDOM.length; i < max; i++) {
+
+      packID = accessoriesDOM[i].getAttribute('data-pack-id');
+      accessories[packID] = accessoriesDOM[i];
+    }
+
+    return accessories;
+  };
+
+  ProductPicker.prototype.getPrices = function() {
+
+    var prices = {},
+        packTotal, products, productPrice;
+
+    for ( id in this.ingredients ) {
+
+      products = this.ingredients[id].querySelectorAll('.pack-product');
+      packTotal = 0;
+
+      for ( var i = 0, max = products.length; i < max; i++) {
+        productPrice = products[i].getAttribute('data-product-price');
+        packTotal += parseInt(productPrice);
+      }
+
+      prices[id] = packTotal;
+    }
+
+    return prices;
+  };
+
+  ProductPicker.prototype.setPrices = function() {
+
+    var packPrice;
+
+    for ( id in this.packPrices ) {
+
+      packPrice = this.DOM.pikerContent.querySelector('[data-pack-id="' + id + '"] .picker-pack__price .money');
+      packPrice.innerHTML = Shopify.formatMoney(this.packPrices[id], "{{ shop.money_format }}");
+
+
+      {% if settings.show_multiple_currencies %}
+        if ( packPrice && packPrice.getAttribute('data-currency') !== '' ){
+          packPrice.removeAttribute('data-currency-' + Currency.currentCurrency.toLowerCase());
+          packPrice.removeAttribute('data-currency');
+        }
+        if ( window.shopCurrency != Currency.currentCurrency ) {
+          Currency.convertAll(shopCurrency, Currency.currentCurrency, '.picker-pack__price span.money', 'money_format');
+        }
+      {% endif %}
+    }
+
+  };
+
+  ProductPicker.prototype.checkAccessories = function() {
+
+    if ( !this.DOM.activePack ) {
+      this.options.accessoriesAvailable();
+      return null;
+    }
+
+    var activePackId = this.DOM.activePack.getAttribute('data-pack-id');
+    var findAccessor = false;
+
+    for ( var id in this.accessories) {
+      if ( activePackId == id ) {
+
+        this.options.accessoriesAvailable();
+        break;
+      } else {
+        this.options.accessoriesNoAvailable();
+      }
+    }    
+  };
+
+  ProductPicker.prototype.toggleVisibilityById = function(elements, idToShow) {
+    var self = this;
+    var activePackID   = this.DOM.activePack.getAttribute('data-pack-id'),
+        firstEnter;
+
+    for ( var id in elements) {
+
+      if ( id === idToShow ) {
+
+        elements[id].style.display = 'block';
+        firstEnter = elements[id].getAttribute('data-enter');
+
+        var productCheckboxes = elements[id].querySelectorAll('.js-product-checkbox');
+        for ( var j = 0, maxJ = productCheckboxes.length; j < maxJ; j++) {
+
+          var checkboxPackID = productCheckboxes[j].getAttribute('data-pack-id');
+
+          // if it accessories screen doesn't check checkbox
+          if ( !elements[id].classList.contains('pack-accessories') && !productCheckboxes[j].checked ) {
+
+            productCheckboxes[j].checked = true;
+          }
+
+          // checked checkbox for ingredients if we choose product pack the second time
+          if ( productCheckboxes[j].checked && checkboxPackID === activePackID ) {
+
+            this.addProductToSummary(productCheckboxes[j]);
+          }
+
+          if ( !firstEnter ) {
+
+            productCheckboxes[j].addEventListener('change', function(e){
+              self.checkboxEvent(e);
+            });            
+          }
+        }
+
+        elements[id].setAttribute('data-enter', 'true');
+
+      } else {
+        elements[id].style.display = 'none';
+      }
+    }
+
+    
+  };
+
+  ProductPicker.prototype.checkboxEvent = function(e) {
+    var currentTarget = e.currentTarget,
+        productPrice  = currentTarget.getAttribute('data-price');
+
+    if ( currentTarget.checked ) {
+
+      this.total = parseInt(this.total) + parseInt(productPrice);
+      this.addProductToSummary(currentTarget);
+    } else {
+
+      this.total = parseInt(this.total) - parseInt(productPrice);
+      this.removeProductToSummary(currentTarget);
+    }
+
+    this.DOM.pickerNavPrice.innerHTML = Shopify.formatMoney(this.total, "{{ shop.money_format }}");
+
+    {% if settings.show_multiple_currencies %}
+      if ( this.DOM.pickerNavPrice && this.DOM.pickerNavPrice.getAttribute('data-currency') !== '' ){
+        this.DOM.pickerNavPrice.removeAttribute('data-currency-' + Currency.currentCurrency.toLowerCase());
+        this.DOM.pickerNavPrice.removeAttribute('data-currency');
+      }
+      if ( window.shopCurrency != Currency.currentCurrency ) {
+        Currency.convertAll(shopCurrency, Currency.currentCurrency, '.choosed-pack-total span.money', 'money_format');
+      }
+    {% endif %}
+    
+  };
+
+  ProductPicker.prototype.addProductToSummary = function(checkbox) {
+
+    var productID, productName, productPrice, accessories;
+
+    productID     = checkbox.getAttribute('data-product-id');
+    productPrice  = checkbox.getAttribute('data-price');
+    productName   = checkbox.getAttribute('data-name');
+    accessories   = checkbox.getAttribute('data-accessories');
+
+    this.summary.products[productID] = {
+      'name': productName,
+      'price': productPrice,
+      'quantity': 1,
+      'accessories': accessories ? true : false
+    }
+  };
+
+  ProductPicker.prototype.removeProductToSummary = function(checkbox) {
+
+    var productID = checkbox.getAttribute('data-product-id');
+
+    delete this.summary.products[productID];
+  };
+
+  ProductPicker.prototype.setSummary = function() {
+
+    var ingredientsListContainer = this.DOM.summaryContainer.querySelector('.ingredients-list-container'),
+        accessoriesListContainer = this.DOM.summaryContainer.querySelector('.accessories-list-container'),
+        choosedPackImage         = this.DOM.summaryContainer.querySelector('.choosed-pack-image'),
+        choosedPackTitle         = this.DOM.summaryContainer.querySelector('.picker-pack__title'),
+        choosedPackTotalPrice    = this.DOM.summaryContainer.querySelector('.picker-pack__price .money');  
+
+    // reset list of ingredients and accessorieses
+    ingredientsListContainer.innerHTML = '';
+    accessoriesListContainer.innerHTML = '';
+
+    this.checkoutLink = 'cart/';     
+
+    choosedPackImage.src            = this.summary.image;
+    choosedPackTitle.innerHTML      = this.summary.packName;
+    choosedPackTotalPrice.innerHTML = Shopify.formatMoney(this.total, "{{ shop.money_format }}");
+
+    {% if settings.show_multiple_currencies %}
+      this.convertCurrency(choosedPackTotalPrice);
+    {% endif %}
+
+    // Crate ingredients list
+    if ( Object.keys(this.summary.products).length > 0) {
+
+      var ingredientsList     = document.createElement('ul'),
+          ingredientsListTemp = '', 
+          accessoriesListTemp = '',
+          isAccessories       = false,
+          product;
+
+      ingredientsList.className = 'ingredients-list summary-list';
+
+      for ( var productID in this.summary.products ) {
+
+        product = this.summary.products[productID];
+
+        this.checkoutLink += productID + ':' + product.quantity + ',';
+
+        if ( product.accessories ) {
+          accessoriesListTemp += '<li class="summary-list__item"><strong>'+ product.name + '</strong> for <strong><span class="money">' + Shopify.formatMoney(product.price, "{{ shop.money_with_currency_format }}") + '</span></strong></li>';
+          isAccessories = true;
+        } else {
+          ingredientsListTemp += '<li class="summary-list__item"><strong>'+ product.quantity +' x kg ' + product.name + '</strong> for <strong><span class="money">' + Shopify.formatMoney(product.price, "{{ shop.money_with_currency_format }}") + '</span></strong></li>';    
+
+        }
+      }
+
+      ingredientsList.innerHTML = ingredientsListTemp;
+      ingredientsListContainer.appendChild(ingredientsList);
+
+      if ( isAccessories ) {
+        var accessoriesList       = document.createElement('ul');
+        accessoriesList.className = 'accessories-list summary-list';
+
+        var accessoriesListTitle = document.createElement('h4');
+        accessoriesListTitle.className = 'summary-list-title';
+        accessoriesListTitle.textContent = 'Accessories';
+
+        accessoriesList.innerHTML = accessoriesListTemp;
+
+        accessoriesListContainer.appendChild(accessoriesListTitle);
+        accessoriesListContainer.appendChild(accessoriesList);
+      }      
+    }
+
+    {% if settings.show_multiple_currencies %}
+      Currency.convertAll(shopCurrency, Currency.currentCurrency, '.summary-list__item span.money', 'money_format');
+    {% endif %}
+  };
+
+  ProductPicker.prototype.toggleCheckoutLink = function(toggle) {
+
+    if (toggle) {
+      this.DOM.pickerNavNextBtn.classList.add('last');
+      this.DOM.pickerNavNextBtn.title = "Add to Cart";
+    } else{
+      this.DOM.pickerNavNextBtn.classList.remove('last');
+      this.DOM.pickerNavNextBtn.title = "Next Step";
+    }
+  };
+
+  ProductPicker.prototype.transEnd = function(element, callback) {
+    var testEl = document.createElement("fakeelement");
+    var currentTrans;
+
+    var transitions = {
+      "OTransition"     : "oTransitionEnd",
+      "MozTransition"   : "transitionend",
+      "WebkitTransition": "webkitTransitionEnd",
+      "transition"      : "transitionend",
+    }
+
+    for (var t in transitions){
+      if (testEl.style[t] !== undefined){
+        currentTrans = transitions[t];
+      }
+    }
+
+    element.addEventListener(currentTrans, function transEvent(){
+      callback();
+      element.removeEventListener(currentTrans, transEvent);
+    });
+  };
+
+  ProductPicker.prototype.convertCurrency = function(element) {
+    if ( element && element.getAttribute('data-currency') !== '' ){
+      element.removeAttribute('data-currency-' + Currency.currentCurrency.toLowerCase());
+      element.removeAttribute('data-currency');
+    }
+    if ( window.shopCurrency != Currency.currentCurrency ) {
+      Currency.convertAll(shopCurrency, Currency.currentCurrency, '.summary-list__item span.money', 'money_format');
+    }    
+  };
+
+  ProductPicker.prototype.stickPickerNav = function() {
+    var self = this;
+
+    var elemOffset           = 120,
+        ticking              = false,
+        windowHeight         = window.innerHeight;
+
+    // the first runing of animation or after page refresh
+    if ( (windowHeight +  window.pageYOffset) >= (this.pikerContentBottomCoord + elemOffset) )  {
+
+      this.DOM.pickerNav.classList.add('is-stick');
+    } 
+
+    // store pageYOffset into a variable
+    function onScroll() {
+
+      latestKnownScrollPos = window.pageYOffset;
+      requestTick();
+    }
+
+    // run requestAnimationFrame only during scrolling
+    function requestTick() {
+
+        if ( !ticking ) {
+            requestAnimationFrame(update);
+        }
+
+        ticking = true;
+    }
+
+    // add animation for items
+    function update() {
+
+        ticking = false;
+
+        if ( (windowHeight + latestKnownScrollPos) >= (self.pikerContentBottomCoord + elemOffset) )  {
+          self.DOM.pickerNav.classList.add('is-stick');
+        } else if ( self.DOM.pickerNav.classList.contains('is-stick') ) {
+
+          self.DOM.pickerNav.classList.add('is-hide');
+          self.DOM.pickerNav.classList.remove('is-stick');
+
+          setTimeout(function(){
+
+            
+            self.DOM.pickerNav.classList.remove('is-hide'); 
+          }, 300); 
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, false);
+  };
+
+  ProductPicker.prototype.getElemBottomCoord = function(element) {
+
+    var elemCoord     = calcCoordinates(element);
+    var elementHeight = element.clientHeight;    
+
+    function calcCoordinates(el) {
+
+      var box = el.getBoundingClientRect();
+
+      return {
+        top:  box.top  + window.pageYOffset,
+        left: box.left + window.pageXOffset
+      };
+    }
+
+    return elemCoord.top + elementHeight;
+  };
+
+  ProductPicker.prototype.checkStickedPickerNav = function() {
+    var self = this;
+
+    this.pikerContentBottomCoord = this.getElemBottomCoord(this.DOM.pikerContainer);
+
+    if ( (window.innerHeight + window.pageYOffset) >= (this.pikerContentBottomCoord + 120) )  {
+
+      this.DOM.pickerNav.classList.add('is-stick');
+    } else if ( this.DOM.pickerNav.classList.contains('is-stick') ) {
+
+      this.DOM.pickerNav.classList.remove('is-stick');    
+    }
+  };
+
+  ProductPicker.prototype.addToCartRequest = function(products, insertEl) {
+
+    var self = this;
+
+    var request = function() {
+      if ( products.length ) {
+
+        $.ajax({
+          type: "post",
+          url: "{{ shop.secure_url }}/cart/add.js",
+          data: 'quantity=' + products[0].quantity + '&id=' + products[0].id,
+          dataType: 'json',
+          success: function() {
+
+            products.shift();
+            request();
+          }
+        });
+      } else {
+
+        global.updateCart();
+        self.showFromMsg(insertEl);
+      }
+    }  
+
+    request();  
+  };
+
+  ProductPicker.prototype.showFromMsg = function(insertEl) {
+
+    var formMsg   = insertEl.querySelector('.form-cart-message');
+    var submitBtn = insertEl.querySelector('.js-add-to-card');
+
+    if ( formMsg ) {
+
+      formMsg.classList.remove('hide-message', 'hide');
+      formMsg.classList.add('show-message');
+    } else {
+
+      formMsg = document.createElement('p');
+      formMsg.classList.add('form-cart-message', 'show-message');
+      formMsg.innerHTML = "{{ 'cart.general.added_to_cart_products_html' | t }}";
+      insertEl.parentElement.insertBefore(formMsg, insertEl);
+
+      // Hide message
+      setTimeout(function() {
+        formMsg.classList.remove('show-message');
+        formMsg.classList.add('hide-message');
+        formMsg.addEventListener('animationend', function addClasses() {
+          formMsg.classList.add('hide');
+          formMsg.removeEventListener('animationend', addClasses);
+        });
+      }, 5000);
+
+    }
+  };
+
+  var productPicker = new ProductPicker({
+    'productPickerSelector': '.js-product-picker',
+    'navNextButtonAction': function(hash){
+      tabController.changeTabManually(hash);
+      tabController.enableTab(tabController.activeTab);
+    },
+    'navPrevButtonAction': function(hash){
+      tabController.changeTabManually(hash);
+    },
+    'resetPackAction': function(){
+      tabController.disableAllTabs();
+    },
+    'accessoriesAvailable': function(){
+      tabController.showTab("#tab-three");
+    },
+    'accessoriesNoAvailable': function(){
+      tabController.hideTab("#tab-three");
+    }
+  });
+
+
+  // matches polyfill
+  this.Element && function(ElementPrototype) {
+      ElementPrototype.matches = ElementPrototype.matches ||
+      ElementPrototype.matchesSelector ||
+      ElementPrototype.webkitMatchesSelector ||
+      ElementPrototype.msMatchesSelector ||
+      function(selector) {
+          var node = this, nodes = (node.parentNode || node.document).querySelectorAll(selector), i = -1;
+          while (nodes[++i] && nodes[i] != node);
+          return !!nodes[i];
+      }
+  }(Element.prototype);
+    
+  // closest polyfill
+  this.Element && function(ElementPrototype) {
+      ElementPrototype.closest = ElementPrototype.closest ||
+      function(selector) {
+          var el = this;
+          while (el.matches && !el.matches(selector)) el = el.parentNode;
+          return el.matches ? el : null;
+      }
+  }(Element.prototype);
+</script>
+
+{% schema %}
+  {
+    "name": "Product builder",
+    "settings": [
+      {
+        "type": "blog",
+        "id": "blog_product_builder",
+        "label": "Choose blog with recipes and products for builder"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "best dinner courses"
+      },
+      {
+        "type": "text",
+        "id": "heading_overlap",
+        "label": "Overlap subheading",
+        "default": "The"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "pick direction you’d like to go further and recieve the list of product options"
+      }
+    ],
+	"presets": [
+      {
+        "name": "Product builder",
+        "category": "Special sections"
+      }
+    ]
+  }
+{% endschema %}

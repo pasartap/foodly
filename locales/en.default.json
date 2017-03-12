@@ -37,8 +37,9 @@
 	},
 	"blogs": {
 		"general": {
-			"heading": "Blog",
-			"subheading": "with love from the bottom of PasarTap's heart",
+			"heading": "Dato' Fazley Yaakob's",
+			"heading_second_line": "My Sucre Story Recipes",
+			"subheading": "<brief description of the recipes>",
 			"by_author": "by"
 		},
 		"sidebar": {
