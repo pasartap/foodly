@@ -1,8 +1,6 @@
 {% comment %}
 Snippet is used to show products in 'collection.liquid', 'similar-product-carousel-collection.liquid'
 {% endcomment %}
-{% include 'bold-product' with product, hide_action: 'skip' %}
-{% include 'bold-hidden-variants' with variant %}
 <div class="product grid--in-row">
   <div class="product__visuals">
     <a class="product__link {% unless product.available %}product--sold-out{% endunless %}" href="{{ product.url }}" title="{{ product.title }}" style="background-image: url({{ product.featured_image | img_url: 'medium'}});min-height:260px">
@@ -35,16 +33,16 @@ Snippet is used to show products in 'collection.liquid', 'similar-product-carous
     </div>
     {% endif %}
     <span class="product__price-point">       
-      <span class="product__price"><span class="money">{{ bold_price | money }}</span></span><br>
+      <span class="product__price"><span class="money">{{ product.price | money }}</span></span><br>
 
       {% if settings.collection_product_badge == 'price'%}
-        {% if bold_compare_at_price_min > bold_price %}
-          <span class="product__compare-price"><span class="money">{{ bold_compare_at_price_max | money }}</span></span>
+        {% if product.compare_at_price_min > product.price %}
+          <span class="product__compare-price"><span class="money">{{ product.compare_at_price_max | money }}</span></span>
         {% endif %}
       {% endif %}
     </span>
 
-    {% if settings.collection_product_badge == 'badge' and bold_compare_at_price_min > bold_price %}
+    {% if settings.collection_product_badge == 'badge' and product.compare_at_price_min > product.price %}
       <span class="product__badge">{{ 'products.general.sale_badge_text' | t }}</span>
     {% endif %}	
   </div>

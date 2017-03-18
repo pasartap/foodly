@@ -22,8 +22,6 @@
         {% paginate collection.products by 10 %}
         
           {% for product in collection.products %}
-            {% include 'bold-product' with product, hide_action: 'skip' %}
-            {% include 'bold-hidden-variants' with variant %}
             {% assign description_text = '' %}
             {% assign content_html = '' %}
 
@@ -45,16 +43,16 @@
                 </div>
                 <span class="product__price-point"> 
                   <meta itemprop="priceCurrency" content="{{ shop.currency }}">      
-                  <span itemprop="price" class="product__price" >{{ bold_price | money }}</span><br>
+                  <span itemprop="price" class="product__price" >{{ product.price | money }}</span><br>
                   
                   {% if settings.collection_product_badge == 'price'%}
-                    {% if bold_compare_at_price_min > bold_price %}
-                      <span class="product__compare-price">{{ bold_compare_at_price_max | money }}  </span>
+                    {% if product.compare_at_price_min > product.price %}
+                      <span class="product__compare-price">{{ product.compare_at_price_max | money }}  </span>
                     {% endif %}
                   {% endif %}
                 </span>
         
-                {% if settings.collection_product_badge == 'badge' and bold_compare_at_price_min > bold_price %}
+                {% if settings.collection_product_badge == 'badge' and product.compare_at_price_min > product.price %}
                   <span class="product__badge">{{ 'products.general.sale_badge_text' | t }}</span>
                 {% endif %} 
               </a> 

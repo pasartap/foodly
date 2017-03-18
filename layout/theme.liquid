@@ -80,9 +80,6 @@
 
 
 <!-- BeginConsistentCartAddon --><script>{% if customer %}Shopify.merge_cart_text = '{{ "consistent_cart_addon.merge_cart_text" | t }}' ;Shopify.customer_logged_in = true ;Shopify.customer_email = "{{ customer.email }}" ;{% else %}Shopify.customer_logged_in = false ;Shopify.customer_email = "" ;{% endif %}</script><!-- EndConsistentCartAddon -->
-<!-- BeginMotivator -->{% if product.metafields.inventory.ShappifyHidden == "true" %} <meta name="robots" content="noindex"> {% endif %}<!-- EndMotivator -->
-  
-  {% include 'bold-motivator-ajax' %}
 </head>
 
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" style="overflow-y: scroll">
