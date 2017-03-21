@@ -380,7 +380,6 @@
                             
                             <ul class="cart-list">
                               {% for item in cart.items %}
-                                {% include 'bold-cart-item' with item %}
                                 <li class="cart-list__item">
                                   <div class="cart-list__item--img clearfix">
                                     <div class="img-holder img-holder--circle img-holder--circle-sm">
@@ -404,7 +403,7 @@
                                   </div>
                             
                                   <div class="cart-list__item--price">
-                                    <span class="money">{{ bold_item_price | money }}</span>
+                                    <span class="money">{{ item.price | money }}</span>
                                   </div>
                             
                                   <div class="cart-list__item--remove">

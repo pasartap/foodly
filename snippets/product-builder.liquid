@@ -4,9 +4,12 @@
   <div class="wrapper">
     <div class="grid">
       <div class="grid__item">
-        {% if settings.pick_products_heading != blank %}
+        {% comment %}{% if settings.pick_products_heading != blank %}
         <h3 class="section-heading heading--page">{{ settings.pick_products_heading | upcase }}</h3>
-        {% endif %}
+        {% endif %}{% endcomment %}
+
+        <h1 class="section-heading heading--page" style="text-transform: none">{{ 'blogs.general.heading' | t }}</h1>
+        <h1 class="section-heading heading--page" style="text-transform: none">{{ 'blogs.general.heading_pack_line' | t }}</h1>
 
         {% if settings.pick_products_subheading != blank %}
         <p class="section__info text-center">{{ settings.pick_products_subheading }}</p>
@@ -22,7 +25,7 @@
                 </svg>
               </a>
             </li>
-            <li class="tab disable" data-tab="#tab-two" data-next-btn-name="{{ 'tabs.products_picker.second_button_name' | t }}">
+            {% comment %}<li class="tab disable" data-tab="#tab-two" data-next-btn-name="{{ 'tabs.products_picker.second_button_name' | t }}">
               <a class="tab__link" href="#tab-two">
                 {{ 'tabs.products_picker.tab_two' | t }}
                 <svg class="underline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="94" height="11" viewBox="0 0 94 11">
@@ -37,7 +40,7 @@
                   <path fill="#5c4b51" d="M93.816,1.151 C71.090,2.543 48.363,3.935 25.637,5.327 C20.167,5.662 13.239,5.918 9.452,5.029 C11.666,3.915 17.736,3.372 23.265,2.934 C43.829,1.306 65.316,-0.351 87.494,0.053 C90.708,0.112 94.987,0.549 93.816,1.151 ZM78.045,5.388 C81.259,5.447 85.538,5.884 84.367,6.486 C61.640,7.878 38.914,9.271 16.188,10.662 C10.718,10.997 3.790,11.254 0.003,10.364 C2.217,9.250 8.287,8.707 13.816,8.269 C34.380,6.641 55.867,4.983 78.045,5.388 Z"/>
                 </svg>
               </a>
-            </li>
+            </li>{% endcomment %}
             <li class="tab disable" data-tab="#tab-four" data-next-btn-name="{{ 'tabs.products_picker.fourth_button_name' | t }}">
               <a class="tab__link" href="#tab-four">
                 {{ 'tabs.products_picker.tab_four' | t }}
@@ -54,39 +57,48 @@
 
                 {% for pack in blogs[blog_recipes].articles %}
 
-                {% if pack.title contains "[price:" %}
-                  {% assign pack_title = pack.title | split: "[price:" | first %}
-                  {% assign pack_price = pack.title | split: "[price:" | last %}
-                  {% assign pack_price = pack_price | split: "]" | first %}
-                  {% assign pack_price = pack_price | replace: ".", "" %}
-                {% endif %}
+                  {% if pack.title contains "[price:" %}
+                    {% assign pack_title = pack.title | split: "[price:" | first %}
+                    {% assign pack_price = pack.title | split: "[price:" | last %}
+                    {% assign pack_price = pack_price | split: "]" | first %}
+                    {% assign pack_price = pack_price | replace: ".", "" %}
+                  {% endif %}
 
-                <div class="picker-pack" data-price="{{ pack_price }}" data-image="{{ pack | img_url: 'large' }}" data-author="{{ pack.author }}" data-desc="{{ pack.excerpt }}" data-url="{{ pack.url }}" data-pack-id="{{ pack.id }}" data-title="{{ pack_title }}">
-                  <div class="image-holder">
-                    <img src="{{ pack | img_url: 'large' }}" alt="{{ pack_title }}">
-                    <span class="check-icon-wrapper">
-                      <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="24" height="22" viewBox="0 0 24 22">
-                        <path fill="none" d="M2.000,9.000 L9.000,20.000 L22.000,2.000 "/>
-                      </svg>
-                    </span>
-                  </div>
+                  {% for product in collections['Deals'].products %}
+                    {% assign product_title = product.title | downcase | strip %}
+                    {% assign recipe_product_down = "Promo Cuti Sekolah" | downcase | strip %}
+                      {% if product_title contains recipe_product_down %}
+                        {% assign pack_price = product.price %}
+                        {% break %}
+                      {% endif %}
+                  {% endfor %}
 
-                  <div class="checked-bg">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="401" height="287" viewBox="0 0 401 287">
-                      <path d="M9.615,31.961 C9.615,31.961 37.892,-26.746 216.717,17.344 C367.492,54.519 394.605,129.219 396.921,137.939 C399.037,145.904 403.816,161.608 395.682,184.402 C384.407,215.996 300.504,310.596 183.428,281.465 C70.756,253.429 -12.938,103.545 1.978,49.148 C3.266,44.451 1.762,47.172 9.615,31.961 Z"/>
-                    </svg>
-                  </div>
-                  
-                  <div class="picker-pack__info">
-                    <div class="title-container">
-                      <h4 class="picker-pack__title">{{ pack_title | t }}</h4>
-                      <span class="picker-pack__subtitle">{{ 'tabs.products_picker.ingredient_pack_from' | t }}</span>
+                  <div class="picker-pack" data-price="{{ pack_price }}" data-image="{{ pack | img_url: 'large' }}" data-author="{{ pack.author }}" data-desc="{{ pack.excerpt }}" data-url="{{ pack.url }}" data-pack-id="{{ pack.id }}" data-title="{{ pack.title | truncatewords: 3 }}">
+                    <div class="image-holder">
+                      <img src="{{ pack | img_url: 'large' }}" alt="{{ pack.title }}">
+                      <span class="check-icon-wrapper">
+                        <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="24" height="22" viewBox="0 0 24 22">
+                          <path fill="none" d="M2.000,9.000 L9.000,20.000 L22.000,2.000 "/>
+                        </svg>
+                      </span>
                     </div>
-                    <span class="picker-pack__price">
-                      <span class="money">{{ pack_price | money }}</span>
-                    </span>
+
+                    <div class="checked-bg">
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="401" height="287" viewBox="0 0 401 287">
+                        <path d="M9.615,31.961 C9.615,31.961 37.892,-26.746 216.717,17.344 C367.492,54.519 394.605,129.219 396.921,137.939 C399.037,145.904 403.816,161.608 395.682,184.402 C384.407,215.996 300.504,310.596 183.428,281.465 C70.756,253.429 -12.938,103.545 1.978,49.148 C3.266,44.451 1.762,47.172 9.615,31.961 Z"/>
+                      </svg>
+                    </div>
+                    
+                    <div class="picker-pack__info">
+                      <div class="title-container">
+                        <h4 class="picker-pack__title">{{ pack.title | truncatewords: 4 }}</h4>
+                        <span class="picker-pack__subtitle">{{ 'tabs.products_picker.ingredient_pack_from' | t }}</span>
+                      </div>
+                      <span class="picker-pack__price">
+                        <span class="money">{{ pack_price | money }}</span>
+                      </span>
+                    </div>
                   </div>
-                </div>
                 {% endfor %}
               </div>
               
@@ -95,7 +107,7 @@
             End tab-content one  
             {% endcomment %}
 
-            <div class="tab-content" id="tab-two">
+            <div class="tab-content" id="tab-two" style="display:none">
               {% for pack in blogs[blog_recipes].articles %}
 
                 {% comment %}
@@ -151,7 +163,7 @@
               
             </div>
 
-            <div class="tab-content" id="tab-three">
+            <div class="tab-content" id="tab-three" style="display:none">
               {% for pack in blogs[blog_recipes].articles %}
 
                 {% comment %}
@@ -253,8 +265,8 @@
                       <span class="arrow-l"></span>
                     </a>
 
-                    <a href="javascript:void(0)" class="btn btn--default next-btn" data-tab="#tab-two">
-                      <span>check its ingedients</span> <span class="arrow-r"></span>
+                    <a href="javascript:void(0)" class="btn btn--default next-btn" data-tab="#tab-four">
+                      <span>{{ 'tabs.products_picker.first_button_name' | t }}</span> <span class="arrow-r"></span>
                     </a>
                   </div>
                 </div>

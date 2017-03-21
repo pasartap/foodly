@@ -132,7 +132,6 @@
                   
                 <ul class="cart-list">
                   {% for item in cart.items %}
-                    {% include 'bold-cart-item' with item %}
                     <li class="cart-list__item">
                       <div class="cart-list__item--img clearfix">
                         <div class="img-holder img-holder--circle img-holder--circle-sm">
@@ -150,13 +149,13 @@
                       <div class="cart-list__item--quantity">
                         <div class="quantity-field">
                           <span class="icon icon--arrow-up js-up-quantity"></span>
-                          <input id="updates_{{ item.id }}" type="number" name="updates[]" min="1" value="{{ item.quantity }}" size="5" {{ bold_qty_attr }} />
+                          <input id="updates_{{ item.id }}" type="number" name="updates[]" min="1" value="{{ item.quantity }}" size="5">
                           <span class="icon icon--arrow-down js-down-quantity"></span>
                         </div>
                       </div>  
                       
                       <div class="cart-list__item--price">
-                        <span class="money">{{ bold_item_price | money }}</span>
+                        <span class="money">{{ item.price | money }}</span>
                       </div>
               
                       <div class="cart-list__item--remove">

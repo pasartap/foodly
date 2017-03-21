@@ -21,7 +21,7 @@
         <a href= "{{ coll_relative_link }}"><h2 class="subheading--page-small" style="text-align:center"><em>View all {{ collections[coll].products_count }} {{ 'collections.product_list.products_in_collection' | t }}</em></h2></a>
         {% include 'space-20' %}
         <div class="swiper-wrapper">
-          {% assign products = collections[coll].products | sort: 'price' %}      
+          {% assign products = collections[coll].products %}      
           {% for product in products limit:15 %}
           <div class="swiper-slide" data-img-bg="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'medium'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}">
             {% include 'product-item-grid' %}

@@ -38,7 +38,8 @@
 	"blogs": {
 		"general": {
 			"heading": "Dato' Fazley Yaakob's",
-			"heading_second_line": "My Sucre Story Recipes",
+			"heading_recipe_line": "My Sucre Story Recipes",
+			"heading_pack_line": "My Sucre Story Recipe Packs",
 			"subheading": "<brief description of the recipes>",
 			"by_author": "by"
 		},
@@ -334,15 +335,15 @@
 	},
 	"tabs": {
 		"products_picker": {
-			"tab_one": "courses",
+			"tab_one": "recipes",
 			"tab_two": "ingredients",
 			"tab_three": "accessories",
 			"tab_four": "summary",
 			"ingredient_pack_from": "Ingredient pack from",
-			"first_button_name": "Check its ingredients",
+			"first_button_name": "Complete order now",
 			"second_button_name": "Handcrafted dishes",
 			"third_button_name": "Sum up the order",
-			"fourth_button_name": "Complete order now",
+			"fourth_button_name": "Add to cart",
 			"link_to_recipe": "Get to know the specifics of this meal"
 		}
 	},
