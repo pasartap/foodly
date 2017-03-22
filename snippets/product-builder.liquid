@@ -56,6 +56,10 @@
 
                 {% for pack in blogs[blog_recipes].articles %}
 
+                  {% unless pack.tags contains 'SukaSucre' %}
+                    {% continue %}
+                  {% endunless %}
+
                   {% if pack.title contains "[price:" %}
                     {% assign pack_title = pack.title | split: "[price:" | first %}
                     {% assign pack_price = pack.title | split: "[price:" | last %}
@@ -73,7 +77,7 @@
                       {% endif %}
                   {% endfor %}
 
-                  <div class="picker-pack" data-price="{{ pack_price }}" data-image="{{ pack | img_url: 'large' }}" data-author="{{ pack.author }}" data-desc="{{ pack.excerpt }}" data-url="{{ pack.url }}" data-pack-id="{{ pack.id }}" data-title="{{ pack.title | truncatewords: 4 }}">
+                  <div class="picker-pack" data-price="{{ pack_price }}" data-image="{{ pack | img_url: 'large' }}" data-author="{{ pack.author }}" data-desc="{{ pack.excerpt }}" data-url="{{ pack.url }}" data-pack-id="{{ pack.id }}" data-title="{{ pack.title }}">
                     <div class="image-holder">
                       <img src="{{ pack | img_url: 'large' }}" alt="{{ pack.title }}">
                       <span class="check-icon-wrapper">
@@ -91,7 +95,7 @@
                     
                     <div class="picker-pack__info">
                       <div class="title-container">
-                        <h4 class="picker-pack__title">{{ pack.title | truncatewords: 4 }}</h4>
+                        <h4 class="picker-pack__title">{{ pack.title }}</h4>
                         <span class="picker-pack__subtitle">{{ 'tabs.products_picker.ingredient_pack_from' | t }}</span>
                       </div>
                       <span class="picker-pack__price">
@@ -240,9 +244,45 @@
                 <div class="accessories-list-container">
                 </div>
 
-               {% comment %} <div itemprop="description" class="rte product__desc-content">
-                  {{ pack_description }}
-                </div>{% endcomment %}
+                {% for product in collections['Deals'].products %}
+                  {% assign product_title = product.title | downcase | strip %}
+                  {% assign recipe_product_down = "Promo Cuti Sekolah" | downcase | strip %}
+                  {% if product_title contains recipe_product_down %}
+                    <div class="form-wrapper">
+                      <form id="meal-kit-form" class="form form--default" action="/cart/add" method="post">
+                      <div class="form__row">
+                        {% if product.variants.size > 1 and product.available %}
+                        
+                        <select id="product-variants" name="id">
+                          {% for variant in product.variants %}
+                          <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }}</option>
+                          {% endfor %}
+                        </select>
+
+                        {% else %}
+
+                        <input type="hidden" name="id" value="{{ product.variants[0].id }}" />              
+                        {% endif %}
+                      </div>
+                      <div class="form__row">
+                        <div class="quantity-field">
+                        <span class="icon icon--arrow-right js-up-quantity"></span>
+                        <input class="form__field" type="number" id="quantity" name="quantity" value="1" min="1" >
+                        <span class="icon icon--arrow-left js-down-quantity"></span>
+                        </div>
+                        <span class="js-price-and-value">x <span class="money">{{ product.price | money }}</span> = <span class="js-total-price money">{{ product.price | money }}</span></span>
+                      </div>
+                      <div class="form__row">
+                        <button {% unless product.available %}disabled{% endunless %} class="btn btn--default btn--full btn--submit {% unless product.available %}btn--disabled{% endunless %} js-add-to-card" type="submit">{% unless product.available %}{{ 'products.general.out_stock' | t }}{% else %} {{ 'layout.general.add_to_cart_button' | t }}{% endunless %}</button>
+                      </div>
+                      <div itemprop="description" class="rte product__desc-content">
+                        {{ product.description }}
+                      </div>
+                      </form>
+                    </div> <!-- End form-wrapper -->
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
 
               </div>
             </div>
@@ -262,7 +302,7 @@
                       <span class="money">{{ 0 | money }}</span>
                     </span>
                     <div class="choosed-pack-desc"></div>
-                    <span class="choosed-pack-author"></span>
+                    <span class="choosed-pack-author" style="display:none"></span>
                   </div>
 
                   <div class="picker-nav-btns">
@@ -614,7 +654,7 @@
 
     if ( packDesc ) {
       this.DOM.pickerNavAuthor.innerHTML = '{{ "blogs.general.by_author" | t }} ' + packAuthor;
-      fullDesc = packDesc + ' <a href="' + packURL + '">{{ "tabs.products_picker.link_to_recipe" | t }}</a>'
+      fullDesc = packDesc + ' <a href="' + packURL + '"><br />{{ "tabs.products_picker.link_to_recipe" | t }}</a>'
     } else {
       this.DOM.pickerNavAuthor.innerHTML = '';
     }

@@ -40,7 +40,7 @@
 			"heading": "Dato' Fazley Yaakob's",
 			"heading_recipe_line": "My Sucre Story Recipes",
 			"heading_mealkit_line": "My Sucre Story Meal Kits",
-			"subheading": "<brief description of the recipes>",
+			"subheading": "PasarTap brings to you Chef Dato' Fazley's select recipes from his book 'My Sucre Story'.",
 			"by_author": "by"
 		},
 		"sidebar": {
@@ -344,7 +344,7 @@
 			"second_button_name": "Handcrafted dishes",
 			"third_button_name": "Sum up the order",
 			"fourth_button_name": "Add to cart",
-			"link_to_recipe": "Get to know the specifics of this meal"
+			"link_to_recipe": "Get to know the specifics of this meal."
 		}
 	},
 	"landing_page": {
