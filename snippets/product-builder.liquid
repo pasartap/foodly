@@ -41,7 +41,7 @@
               </a>
             </li>{% endcomment %}
             <li class="tab disable" data-tab="#tab-four" data-next-btn-name="{{ 'tabs.products_picker.fourth_button_name' | t }}">
-              <a class="tab__link" href="#tab-four">
+              <a class="tab__link" href="#tab-four" onclick="document.getElementById('meal-kit-form').submit();">
                 {{ 'tabs.products_picker.tab_four' | t }}
                 <svg class="underline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="94" height="11" viewBox="0 0 94 11">
                   <path fill="#5c4b51" d="M93.816,1.151 C71.090,2.543 48.363,3.935 25.637,5.327 C20.167,5.662 13.239,5.918 9.452,5.029 C11.666,3.915 17.736,3.372 23.265,2.934 C43.829,1.306 65.316,-0.351 87.494,0.053 C90.708,0.112 94.987,0.549 93.816,1.151 ZM78.045,5.388 C81.259,5.447 85.538,5.884 84.367,6.486 C61.640,7.878 38.914,9.271 16.188,10.662 C10.718,10.997 3.790,11.254 0.003,10.364 C2.217,9.250 8.287,8.707 13.816,8.269 C34.380,6.641 55.867,4.983 78.045,5.388 Z"/>
@@ -270,10 +270,11 @@
                         <input class="form__field" type="number" id="quantity" name="quantity" value="1" min="1" >
                         <span class="icon icon--arrow-left js-down-quantity"></span>
                         </div>
-                        <span class="js-price-and-value">x <span class="money">{{ product.price | money }}</span> = <span class="js-total-price money">{{ product.price | money }}</span></span>
+                        <span class="js-price-and-value">x <span class="money">{{ product.price | money }}</span>
+                        {% comment %}<span class="js-price-and-value">x <span class="money">{{ product.price | money }}</span> = <span class="js-total-price money">{{ product.price | money }}</span></span>{% endcomment %}
                       </div>
                       <div class="form__row">
-                        <button {% unless product.available %}disabled{% endunless %} class="btn btn--default btn--full btn--submit {% unless product.available %}btn--disabled{% endunless %} js-add-to-card" type="submit">{% unless product.available %}{{ 'products.general.out_stock' | t }}{% else %} {{ 'layout.general.add_to_cart_button' | t }}{% endunless %}</button>
+                        <button id="meal-kit-button" style="display:none" {% unless product.available %}disabled{% endunless %} class="btn btn--default btn--full btn--submit {% unless product.available %}btn--disabled{% endunless %} js-add-to-card" type="submit">{% unless product.available %}{{ 'products.general.out_stock' | t }}{% else %} {{ 'layout.general.add_to_cart_button' | t }}{% endunless %}</button>
                       </div>
                       <div itemprop="description" class="rte product__desc-content">
                         {{ product.description }}
@@ -912,8 +913,13 @@
   ProductPicker.prototype.toggleCheckoutLink = function(toggle) {
 
     if (toggle) {
-      this.DOM.pickerNavNextBtn.href = this.checkoutLink;
-    } else{
+      this.DOM.pickerNavNextBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        document.getElementById( "meal-kit-button" ).click();
+      });
+      t/*his.DOM.pickerNavNextBtn.href = this.checkoutLink;*/
+      this.DOM.pickerNavNextBtn.href = '/pages/recipes';
+    } else {
       this.DOM.pickerNavNextBtn.href = 'javascript:void(0)';
     }
   };
