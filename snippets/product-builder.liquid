@@ -8,8 +8,7 @@
         <h3 class="section-heading heading--page">{{ settings.pick_products_heading | upcase }}</h3>
         {% endif %}{% endcomment %}
 
-        <h1 class="section-heading heading--page" style="text-transform: none">{{ 'blogs.general.heading' | t }}</h1>
-        <h1 class="section-heading heading--page" style="text-transform: none">{{ 'blogs.general.heading_pack_line' | t }}</h1>
+        <h1 class="section-heading heading--page" style="text-transform: none">{{ 'blogs.general.heading_mealkit_line' | t }}</h1>
 
         {% if settings.pick_products_subheading != blank %}
         <p class="section__info text-center">{{ settings.pick_products_subheading }}</p>
@@ -69,11 +68,12 @@
                     {% assign recipe_product_down = "Promo Cuti Sekolah" | downcase | strip %}
                       {% if product_title contains recipe_product_down %}
                         {% assign pack_price = product.price %}
+                        {% assign pack_description = product.description %}
                         {% break %}
                       {% endif %}
                   {% endfor %}
 
-                  <div class="picker-pack" data-price="{{ pack_price }}" data-image="{{ pack | img_url: 'large' }}" data-author="{{ pack.author }}" data-desc="{{ pack.excerpt }}" data-url="{{ pack.url }}" data-pack-id="{{ pack.id }}" data-title="{{ pack.title | truncatewords: 3 }}">
+                  <div class="picker-pack" data-price="{{ pack_price }}" data-image="{{ pack | img_url: 'large' }}" data-author="{{ pack.author }}" data-desc="{{ pack.excerpt }}" data-url="{{ pack.url }}" data-pack-id="{{ pack.id }}" data-title="{{ pack.title | truncatewords: 4 }}">
                     <div class="image-holder">
                       <img src="{{ pack | img_url: 'large' }}" alt="{{ pack.title }}">
                       <span class="check-icon-wrapper">
@@ -234,10 +234,15 @@
                 </div>
 
                 <div class="ingredients-list-container">
+                  {{ pack_description }}
                 </div>
 
                 <div class="accessories-list-container">
                 </div>
+
+               {% comment %} <div itemprop="description" class="rte product__desc-content">
+                  {{ pack_description }}
+                </div>{% endcomment %}
 
               </div>
             </div>

@@ -3,7 +3,6 @@
     <div class="grid">
       <div class="grid__item one-whole">
         <div class="page-description">
-          <h1 class="heading--page" style="text-transform: none">{{ 'blogs.general.heading' | t }}</h1>
           <h1 class="heading--page" style="text-transform: none">{{ 'blogs.general.heading_recipe_line' | t }}</h1>
           <h2 class="subheading--page-small">
             <em>{{ 'blogs.general.subheading' | t }}</em>
@@ -15,95 +14,98 @@
           </div>
         {% endif %}
         <div class="blog-container">
-          {% paginate blog.articles by 5 %}   
+          {% paginate blog.articles by 10 %}   
           
             {% for article in blog.articles %}
               {% comment %}
-              Check if article is article with recipe
+              Check if article is English or BM. We want to display English articles only.
               {% endcomment %}
-              {% assign content_html =  article.content %}
-              {% assign article_recipe = false %}
+              {% if article.tags contains 'SukaSucre' %}
+                {% comment %}
+                Check if article is article with recipe
+                {% endcomment %}
+                {% assign content_html =  article.content %}
+                {% assign article_recipe = false %}
 
-              {% comment %}
-              Strip unnecessary html
-              {% endcomment %}
-              {% include 'strip_html_tags' with content_html %}
+                {% comment %}
+                Strip unnecessary html
+                {% endcomment %}
+                {% include 'strip_html_tags' with content_html %}
 
-              {% if content contains '[ingredients]' or content contains '[directions]'  %}
-                {% assign article_recipe = true %}
-              {% endif %}
-              <article class="article article--blog">
-                {% if article.title contains "[price:" %}
-                  {% assign article_title = article.title | split: "[price:" | first %}
-                {% else %}
-                  {% assign article_title = article.title  %}
+                {% if content contains '[ingredients]' or content contains '[directions]'  %}
+                  {% assign article_recipe = true %}
                 {% endif %}
-            
-                <div class="img-holder">
-                  <a href="{{ article.url }}" title="{{ article_title }}">
-                    <img class="article__img" src="{{ article | img_url: 'large' }}" alt="{{ article_title }}">
-                  </a>
-                </div>              
-                   
-                <h3 class="heading--add article__title">
-                  <a href="{{ article.url }}" title="{{ article_title }}">{{ article_title }}</a>
-                </h3>
-                
-                <p class="article__date">
-                  <time class="date">{{ article.created_at | date: "%B %-d, %Y" }}</time>
-                </p>
-                
-                <div class="rte article__content">
-                  {% if article_recipe == true %}
-
-                    {% if content contains '[ingredients]' %}
-                      {% assign first_part = content | split: '[ingredients]' | first %}
-                      
-                      {% if first_part contains 'Ingredients' %}
-                        {% assign f_p_b_ingredients = first_part | split: 'Ingredients' | first %}
-                        {% assign f_p_a_ingredients = first_part | split: 'Ingredients' | last %}
-                      {% elsif first_part contains 'ingredients' %}
-                        {% assign f_p_b_ingredients = first_part | split: 'ingredients' | first %}
-                        {% assign f_p_a_ingredients = first_part | split: 'ingredients' | last %}
-                      {% else %}
-                        {% assign f_p_b_ingredients = first_part %}
-                      {% endif %} 
-
-
-                      {% if f_p_b_ingredients.size > 5 %}
-                        {{f_p_b_ingredients}}
-                      {% elsif article.excerpt.size > 0 %}
-                        {{ article.excerpt }}
-                      {% endif %}
-                    {% endif %}
-
+                <article class="article article--blog">
+                  {% if article.title contains "[price:" %}
+                    {% assign article_title = article.title | split: "[price:" | first %}
                   {% else %}
-                    {% if article.excerpt.size > 0 %}
-                      {{ article.excerpt }}
-                    {% else %}
-                      <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
-                    {% endif %}
+                    {% assign article_title = article.title  %}
                   {% endif %}
+              
+                  <div class="img-holder">
+                    <a href="{{ article.url }}" title="{{ article_title }}">
+                      <img class="article__img" src="{{ article | img_url: 'large' }}" alt="{{ article_title }}">
+                    </a>
+                  </div>              
+                     
+                  <h3 class="heading--add article__title">
+                    <a href="{{ article.url }}" title="{{ article_title }}">{{ article_title }}</a>
+                  </h3>
                   
-                </div>
-                
-                <p class="article__author">{{ 'blogs.general.by_author' | t }} {{ article.author }}</p>
-              </article>
-                    
-              <hr class="hr--clear-inverse">  
-            {% endfor %}
-          
+                  <p class="article__date">
+                    {% comment %}<time class="date">{{ article.created_at | date: "%B %-d, %Y" }}</time>{% endcomment %}
+                    <time class="date">{{ 'Buy Now' | link_to: '/pages/recipes','Buy Now' }}</time>
+                  </p>
+                  
+                  <div class="rte article__content">
+                    {% comment %}{% if article_recipe == true %}
+
+                      {% if content contains '[ingredients]' %}
+                        {% assign first_part = content | split: '[ingredients]' | first %}
+                        
+                        {% if first_part contains 'Ingredients' %}
+                          {% assign f_p_b_ingredients = first_part | split: 'Ingredients' | first %}
+                          {% assign f_p_a_ingredients = first_part | split: 'Ingredients' | last %}
+                        {% elsif first_part contains 'ingredients' %}
+                          {% assign f_p_b_ingredients = first_part | split: 'ingredients' | first %}
+                          {% assign f_p_a_ingredients = first_part | split: 'ingredients' | last %}
+                        {% else %}
+                          {% assign f_p_b_ingredients = first_part %}
+                        {% endif %} 
+
+
+                        {% if f_p_b_ingredients.size > 5 %}
+                          {{f_p_b_ingredients}}
+                        {% elsif article.excerpt.size > 0 %}
+                          {{ article.excerpt }}
+                        {% endif %}
+                      {% endif %}
+
+                    {% else %}
+                      {% if article.excerpt.size > 0 %}
+                        {{ article.excerpt }}
+                      {% else %}
+                        <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+                      {% endif %}
+                    {% endif %}{% endcomment %}
+                    {{ article.excerpt }}
+                  </div>
+                  
+                  {% comment %}<p class="article__author">{{ 'blogs.general.by_author' | t }} {{ article.author }}</p>{% endcomment %}
+                </article>
+                      
+                <hr class="hr--clear-inverse">  
+              {% endif %}  
+            {% endfor %}                             
         
-        
-          {% if paginate.pages > 1 %}
+         {% comment %} {% if paginate.pages > 1 %}
             <div class="pagination">
               {% include 'pagination' %}
             </div>  
-          {% endif %}
+          {% endif %}{% endcomment %}
 
         {% endpaginate %}
           </div> <!-- End blog-container -->
-        
         
       </div> <!-- End grid__item -->
     </div> <!-- End grid -->
