@@ -232,7 +232,7 @@
                       <span class="picker-pack__subtitle">{{ 'tabs.products_picker.ingredient_pack_from' | t }}</span>
                     </div>
                     <span class="picker-pack__price">
-                      <span class="money"></span>
+                      <span class="js-total-price-recipe money"></span>
                     </span>
                   </div>
                 </div>
@@ -265,12 +265,13 @@
                         {% endif %}
                       </div>
                       <div class="form__row">
-                        <div class="quantity-field">
-                        <span class="icon icon--arrow-right js-up-quantity"></span>
-                        <input class="form__field" type="number" id="quantity" name="quantity" value="1" min="1" >
-                        <span class="icon icon--arrow-left js-down-quantity"></span>
+                        <div class="quantity-field" style="margin-top:-40px">
+                          <span class="icon icon--arrow-right js-up-quantity"></span>
+                          <input class="form__field" type="number" id="quantity" name="quantity" value="1" min="1" >
+                          <span class="icon icon--arrow-left js-down-quantity"></span>
                         </div>
-                        <span class="js-price-and-value">x <span class="money">{{ product.price | money }}</span>
+                        <span class="js-price-and-value" style="display:none">x <span class="money">{{ product.price | money }}</span>
+                        <span class="js-total-price money" style="display:none"></span>
                         {% comment %}<span class="js-price-and-value">x <span class="money">{{ product.price | money }}</span> = <span class="js-total-price money">{{ product.price | money }}</span></span>{% endcomment %}
                       </div>
                       <div class="form__row">
@@ -300,7 +301,7 @@
                   <div class="choosed-pack-info">
                     <h4 class="total-heading">Total</h4>
                     <span class="choosed-pack-total">
-                      <span class="money">{{ 0 | money }}</span>
+                      <span id="js-total-price-picker-nav" class="money">{{ 0 | money }}</span>
                     </span>
                     <div class="choosed-pack-desc"></div>
                     <span class="choosed-pack-author" style="display:none"></span>
@@ -916,9 +917,10 @@
       this.DOM.pickerNavNextBtn.addEventListener('click', function(e){
         e.preventDefault();
         document.getElementById( "meal-kit-button" ).click();
+        this.DOM.pickerNavNextBtn.href = '/pages/recipes';
       });
-      t/*his.DOM.pickerNavNextBtn.href = this.checkoutLink;*/
-      this.DOM.pickerNavNextBtn.href = '/pages/recipes';
+      /*this.DOM.pickerNavNextBtn.href = this.checkoutLink;*/
+      document.getElementById( "quantity" ).setAttribute("style","width: 70%;");
     } else {
       this.DOM.pickerNavNextBtn.href = 'javascript:void(0)';
     }

@@ -84,6 +84,7 @@
 
                   var quantityParentDOM = target.parentElement.parentElement;
                   var totalPriceDOM     = quantityParentDOM.querySelector('.js-total-price');
+                  var totalPriceDOMPickerNav     = document.getElementById('js-total-price-picker-nav');
                   var productPriceDOM   = quantityParentDOM.querySelector('.js-price-and-value > .money')
                   var productPrice      = productPriceDOM.innerHTML;
 
@@ -93,6 +94,7 @@
                   var total = e.target.value * productPrice;
                 
                   totalPriceDOM.textContent = Shopify.formatMoney(total, "{{ shop.money_format }}");
+                  totalPriceDOMPickerNav.textContent = Shopify.formatMoney(total, "{{ shop.money_format }}");
                 
                   {% if settings.show_multiple_currencies %}
                     if ( totalPriceDOM && totalPriceDOM.getAttribute('data-currency') !== '' ){
