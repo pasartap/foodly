@@ -86,6 +86,11 @@
                   var totalPriceDOM     = quantityParentDOM.querySelector('.js-total-price');
                   var totalPriceDOMPickerNav     = document.getElementById('js-total-price-picker-nav');
                   var productPriceDOM   = quantityParentDOM.querySelector('.js-price-and-value > .money')
+                  
+                  if ( productPriceDOM == null ) {
+                    productPriceDOM   = quantityParentDOM.querySelector('.js-price-and-value');
+                  }
+
                   var productPrice      = productPriceDOM.innerHTML;
 
                   productPrice = productPrice.replace(/[^0-9.]/g, '');
