@@ -1,6 +1,6 @@
 <div class="swiper-container box-slider">
   <div class="swiper-wrapper">
-    {% for slide_num in (2..4) %}
+    {% for slide_num in (1..4) %}
 
       {% comment %}
       Capture variables for every slide
@@ -20,8 +20,16 @@
 
       <div class="swiper-slide slide--{{ slide_num }} js-img-holder-cover" style="background-size:contain">
 		  
-          <img class="slide__image" src="{{ settings[slide_img] | asset_url }}" alt="{{ settings[slide_heading] }}" />
+          {% comment %}<img class="slide__image" src="{{ settings[slide_img] | asset_url }}" alt="{{ settings[slide_heading] }}" />{% endcomment %}
           
+          {% if slide_num == 4 %}
+            <a style="width: 100%; height:100%; position: absolute;" href ="/pages/recipes">
+              <img class="slide__image" src="{{ settings[slide_img] | asset_url }}" alt="{{ settings[slide_heading] }}" />
+            </a>
+          {% else %}
+            <img class="slide__image" src="{{ settings[slide_img] | asset_url }}" alt="{{ settings[slide_heading] }}" />
+          {% endif %}
+
           {% if settings[slide_text_enable] %}
             <div class="slide__info-wrapper">
               <div class="slide__info-part">
