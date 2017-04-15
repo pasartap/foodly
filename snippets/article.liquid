@@ -56,14 +56,9 @@ Layout for article with recipe
               {% endif %}
               <h1 class="article__title">{{ article_title }}</h1>
              <p class="article__date">
-               <time class="date">{{ article.created_at | date: "%B %-d, %Y" }}</time>
+               <span><a class="btn btn--default" href="/pages/recipes" title="Buy Meal Kit">Buy Meal Kit</a></span>
              </p>
-             
-             <div class="article__desc">
-               <span>{{ 'blogs.article.by_author' | t }} {{ article.author}}</span>
-               <span>{{ 'blogs.article.for_product' | t }} {{related_product}}</span>
-             </div>
-           </div>
+            
               
             <div class="rte article__content">
 

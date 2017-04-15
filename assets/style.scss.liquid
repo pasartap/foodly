@@ -1443,6 +1443,7 @@ th, td {
   .article__date {
     padding-top: 10px;
     text-align: center;
+    padding-bottom: 15px;
   }
 
   .article__author {
@@ -13116,6 +13117,52 @@ th, td {
   }
 }
 
+/* SukaSucre Banner
+/* -------------------------------------------------------------------------- */
+.sukasucre-image {
+  height: 100vh;
+  max-height: 500px;
+  background: url({{ 'sukasucre_banner.jpg' | asset_url }}) 50% 50% no-repeat;
+  background-size: contain;
+  position: relative;
+}
+
+.sukasucre-image .sukasucre-image__content {
+  position: absolute;
+  top: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 550px;
+  width: 100%;
+}
+
+.sukasucre-image__title {
+  margin-bottom: 32px;
+  font-family: $headerPageFontStack;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 72px;
+}
+
+.sukasucre-image__desc {
+  margin-bottom: 57px;
+  font-family: $additionalBodyFontStack;
+  font-size: 24px;
+  font-style: italic;
+  line-height: 36px;
+}
+
+@media (min-width: 769px){
+  .sukasucre-image .sukasucre-image__content {
+    top: 175px;
+  }
+}
+
+@media(max-width: 769px) {
+  .sukasucre-image {
+    background: url({{ 'sukasucre_banner_mobile.jpg' | asset_url }}) center/contain no-repeat !important;
+  }
+}
 
 /* Static block with image
 /* -------------------------------------------------------------------------- */
@@ -15252,6 +15299,7 @@ th, td {
 
 .picker-pack .picker-pack__title {
   font-size: 18px;
+  height: 50px; //added
 }
 
 .picker-pack .picker-pack__subtitle {
@@ -15599,7 +15647,7 @@ th, td {
 }
 
 .summary-container .picker-pack__info {
-  margin-top: 45px;
+  margin-top: 10px; //45px;
 }
 
 .summary-container .picker-pack .image-holder:before {
