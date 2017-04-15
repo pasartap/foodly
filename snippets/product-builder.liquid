@@ -67,7 +67,7 @@
                     {% assign pack_price = pack_price | replace: ".", "" %}
                   {% endif %}{% endcomment %}
 
-                  {% for product in collections['my-sucre-story-meal-kits'].products %}
+                  {% for product in collections['dato-fazley-ready-to-cook-meal-kits'].products %}
                     {% assign product_title = product.title | downcase | strip %}
                     {% assign recipe_product_down = pack.title | downcase | strip %}
                       {% if product_title contains recipe_product_down %}
