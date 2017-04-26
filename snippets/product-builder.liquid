@@ -15,7 +15,7 @@
         {% endif %}
 
         <div class="tab-wrapper js-product-picker">
-          <ul class="tab-list">
+          <ul class="tab-list" style="display:none">
             <li class="tab is-active" data-tab="#tab-one" data-next-btn-name="{{ 'tabs.products_picker.first_button_name' | t }}">
               <a class="tab__link" href="#tab-one">
                 {{ 'tabs.products_picker.tab_one' | t }}
@@ -94,6 +94,7 @@
                       </svg>
                     </div>
                     
+                    {% comment %}
                     <div class="picker-pack__info">
                       <div class="title-container">
                         <h4 class="picker-pack__title">{{ pack.title }}</h4>
@@ -103,6 +104,7 @@
                         <span class="money">{{ pack_price | money }}</span>
                       </span>
                     </div>
+                    {% endcomment %}
                   </div>
                 {% endfor %}
               </div>
