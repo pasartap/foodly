@@ -1,3 +1,7 @@
 {% include 'space-20' %}
-{% include 'collection-thumb' %}
+{% if collection.handle == 'dato-fazley-ready-to-cook-meal-kits' %}
+	{% include 'collection-list' %}	
+{% else %}
+	{% include 'collection-thumb' %}
+{% endif %}
 {% include 'space-80' %}

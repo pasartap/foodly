@@ -13174,12 +13174,19 @@ th, td {
   }
 }
 
-/* Static block with image
+/* Static blocks with images
 /* -------------------------------------------------------------------------- */
+.as-seen-on-image {
+  background: url({{ 'banner_as_seen_on.jpg' | asset_url }}) 50% 50% no-repeat;
+}
+
+.sukasucre-blog-image {
+  background: url({{ 'sukasucre_blog_banner.jpg' | asset_url }}) 50% 50% no-repeat;
+}
+
 .static-image {
   height: 100vh;
   max-height: 500px;
-  background: url({{ 'banner_as_seen_on.jpg' | asset_url }}) 50% 50% no-repeat;
   background-size: contain;
   position: relative;
 }
@@ -13216,8 +13223,12 @@ th, td {
 }
 
 @media(max-width: 769px) {
-  .static-image {
+  .as-seen-on-image {
     background: url({{ 'banner_as_seen_on_mobile.jpg' | asset_url }}) center/contain no-repeat !important;
+  }
+
+  .sukasucre-blog-image {
+    background: url({{ 'sukasucre_blog_banner_mobile.jpg' | asset_url }}) 50% 50% no-repeat;
   }
 }
 
