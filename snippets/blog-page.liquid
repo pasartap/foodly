@@ -65,7 +65,7 @@
                   
                   {% comment %}<p class="article__date">
                     <time class="date">{{ article.created_at | date: "%B %-d, %Y" }}</time>
-                    <time class="date">{{ 'Buy Meal Kit' | link_to: '/pages/recipes','Buy Meal Kit' }}</time>
+                    <time class="date">{{ 'Buy Meal Kit' | link_to: '/pages/meal-kits','Buy Meal Kit' }}</time>
                   </p>{% endcomment %}
 
                   {% for product in collections['dato-fazley-ready-to-cook-meal-kits'].products %}
