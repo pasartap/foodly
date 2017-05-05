@@ -4986,7 +4986,7 @@ th, td {
   width: 100%;
   max-width: 280px;
   position: absolute;
-  top: -155%;
+  top: 40%; //-155%;
   left: 0;
   font-size: 14px;
   line-height: 20px;
@@ -13228,7 +13228,7 @@ th, td {
   }
 
   .sukasucre-blog-image {
-    background: url({{ 'sukasucre_blog_banner_mobile.jpg' | asset_url }}) 50% 50% no-repeat;
+    background: url({{ 'sukasucre_blog_banner_mobile.jpg' | asset_url }}) center/contain no-repeat !important;
   }
 }
 
@@ -15271,9 +15271,10 @@ th, td {
   margin-bottom: 60px;
   display: inline-block;
   max-width: 365px;
-  text-align: left;
+  text-align: center; //left;
   cursor: pointer;
   position: relative;
+  vertical-align: top; //added
 }
 
 .picker-pack .image-holder {
