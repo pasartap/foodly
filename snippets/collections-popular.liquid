@@ -20,7 +20,7 @@
       {% for collection in popular_collections %}
         {% assign collection = collection | downcase %}
       
-    {% if collections[collection].image %}
+        {% if collections[collection].image %}
           {% assign collection_image = collections[collection].image | img_url: 'medium' %}
         {% else %}
           {% for product in collections[collection].products  limit: 1 %}

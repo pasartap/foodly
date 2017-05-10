@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="grid">
       <div class="grid__item one-whole">
-        <div class="page-description">
+        {% comment %}<div class="page-description">
           <h1 class="heading--page" style="text-transform: none">{{ 'blogs.general.heading_recipe_line' | t }}</h1>
           <h2 class="subheading--page-small">
             <em>{{ 'blogs.general.subheading' | t }}</em>
@@ -12,7 +12,7 @@
           <div id="sorting_toolbar" class="sorting_toolbar">
             
           </div>
-        {% endif %}
+        {% endif %}{% endcomment %}
         <div class="blog-container">
           {% paginate blog.articles by 10 %}   
           
@@ -43,8 +43,19 @@
                   {% endif %}
               
                   <div class="img-holder">
+                    {% if article.title == 'Eggplant Sambal with Acetes Shrimp and Roasted Stink-beans' %}
+                      {% assign article_img = 'sambal-terung-udang-geragau-petai-bakar.jpg' %}
+                    {% elsif article.title == 'Sardine Swirl Curry Puffs' %}
+                      {% assign article_img = 'karipap-pusing-sardin.jpg' %}
+                    {% elsif article.title == 'Mixed Rendang a la Negeri Sembilan' %}
+                      {% assign article_img = 'rendang-campur-negeri-sembilan.jpg' %}
+                    {% elsif article.title == 'Grilled Chicken with Green Sambal' %}
+                      {% assign article_img = 'ayam-pop-sambal-hijau.jpg' %}
+                    {% else %}
+                      {% assign article_img = 'daging-salai-lemak-cili-padi.jpg' %}
+                    {% endif %}
                     <a href="{{ article.url }}" title="{{ article_title }}">
-                      <img class="article__img" src="{{ article | img_url: 'large' }}" alt="{{ article_title }}">
+                      <img class="article__img" src="{{ article_img | asset_url }}" alt="{{ article_title }}">
                     </a>
                   </div>              
                      
@@ -52,10 +63,20 @@
                     <a href="{{ article.url }}" title="{{ article_title }}">{{ article_title }}</a>
                   </h3>
                   
-                  <p class="article__date">
-                    {% comment %}<time class="date">{{ article.created_at | date: "%B %-d, %Y" }}</time>{% endcomment %}
-                    <time class="date">{{ 'Buy Meal Kit' | link_to: '/pages/recipes','Buy Meal Kit' }}</time>
-                  </p>
+                  {% comment %}<p class="article__date">
+                    <time class="date">{{ article.created_at | date: "%B %-d, %Y" }}</time>
+                    <time class="date">{{ 'Buy Meal Kit' | link_to: '/pages/meal-kits','Buy Meal Kit' }}</time>
+                  </p>{% endcomment %}
+
+                  {% for product in collections['dato-fazley-ready-to-cook-meal-kits'].products %}
+                    {% assign product_title = product.title | downcase | strip %}
+                    {% assign article_title = article.title | downcase | strip %}
+                      {% if product_title == article_title %}
+                        {% assign product_id = product.id %}
+                        {% assign variant_id = product.variants.first.id %}
+                        {% break %}
+                      {% endif %}
+                  {% endfor %}                 
                   
                   <div class="rte article__content">
                     {% comment %}{% if article_recipe == true %}

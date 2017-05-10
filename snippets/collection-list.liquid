@@ -7,6 +7,12 @@
           <h2 class="subheading--page-small">
             <em>{{ collection.products.size }} {{ 'collections.product_list.products_in_collection' | t }}</em>
           </h2>
+          {% if collection.handle == 'meat' %}
+            <h2 class="subheading--page-small"><strong>Place your order before 12PM for same day delivery.</strong></h2>
+            <h2 class="subheading--page-small"><strong>For mybif products, place your order before Friday and delivery will be done on Saturday.</strong></h2>
+          {% elsif collection.handle == 'mybif' %}
+            <h2 class="subheading--page-small"><strong>Place your order before Friday and delivery will be done on Saturday.</strong></h2>
+          {% endif %} 
         </div>
         
         {% comment %}

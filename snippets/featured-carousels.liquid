@@ -1,5 +1,5 @@
 {% include 'space-20' %}
-{% for coll_num in (1..12) %}
+{% for coll_num in (1..10) %}
   {% capture current_collection %}homepage_featured_collection_{{ coll_num }}{% endcapture %}
   {% capture carousel_homepage %}carousel--homepage_{{ coll_num }}{% endcapture %}
   {% capture js_swiper_btn_next %}js-swiper-btn-next_{{ coll_num }}{% endcapture %}
@@ -19,6 +19,10 @@
         {% include 'space-20' %}
         <h1 class="heading--page" style="text-align:center">{{ collections[coll].title }}</h1>
         <a href= "{{ coll_relative_link }}"><h2 class="subheading--page-small" style="text-align:center"><em>View all {{ collections[coll].products_count }} {{ 'collections.product_list.products_in_collection' | t }}</em></h2></a>
+        {% if collections[coll].handle == 'meat' %}
+          <h2 class="subheading--page-small" style="text-align:center"><strong>Place your order before 12PM for same day delivery.</strong></h2>
+          <h2 class="subheading--page-small" style="text-align:center"><strong>For mybif products, place your order before Friday and delivery will be done on Saturday.</strong></h2>
+        {% endif %} 
         {% include 'space-20' %}
         <div class="swiper-wrapper">
           {% assign products = collections[coll].products %}      

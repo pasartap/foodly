@@ -8,14 +8,14 @@
         <h3 class="section-heading heading--page">{{ settings.pick_products_heading | upcase }}</h3>
         {% endif %}{% endcomment %}
 
-        <h1 class="section-heading heading--page" style="text-transform: none">{{ 'blogs.general.heading_mealkit_line' | t }}</h1>
+        {% comment %}<h1 class="section-heading heading--page" style="text-transform: none">{{ 'blogs.general.heading_mealkit_line' | t }}</h1>
 
         {% if settings.pick_products_subheading != blank %}
         <p class="section__info text-center">{{ settings.pick_products_subheading }}</p>
-        {% endif %}
+        {% endif %}{% endcomment %}
 
         <div class="tab-wrapper js-product-picker">
-          <ul class="tab-list">
+          <ul class="tab-list" style="display:none">
             <li class="tab is-active" data-tab="#tab-one" data-next-btn-name="{{ 'tabs.products_picker.first_button_name' | t }}">
               <a class="tab__link" href="#tab-one">
                 {{ 'tabs.products_picker.tab_one' | t }}
@@ -52,7 +52,8 @@
 
           <div class="tabs-content">
             <div class="tab-content is-active" id="tab-one">
-              <div class="picker-packs-container js-picker-content">
+              {% comment %}<div class="picker-packs-container js-picker-content">{% endcomment %}
+              <div class="picker-packs-container">
 
                 {% for pack in blogs[blog_recipes].articles %}
 
@@ -74,13 +75,29 @@
                         {% assign pack_price = product.price %}
                         {% assign pack_ingredients = product.description %}
                         {% assign variant_id = product.variants.first.id %}
+                        {% assign product_id = product.id %}
                         {% break %}
                       {% endif %}
                   {% endfor %}
 
                   <div class="picker-pack" data-price="{{ pack_price }}" data-image="{{ pack | img_url: 'large' }}" data-author="{{ pack.author }}" data-desc="{{ pack.excerpt }}" data-url="{{ pack.url }}" data-pack-id="{{ pack.id }}" data-title="{{ pack.title }}" data-ingredients="{{ pack_ingredients }}" data-variant-id="{{ variant_id }}">
                     <div class="image-holder">
-                      <img src="{{ pack | img_url: 'large' }}" alt="{{ pack.title }}">
+                      {% if pack.title == 'Eggplant Sambal with Acetes Shrimp and Roasted Stink-beans' %}
+                        {% assign pack_img = 'sambal-terung-udang-geragau-petai-bakar.jpg' %}
+                      {% elsif pack.title == 'Sardine Swirl Curry Puffs' %}
+                        {% assign pack_img = 'karipap-pusing-sardin.jpg' %}
+                      {% elsif pack.title == 'Mixed Rendang a la Negeri Sembilan' %}
+                        {% assign pack_img = 'rendang-campur-negeri-sembilan.jpg' %}
+                      {% elsif pack.title == 'Grilled Chicken with Green Sambal' %}
+                        {% assign pack_img = 'ayam-pop-sambal-hijau.jpg' %}
+                      {% else %}
+                        {% assign pack_img = 'daging-salai-lemak-cili-padi.jpg' %}
+                      {% endif %}
+
+                      <a href="{{ pack.url }}" title="Click for more details">
+                        <img src="{{ pack_img | asset_url }}">
+                      </a>
+                      
                       <span class="check-icon-wrapper">
                         <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="24" height="22" viewBox="0 0 24 22">
                           <path fill="none" d="M2.000,9.000 L9.000,20.000 L22.000,2.000 "/>
@@ -88,12 +105,29 @@
                       </span>
                     </div>
 
-                    <div class="checked-bg">
+                    {% comment %}<div class="checked-bg">
                       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="401" height="287" viewBox="0 0 401 287">
                         <path d="M9.615,31.961 C9.615,31.961 37.892,-26.746 216.717,17.344 C367.492,54.519 394.605,129.219 396.921,137.939 C399.037,145.904 403.816,161.608 395.682,184.402 C384.407,215.996 300.504,310.596 183.428,281.465 C70.756,253.429 -12.938,103.545 1.978,49.148 C3.266,44.451 1.762,47.172 9.615,31.961 Z"/>
                       </svg>
-                    </div>
+                    </div>{% endcomment %}
                     
+                    <div class="product__add-cart">
+                      <form action="/cart/add" method="POST" id="product-actions-{{ product_id }}">
+                        <input type="hidden" name="id" value="{{ variant_id }}">
+                        <div class="form__row btn--underlines-container" style="margin-top:20px">
+                          <input class="btn btn--underlines js-add-to-card" type="submit" value="{{ 'layout.general.add_to_cart_button' | t }}">
+                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="61" height="12" viewBox="0 0 61 12">
+                            <path d="M60.217,1.433 C45.717,2.825 31.217,4.217 16.717,5.609 C13.227,5.944 8.806,6.200 6.390,5.310 C7.803,4.196 11.676,3.654 15.204,3.216 C28.324,1.587 42.033,-0.069 56.184,0.335 C58.234,0.394 60.964,0.830 60.217,1.433 ZM50.155,5.670 C52.205,5.728 54.936,6.165 54.188,6.767 C39.688,8.160 25.188,9.552 10.688,10.943 C7.198,11.278 2.778,11.535 0.362,10.645 C1.774,9.531 5.647,8.988 9.175,8.551 C22.295,6.922 36.005,5.265 50.155,5.670 Z" class="cls-1"/>
+                          </svg>
+                        </div>
+                      </form>
+                    </div> <!-- End product__add-cart -->
+
+                    <div class="picker-pack__info">
+                      {{ pack_ingredients }}
+                    </div>                
+
+                    {% comment %}
                     <div class="picker-pack__info">
                       <div class="title-container">
                         <h4 class="picker-pack__title">{{ pack.title }}</h4>
@@ -103,6 +137,7 @@
                         <span class="money">{{ pack_price | money }}</span>
                       </span>
                     </div>
+                    {% endcomment %}
                   </div>
                 {% endfor %}
               </div>
@@ -260,7 +295,7 @@
                     {% comment %}<span class="js-price-and-value">x <span class="money">{{ product.price | money }}</span> = <span class="js-total-price money">{{ product.price | money }}</span></span>{% endcomment %}
                   </div>
                   <div class="form__row">
-                    <button id="meal-kit-button" style="display:none" class="btn btn--default btn--full btn--submit js-add-to-card" type="submit">{{ 'layout.general.add_to_cart_button' | t }}</button>
+                    {% comment %}<button id="meal-kit-button" style="display:none" class="btn btn--default btn--full btn--submit js-add-to-card" type="submit">{{ 'layout.general.add_to_cart_button' | t }}</button>{% endcomment %}
                   </div>
                   <div itemprop="description" id="choosed-pack-ingredients">
                   </div>
