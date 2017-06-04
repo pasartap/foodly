@@ -441,8 +441,7 @@
                                   </svg>
                                 </span>
                               </a>
-                              
-                              <p class="cart-total__info clearfix">{{ 'cart.general.total_information' | t }}</p>
+                          
                               
                             </div>
                         
@@ -457,10 +456,18 @@
                                 <label  class="form__field--placeholder" for="{{ 'cart.general.note_heading' | t | handle }}">{{ 'cart.general.note_placeholder' | t }}</label>
                               </div>
                             </div>
+
+                            {% if cart.total_price < 2000 or cart.local_delivery_request == " "  %} 
                         
+                           <p class="cart-total__info clearfix"> {{ 'cart.general.total_information' | t }}</p>
+
+                            {% elsif cart.total_price > 2000 %}
+
                             <div class="text-center cart__checkout-btn">
-                              <button class="btn btn--default btn--full" type="submit" name="checkout">{{ 'cart.general.checkout_button' | t | upcase }}</button>
+                              <button class="btn btn--default btn--full" type="submit" name="checkout" id="checkout" >{{ 'cart.general.checkout_button' | t | upcase }}</button>
                             </div>
+
+                            {% endif %}
                             
                             {% comment %}
                             Snippet for adding shipping calculator.
