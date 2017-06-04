@@ -513,11 +513,12 @@
 					item = template;
 					specialPackItem = specialPackTemplate;
 
+					/*truncateTilte = cart.items[i].title;
 					// Truncate long item name
 					if ( cart.items[i].title.length > 20 ) {
 						truncateTilte = cart.items[i].title.substr(0, 17);
 						truncateTilte = truncateTilte + '...';
-					}
+					}*/
 
 					// If special pack is available in cart - don't show it twice
 					if ( specialPackID && specialPackID[0] == cart.items[i].id ) {
