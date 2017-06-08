@@ -591,6 +591,15 @@
 					Currency.convertAll(shopCurrency, $('[name=currencies]').val(), 'span.money', 'money_format');
 				}
 			{% endif %}
+
+			// Cart validation
+			if (cart.total_price >= 2000) {
+				$('#checkout').prop('disabled', false);
+				$('#checkout').removeClass('btn--disabled');
+			} else {
+				$('#checkout').prop('disabled', true);
+				$('#checkout').addClass('btn--disabled');
+			}			
 		},
 
 		// Dynamic changing quantity
