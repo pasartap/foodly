@@ -1891,7 +1891,7 @@
 
     // Cart validation based on whether time slot is selected
     var target = document.querySelector('#timeDiv');
-    var totalPrice  = document.querySelector('.money').innerHTML.replace('RM', '');
+    var totalPrice  = document.querySelector('#totalPrice').innerHTML.replace('RM', '');
     var observer = new MutationObserver(function(mutations) {
       mutations.forEach( function(mutation) {
           var displayStyle = mutation.target.style.display;

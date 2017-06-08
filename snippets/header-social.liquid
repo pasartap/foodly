@@ -430,7 +430,7 @@
                               <h3 class="heading--add-small">{{ 'cart.general.total' | t | upcase }}</h3>
 
                               <span class="cart-total__amount">
-                                <span class="money">{{ cart.total_price | money }}</span>
+                                <span id="totalPrice" class="money">{{ cart.total_price | money }}</span>
                               </span>
 
                               <a id="update-cart" class="update-cart" href="javascript:void(0);">

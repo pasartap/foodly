@@ -182,7 +182,7 @@
                   <h3 class="heading--add-small">{{ 'cart.general.total' | t | upcase }}</h3>
                   
                   <span class="cart-total__amount">
-                    <span class="money">{{ cart.total_price | money }}</span>
+                    <span id="totalPrice" class="money">{{ cart.total_price | money }}</span>
                   </span>
                   
                   <a id="update-cart" class="update-cart" href="javascript:void(0);">
@@ -209,7 +209,7 @@
                 </div>
                 
                   <div class="text-center cart__checkout-btn">
-                    <button class="btn btn--default btn--full" type="submit" name="checkout">{{ 'cart.general.checkout_button' | t | upcase }}</button>
+                    <button class="btn btn--default btn--full" type="submit" id="checkout" name="checkout">{{ 'cart.general.checkout_button' | t | upcase }}</button>
                   </div>
                   
                   <div class="cart__block cart__shipping-calculator">
@@ -403,5 +403,6 @@
   {{ 'scrollbar.min.js' | asset_url | script_tag }}
   {{ 'foodly.js' | asset_url | script_tag }}
   <script>Shopify.money_format = "{{ shop.money_format }}";</script>
+  {% include 'scripts' %}
 </body>
 </html>
