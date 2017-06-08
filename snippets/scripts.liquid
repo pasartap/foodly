@@ -1888,6 +1888,28 @@
         });
       }
     {% endif %}
+
+    // Cart validation based on whether time slot is selected
+    var target = document.querySelector('#timeDiv');
+    var totalPrice  = document.querySelector('.money').innerHTML.replace('RM', '');
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach( function(mutation) {
+          var displayStyle = mutation.target.style.display;
+          if (displayStyle === 'none') {          
+            $('#checkout').prop('disabled', true);
+            $('#checkout').addClass('btn--disabled');
+          } else {
+            if (totalPrice >= 20.00) {
+              $('#checkout').prop('disabled', false);
+              $('#checkout').removeClass('btn--disabled');
+            } else {
+              $('#checkout').prop('disabled', true);
+              $('#checkout').addClass('btn--disabled');
+            }           
+          }
+      });
+    });    
+    observer.observe(target, { attributes: true });
 });
 </script>
 

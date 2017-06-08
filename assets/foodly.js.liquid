@@ -593,7 +593,7 @@
 			{% endif %}
 
 			// Cart validation
-			if (cart.total_price >= 2000) {
+			if (cart.total_price >= 2000 && $('#timeDiv').css('display') === 'block') {
 				$('#checkout').prop('disabled', false);
 				$('#checkout').removeClass('btn--disabled');
 			} else {
