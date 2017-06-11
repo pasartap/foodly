@@ -1889,24 +1889,11 @@
       }
     {% endif %}
 
-    // Cart validation based on whether time slot is selected
+    // Trigger cart validation
     var target = document.querySelector('#timeDiv');
-    var totalPrice  = document.querySelector('#totalPrice').innerHTML.replace('RM', '');
     var observer = new MutationObserver(function(mutations) {
       mutations.forEach( function(mutation) {
-          var displayStyle = mutation.target.style.display;
-          if (displayStyle === 'none') {          
-            $('#checkout').prop('disabled', true);
-            $('#checkout').addClass('btn--disabled');
-          } else {
-            if (totalPrice >= 20.00) {
-              $('#checkout').prop('disabled', false);
-              $('#checkout').removeClass('btn--disabled');
-            } else {
-              $('#checkout').prop('disabled', true);
-              $('#checkout').addClass('btn--disabled');
-            }           
-          }
+        $('#update-cart').click();
       });
     });    
     observer.observe(target, { attributes: true });
