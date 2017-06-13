@@ -2443,6 +2443,7 @@ th, td {
 
     .nav-list {
       background-color: $colorNeutral;
+      top: 0px;
     }
   }
 
@@ -2620,7 +2621,7 @@ th, td {
 }
 
 .header--cart {
-  height: 190px;
+  height: 150px;
   position: relative;
   text-align: center;
   background-color: $colorInverse;
@@ -2755,7 +2756,7 @@ th, td {
 
   .drawer__wrapper {
     width: 320px;
-    min-height: 100vh;
+    max-height: 100vh;
     position: absolute;
     background-color: $colorInverse;
     @include transition(transform 350ms ease-in-out);
@@ -2843,6 +2844,7 @@ th, td {
 
   .drawer--cart-total {
     display: none;
+    top: 0px;
   }
 
   .drawer__wrapper {
@@ -2851,7 +2853,7 @@ th, td {
 
   .drawer__btn-open {
     left: auto;
-    top: 6px;
+    top: 0px;
     right: 37px;
     min-width: 0px;
 
@@ -2870,7 +2872,7 @@ th, td {
   }
 
   .drawer__btn-close {
-    top: 6px;
+    top: 0px;
     right: 8px;
   }
 
@@ -2879,7 +2881,7 @@ th, td {
     height: 16px;
     display: inline-block;
     position: absolute;
-    top: 6px;
+    top: 12px;
     right: -30px;
     font-size: 11px;
     line-height: 15px;
@@ -2890,7 +2892,7 @@ th, td {
 
   .icon--cart {
     position: absolute;
-    top: 14px;
+    top: 12px;
     right: -15px;
 
     .svg-icon path {
@@ -3234,8 +3236,7 @@ th, td {
   }
 
   .nav-list {
-    margin: 0 auto;
-    //padding-top: 7px;
+    margin-top: -20px;
     width: 96%;
     height: 86px;
     position: relative;
@@ -3534,7 +3535,7 @@ th, td {
 
   .drawer--cart {
     .drawer__btn-open {
-      top: 30px; //49px;
+      top: 0px; //49px;
     }
   }
 
@@ -3621,7 +3622,7 @@ th, td {
     }
 
     .cart-total__amount {
-      margin-top: -13px;
+      margin-top: -33px;
       float: right;
       font-weight: 500;
       font-size: 24px;
@@ -12569,11 +12570,12 @@ th, td {
 
 .header__top-line {
   display: none;
+
 }
 
 @media (min-width: 769px) {
   .header--social {
-    height: 200px; //273px;
+    height: 150px; //273px;
 
     &:before {
       content: "";
@@ -12588,7 +12590,7 @@ th, td {
     }
 
     .header__top-line {
-      height: 50px;
+      height: 25px;
       display: block;
       line-height: 50px;
       padding: 0 25px;
@@ -12603,8 +12605,8 @@ th, td {
     }
 
     .header__top-line .social-icons__item {
-      margin-top: 10px;
-      margin-right: 10px;
+      margin-top: 5px;
+      margin-right: 5px;
     }
 
     .header__top-line .social-icons__link {
@@ -12618,7 +12620,7 @@ th, td {
     }
 
     .search-container {
-      top: 85px; //110px;
+      top: 60px; //110px;
     }
 
     .drawer--cart {
