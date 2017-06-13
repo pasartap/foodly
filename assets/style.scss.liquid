@@ -3236,9 +3236,9 @@ th, td {
 
   .nav-list {
     margin-top: -30px;
-    margin-bottom: -30px;
+    //margin-bottom: -30px;
     width: 96%;
-    height: 86px;
+    height: 66px; //86px;
     position: relative;
     text-align: center;
 
@@ -3622,7 +3622,7 @@ th, td {
     }
 
     .cart-total__amount {
-      margin-top: -33px;
+      margin-top: -10px; //33px;
       float: right;
       font-weight: 500;
       font-size: 24px;
@@ -8119,14 +8119,15 @@ th, td {
   .social-icons__link {
     width: 50px;
     height: 50px;
-    background-color: $colorInverse;
+    color: $colorInverse; //added
+    background-color: $colorPrimary; //$colorInverse;
     border-radius: 50%;
     -webkit-transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
             transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
 
     &:hover {
-      color: $colorInverse;
-      background-color: $colorPrimary;
+      color: $colorPrimary; //$colorInverse;
+      background-color: $colorInverse; //$colorPrimary;
     }
   }
 }
@@ -12575,7 +12576,7 @@ th, td {
 
 @media (min-width: 769px) {
   .header--social {
-    height: 125px; //273px;
+    height: 80px; //273px;
 
     &:before {
       content: "";
@@ -12709,6 +12710,7 @@ th, td {
 /* -------------------------------------------------------------------------- */
 .box-slider {
   height: 220px; //500px;
+  margin-top: -40px; //added
 
   .swiper-slide {
     .slide__info-wrapper {
