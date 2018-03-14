@@ -127,7 +127,7 @@
       {
         "type": "color",
         "id": "color_add_headers",
-        "label": "Additoinal heading color",
+        "label": "Additional heading color",
         "default": "#ada2a4",
         "info": "Used for subheadings and small headings"
       }
